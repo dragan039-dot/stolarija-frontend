@@ -16,6 +16,11 @@ export const metadata = {
   title: "Stolarija App",
   description: "Aplikacija za ponude i radne liste",
   manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    title: "Stolarija",
+    statusBarStyle: "default",
+  },
 };
 
 export const viewport = {
