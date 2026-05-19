@@ -2430,7 +2430,7 @@ if (!loggedUser) {
   >
     Instaliraj App
   </button>
-)}
+
       <div className="bg-white border rounded p-6 w-full max-w-sm shadow">
         <h1 className="text-2xl font-bold mb-4 text-center">
           Prijava
