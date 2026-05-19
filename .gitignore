@@ -39,3 +39,24 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# temp
+111/
+
+# helper docs
+AGENTS.md
+CLAUDE.md
+
+# random files
+{
+x.element
+
+# env
+.env
+
+# build
+.next/
+out/
+
+# node
+node_modules/
