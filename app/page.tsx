@@ -313,7 +313,7 @@ const triggerPreview = (updatedFormule: any[]) => {
   clearTimeout(timeout);
 
   timeout = setTimeout(async () => {
-    const res = await apiFetch("http://localhost:3001/profile/formula/preview", {
+    const res = await apiFetch(`${API_URL}/profile/formula/preview`, {
       method: "POST",
       headers: authHeaders(),
       body: JSON.stringify({
@@ -508,7 +508,7 @@ const getVisibleDimensions = (type: string) => {
 
 
 const loadParams = async () => {
-  const res = await apiFetch("http://localhost:3001/params/profiles", {
+  const res = await apiFetch(`${API_URL}/params/profiles`, {
     headers: authHeaders(),
   });
 
@@ -524,7 +524,7 @@ const loadParams = async () => {
 const addParam = async () => {
   if (!grupa || !nazivParam) return alert("Popuni sve");
 
-  await apiFetch("http://localhost:3001/params", {
+  await apiFetch(`${API_URL}/params`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({ grupa, naziv: nazivParam })
@@ -756,7 +756,7 @@ const C = Number(firstPosition?.c) || 0;
 const D = Number(firstPosition?.d) || 0;
   
 
-  const res = await apiFetch("http://localhost:3001/profile/calculate", {
+  const res = await apiFetch(`${API_URL}/profile/calculate`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({
@@ -804,7 +804,7 @@ const D = Number(firstPosition?.d) || 0;
 
 
 
-    const res = await apiFetch("http://localhost:3001/profile/calculate-pvc19", {
+    const res = await apiFetch(`${API_URL}/profile/calculate-pvc19`, {
       method: "POST",
       headers: authHeaders(),
       body: JSON.stringify({
@@ -867,7 +867,7 @@ const saveFormule = async () => {
       redosled: index + 1
     }));
 
-    const res = await apiFetch("http://localhost:3001/profile/formula", {
+    const res = await apiFetch(`${API_URL}/profile/formula`, {
       method: "POST",
       headers: authHeaders(),
       body: JSON.stringify(payload),
@@ -1158,7 +1158,7 @@ const getPriceValue = (element: string, profilId: number | string) => {
   
   
 const loadProfileParams = async () => {
-  const res = await apiFetch("http://localhost:3001/profile/params", {
+  const res = await apiFetch(`${API_URL}/profile/params`, {
     headers: authHeaders(),
   });
 
@@ -1349,7 +1349,7 @@ setExtraItems(filledExtra);
   
 
 const saveValute = async () => {
-  await apiFetch("http://localhost:3001/profile/valuta", {
+  await apiFetch(`${API_URL}/profile/valuta`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(
@@ -1367,7 +1367,7 @@ const saveValute = async () => {
 
 
 const saveOkovi = async () => {
-  await apiFetch("http://localhost:3001/okov", {
+  await apiFetch(`${API_URL}/okov`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(
@@ -1396,7 +1396,7 @@ const saveProfili = async () => {
     naziv: p.naziv || `Profil ${index + 1}`,
   }));
 
-  const res = await apiFetch("http://localhost:3001/profile/profiles", {
+  const res = await apiFetch(`${API_URL}/profile/profiles`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(dataToSave),
@@ -1416,7 +1416,7 @@ const saveProfili = async () => {
   
   const saveFirma = async () => {
   try {
-    const res = await apiFetch("http://localhost:3001/settings", {
+    const res = await apiFetch(`${API_URL}/settings`, {
       method: "POST",
       headers: authHeaders(),
       body: JSON.stringify({
@@ -1493,7 +1493,7 @@ const formForCreate = {
   brojPonude: "",
 };
 
-    const res = await apiFetch("http://localhost:3001/offers", {
+    const res = await apiFetch(`${API_URL}/offers`, {
       method: "POST",
       headers: authHeaders(),
       body: JSON.stringify({
@@ -1524,7 +1524,7 @@ if (worklistOffer?.id) {
 
 
 const saveTehnicki = async () => {
-  await apiFetch("http://localhost:3001/profile/params", {
+  await apiFetch(`${API_URL}/profile/params`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(tehnicki)
@@ -1761,7 +1761,7 @@ const D = Number(firstPosition?.d) || 0;
 
   
 
-  const res = await apiFetch("http://localhost:3001/profile/preview-formula", {
+  const res = await apiFetch(`${API_URL}/profile/preview-formula`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({
@@ -1919,7 +1919,7 @@ const imaRoletnu =
   const imaOkov = p.okov ? 1 : 0;
   const imaIspunu = p.ispuna ? 1 : 0;
 
-  const res = await apiFetch("http://localhost:3001/profile/calculate", {
+  const res = await apiFetch(`${API_URL}/profile/calculate`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({
@@ -2187,7 +2187,7 @@ const printPdf = (type: "proposal" | "worklist") => {
 
 
 const saveIspune = async () => {
-  await apiFetch("http://localhost:3001/ispuna", {
+  await apiFetch(`${API_URL}/ispuna`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(
@@ -2339,7 +2339,7 @@ const login = async () => {
   setLoginError("");
 
   try {
-    const res = await window.fetch("http://localhost:3001/auth/login", {
+    const res = await window.fetch(`${API_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -2442,7 +2442,7 @@ const isAdmin = loggedUser?.role === "ADMIN";
 
 
 const loadAdminUsers = async () => {
-  const res = await apiFetch("http://localhost:3001/auth/users", {
+  const res = await apiFetch(`${API_URL}/auth/users`, {
   headers: authHeaders(),
 });
   const data = await res.json();
@@ -2455,7 +2455,7 @@ const createAdminUser = async () => {
     return;
   }
 
-  const res = await apiFetch("http://localhost:3001/auth/users", {
+  const res = await apiFetch(`${API_URL}/auth/users`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(newUser),
@@ -2489,7 +2489,7 @@ const changeMyPassword = async () => {
     return;
   }
 
-  const res = await apiFetch("http://localhost:3001/auth/change-password", {
+  const res = await apiFetch(`${API_URL}/auth/change-password`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({
@@ -2520,7 +2520,7 @@ const adminChangeUserPassword = async (userId: number) => {
     return;
   }
 
-  await apiFetch("http://localhost:3001/auth/admin-change-password", {
+  await apiFetch(`${API_URL}/auth/admin-change-password`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({ userId, password }),
@@ -2533,7 +2533,7 @@ const adminChangeUserPassword = async (userId: number) => {
 const deleteAdminUser = async (id: number) => {
   if (!confirm("Da li sigurno želite da obrišete korisnika?")) return;
 
-  await apiFetch("http://localhost:3001/auth/delete-user", {
+  await apiFetch(`${API_URL}/auth/delete-user`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({ id }),
@@ -2572,7 +2572,7 @@ const loadUserDevices = async (user: any) => {
 };
 
 const deleteDevice = async (id: number) => {
-  await apiFetch("http://localhost:3001/auth/devices/delete", {
+  await apiFetch(`${API_URL}/auth/devices/delete`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({ id }),
@@ -2590,7 +2590,7 @@ const deleteAllDevices = async () => {
     return;
   }
 
-  await apiFetch("http://localhost:3001/auth/devices/delete-all", {
+  await apiFetch(`${API_URL}/auth/devices/delete-all`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({ userId: selectedAdminUser.id }),
@@ -2601,7 +2601,7 @@ const deleteAllDevices = async () => {
 
 
 const updateAdminUser = async (u: any) => {
-  await apiFetch("http://localhost:3001/auth/users/update", {
+  await apiFetch(`${API_URL}/auth/users/update`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(u),
@@ -2614,7 +2614,7 @@ const updateAdminUser = async (u: any) => {
 
 const createManualBackup = async () => {
   try {
-    const res = await apiFetch("http://localhost:3001/backup/create", {
+    const res = await apiFetch(`${API_URL}/backup/create`, {
       method: "POST",
       headers: authHeaders(),
     });
@@ -2636,7 +2636,7 @@ const createManualBackup = async () => {
 
 
 const loadBackups = async () => {
-  const res = await apiFetch("http://localhost:3001/backup/list", {
+  const res = await apiFetch(`${API_URL}/backup/list`, {
   headers: authHeaders(),
 });
   const data = await res.json();
@@ -2648,7 +2648,7 @@ const loadBackups = async () => {
 const deleteBackupFile = async (fileName: string) => {
   if (!confirm("Da li sigurno želite da obrišete backup?")) return;
 
-  await apiFetch("http://localhost:3001/backup/delete", {
+  await apiFetch(`${API_URL}/backup/delete`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({ fileName }),
@@ -2666,7 +2666,7 @@ const restoreBackupFile = async (fileName: string) => {
 
   if (!ok) return;
 
-  const res = await apiFetch("http://localhost:3001/backup/restore", {
+  const res = await apiFetch(`${API_URL}/backup/restore`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({ fileName }),
@@ -2691,7 +2691,7 @@ const restoreBackupFile = async (fileName: string) => {
 
 
 const loadAuditLogs = async () => {
-  const res = await apiFetch("http://localhost:3001/audit", {
+  const res = await apiFetch(`${API_URL}/audit`, {
   headers: authHeaders(),
 });
   const data = await res.json();
@@ -2720,7 +2720,7 @@ const filteredAuditLogs = auditLogs.filter((a: any) =>
 );
 
 const loadAdminOffers = async () => {
-  const res = await apiFetch("http://localhost:3001/offers/admin/all", {
+  const res = await apiFetch(`${API_URL}/offers/admin/all`, {
   headers: authHeaders(),
 });
   const data = await res.json();
@@ -2785,7 +2785,7 @@ const saveAllTehnicki = async () => {
   );
 
   for (const item of rows) {
-    await apiFetch("http://localhost:3001/profile/tehnicki", {
+    await apiFetch(`${API_URL}/profile/tehnicki`, {
       method: "POST",
       headers: authHeaders(),
       body: JSON.stringify({
@@ -2809,7 +2809,7 @@ const saveAllPrices = async () => {
   );
 
   for (const item of rows) {
-    await apiFetch("http://localhost:3001/profile/prices", {
+    await apiFetch(`${API_URL}/profile/prices`, {
       method: "POST",
       headers: authHeaders(),
       body: JSON.stringify({
@@ -2827,7 +2827,7 @@ const saveAllPrices = async () => {
 
 
 const loadArchivedUsers = async () => {
-  const res = await apiFetch("http://localhost:3001/auth/users/archived", {
+  const res = await apiFetch(`${API_URL}/auth/users/archived`, {
     headers: authHeaders(),
   });
 
@@ -2838,7 +2838,7 @@ const loadArchivedUsers = async () => {
 };
 
 const restoreUser = async (id: number) => {
-  await apiFetch("http://localhost:3001/auth/restore-user", {
+  await apiFetch(`${API_URL}/auth/restore-user`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({ id }),
@@ -2857,7 +2857,7 @@ const restoreUser = async (id: number) => {
 
 const loadHelpTexts = async () => {
   try {
-    const res = await apiFetch("http://localhost:3001/help-texts", {
+    const res = await apiFetch(`${API_URL}/help-texts`, {
       headers: authHeaders(),
     });
 
@@ -2874,7 +2874,7 @@ const loadHelpTexts = async () => {
 
 const saveHelpTexts = async () => {
   try {
-    await apiFetch("http://localhost:3001/help-texts", {
+    await apiFetch(`${API_URL}/help-texts`, {
       method: "POST",
       headers: authHeaders(),
       body: JSON.stringify(helpTexts),
@@ -2916,7 +2916,7 @@ const tabHelpItems = [
 
 
 const loadAds = () => {
-  apiFetch("http://localhost:3001/ads", {
+  apiFetch(`${API_URL}/ads`, {
     headers: authHeaders(),
   })
     .then((res) => res.json())
@@ -2928,7 +2928,7 @@ const loadAds = () => {
 
 
 const saveAds = async () => {
-  await apiFetch("http://localhost:3001/ads", {
+  await apiFetch(`${API_URL}/ads`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(ads),
@@ -2960,7 +2960,7 @@ const setAdValue = (key: string, value: string) => {
 };
 
 const openAdLink = async (key: string) => {
-  await apiFetch("http://localhost:3001/ads/click", {
+  await apiFetch(`${API_URL}/ads/click`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify({ adKey: key }),
@@ -2976,7 +2976,7 @@ const openAdLink = async (key: string) => {
 
 
 const loadAdStats = async () => {
-  const res = await apiFetch("http://localhost:3001/ads/stats", {
+  const res = await apiFetch(`${API_URL}/ads/stats`, {
     headers: authHeaders(),
   });
 
@@ -3001,7 +3001,7 @@ const resetAdClicks = async (key: string) => {
   if (!confirmReset) return;
 
   await apiFetch(
-    "http://localhost:3001/ads/reset-clicks",
+    `${API_URL}/ads/reset-clicks`,
     {
       method: "POST",
       headers: authHeaders(),
@@ -5900,7 +5900,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
                   formData.append("file", e.target.files[0]);
 
                   const res = await apiFetch(
-                    "http://localhost:3001/ads/upload",
+                    `${API_URL}/ads/upload`,
                     {
                       method: "POST",
                       headers: {
