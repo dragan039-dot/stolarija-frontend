@@ -2149,40 +2149,67 @@ const formatCena = (value: number) => {
 };
 
 
-
 const printPdf = (type: "proposal" | "worklist") => {
-  document.body.classList.remove("print-proposal", "print-worklist");
+  document.body.classList.remove(
+    "print-proposal",
+    "print-worklist"
+  );
+
+  // DODATO
+  document.body.classList.add("printing-pdf");
 
   let fileName = "Dokument";
 
   if (type === "proposal") {
     document.body.classList.add("print-proposal");
 
-    fileName = `Ponuda ${proposalOffer?.brojPonude || proposalOffer?.id || ""} ${proposalOffer?.naziv || ""}`;
+    fileName =
+      `Ponuda ${
+        proposalOffer?.brojPonude ||
+        proposalOffer?.id ||
+        ""
+      } ${
+        proposalOffer?.naziv || ""
+      }`;
   }
 
   if (type === "worklist") {
     document.body.classList.add("print-worklist");
 
-    fileName = `Radni nalog ${worklistOffer?.brojPonude || worklistOffer?.id || ""} ${worklistOffer?.naziv || ""}`;
+    fileName =
+      `Radni nalog ${
+        worklistOffer?.brojPonude ||
+        worklistOffer?.id ||
+        ""
+      } ${
+        worklistOffer?.naziv || ""
+      }`;
   }
 
-  // zapamti stari title
+  // zapamti stari naslov
   const oldTitle = document.title;
 
-  // postavi novi naziv
+  // postavi novi naslov
   document.title = fileName;
 
   setTimeout(() => {
     window.print();
 
-    // vrati stari title
+    // vrati stari naslov
     document.title = oldTitle;
 
-    document.body.classList.remove("print-proposal", "print-worklist");
+    document.body.classList.remove(
+      "print-proposal",
+      "print-worklist"
+    );
+
+    // DODATO
+    document.body.classList.remove(
+      "printing-pdf"
+    );
+
   }, 100);
 };
-
 
 
 
@@ -3825,7 +3852,8 @@ return (
       className="border p-2 w-full mb-3"
     />
 
-    <div className="w-full overflow-x-auto border mb-6">
+    {/* TABELA */}
+<div className="offer-search-table w-full overflow-x-auto border mb-6">
       <div style={{ maxHeight: "220px", overflowY: "auto" }}>
         <table className="w-full border-collapse">
           <thead className="bg-gray-200 sticky top-0">
