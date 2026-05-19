@@ -225,6 +225,9 @@ const [helpTexts, setHelpTexts] = useState<any[]>([]);
 
 const [adStats, setAdStats] = useState<any[]>([]);
 
+const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+const [showInstallButton, setShowInstallButton] = useState(false);
+
 
 const addExtraItem = () => {
   if (extraItems.length >= 30) {
@@ -2420,6 +2423,12 @@ const logout = () => {
 if (!loggedUser) {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-100">
+      <button
+  onClick={installApp}
+  className="fixed top-3 right-3 z-[9999] md:hidden bg-blue-600 text-white px-3 py-2 rounded shadow text-sm"
+>
+  Instaliraj App
+</button>
       <div className="bg-white border rounded p-6 w-full max-w-sm shadow">
         <h1 className="text-2xl font-bold mb-4 text-center">
           Prijava
@@ -3046,6 +3055,38 @@ const resetAdClicks = async (key: string) => {
 
 const isVideoFile = (path: string) => {
   return path.endsWith(".mp4") || path.endsWith(".webm");
+};
+
+
+useEffect(() => {
+  const handler = (e: any) => {
+    e.preventDefault();
+    setDeferredPrompt(e);
+    setShowInstallButton(true);
+  };
+
+  window.addEventListener("beforeinstallprompt", handler);
+
+  return () => {
+    window.removeEventListener("beforeinstallprompt", handler);
+  };
+}, []);
+
+
+const installApp = async () => {
+  if (!deferredPrompt) {
+    alert(
+      "Ako koristite iPhone: kliknite Share pa Add to Home Screen. Ako koristite Android, proverite da li ste otvorili sajt u Chrome browseru."
+    );
+    return;
+  }
+
+  deferredPrompt.prompt();
+
+  await deferredPrompt.userChoice;
+
+  setDeferredPrompt(null);
+  setShowInstallButton(false);
 };
 
 
