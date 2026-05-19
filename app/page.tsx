@@ -81,7 +81,9 @@ export default function Home() {
 
   // ---------------- STATE ----------------
 
-const API_URL = "http://localhost:3001";
+const API_URL =
+  process.env.NEXT_PUBLIC_API_URL ||
+  "http://localhost:3001";
 
 
 
@@ -343,7 +345,7 @@ const triggerPreview = (updatedFormule: any[]) => {
 const loadIspune = () => {
   if (!loggedUser?.id) return;
 
-  apiFetch(`http://localhost:3001/ispuna?userId=${loggedUser.id}`, {
+  apiFetch(`${API_URL}/ispuna?userId=${loggedUser.id}`, {
     headers: authHeaders(),
   })
     .then(res => res.json())
@@ -368,7 +370,7 @@ const loadIspune = () => {
 const loadOkov = () => {
   if (!loggedUser?.id) return;
 
-  apiFetch(`http://localhost:3001/okov?userId=${loggedUser.id}`, {
+  apiFetch(`${API_URL}/okov?userId=${loggedUser.id}`, {
     headers: authHeaders(),
   })
     .then(res => res.json())
@@ -395,7 +397,7 @@ const loadOkov = () => {
 const loadValute = () => {
   if (!loggedUser?.id) return;
 
-  apiFetch(`http://localhost:3001/profile/valuta?userId=${loggedUser.id}`, {
+  apiFetch(`${API_URL}/profile/valuta?userId=${loggedUser.id}`, {
     headers: authHeaders(),
   })
     .then((res) => res.json())
@@ -537,7 +539,7 @@ const addParam = async () => {
 
 
 const deleteParam = async (id: number) => {
-  await apiFetch(`http://localhost:3001/params/${id}`, {
+  await apiFetch(`${API_URL}/params/${id}`, {
     method: "DELETE",
     headers: authHeaders(),
   });
@@ -598,7 +600,7 @@ const getDefaultProfili = () =>
 const loadProfili = () => {
   if (!loggedUser?.id) return;
 
-  apiFetch(`http://localhost:3001/profile/profiles?userId=${loggedUser.id}`, {
+  apiFetch(`${API_URL}/profile/profiles?userId=${loggedUser.id}`, {
     headers: authHeaders(),
   })
     .then((res) => res.json())
@@ -1074,7 +1076,7 @@ const loadFormulaByWindowType = async (
 
   try {
     const res = await apiFetch(
-      `http://localhost:3001/profile/formula?vrstaStolarije=${encodeURIComponent(vrstaStolarije)}&vrstaProzora=${encodeURIComponent(vrstaProzora)}`, {
+      `${API_URL}/profile/formula?vrstaStolarije=${encodeURIComponent(vrstaStolarije)}&vrstaProzora=${encodeURIComponent(vrstaProzora)}`, {
     headers: authHeaders(),
   });
 
@@ -1171,7 +1173,7 @@ const loadProfileParams = async () => {
 const loadProfilePrices = () => {
   if (!loggedUser?.id) return;
 
-  apiFetch(`http://localhost:3001/profile/prices?userId=${loggedUser.id}`, {
+  apiFetch(`${API_URL}/profile/prices?userId=${loggedUser.id}`, {
     headers: authHeaders(),
   })
     .then(res => res.json())
@@ -1185,7 +1187,7 @@ const loadProfilePrices = () => {
 const loadFirma = () => {
   if (!loggedUser?.id) return;
 
-  apiFetch(`http://localhost:3001/settings?userId=${loggedUser.id}`, {
+  apiFetch(`${API_URL}/settings?userId=${loggedUser.id}`, {
     headers: authHeaders(),
   })
     .then(res => res.json())
@@ -1215,7 +1217,7 @@ useEffect(() => {
 const loadOffers = async () => {
   if (!loggedUser?.id) return;
 
-  const res = await apiFetch(`http://localhost:3001/offers?userId=${loggedUser.id}`,
+  const res = await apiFetch(`${API_URL}/offers?userId=${loggedUser.id}`,
     {
       headers: authHeaders(),
     }
@@ -1233,7 +1235,7 @@ const loadOffers = async () => {
 const loadTehnicki = () => {
   if (!loggedUser?.id) return;
 
-  apiFetch(`http://localhost:3001/profile/tehnicki?userId=${loggedUser.id}`, {
+  apiFetch(`${API_URL}/profile/tehnicki?userId=${loggedUser.id}`, {
     headers: authHeaders(),
   })
     .then((res) => res.json())
@@ -1264,7 +1266,7 @@ const getValue = (profil: string, parametar: string) => {
 
   // ---------------- OPEN FROM TABLE ----------------
   const openFromTable = async (id: number) => {
-    const res = await apiFetch(`http://localhost:3001/offers/${id}`, {
+    const res = await apiFetch(`${API_URL}/offers/${id}`, {
     headers: authHeaders(),
   });
     const data = await res.json();
@@ -1470,7 +1472,7 @@ if (isChangingOfferType) {
   // 👉 AKO POSTOJI ID → UPDATE
   if (form.id && !isChangingOfferType) {
 
-    await apiFetch(`http://localhost:3001/offers/${form.id}`, {
+    await apiFetch(`${API_URL}/offers/${form.id}`, {
       method: "PUT",
       headers: authHeaders(),
       body: JSON.stringify({
@@ -1965,7 +1967,7 @@ const imaRoletnu =
 
 
 const openWorklistOffer = async (id: number) => {
-  const res = await apiFetch(`http://localhost:3001/offers/${id}`, {
+  const res = await apiFetch(`${API_URL}/offers/${id}`, {
     headers: authHeaders(),
   });
   const data = await res.json();
@@ -2104,7 +2106,7 @@ const getExtraTotal = (x: any) => {
 
 
 const openProposalOffer = async (id: number) => {
-  const res = await apiFetch(`http://localhost:3001/offers/${id}`, {
+  const res = await apiFetch(`${API_URL}/offers/${id}`, {
     headers: authHeaders(),
   });
   const data = await res.json();
@@ -2563,7 +2565,7 @@ const licenseDaysLeft = getLicenseDaysLeft();
 const loadUserDevices = async (user: any) => {
   setSelectedAdminUser(user);
 
-  const res = await apiFetch(`http://localhost:3001/auth/devices?userId=${user.id}`, {
+  const res = await apiFetch(`${API_URL}/auth/devices?userId=${user.id}`, {
     headers: authHeaders(),
   });
   const data = await res.json();
@@ -2751,7 +2753,7 @@ const filteredAdminOffers = adminOffers.filter((o: any) =>
 
 const downloadBackupFile = async (fileName: string) => {
   const res = await apiFetch(
-    `http://localhost:3001/backup/download?file=${encodeURIComponent(fileName)}`,
+    `${API_URL}/backup/download?file=${encodeURIComponent(fileName)}`,
     {
       headers: authHeaders(),
     }
@@ -5924,7 +5926,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
               {getAdValue(`${cfg.key}Image`) && (
                 <div className="mt-2">
                   <img
-                    src={`http://localhost:3001${getAdValue(
+                    src={`${API_URL}${getAdValue(
                       `${cfg.key}Image`
                     )}`}
                     className="w-[50px] border"

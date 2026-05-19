@@ -36,6 +36,12 @@ type Position = {
 export default function Home() {
 
   // ---------------- STATE ----------------
+ 
+ const API_URL =
+  process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001";
+ 
+ 
+ 
   const [offers, setOffers] = useState<Offer[]>([]);
 
   const [form, setForm] = useState<Offer>({
@@ -140,7 +146,7 @@ const showField = (type: string, field: string) => {
 
   // ---------------- LOAD OFFERS ----------------
   const loadOffers = async () => {
-    const res = await fetch("http://localhost:3001/offers");
+    const res = await fetch(`${API_URL}/offers`);
     const data = await res.json();
     setOffers(Array.isArray(data) ? data : []);
   };
@@ -151,7 +157,7 @@ const showField = (type: string, field: string) => {
 
   // ---------------- OPEN FROM TABLE ----------------
   const openFromTable = async (id: number) => {
-    const res = await fetch(`http://localhost:3001/offers/${id}`);
+    const res = await fetch(`${API_URL}/offers/${id}`);
     const data = await res.json();
 
     if (!data.offer) return alert("Nema ponude za ovaj ID");
@@ -194,7 +200,7 @@ const showField = (type: string, field: string) => {
   // 👉 AKO POSTOJI ID → UPDATE
   if (form.id) {
 
-    await fetch(`http://localhost:3001/offers/${form.id}`, {
+    await fetch(`${API_URL}/offers/${form.id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -208,7 +214,7 @@ const showField = (type: string, field: string) => {
   } else {
     // 👉 NOVA PONUDA → CREATE
 
-    const res = await fetch("http://localhost:3001/offers", {
+    const res = await fetch(`${API_URL}/offers`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
