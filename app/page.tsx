@@ -2420,6 +2420,50 @@ const logout = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const installApp = async () => {
+  if (!deferredPrompt) {
+    alert(
+      "Ako koristite iPhone: kliknite Share pa Add to Home Screen. Ako koristite Android, proverite da li ste otvorili sajt u Chrome browseru."
+    );
+    return;
+  }
+
+  deferredPrompt.prompt();
+
+  await deferredPrompt.userChoice;
+
+  setDeferredPrompt(null);
+  setShowInstallButton(false);
+};
+
+
+
+
+
+
+
+
+
+
+
+
 if (!loggedUser) {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -2476,6 +2520,29 @@ if (!loggedUser) {
     </main>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const isAdmin = loggedUser?.role === "ADMIN";
@@ -3075,21 +3142,6 @@ useEffect(() => {
 }, []);
 
 
-const installApp = async () => {
-  if (!deferredPrompt) {
-    alert(
-      "Ako koristite iPhone: kliknite Share pa Add to Home Screen. Ako koristite Android, proverite da li ste otvorili sajt u Chrome browseru."
-    );
-    return;
-  }
-
-  deferredPrompt.prompt();
-
-  await deferredPrompt.userChoice;
-
-  setDeferredPrompt(null);
-  setShowInstallButton(false);
-};
 
 
 
