@@ -2423,8 +2423,7 @@ const logout = () => {
 if (!loggedUser) {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-100">
-      {typeof window !== "undefined" &&
-window.innerWidth < 768 && (
+
   <button
     onClick={installApp}
     className="fixed top-3 right-3 z-[9999] bg-blue-600 text-white px-3 py-2 rounded shadow text-sm"
