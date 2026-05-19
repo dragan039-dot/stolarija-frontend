@@ -105,5 +105,39 @@ body {
   display: none !important;
 }
 
+@page {
+  size: A4;
+  margin: 5mm;
+}
+
+@media print {
+  html,
+  body {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print-proposal,
+  .print-worklist {
+    width: 100%;
+    max-width: 200mm;
+    margin: 0 auto;
+  }
+
+  .no-print,
+  .offer-search-table {
+    display: none !important;
+  }
+}
+
+
 
 }
