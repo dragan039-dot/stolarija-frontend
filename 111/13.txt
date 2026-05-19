@@ -1,0 +1,44 @@
+npm install
+npm start
+
+npm run start:dev
+
+
+
+npm run dev
+
+
+da se doda
+
+čepovi za šlogu 2 kom po šlogi
+
+uskocno klizno pvc i alu
+podizno klizno alu 
+klizno za terase alu
+
+harmonika sistem alu
+komarnici vrste
+
+
+
+1 Fiksni prozor		A-širina, B-visina
+2 Jednokrilni prozor		A-širina, B-visina
+3 Dvokrilni prozor (šloga)		A-širina, B-visina
+4 Dvokrilni prozor (T-prečka)		A-širina, B-visina
+5 Prozor + fiks 		A-širina, B-visina
+6 Trokrilni prozor (šloga)		A-širina, B-visina
+7 Trokrilni prozor (T-prečka)		A-širina, B-visina
+8 Trokrilni prozor (2 fiksa) A		A-širina, B-visina
+9 Trokrilni prozor (fiks + T-prečka) A		A-širina, B-visina
+10 Trokrilni prozor (fiks + šloga) A		A-širina, B-visina
+11 Trokrilni prozor (2 fiksa)		A-širina, B-visina, C-širina krila
+12 Trokrilni prozor (fiks + T-prečka)		A-širina, B-visina, C-širina krila
+13 Trokrilni prozor (fiks + šloga)		A-širina, B-visina, C-širina oba krila
+14 Jednokrilni prozor (nadsvetlo)		A-širina, B-visina, D-visina krila
+15 Prozor + fiks (nadsvetlo)		A-širina, B-visina, D-visina krila
+16 Dvokrilni prozor (šloga, nadsvetlo)		A-širina, B-visina, D-visina krila
+17 Dvokrilni prozor (T-prečka, nadsvetlo)		A-širina, B-visina, D-visina krila
+18 Jednokrilni prozor (nadsvetlo-kip)		A-širina, B-visina, D-visina krila
+19 Prozor + fiks (nadsvetlo-kip)		A-širina, B-visina, D-visina krila
+20 Dvokrilni prozor (šloga, nadsvetlo-kip)		A-širina, B-visina, D-visina krila
+21 Dvokrilni prozor (T-prečka, nadsvetlo-kip)		A-širina, B-visina, D-visina krila

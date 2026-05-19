@@ -1,0 +1,3814 @@
+1. Fiksni prozor - PVC
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Lajsna za štok
+(Š)	A - 2 * Širina profila Štok
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+Cena	(Komarnik Cena elemenata + Roletne Cena elemenata) + (Štok Cena elemenata + Čelik za štok Cena elemenata + Lajsna za štok Cena elemenata + Ispuna za štok Cena elemenata + PLASTIKA + (ImaOkov * OKOV)) * (1 + (Otpad %) / 100) * (1 + (Zarada %) / 100)
+
+
+(Komarnik Cena + Roletna Cena) + (Štok Cena + Čelik za štok Cena + Lajsna za štok Cena + Ispuna za štok Cena + Krilo 1 Cena + Čelik za krilo 1 Cena + Lajsna za krilo 1 Cena + Ispuna za krilo 1 Cena + Krilo 2 Cena + Čelik za krilo 2 Cena + Lajsna za krilo 2 Cena + Ispuna za krilo 2 Cena + T-prečka 1 Cena + Čelik za T-prečku 1 Cena + T-prečka 2 Cena + Čelik za T-prečku 2 Cena + PLASTIKA + (ImaOkov * OKOV)) * (1 + (Otpad % / 100)) * (1 + (Zarada % / 100))",
+
+
+
+(Komarnik Cena elemenata + Roletne Cena elemenata) + (Zbir cena svih elemenata u tabelim osim Roletne i Komarnika + PLASTIKA + (ImaOkov * OKOV)) * (1 + (Otpad %) / 100) * (1 + (Zarada %) / 100)
+  
+
+
+
+
+
+2. Jednokrilni prozor - PVC
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Krilo 1
+(Š)	Štok (Š) - 2 * Širina profila Štok + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+3. Dvokrilni prozor (šloga) - PVC
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Preklop kod šloge) / 2 + 2 * Var profila + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	4
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+Šloga
+(Š)	
+(V)	Krilo 1 (V) - Čepovi šloge - 2 * Var profila
+Kom.	1
+Cena	Šloga (V) / 1000 * Šloga Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+4. Dvokrilni prozor (T-prečka) - PVC
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Krilo 1
+(Š)	(Štok (Š) - 2 * Širina profila Štok - Širina profila T prečka + (2 * Var profila) * 2 + (2 * Preklop kod krila) * 2) / 2
+(V)	(Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	4
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	
+(V)	T-prečka 1 (Š)
+Kom.	1
+Cena	Čelik za T-prečku 1 (Š) / 1000 * Čelik Cena
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+5. Prozor + fiks - PVC
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2
+(V)	B - 2 * Širina profila Štok - Širina profila T prečka
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2 + 2 * Var profila + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	1
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	
+(V)	T-prečka 1 (V)
+Kom.	1
+Cena	Čelik za T-prečku 1 (V) / 1000 * Čelik Cena
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+6. Trokrilni prozor (šloga) - PVC
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka - Preklop kod šloge) / 3 + 2 * Var profila + (4 * Preklop kod krila) / 3
+(V)	Štok (V) - 2 * Širina profila Štok +  2 * Preklop kod krila
+Kom.	6
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	6
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	6
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	3
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	1
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	
+(V)	T-prečka 1 (V)
+Kom.	1
+Cena	Čelik za T-prečku 1 (V) / 1000 * Čelik Cena
+
+
+Šloga
+(Š)	
+(V)	Krilo 1 (V) - 2 * Čepovi šloge - 2 * Var profila
+Kom.	1
+Cena	Šloga (V) / 1000 * Šloga Cena
+
+
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+7. Trokrilni prozor (T-prečka) - PVC
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - 2 * Širina profila T prečka) / 3 + 2 * Var profila + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok +  2 * Preklop kod krila
+Kom.	6
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	6
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	6
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	3
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	
+(V)	T-prečka 1 (V)
+Kom.	2
+Cena	Čelik za T-prečku 1 (V) / 1000 * Čelik Cena
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+8. Trokrilni prozor (2 fiksa) A - PVC
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - 2 * Širina profila T prečka) / 3
+(V)	B - 2 * Širina profila Štok
+Kom.	4
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - 2 * Širina profila T prečka) / 3 + 2 * Var profila + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok - 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	
+(V)	T-prečka 1 (V)
+Kom.	2
+Cena	Čelik za T-prečku 1 (V) / 1000 * Čelik Cena
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+9. Trokrilni prozor (fiks + T-prečka) A - PVC
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - 2 * Širina profila T prečka) / 3
+(V)	B - 2 *  Širina profila Štok
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - 2 * Širina profila T prečka) / 3 + 2 * Var profila + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok - 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	4
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	
+(V)	T-prečka 1 (V)
+Kom.	2
+Cena	Čelik za T-prečku 1 (V) / 1000 * Čelik Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+10. Trokrilni prozor (fiks + šloga) A - PVC
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - Preklop kod šloge) / 3
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka - Preklop kod šloge) / 3 + 2 * Var profila + Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	4
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	1
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	
+(V)	T-prečka 1 (V)
+Kom.	1
+Cena	Čelik za T-prečku 1 (V) / 1000 * Čelik Cena
+
+
+Šloga
+(Š)	
+(V)	Krilo 1 (V) - 2 * Čepovi šloge - 2 * Var profila
+Kom.	1
+Cena	Šloga (V) / 1000 * Šloga Cena
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+11. Trokrilni prozor (2 fiksa) - PVC
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Lajsna za štok
+(Š)	(A - C - 2 * Širina profila Štok) / 2
+(V)	B - 2 * Širina profila Štok
+Kom.	4
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(C - 2 * Širina profila T prečka + 2 * Var profila + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	
+(V)	T-prečka 1 (V)
+Kom.	2
+Cena	Čelik za T-prečku 1 (V) / 1000 * Čelik Cena
+
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+12. Trokrilni prozor (fiks + T-prečka) - PVC
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Lajsna za štok
+(Š)	A - (Krilo 1 (Š) - 2 * Var profila - 2 * Preklop kod krila) * 2 - 2 * Širina profila Štok - 2 * Širina profila T prečka
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	C - Širina profila Štok - Širina profila T prečka + 2 * Var profila + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	4
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	
+(V)	T-prečka 1 (V)
+Kom.	2
+Cena	Čelik za T-prečku 1 (V) / 1000 * Čelik Cena
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+13. Trokrilni prozor (fiks + šloga) - PVC
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Lajsna za štok
+(Š)	A - C - Širina profila Štok
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(C - Širina profila Štok - Širina profila T prečka - Preklop kod šloge) / 2 + 2 * Var profila + Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	4
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	1
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	
+(V)	T-prečka 1 (V)
+Kom.	1
+Cena	Čelik za T-prečku 1 (V) / 1000 * Čelik Cena
+
+
+Šloga
+(Š)	
+(V)	Krilo 1 (V) - 2 * Čepovi šloge - 2 * Var profila
+Kom.	1
+Cena	Šloga (V) / 1000 * Šloga Cena
+
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+14. Jednokrilni prozor (nadsvetlo) - PVC
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Krilo 1
+(Š)	Štok (Š) - 2 * Širina profila Štok + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Var profila + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	T-prečka 1 (Š)
+(V)	
+Kom.	1
+Cena	Čelik za T-prečku 1 (Š) / 1000 * Čelik Cena
+
+
+Lajsna za nadsvetlo
+(Š)	A - 2 * Širina profila Štok
+(V)	B - D - Širina profila Štok
+Kom.	2
+Cena	Lajsna za nadsvetlo Kom. * (Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za nadsvetlo
+(Š)	Lajsna za nadsvetlo (Š) - Zazor za staklo
+(V)	Lajsna za nadsvetlo (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Ispuna Cena
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+15. Prozor + fiks (nadsvetlo) - PVC
+
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2 + 2 * Var profila + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Var profila + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	T-prečka 1 (Š)
+(V)	
+Kom.	1
+Cena	Čelik za T-prečku 1 (Š) / 1000 * Čelik Cena
+
+
+T-prečka 2
+(Š)	
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	1
+Cena	T-prečka 2 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 2
+(Š)	
+(V)	T-prečka 2 (V)
+Kom.	1
+Cena	Čelik za T-prečku 2 (V) / 1000 * Čelik Cena
+
+
+Lajsna za nadsvetlo
+(Š)	A - 2 * Širina profila Štok
+(V)	B - D - Širina profila Štok
+Kom.	2
+Cena	Lajsna za nadsvetlo Kom. * (Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za nadsvetlo
+(Š)	Lajsna za nadsvetlo (Š) - Zazor za staklo
+(V)	Lajsna za nadsvetlo (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Ispuna Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+
+
+
+16. Dvokrilni prozor (šloga, nadsvetlo) - PVC
+
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Preklop kod šloge) / 2 + 2 * Var profila + Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Var profila + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	4
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	T-prečka 1 (Š)
+(V)	
+Kom.	1
+Cena	Čelik za T-prečku 1 (Š) / 1000 * Čelik Cena
+
+
+Lajsna za nadsvetlo
+(Š)	A - 2 * Širina profila Štok
+(V)	B - D - Širina profila Štok
+Kom.	2
+Cena	Lajsna za nadsvetlo Kom. * (Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za nadsvetlo
+(Š)	Lajsna za nadsvetlo (Š) - Zazor za staklo
+(V)	Lajsna za nadsvetlo (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Ispuna Cena
+
+
+Šloga
+(Š)	
+(V)	Krilo 1 (V) - 2 * Čepovi šloge - 2 * Var profila
+Kom.	1
+Cena	Šloga (V) / 1000 * Šloga Cena
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+
+
+
+
+17. Dvokrilni prozor (T-prečka, nadsvetlo) - PVC
+
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2 + 2 * Var profila + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Var profila + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	4
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	T-prečka 1 (Š)
+(V)	
+Kom.	1
+Cena	Čelik za T-prečku 1 (Š) / 1000 * Čelik Cena
+
+
+T-prečka 2
+(Š)	
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	1
+Cena	T-prečka 2 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 2
+(Š)	
+(V)	T-prečka 2 (V)
+Kom.	1
+Cena	Čelik za T-prečku 2 (V) / 1000 * Čelik Cena
+
+
+Lajsna za nadsvetlo
+(Š)	A - 2 * Širina profila Štok
+(V)	B - D - Širina profila Štok
+Kom.	2
+Cena	Lajsna za nadsvetlo Kom. * (Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za nadsvetlo
+(Š)	Lajsna za nadsvetlo (Š) - Zazor za staklo
+(V)	Lajsna za nadsvetlo (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Ispuna Cena
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+
+
+
+18. Jednokrilni prozor (nadsvetlo-kip) - PVC
+
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Krilo 1
+(Š)	Štok (Š) - 2 * Širina profila Štok + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Var profila + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+Krilo 2
+(Š)	A - 2 * Širina profila Štok + 2 * Var profila + 2 * Preklop kod krila
+(V)	B - D - Širina profila Štok + 2 * Var profila + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 2 Kom. * (Krilo 2 (Š) + Krilo 2 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 2 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 2 Kom. * (Čelik za krilo 2 (Š) + Čelik za krilo 2 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 2 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 2 Kom. * (Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 2
+(Š)	Lajsna za krilo 2 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 2 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	T-prečka 1 (Š)
+(V)	
+Kom.	1
+Cena	Čelik za T-prečku 1 (Š) / 1000 * Čelik Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+
+
+
+19. Prozor + fiks (nadsvetlo-kip) - PVC
+
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2 + 2 * Var profila + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Var profila + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+Krilo 2
+(Š)	A - 2 * Širina profila Štok + 2 * Var profila + 2 * Preklop kod krila
+(V)	B - D - Širina profila Štok + 2 * Var profila + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 2 Kom. * (Krilo 2 (Š) + Krilo 2 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 2 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 2 Kom. * (Čelik za krilo 2 (Š) + Čelik za krilo 2 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 2 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 2 Kom. * (Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 2
+(Š)	Lajsna za krilo 2 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 2 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	T-prečka 1 (Š)
+(V)	
+Kom.	1
+Cena	Čelik za T-prečku 1 (Š) / 1000 * Čelik Cena
+
+
+T-prečka 2
+(Š)	
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	1
+Cena	T-prečka 2 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 2
+(Š)	
+(V)	T-prečka 2 (V)
+Kom.	1
+Cena	Čelik za T-prečku 2 (V) / 1000 * Čelik Cena
+
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+20. Dvokrilni prozor (šloga, nadsvetlo-kip) - PVC
+
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Preklop kod šloge) / 2 + 2 * Var profila + Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Var profila + Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	4
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+Krilo 2
+(Š)	A - 2 * Širina profila Štok + 2 * Var profila + 2 * Preklop kod krila
+(V)	B - D - Širina profila Štok + 2 * Var profila + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 2 Kom. * (Krilo 2 (Š) + Krilo 2 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 2 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 2 Kom. * (Čelik za krilo 2 (Š) + Čelik za krilo 2 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 2 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 2 Kom. * (Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 2
+(Š)	Lajsna za krilo 2 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 2 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	T-prečka 1 (Š)
+(V)	
+Kom.	1
+Cena	Čelik za T-prečku 1 (Š) / 1000 * Čelik Cena
+
+
+Šloga
+(Š)	
+(V)	Krilo 1 (V) - 2 * Čepovi šloge - 2 * Var profila
+Kom.	1
+Cena	Šloga (V) / 1000 * Šloga Cena
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+21. Dvokrilni prozor (T-prečka, nadsvetlo-kip) - PVC
+
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2 + 2 * Var profila + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Var profila + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	4
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+Krilo 2
+(Š)	A - 2 * Širina profila Štok + 2 * Var profila + 2 * Preklop kod krila
+(V)	B - D - Širina profila Štok + 2 * Var profila + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 2 Kom. * (Krilo 2 (Š) + Krilo 2 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 2 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 2 Kom. * (Čelik za krilo 2 (Š) + Čelik za krilo 2 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 2 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 2 Kom. * (Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 2
+(Š)	Lajsna za krilo 2 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 2 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	T-prečka 1 (Š)
+(V)	
+Kom.	1
+Cena	Čelik za T-prečku 1 (Š) / 1000 * Čelik Cena
+
+
+T-prečka 2
+(Š)	
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	1
+Cena	T-prečka 2 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 2
+(Š)	
+(V)	T-prečka 2 (V)
+Kom.	1
+Cena	Čelik za T-prečku 2 (V) / 1000 * Čelik Cena
+
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1. Fiksni prozor - ALU
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Lajsna za štok
+(Š)	A - 2 * Širina profila Štok
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Spojnica 1
+Kom.	4
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	4
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+  
+
+
+
+
+
+2. Jednokrilni prozor - ALU
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Krilo 1
+(Š)	Štok (Š) - 2 * Širina profila Štok + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+Spojnica 1
+Kom.	8
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	8
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+3. Dvokrilni prozor (šloga) - ALU
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Preklop kod šloge) / 2 + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+Šloga
+(Š)	
+(V)	Krilo 1 (V) - Čepovi šloge
+Kom.	1
+Cena	Šloga (V) / 1000 * Šloga Cena
+
+
+Spojnica 1
+Kom.	12
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	12
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+4. Dvokrilni prozor (T-prečka) - ALU
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Krilo 1
+(Š)	(Štok (Š) - 2 * Širina profila Štok - Širina profila T prečka + (2 * Preklop kod krila) * 2) / 2
+(V)	(Štok (V) - 2 * Širina profila Štok) + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	
+(V)	T-prečka 1 (Š)
+Kom.	1
+Cena	Čelik za T-prečku 1 (Š) / 1000 * Čelik Cena
+
+
+Spojnica 1
+Kom.	14
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	14
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+5. Prozor + fiks - ALU
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2
+(V)	B - 2 * Širina profila Štok - Širina profila T prečka
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2 + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	1
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Spojnica 1
+Kom.	10
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	10
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+6. Trokrilni prozor (šloga) - ALU
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka - Preklop kod šloge) / 3 + (4 * Preklop kod krila) / 3
+(V)	Štok (V) - 2 * Širina profila Štok +  2 * Preklop kod krila
+Kom.	6
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	6
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	3
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	1
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Šloga
+(Š)	
+(V)	Krilo 1 (V) - 2 * Čepovi šloge
+Kom.	1
+Cena	Šloga (V) / 1000 * Šloga Cena
+
+
+Spojnica 1
+Kom.	18
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	18
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+7. Trokrilni prozor (T-prečka) - ALU
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - 2 * Širina profila T prečka) / 3 + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok +  2 * Preklop kod krila
+Kom.	6
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	6
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	3
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Spojnica 1
+Kom.	20
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	20
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+8. Trokrilni prozor (2 fiksa) A - ALU
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - 2 * Širina profila T prečka) / 3
+(V)	B - 2 * Širina profila Štok
+Kom.	4
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - 2 * Širina profila T prečka) / 3 + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok - 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Spojnica 1
+Kom.	12
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	12
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+9. Trokrilni prozor (fiks + T-prečka) A - ALU
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - 2 * Širina profila T prečka) / 3
+(V)	B - 2 *  Širina profila Štok
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - 2 * Širina profila T prečka) / 3 + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok - 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Spojnica 1
+Kom.	16
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	16
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+10. Trokrilni prozor (fiks + šloga) A - ALU
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - Preklop kod šloge) / 3
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka - Preklop kod šloge) / 3 + Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Šloga
+(Š)	
+(V)	Krilo 1 (V) - 2 * Čepovi šloge
+Kom.	1
+Cena	Šloga (V) / 1000 * Šloga Cena
+
+
+Spojnica 1
+Kom.	14
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	14
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+11. Trokrilni prozor (2 fiksa) - ALU
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Lajsna za štok
+(Š)	(A - C - 2 * Širina profila Štok) / 2
+(V)	B - 2 * Širina profila Štok
+Kom.	4
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(C - 2 * Širina profila T prečka + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Spojnica 1
+Kom.	12
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	12
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+12. Trokrilni prozor (fiks + T-prečka) - ALU
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Lajsna za štok
+(Š)	A - (Krilo 1 (Š) - 2 * Preklop kod krila) * 2 - 2 * Širina profila Štok - 2 * Širina profila T prečka
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	C - Širina profila Štok - Širina profila T prečka + 2 * Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Spojnica 1
+Kom.	16
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	16
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+13. Trokrilni prozor (fiks + šloga) - ALU
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Lajsna za štok
+(Š)	A - C - Širina profila Štok
+(V)	B - 2 * Širina profila Štok
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(C - Širina profila Štok - Širina profila T prečka - Preklop kod šloge) / 2 + Preklop kod krila
+(V)	Štok (V) - 2 * Širina profila Štok + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	
+(V)	B - 2 * Širina profila Štok
+Kom.	1
+Cena	T-prečka 1 (V) / 1000 * T prečka Cena
+
+
+Šloga
+(Š)	
+(V)	Krilo 1 (V) - 2 * Čepovi šloge
+Kom.	1
+Cena	Šloga (V) / 1000 * Šloga Cena
+
+
+Spojnica 1
+Kom.	14
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	14
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+14. Jednokrilni prozor (nadsvetlo) - ALU
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Krilo 1
+(Š)	Štok (Š) - 2 * Širina profila Štok + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Lajsna za nadsvetlo
+(Š)	A - 2 * Širina profila Štok
+(V)	B - D - Širina profila Štok
+Kom.	2
+Cena	Lajsna za nadsvetlo Kom. * (Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za nadsvetlo
+(Š)	Lajsna za nadsvetlo (Š) - Zazor za staklo
+(V)	Lajsna za nadsvetlo (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Ispuna Cena
+
+
+Spojnica 1
+Kom.	10
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	10
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+15. Prozor + fiks (nadsvetlo) - ALU
+
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2 + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+T-prečka 2
+(Š)	
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	1
+Cena	T-prečka 2 (V) / 1000 * T prečka Cena
+
+
+Lajsna za nadsvetlo
+(Š)	A - 2 * Širina profila Štok
+(V)	B - D - Širina profila Štok
+Kom.	2
+Cena	Lajsna za nadsvetlo Kom. * (Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za nadsvetlo
+(Š)	Lajsna za nadsvetlo (Š) - Zazor za staklo
+(V)	Lajsna za nadsvetlo (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Ispuna Cena
+
+
+Spojnica 1
+Kom.	12
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	12
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+
+
+
+16. Dvokrilni prozor (šloga, nadsvetlo) - ALU
+
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Preklop kod šloge) / 2 + Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Lajsna za nadsvetlo
+(Š)	A - 2 * Širina profila Štok
+(V)	B - D - Širina profila Štok
+Kom.	2
+Cena	Lajsna za nadsvetlo Kom. * (Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za nadsvetlo
+(Š)	Lajsna za nadsvetlo (Š) - Zazor za staklo
+(V)	Lajsna za nadsvetlo (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Ispuna Cena
+
+
+Šloga
+(Š)	
+(V)	Krilo 1 (V) - 2 * Čepovi šloge - 2 * Var profila
+Kom.	1
+Cena	Šloga (V) / 1000 * Šloga Cena
+
+
+Spojnica 1
+Kom.	14
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	14
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+
+
+
+
+17. Dvokrilni prozor (T-prečka, nadsvetlo) - ALU
+
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2 + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+T-prečka 2
+(Š)	
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	1
+Cena	T-prečka 2 (V) / 1000 * T prečka Cena
+
+
+Lajsna za nadsvetlo
+(Š)	A - 2 * Širina profila Štok
+(V)	B - D - Širina profila Štok
+Kom.	2
+Cena	Lajsna za nadsvetlo Kom. * (Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za nadsvetlo
+(Š)	Lajsna za nadsvetlo (Š) - Zazor za staklo
+(V)	Lajsna za nadsvetlo (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za nadsvetlo (Š) + Lajsna za nadsvetlo (V)) / 1000 * Ispuna Cena
+
+
+Spojnica 1
+Kom.	16
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	16
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+
+
+
+18. Jednokrilni prozor (nadsvetlo-kip) - ALU
+
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Krilo 1
+(Š)	Štok (Š) - 2 * Širina profila Štok + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+Krilo 2
+(Š)	A - 2 * Širina profila Štok + 2 * Preklop kod krila
+(V)	B - D - Širina profila Štok + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 2 Kom. * (Krilo 2 (Š) + Krilo 2 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Širina profila krilo
+(V)	Krilo 2 (V) - 2 * Širina profila krilo
+Kom.	2
+Cena	Lajsna za krilo 2 Kom. * (Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 2
+(Š)	Lajsna za krilo 2 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 2 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Spojnica 1
+Kom.	14
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	14
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+
+
+
+
+19. Prozor + fiks (nadsvetlo-kip) - ALU
+
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2 + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+Krilo 2
+(Š)	A - 2 * Širina profila Štok + 2 * Preklop kod krila
+(V)	B - D - Širina profila Štok + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 2 Kom. * (Krilo 2 (Š) + Krilo 2 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Širina profila krilo
+(V)	Krilo 2 (V) - 2 * Širina profila krilo
+Kom.	2
+Cena	Lajsna za krilo 2 Kom. * (Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 2
+(Š)	Lajsna za krilo 2 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 2 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+T-prečka 2
+(Š)	
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	1
+Cena	T-prečka 2 (V) / 1000 * T prečka Cena
+
+
+Spojnica 1
+Kom.	16
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	16
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+20. Dvokrilni prozor (šloga, nadsvetlo-kip) - ALU
+
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Preklop kod šloge) / 2 + Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+Krilo 2
+(Š)	A - 2 * Širina profila Štok + 2 * Preklop kod krila
+(V)	B - D - Širina profila Štok + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 2 Kom. * (Krilo 2 (Š) + Krilo 2 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Širina profila krilo
+(V)	Krilo 2 (V) - 2 * Širina profila krilo
+Kom.	2
+Cena	Lajsna za krilo 2 Kom. * (Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 2
+(Š)	Lajsna za krilo 2 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 2 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Šloga
+(Š)	
+(V)	Krilo 1 (V) - 2 * Čepovi šloge
+Kom.	1
+Cena	Šloga (V) / 1000 * Šloga Cena
+
+
+Spojnica 1
+Kom.	18
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	18
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+
+
+
+
+
+21. Dvokrilni prozor (T-prečka, nadsvetlo-kip) - ALU
+
+
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2 + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Preklop kod krila
+Kom.	4
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo
+(V)	Krilo 1 (V) - 2 * Širina profila krilo
+Kom.	4
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	2
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena
+
+
+Krilo 2
+(Š)	A - 2 * Širina profila Štok + 2 * Preklop kod krila
+(V)	B - D - Širina profila Štok + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 2 Kom. * (Krilo 2 (Š) + Krilo 2 (V)) / 1000 * Krilo Cena
+
+
+Lajsna za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Širina profila krilo
+(V)	Krilo 2 (V) - 2 * Širina profila krilo
+Kom.	2
+Cena	Lajsna za krilo 2 Kom. * (Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 2
+(Š)	Lajsna za krilo 2 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 2 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Ispuna Cena
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+T-prečka 2
+(Š)	
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	1
+Cena	T-prečka 2 (V) / 1000 * T prečka Cena
+
+
+Spojnica 1
+Kom.	20
+Cena	Spojnica 1 Kom. * Spojnica 1 Cena
+
+
+Spojnica 2
+Kom.	20
+Cena	Spojnica 2 Kom. * Spojnica 2 Cena
+
+
+
+
+
+
+Roletne
+(Š)	A * ImaRoletnu
+(V)	(B + RoletnaTip * Visina kutije nadprozorske roletne) * ImaRoletnu
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)
+
+
+Komarnik
+(Š)	A * ImaKomarnik
+(V)	B * ImaKomarnik
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)
+
+
+

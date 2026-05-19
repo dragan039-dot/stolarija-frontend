@@ -1,0 +1,17 @@
+export const ispunaData = [
+  { id: 1, naziv: "Ispuna 1", cena: 0 },
+  { id: 2, naziv: "Ispuna 2", cena: 0 },
+  { id: 3, naziv: "Ispuna 3", cena: 0 },
+  { id: 4, naziv: "Ispuna 4", cena: 0 },
+  { id: 5, naziv: "Ispuna 5", cena: 0 },
+  { id: 6, naziv: "Ispuna 6", cena: 0 },
+  { id: 7, naziv: "Ispuna 7", cena: 0 },
+  { id: 8, naziv: "Ispuna 8", cena: 0 },
+  { id: 9, naziv: "Ispuna 9", cena: 0 },
+  { id: 10, naziv: "Ispuna 10", cena: 0 },
+  { id: 11, naziv: "Ispuna 11", cena: 0 },
+  { id: 12, naziv: "Ispuna 12", cena: 0 },
+  { id: 13, naziv: "Ispuna 13", cena: 0 },
+  { id: 14, naziv: "Ispuna 14", cena: 0 },
+  { id: 15, naziv: "Ispuna 15", cena: 0 },
+];

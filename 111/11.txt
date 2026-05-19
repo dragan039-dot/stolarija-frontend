@@ -1,0 +1,375 @@
+"use client";
+
+import { useEffect, useState } from "react";
+
+type Customer = {
+  id: number;
+  naziv: string;
+  adresa: string;
+  telefon: string;
+  pib: string;
+};
+
+type Position = {
+  vrsta_stolarije: string;
+  vrsta_prozora: string;
+  slika: number | null;
+  a: number;
+  b: number;
+  c: number;
+  d: number;
+  profil: string;
+  ispuna: string;
+  okov: string;
+  otvaranje: string;
+  roletna: string;
+  komarnik: string;
+  kolicina: number;
+};
+
+export default function Home() {
+
+  // ---------------- STATE ----------------
+  const [customers, setCustomers] = useState<Customer[]>([]);
+  const [search, setSearch] = useState("");
+
+  const [form, setForm] = useState({
+    id: "",
+    naziv: "",
+    adresa: "",
+    telefon: "",
+    pib: "",
+    maticni: "",
+    datum: "",
+    vrsta_ponude: "",
+    valuta: "",
+    popust: "",
+    napomena: "",
+  });
+
+  const [positions, setPositions] = useState<Position[]>(
+    Array.from({ length: 10 }, () => ({
+      vrsta_stolarije: "",
+      vrsta_prozora: "",
+      slika: null,
+      a: 0,
+      b: 0,
+      c: 0,
+      d: 0,
+      profil: "",
+      ispuna: "",
+      okov: "",
+      otvaranje: "",
+      roletna: "",
+      komarnik: "",
+      kolicina: 1,
+    }))
+  );
+
+  // ---------------- LISTE ----------------
+  const prozori = [
+    { id: 1, naziv: "Fiksni prozor" },
+    { id: 2, naziv: "Jednokrilni prozor" },
+    { id: 3, naziv: "Dvokrilni prozor (šloga)" },
+    { id: 4, naziv: "Dvokrilni prozor (T-prečka)" },
+    { id: 5, naziv: "Prozor + fiks" },
+    { id: 6, naziv: "Trokrilni prozor (šloga)" },
+    { id: 7, naziv: "Trokrilni prozor (T-prečka)" },
+    { id: 8, naziv: "Trokrilni prozor (2 fiksa) A" },
+    { id: 9, naziv: "Trokrilni prozor (fiks + T-prečka) A" },
+    { id: 10, naziv: "Trokrilni prozor (fiks + šloga) A" },
+    { id: 11, naziv: "Trokrilni prozor (2 fiksa)" },
+    { id: 12, naziv: "Trokrilni prozor (fiks + T-prečka)" },
+    { id: 13, naziv: "Trokrilni prozor (fiks + šloga)" },
+    { id: 14, naziv: "Jednokrilni prozor (nadsvetlo)" },
+    { id: 15, naziv: "Prozor + fiks (nadsvetlo)" },
+    { id: 16, naziv: "Dvokrilni prozor (šloga, nadsvetlo)" },
+    { id: 17, naziv: "Dvokrilni prozor (T-prečka, nadsvetlo)" },
+    { id: 18, naziv: "Jednokrilni prozor (nadsvetlo-kip)" },
+    { id: 19, naziv: "Prozor + fiks (nadsvetlo-kip)" },
+    { id: 20, naziv: "Dvokrilni prozor (šloga, nadsvetlo-kip)" },
+    { id: 21, naziv: "Dvokrilni prozor (T-prečka, nadsvetlo-kip)" },
+  ];
+
+  const stolarija = ["PVC", "ALU"];
+  const profili = ["Profil 70", "Profil 80"];
+  const ispune = ["Dvoslojno", "Troslojno"];
+  const okovi = ["Standard", "Premium"];
+  const otvaranja = ["Levo", "Desno"];
+  const roletne = ["Ne", "Da"];
+  const komarnici = ["Ne", "Da"];
+
+  // ---------------- FETCH ----------------
+  useEffect(() => {
+    fetch("http://localhost:3001/customers")
+      .then(res => res.json())
+      .then(data => {
+        // ✅ SORTIRANJE (najnoviji prvi)
+        const sorted = data.sort((a: Customer, b: Customer) => b.id - a.id);
+        setCustomers(sorted);
+      });
+  }, []);
+
+  // ---------------- FILTER ----------------
+  const filtered = customers
+    .filter(c => c.naziv.toLowerCase().includes(search.toLowerCase()))
+    .slice(0, 5);
+
+  // ---------------- SELECT CUSTOMER ----------------
+  const selectCustomer = (c: Customer) => {
+    setForm({
+      ...form,
+      naziv: c.naziv,
+      adresa: c.adresa,
+      telefon: c.telefon,
+      pib: c.pib,
+    });
+  };
+
+  // ---------------- CLEAR FORM ----------------
+  const clearForm = () => {
+    setForm({
+      id: "",
+      naziv: "",
+      adresa: "",
+      telefon: "",
+      pib: "",
+      maticni: "",
+      datum: "",
+      vrsta_ponude: "",
+      valuta: "",
+      popust: "",
+      napomena: "",
+    });
+
+    setPositions(
+      Array.from({ length: 10 }, () => ({
+        vrsta_stolarije: "",
+        vrsta_prozora: "",
+        slika: null,
+        a: 0,
+        b: 0,
+        c: 0,
+        d: 0,
+        profil: "",
+        ispuna: "",
+        okov: "",
+        otvaranje: "",
+        roletna: "",
+        komarnik: "",
+        kolicina: 1,
+      }))
+    );
+  };
+
+  // ---------------- UPDATE ----------------
+  const update = (i: number, field: string, value: any) => {
+    const copy = [...positions];
+    (copy[i] as any)[field] = value;
+    setPositions(copy);
+  };
+
+  const selectProzor = (i: number, naziv: string) => {
+    const p = prozori.find(x => x.naziv === naziv);
+
+    const copy = [...positions];
+    copy[i].vrsta_prozora = naziv;
+    copy[i].slika = p ? p.id : null;
+
+    setPositions(copy);
+  };
+
+  // ================== SAVE ==================
+  const saveOffer = async () => {
+    const res = await fetch("http://localhost:3001/offers", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...form,
+        positions
+      })
+    });
+
+    const data = await res.json();
+
+    alert("Sačuvano ID: " + data.id);
+
+    setForm({ ...form, id: data.id });
+  };
+
+  // ================== OPEN ==================
+  const openOffer = async () => {
+    if (!form.id) return alert("Unesi ID");
+
+    const res = await fetch(`http://localhost:3001/offers/${form.id}`);
+    const data = await res.json();
+
+    setForm({
+      ...form,
+      ...data.offer
+    });
+
+    setPositions(data.items);
+  };
+
+  return (
+    <main className="p-6 max-w-7xl mx-auto">
+
+      <h1 className="text-3xl font-bold mb-4">FORMA</h1>
+
+      {/* SEARCH */}
+      <input
+        placeholder="Pretraga kupca..."
+        className="border p-2 mb-2 w-full"
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+      />
+
+      {/* TABELA */}
+      <table className="w-full border mb-6">
+        <thead className="bg-gray-200">
+          <tr>
+            <th>ID</th><th>Naziv</th><th>Adresa</th><th>Telefon</th><th>PIB</th>
+          </tr>
+        </thead>
+        <tbody>
+          {filtered.map(c => (
+            <tr key={c.id}
+              className="cursor-pointer hover:bg-gray-100"
+              onClick={() => selectCustomer(c)}>
+              <td>{c.id}</td>
+              <td>{c.naziv}</td>
+              <td>{c.adresa}</td>
+              <td>{c.telefon}</td>
+              <td>{c.pib}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      {/* FORMA */}
+      <div className="grid grid-cols-4 gap-2 mb-6">
+
+        <input placeholder="ID" value={form.id}
+          onChange={e => setForm({ ...form, id: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="Kupac" value={form.naziv}
+          onChange={e => setForm({ ...form, naziv: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="Adresa" value={form.adresa}
+          onChange={e => setForm({ ...form, adresa: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="Telefon" value={form.telefon}
+          onChange={e => setForm({ ...form, telefon: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="PIB" value={form.pib}
+          onChange={e => setForm({ ...form, pib: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="Matični broj" value={form.maticni}
+          onChange={e => setForm({ ...form, maticni: e.target.value })}
+          className="border p-2"/>
+
+        <input type="date" value={form.datum}
+          onChange={e => setForm({ ...form, datum: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="Vrsta ponude"
+          onChange={e => setForm({ ...form, vrsta_ponude: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="Valuta"
+          onChange={e => setForm({ ...form, valuta: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="Popust"
+          onChange={e => setForm({ ...form, popust: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="Napomena"
+          onChange={e => setForm({ ...form, napomena: e.target.value })}
+          className="border p-2 col-span-4"/>
+
+      </div>
+
+      {/* DUGMAD */}
+      <div className="flex gap-3 mb-8">
+        <button onClick={openOffer} className="bg-gray-600 text-white px-4 py-2 rounded">Otvori</button>
+        <button onClick={saveOffer} className="bg-blue-600 text-white px-4 py-2 rounded">Sačuvaj</button>
+        <button onClick={clearForm} className="bg-red-600 text-white px-4 py-2 rounded">Obriši formu</button>
+      </div>
+
+      {/* POZICIJE (NETAKNUTE) */}
+      {positions.map((p, i) => (
+        <div key={i} className="border rounded p-4 mb-6">
+
+          <h2 className="font-bold mb-3">Pozicija {i + 1}</h2>
+
+          <div className="grid grid-cols-4 gap-2">
+
+            <select onChange={e => update(i, "vrsta_stolarije", e.target.value)} className="border p-2">
+              <option>Vrsta stolarije</option>
+              {stolarija.map((v, idx) => <option key={idx}>{v}</option>)}
+            </select>
+
+            <select onChange={e => selectProzor(i, e.target.value)} className="border p-2">
+              <option>Vrsta prozora</option>
+              {prozori.map(x => <option key={x.id}>{x.naziv}</option>)}
+            </select>
+
+            <input placeholder="A" type="number" onChange={e => update(i, "a", Number(e.target.value))} className="border p-2"/>
+            <input placeholder="B" type="number" onChange={e => update(i, "b", Number(e.target.value))} className="border p-2"/>
+            <input placeholder="C" type="number" onChange={e => update(i, "c", Number(e.target.value))} className="border p-2"/>
+            <input placeholder="D" type="number" onChange={e => update(i, "d", Number(e.target.value))} className="border p-2"/>
+
+            <select onChange={e => update(i, "profil", e.target.value)} className="border p-2">
+              <option>Profil</option>
+              {profili.map((v, idx) => <option key={idx}>{v}</option>)}
+            </select>
+
+            <select onChange={e => update(i, "ispuna", e.target.value)} className="border p-2">
+              <option>Ispuna</option>
+              {ispune.map((v, idx) => <option key={idx}>{v}</option>)}
+            </select>
+
+            <select onChange={e => update(i, "okov", e.target.value)} className="border p-2">
+              <option>Okov</option>
+              {okovi.map((v, idx) => <option key={idx}>{v}</option>)}
+            </select>
+
+            <select onChange={e => update(i, "otvaranje", e.target.value)} className="border p-2">
+              <option>Otvaranje</option>
+              {otvaranja.map((v, idx) => <option key={idx}>{v}</option>)}
+            </select>
+
+            <select onChange={e => update(i, "roletna", e.target.value)} className="border p-2">
+              <option>Roletna</option>
+              {roletne.map((v, idx) => <option key={idx}>{v}</option>)}
+            </select>
+
+            <select onChange={e => update(i, "komarnik", e.target.value)} className="border p-2">
+              <option>Komarnik</option>
+              {komarnici.map((v, idx) => <option key={idx}>{v}</option>)}
+            </select>
+
+            <input placeholder="Količina" type="number"
+              onChange={e => update(i, "kolicina", Number(e.target.value))}
+              className="border p-2"
+            />
+
+          </div>
+
+          {p.slika && (
+            <img src={`/prozori/${p.slika}.jpg`} className="mt-4 w-48 border"/>
+          )}
+
+        </div>
+      ))}
+
+    </main>
+  );
+}

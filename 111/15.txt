@@ -1,0 +1,506 @@
+Mozemo li da se zadrzimo na Parametrima
+Sada ću da ti napravim kostur kako sam ja planirao da izgleda tab Parametri
+Ovo je prva grupa podataka koji se unose u Parametre
+
+
+Podaci firme (podatke unosi korisnik koje ćemo kasnije iskoristiti za Ponudu)
+Naziv:
+Adresa:
+PIB:
+Matični br:
+Telefon:
+E-mail:
+TR:
+Logo: (Da se ostavi mogućnost da se ubaci logo firme koji ćemo kasnije iskoristiti za Ponudu)
+Zarada:		%
+Otpad:		%
+Roletna:		%
+Komarnik:		%
+Valuta plaćanja:		dana
+PDV:		%
+
+
+Naziv Ispuna	(Naziv i cenu menja korisnik)
+ALU/PVC	cena
+-Ispuna 1	60
+-Ispuna 2	60
+-Ispuna 3	60
+-Ispuna 4	60
+-Ispuna 5	60
+-Ispuna 6	60
+-Ispuna 7	60
+-Ispuna 8	60
+-Ispuna 9	60
+-Ispuna 10	60
+-Ispuna 11	60
+-Ispuna 12	60
+-Ispuna 13	60
+-Ispuna 14	60
+-Ispuna 15	60
+
+
+Nazivi Profila (Nazive menja korisnik)
+ALU/PVC
+-Profil 1
+-Profil 2
+-Profil 3
+-Profil 4
+-Profil 5
+-Profil 6
+-Profil 7
+-Profil 8
+-Profil 9
+-Profil 10
+-Profil 11
+-Profil 12
+-Profil 13
+-Profil 14
+-Profil 15
+
+
+Valuta (Nazive menja korisnik i dodaje na mesto crtica)
+-(RSD)
+-(EU)
+-
+-
+
+
+
+Ponuda (Ove podatke ne može da menja korisnik)
+-PREDRAČUN
+-RAČUN
+
+
+
+Vrste prozora (Ove podatke ne može da menja korisnik)
+-1 Fiksni prozor
+-2 Jednokrilni prozor
+-3 Dvokrilni prozor (šloga)
+-4 Dvokrilni prozor (T-prečka)
+-5 Prozor + fiks 
+-6 Trokrilni prozor (šloga)
+-7 Trokrilni prozor (T-prečka)
+-8 Trokrilni prozor (2 fiksa) A
+-9 Trokrilni prozor (fiks + T-prečka) A
+-10 Trokrilni prozor (fiks + šloga) A
+-11 Trokrilni prozor (2 fiksa)
+-12 Trokrilni prozor (fiks + T-prečka)
+-13 Trokrilni prozor (fiks + šloga)
+-14 Jednokrilni prozor (nadsvetlo)
+-15 Prozor + fiks (nadsvetlo)
+-16 Dvokrilni prozor (šloga, nadsvetlo)
+-17 Dvokrilni prozor (T-prečka, nadsvetlo)
+-18 Jednokrilni prozor (nadsvetlo-kip)
+-19 Prozor + fiks (nadsvetlo-kip)
+-20 Dvokrilni prozor (šloga, nadsvetlo-kip)
+-21 Dvokrilni prozor (T-prečka, nadsvetlo-kip)
+
+
+
+Okov	(Naziv i cenu menja korisnik)
+Naziv	Cena
+-Okov 1	44
+-Okov 2	
+-Okov 3	
+-Okov 4	
+-Okov 5	
+
+
+
+Otvaranje (Ove podatke ne može da menja korisnik)
+-Levo
+-Desno
+
+
+
+Vrsta stolarije (Ove podatke ne može da menja korisnik)
+-PVC
+-ALU
+
+
+Roletna (Ove podatke ne može da menja korisnik)
+-Nadprozorska
+-Spoljna
+
+
+
+
+Komarnik (Ove podatke ne može da menja korisnik)
+-Da
+-Ne
+
+
+
+
+
+
+
+
+
+
+
+
+Slova A, B, C i D su polja u Formi za dimenzije prozora.
+Nazivi u zagradama koji se nalaze u formulama su ustvari podaci koji treba da se povuku iz tab-ova Tehnicki i Cene u zavisnosti koji profil se koristi.
+U ovom primeru sam stavio da ima Roletne i Komarnik čisto da bi video celu formulu, ali ukoliko u Formi se ne izaberu Roletna i Komarnik onda ne ulazi u obračun.
+(Š) - Širina
+(V) - Visina
+Kom. - Komada sa tačkom je podatak iz elemenata (koliko ukupno elemenata)
+Kom - Komada bez tačke je podatak iz Forme (koliko ukupno prozora)
+
+
+
+
+Izvini, dodao sam još formule za izračunavanje cene prozora, tako da je ovo kompletna formula za ovaj prozor.
+Samo bih te zamolio da mi što detaljnije objašnjavaš gde da stavim neki dok ili šta tačno da zamenim u kodu. Unapred ti hvala.
+
+
+
+
+1 Fiksni prozor	- PVC (cena da se doradi na kraju)
+
+Štok
+(Š)	A+2*(Var profila)
+(V)	B+2*(Var profila)
+Kom.	2
+Cena	(Štok Kom.)*((Štok (Š))+(Štok (V)))/1000*(Štok Cena)
+
+
+Čelik za štok
+(Š)	A-(Skraćenje čelika za štok)
+(V)	B-(Skraćenje čelika za štok)
+Kom.	2
+Cena	(Čelik za štok Kom.)*((Čelik za štok (Š))+(Čelik za štok (V)))/1000*(Čelik Cena)
+
+
+Lajsna za štok
+(Š)	A-2*(Širina profila Štok)
+(V)	B-2*(Širina profila Štok)
+Kom.	2
+Cena	(Lajsna za štok Kom.)*((Lajsna za štok (Š))+(Lajsna za štok (V)))/1000*(Lajsna Cena)
+
+
+Ispuna za štok
+(Š)	(Lajsna za štok (Š))-(Zazor za staklo)
+(V)	(Lajsna za štok (V))-(Zazor za staklo)
+Kom.	1
+Cena	(Ispuna za štok Kom.)*((Lajsna za štok (Š))+(Lajsna za štok (V)))/1000*(Ispuna Cena) Napomena: Cena Ispune zavisi koja je ispuna izabrana
+
+
+Roletne
+(Š)	A
+(V)	Nadprozorska = B+(Visina kutije nadprozorske roletne)  Spoljna = B Napomena:U zavisnosti da li izabere Nadprozorska ili Spoljna roletna
+Cena	(Roletna (Š)/1000)*(Roletna (V)/1000)*(Roletna Cena)*(1+(Roletna %)/100) Napomena: Cena Roletne zavisi koji je Profil izabran a "Roletna %" je iz parametara za firmu
+
+
+Komarnik
+(Š)	A
+(V)	B
+Cena	(Komarnik (Š)/1000)*(Komarnik (V)/1000)*(Komarnik Cena)*(1+(Komarnik %)/100) Napomena: Cena Komarnika zavisi koji je Profil izabran a "Komarnik %" je iz parametara za firmu
+
+
+
+
+Ukupna cena	((Komarnik Cena elemenata)+(Roletna Cena elemenata))+((Štok Cena elemenata)+(Čelik za štok Cena elemenata)+(Lajsna za štok Cena elemenata)+(Ispuna za štok Cena elemenata))*(1+(Otpad %)/100)*(1+(Zarada %)/100) Napomena: Cene elemenata su cene koje smo dobili iz gore navedenih formula, da ne bude zabune
+
+
+
+
+
+
+
+
+
+
+1 Fiksni prozor	- ALU (cena da se doradi na kraju)
+
+Štok
+(Š)	A
+(V)	B
+Kom.	2
+Cena	(Štok Kom.)*((Štok (Š))+(Štok (V)))/1000*(Štok Cena)
+
+
+Lajsna za štok
+(Š)	A-2*(Širina profila Štok)
+(V)	B-2*(Širina profila Štok)
+Kom.	2
+Cena	(Lajsna za štok Kom.)*((Lajsna za štok (Š))+(Lajsna za štok (V)))/1000*(Lajsna Cena)
+
+
+Ispuna za štok
+(Š)	(Lajsna za štok (Š))-(Zazor za staklo)
+(V)	(Lajsna za štok (V))-(Zazor za staklo)
+Kom.	1
+Cena	(Ispuna za štok Kom.)*((Lajsna za štok (Š))+(Lajsna za štok (V)))/1000*(Ispuna Cena) Napomena: Cena Ispune zavisi koja je ispuna izabrana
+
+
+ALU spojnice 1
+Kom.	4
+Cena	(ALU spojnice 1 Kom.)*(ALU spojnice 1 Cena) Napomena: Cena ALU spojnice 1 zavisi koji je Profil izabran
+
+
+ALU spojnice 2
+Kom.	4
+Cena	(ALU spojnice 2 Kom.)*(ALU spojnice 2 Cena) Napomena: Cena ALU spojnice 2 zavisi koji je Profil izabran
+
+
+Roletne
+(Š)	A
+(V)	Nadprozorska = B+(Visina kutije nadprozorske roletne)  Spoljna = B Napomena:U zavisnosti da li izabere Nadprozorska ili Spoljna roletna
+Cena	(Roletna (Š)/1000)*(Roletna (V)/1000)*(Roletna Cena)*(1+(Roletna %)/100) Napomena: Cena Roletne zavisi koji je Profil izabran a "Roletna %" je iz parametara za firmu
+
+
+Komarnik
+(Š)	A
+(V)	B
+Cena	(Komarnik (Š)/1000)*(Komarnik (V)/1000)*(Komarnik Cena)*(1+(Komarnik %)/100) Napomena: Cena Komarnika zavisi koji je Profil izabran a "Komarnik %" je iz parametara za firmu
+
+
+
+Ukupna cena	((Komarnik Cena elemenata)+(Roletna Cena elemenata))+((Štok Cena elemenata)+(Lajsna za štok Cena elemenata)+(Ispuna za štok Cena elemenata)+(ALU spojnice 1 Cena elemenata)+(ALU spojnice 2 Cena elemenata))*(1+(Otpad %)/100)*(1+(Zarada %)/100) Napomena: Cene elemenata su cene koje smo dobili iz gore navedenih formula, da ne bude zabune
+
+
+
+
+
+
+
+
+19. Prozor + fiks (nadsvetlo-kip) - PVC
+
+
+Štok
+(Š)	A + 2 * Var profila
+(V)	B + 2 * Var profila
+Kom.	2
+Cena	Štok Kom. * (Štok (Š) + Štok (V)) / 1000 * Štok Cena
+
+
+Čelik za štok
+(Š)	A - Skraćenje čelika za štok
+(V)	B - Skraćenje čelika za štok
+Kom.	2
+Cena	Čelik za štok Kom. * (Čelik za štok (Š) + Čelik za štok (V)) / 1000 * Čelik Cena
+
+
+Lajsna za štok
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	2
+Cena	Lajsna za štok Kom. * (Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za štok
+(Š)	Lajsna za štok (Š) - Zazor za staklo
+(V)	Lajsna za štok (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za štok (Š) + Lajsna za štok (V)) / 1000 * Ispuna Cena    Napomena: Cena Ispune zavisi koja je ispuna izabrana
+
+
+Krilo 1
+(Š)	(A - 2 * Širina profila Štok - Širina profila T prečka) / 2 + 2 * Var profila + 2 * Preklop kod krila
+(V)	D - Širina profila Štok - Širina profila T prečka + 2 * Var profila + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 1 Kom. * (Krilo 1 (Š) + Krilo 1 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 1 Kom. * (Čelik za krilo 1 (Š) + Čelik za krilo 1 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 1
+(Š)	Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 1 Kom. * (Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 1
+(Š)	Lajsna za krilo 1 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 1 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 1 (Š) + Lajsna za krilo 1 (V)) / 1000 * Ispuna Cena    Napomena: Cena Ispune zavisi koja je ispuna izabrana
+
+
+Krilo 2
+(Š)	A - 2 * Širina profila Štok + 2 * Var profila + 2 * Preklop kod krila
+(V)	B - D - Širina profila Štok + 2 * Var profila + 2 * Preklop kod krila
+Kom.	2
+Cena	Krilo 2 Kom. * (Krilo 2 (Š) + Krilo 2 (V)) / 1000 * Krilo Cena
+
+
+Čelik za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Var profila - Skraćenje čelika za krilo
+(V)	Krilo 2 (V) - 2 * Var profila - Skraćenje čelika za krilo
+Kom.	2
+Cena	Čelik za krilo 2 Kom. * (Čelik za krilo 2 (Š) + Čelik za krilo 2 (V)) / 1000 * Čelik Cena
+
+
+Lajsna za krilo 2
+(Š)	Krilo 2 (Š) - 2 * Širina profila krilo - 2 * Var profila
+(V)	Krilo 2 (V) - 2 * Širina profila krilo - 2 * Var profila
+Kom.	2
+Cena	Lajsna za krilo 2 Kom. * (Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Lajsna Cena
+
+
+Ispuna za krilo 2
+(Š)	Lajsna za krilo 2 (Š) - Zazor za staklo
+(V)	Lajsna za krilo 2 (V) - Zazor za staklo
+Kom.	1
+Cena	(Lajsna za krilo 2 (Š) + Lajsna za krilo 2 (V)) / 1000 * Ispuna Cena    Napomena: Cena Ispune zavisi koja je ispuna izabrana
+
+
+T-prečka 1
+(Š)	A - 2 * Širina profila Štok
+(V)	
+Kom.	1
+Cena	T-prečka 1 (Š) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 1
+(Š)	T-prečka 1 (Š)
+(V)	
+Kom.	1
+Cena	Čelik za T-prečku 1 (Š) / 1000 * Čelik Cena
+
+
+T-prečka 2
+(Š)	
+(V)	D - Širina profila Štok - Širina profila T prečka
+Kom.	1
+Cena	T-prečka 2 (V) / 1000 * T prečka Cena
+
+
+Čelik za T-prečku 2
+(Š)	
+(V)	T-prečka 2 (V)
+Kom.	1
+Cena	Čelik za T-prečku 2 (V) / 1000 * Čelik Cena
+
+
+
+
+Roletne
+(Š)	A
+(V)	Nadprozorska = B + Visina kutije nadprozorske roletne   Spoljna = B    Napomena:U zavisnosti da li izabere Nadprozorska ili Spoljna roletna
+Cena	(Roletna (Š) / 1000) * (Roletna (V) / 1000) * Roletna Cena * (1 + (Roletna %) / 100)    Napomena: Cena Roletne zavisi koji je Profil izabran a "Roletna %" je iz parametara za firmu
+
+
+Komarnik
+(Š)	A
+(V)	B
+Cena	(Komarnik (Š) / 1000) * (Komarnik (V) / 1000) * Komarnik Cena * (1 + (Komarnik %) / 100)    Napomena: Cena Komarnika zavisi koji je Profil izabran a "Komarnik %" je iz parametara za firmu
+
+
+
+
+Cena	(Komarnik Cena elemenata + Roletne Cena elemenata) + (Štok Cena elemenata + Čelik za štok Cena elemenata + Lajsna za štok Cena elemenata + Ispuna za štok Cena elemenata + Krilo 1 Cena elemenata + Čelik za krilo 1 Cena elemenata + Lajsna za krilo 1 Cena elemenata + Ispuna za krilo 1 Cena elemenata + Ispuna za krilo 1 Cena elemenata + Krilo 2 Cena elemenata + Čelik za krilo 2 Cena elemenata + Lajsna za krilo 2 Cena elemenata + Ispuna za krilo 2 Cena elemenata + Ispuna za krilo 2 Cena elemenata + T-prečka 1 Cena elemenata + Čelik za T-prečku 1 Cena elemenata + T-prečka 2 Cena elemenata + Čelik za T-prečku 2 Cena elemenata + PLASTIKA + OKOV) * (1 + (Otpad %) / 100) * (1 + (Zarada %) / 100)    
+
+
+Napomena: 
+Cene elemenata su cene koje smo dobili iz gore navedenih formula, da ne bude zabune. 
+(Roletna %), (Komarnik %), (Otpad %), (Zarada %) su vrednosti iz parametara za firmu.
+Komarnik i Roletne se uračunavaju u cenu samo ukoliko su izabarani u Formi u poziciji.
+OKOV i PLASTIKA se nalaze u tabu Cene.
+Sve ove parametre ćemo kasnije koristiti za tab Radni list
+
+
+
+
+
+
+
+
+
+
+
+Elementi prozora: (Š - širina, V - visina)
+Štok (Š i V)
+Čelik za štok (Š i V)
+Lajsna za štok (Š i V)
+Ispuna za štok (Š i V)
+Krilo 1 (Š i V)
+Čelik za krilo 1 (Š i V)
+Lajsna za krilo 1 (Š i V)
+Ispuna za krilo 1 (Š i V)
+Krilo 2 (Š i V)
+Čelik za krilo 2 (Š i V)
+Lajsna za krilo 2 (Š i V)
+Ispuna za krilo 2 (Š i V)
+T-prečka 1 (Š i V)
+Čelik za T-prečku 1 (Š i V)
+T-prečka 2 (Š i V)
+Čelik za T-prečku 2 (Š i V)
+Lajsna za nadsvetlo (Š i V)
+Ispuna za nadsvetlo (Š i V)
+Šloga (V)
+ALU Spojnice 1
+ALU Spojnice 2
+Roletna (Š i V)
+Komarnik (Š i V)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Naziv: PVC 19 - Prozor + fiks (nadsvetlo-kip)
+
+Elementi prozora: (Š - širina, V - visina)
+Štok (Š i V)
+Čelik za štok (Š i V)
+Lajsna za štok (Š i V)
+Ispuna za štok (Š i V)
+Krilo 1 (Š i V)
+Čelik za krilo 1 (Š i V)
+Lajsna za krilo 1 (Š i V)
+Ispuna za krilo 1 (Š i V)
+Krilo 2 (Š i V)
+Čelik za krilo 2 (Š i V)
+Lajsna za krilo 2 (Š i V)
+Ispuna za krilo 2 (Š i V)
+T-prečka 1 (Š i V)
+Čelik za T-prečku 1 (Š i V)
+T-prečka 2 (Š i V)
+Čelik za T-prečku 2 (Š i V)
+
+Roletna (Š i V)
+Komarnik (Š i V)
+
+
+
+
+
+
+
+Elementi:
+
+- Krilo 1
+- Čelik za krilo 1
+- Lajsna za krilo 1
+- Ispuna za krilo 1
+- Krilo 2
+- Čelik za krilo 2
+- Lajsna za krilo 2
+- Ispuna za krilo 2
+- T-prečka 1
+- Čelik za T-prečku 1
+- T-prečka 2
+- Čelik za T-prečku 2
+- Roletna
+- Komarnik

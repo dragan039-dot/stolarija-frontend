@@ -1,0 +1,17 @@
+export const profilData = [
+  { id: 1, naziv: "Profil 1" },
+  { id: 2, naziv: "Profil 2" },
+  { id: 3, naziv: "Profil 3" },
+  { id: 4, naziv: "Profil 4" },
+  { id: 5, naziv: "Profil 5" },
+  { id: 6, naziv: "Profil 6" },
+  { id: 7, naziv: "Profil 7" },
+  { id: 8, naziv: "Profil 8" },
+  { id: 9, naziv: "Profil 9" },
+  { id: 10, naziv: "Profil 10" },
+  { id: 11, naziv: "Profil 11" },
+  { id: 12, naziv: "Profil 12" },
+  { id: 13, naziv: "Profil 13" },
+  { id: 14, naziv: "Profil 14" },
+  { id: 15, naziv: "Profil 15" },
+];

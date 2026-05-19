@@ -1,0 +1,4076 @@
+"use client";
+
+import ParamTabs from "./components/ParamTabs";
+import Tabs from "./components/Tabs";
+import { useEffect, useState } from "react";
+
+import { okovData } from "./data/okov";
+import { ispunaData } from "./data/ispuna";
+import { ceneData } from "./data/cene";
+import { tehnickiData } from "./data/tehnicki";
+import { valutaData } from "./data/valuta";
+
+
+import { profilData as defaultProfil } from "./data/profil";
+import { ispunaData as defaultIspuna } from "./data/ispuna";
+import { okovData as defaultOkov } from "./data/okov";
+import { valutaData as defaultValuta } from "./data/valuta";
+
+
+
+import { getCena, getTehnicki, getOkovCena, getIspunaCena } from "./utils/calc";
+
+
+
+
+
+
+
+
+
+
+
+type Offer = {
+  id: number;
+  naziv: string;
+  adresa: string;
+  telefon: string;
+  pib: string;
+  maticni: string;
+  datum: string;
+  vrsta_ponude: string;
+  valuta: string;
+  popust: string;
+  napomena: string;
+};
+
+type Position = {
+  vrsta_stolarije: string;
+  vrsta_prozora: string;
+  slika: number | null;
+  a: number;
+  b: number;
+  c: number;
+  d: number;
+  profil: string;
+  ispuna: string;
+  okov: string;
+  otvaranje: string;
+  roletna: string;
+  komarnik: string;
+  kolicina: number;
+};
+
+
+type ExtraItem = {
+  naziv: string;
+  kolicina: number;
+  cena: number;
+};
+
+
+
+
+
+export default function Home() {
+
+  // ---------------- STATE ----------------
+
+
+
+
+
+  const [profilId, setProfilId] = useState<number | null>(null);
+const [okovId, setOkovId] = useState<number | null>(null);
+const [ispunaId, setIspunaId] = useState<number | null>(null);
+
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+const [activeInput, setActiveInput] = useState<{i: number, field: string} | null>(null);
+const [preview, setPreview] = useState<any[]>([]);
+  const [formule, setFormule] = useState([]);
+  const [formulaVrstaStolarije, setFormulaVrstaStolarije] = useState("PVC");
+const [formulaVrstaProzora, setFormulaVrstaProzora] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [priceValues, setPriceValues] = useState({});
+  const [tehnickiValues, setTehnickiValues] = useState({});
+  const [rezultati, setRezultati] = useState<any[]>([]);
+  const [tehnickiData, setTehnickiData] = useState<any[]>([]);
+  const [pricesData, setPricesData] = useState<any[]>([]);
+
+
+  const [worklistOffer, setWorklistOffer] = useState<any>(null);
+const [worklistPositions, setWorklistPositions] = useState<any[]>([]);
+const [worklistExtraItems, setWorklistExtraItems] = useState<any[]>([]);
+const [worklistResults, setWorklistResults] = useState<Record<number, any[]>>({});
+
+const [offerSearch, setOfferSearch] = useState("");
+const [worklistSearch, setWorklistSearch] = useState("");
+
+const [proposalSearch, setProposalSearch] = useState("");
+const [proposalOffer, setProposalOffer] = useState<any>(null);
+const [proposalPositions, setProposalPositions] = useState<any[]>([]);
+const [proposalExtraItems, setProposalExtraItems] = useState<any[]>([]);
+const [proposalResults, setProposalResults] = useState<Record<number, any[]>>({});
+
+  
+
+
+
+
+
+
+
+
+
+  const [params, setParams] = useState<any>({
+  profil: [],
+  okov: [],
+  valuta: []
+});
+
+const safeProfili = Array.isArray(params.profil)
+  ? params.profil
+  : [];
+
+const safeParams = {
+  ...params,
+  profil: Array.isArray(params.profil) ? params.profil : []
+};
+
+const [paramList, setParamList] = useState<any[]>([]);
+const [grupa, setGrupa] = useState("");
+const [nazivParam, setNazivParam] = useState("");
+const [offers, setOffers] = useState<Offer[]>([]);
+const [activeTab, setActiveTab] = useState("Forma");
+const [paramTab, setParamTab] = useState("Firma");
+
+
+const [profileParams, setProfileParams] = useState<any[]>([]);
+const [profilePrices, setProfilePrices] = useState<any[]>([]);
+const [firma, setFirma] = useState<any>({});
+const [profilDraft, setProfilDraft] = useState<string[]>([]);
+
+
+
+
+
+
+const [tehnicki, setTehnicki] = useState<any[]>([]);
+const [parametri, setParametri] = useState<string[]>([]);
+
+
+
+
+const emptyExtraItem = (): ExtraItem => ({
+  naziv: "",
+  kolicina: 1,
+  cena: 0,
+});
+
+const [extraItems, setExtraItems] = useState<ExtraItem[]>([
+  emptyExtraItem()
+]);
+
+
+const addExtraItem = () => {
+  if (extraItems.length >= 30) {
+    alert("Maksimalan broj dodatnih usluga/proizvoda je 30");
+    return;
+  }
+
+  setExtraItems(prev => [...prev, emptyExtraItem()]);
+};
+
+
+
+
+const formulaParametri = [
+  "Skraćenje čelika za štok",
+  "Skraćenje čelika za krilo"
+];
+
+
+
+let timeout: any;
+
+const triggerPreview = (updatedFormule) => {
+  clearTimeout(timeout);
+
+  timeout = setTimeout(async () => {
+    const res = await fetch("http://localhost:3001/profile/formula/preview", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        formule: updatedFormule,
+        input: {
+          A: 1200,
+          B: 1400,
+          C: 0,
+          D: 600,
+          tehnicki: tehnickiValues,
+          cene: priceValues
+        }
+      }),
+    });
+
+    const data = await res.json();
+    setPreview(data);
+  }, 400);
+};
+
+
+
+
+
+
+
+const loadIspune = () => {
+  fetch("http://localhost:3001/ispuna")
+    .then(res => res.json())
+    .then(data => {
+      const list = Array.isArray(data) ? data : [];
+
+      const normalized = Array.from({ length: 15 }, (_, index) => {
+        const item = list[index];
+
+        return {
+          id: index + 1,
+          naziv: item?.naziv || `Ispuna ${index + 1}`,
+          cena: Number(item?.cena) || 0,
+        };
+      });
+
+      setIspune(normalized);
+      console.log("ISPUNE NORMALIZED:", normalized);
+    })
+    .catch(() => {
+      setIspune(
+        Array.from({ length: 15 }, (_, index) => ({
+          id: index + 1,
+          naziv: `Ispuna ${index + 1}`,
+          cena: 0,
+        }))
+      );
+    });
+};
+
+
+
+const loadOkovi = () => {
+  fetch("http://localhost:3001/okov")
+    .then(res => res.json())
+    .then(data => {
+      if (Array.isArray(data) && data.length > 0) {
+        setOkovi(data);
+      } else {
+        const defaults = Array.from({ length: 5 }, (_, i) => ({
+          naziv: `Okov ${i + 1}`,
+          cena: ""
+        }));
+        setOkovi(defaults);
+      }
+    })
+    .catch(() => {
+      const defaults = Array.from({ length: 5 }, (_, i) => ({
+        naziv: `Okov ${i + 1}`,
+        cena: ""
+      }));
+      setOkovi(defaults);
+    });
+};
+
+useEffect(() => {
+  loadOkovi();
+}, []);
+
+const loadValute = () => {
+  fetch("http://localhost:3001/profile/valuta")
+    .then(res => res.json())
+    .then(data => {
+      if (Array.isArray(data) && data.length > 0) {
+        setValute(data);
+      } else {
+        setValute([
+          { naziv: "RSD" },
+          { naziv: "EUR" },
+          { naziv: "Valuta 3" },
+          { naziv: "Valuta 4" },
+          { naziv: "Valuta 5" }
+        ]);
+      }
+    })
+    .catch(() => {
+      setValute([
+        { naziv: "RSD" },
+        { naziv: "EUR" },
+        { naziv: "Valuta 3" },
+        { naziv: "Valuta 4" },
+        { naziv: "Valuta 5" }
+      ]);
+    });
+};
+
+useEffect(() => {
+  loadValute();
+}, []);
+
+
+
+
+
+
+
+useEffect(() => {
+  loadIspune();
+  loadOkovi();
+  loadValute();
+}, []);
+
+
+
+
+useEffect(() => {
+  loadTehnicki();
+  loadParams();
+}, []);
+
+
+
+useEffect(() => {
+  setParametri(tehnickiParametri);
+}, []);
+
+
+
+useEffect(() => {
+  loadFormulaByWindowType(formulaVrstaStolarije, formulaVrstaProzora);
+}, [formulaVrstaStolarije, formulaVrstaProzora]);
+
+
+
+const getFirmaValue = (key: string) => {
+  const val = firma[key];
+
+  // ako je prazno → 0
+  if (val === undefined || val === null || val === "") return 0;
+
+  // konverzija u broj
+  return Number(val);
+};
+
+
+const getParamNamesByGroup = (grupa: string) => {
+  return paramList
+    .filter(p => p.grupa === grupa)
+    .map(p => p.naziv);
+};
+
+
+
+
+
+const getVisibleDimensions = (type: string) => {
+  return dimensionRules[type] || [];
+};
+
+
+
+
+
+const loadParams = async () => {
+  const res = await fetch("http://localhost:3001/profile/params");
+  const data = await res.json();
+
+  const list = Array.isArray(data) ? data : [];
+  setParams(list);
+};
+
+useEffect(() => {
+  loadParams();
+}, []);
+
+
+const addParam = async () => {
+  if (!grupa || !nazivParam) return alert("Popuni sve");
+
+  await fetch("http://localhost:3001/params", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ grupa, naziv: nazivParam })
+  });
+
+  setNazivParam("");
+  loadParams();
+};
+
+
+
+const deleteParam = async (id: number) => {
+  await fetch(`http://localhost:3001/params/${id}`, {
+    method: "DELETE"
+  });
+
+  loadParams();
+};
+
+
+
+
+  const [form, setForm] = useState<Offer>({
+    id: 0,
+    naziv: "",
+    adresa: "",
+    telefon: "",
+    pib: "",
+    maticni: "",
+    datum: "",
+    vrsta_ponude: "",
+    valuta: "",
+    popust: "",
+    napomena: "",
+  });
+
+  const emptyPosition = (): Position => ({
+  vrsta_stolarije: "",
+  vrsta_prozora: "",
+  slika: null,
+  a: 0,
+  b: 0,
+  c: 0,
+  d: 0,
+  profil: "",
+  ispuna: "",
+  okov: "",
+  otvaranje: "",
+  roletna: "",
+  komarnik: "",
+  kolicina: "",
+});
+
+const [positions, setPositions] = useState<Position[]>([
+  emptyPosition()
+]);
+
+
+
+
+
+const getDefaultProfili = () =>
+  Array.from({ length: 15 }, (_, i) => ({
+    id: i + 1,
+    naziv: `Profil ${i + 1}`,
+  }));
+
+const loadProfili = async () => {
+  try {
+    const res = await fetch("http://localhost:3001/profile/profiles");
+    if (!res.ok) throw new Error("Neuspešno učitavanje profila");
+
+    const data = await res.json();
+
+    if (Array.isArray(data) && data.length > 0) {
+      const saId = data.map((p: any, i: number) => ({
+        id: p.id ?? i + 1,
+        naziv: p.naziv ?? `Profil ${i + 1}`,
+      }));
+      setProfili(saId);
+    } else {
+      setProfili(
+        Array.from({ length: 15 }, (_, i) => ({
+          id: i + 1,
+          naziv: `Profil ${i + 1}`,
+        }))
+      );
+    }
+  } catch (err) {
+    console.log("Greška pri učitavanju profila:", err);
+  }
+};
+
+useEffect(() => {
+  loadProfili();
+}, []);
+
+
+
+
+
+
+
+const updateValue = (profil: string, parametar: string, value: string) => {
+  setTehnicki((prev: any[]) => {
+    const copy = [...prev];
+
+    const idx = copy.findIndex(
+      (x) => x.profil === profil && x.parametar === parametar
+    );
+
+    if (idx !== -1) {
+      copy[idx] = {
+        ...copy[idx],
+        vrednost: value,
+      };
+    } else {
+      copy.push({
+        profil,
+        parametar,
+        vrednost: value,
+      });
+    }
+
+    return copy;
+  });
+};
+
+
+
+
+
+const getTehnickiMapByProfilId = (profilId: number | string) => {
+  const map: Record<string, number> = {};
+
+  (tehnickiData || []).forEach((t: any) => {
+    if (String(t.profil) === String(profilId)) {
+      map[t.element] = Number(t.vrednost) || 0;
+    }
+  });
+
+  // AUTOMATSKE FORMULE IZ TABA TEHNIČKI
+  const sirinaStok = Number(map["Širina profila Štok"] || 0);
+  const sirinaKrilo = Number(map["Širina profila krilo"] || 0);
+
+  map["Skraćenje čelika za štok"] = (sirinaStok + 10) * 2;
+  map["Skraćenje čelika za krilo"] = (sirinaKrilo + 10) * 2;
+
+  return map;
+};
+
+
+
+const getCeneMapByProfilId = (profilId: number | string) => {
+  const map: Record<string, number> = {};
+
+  (profilePrices || []).forEach((c: any) => {
+    if (String(c.profil) === String(profilId)) {
+      map[`${c.element} Cena`] = Number(c.cena) || 0;
+    }
+  });
+
+  return map;
+};
+
+const getIspunaCenaById = (id: any) => {
+  const found = ispune.find(
+    (x: any) => String(x.id) === String(id)
+  );
+
+  return Number(found?.cena) || 0;
+};
+
+const getOkovCenaById = (okovId: number | string) => {
+  const found = okovi.find((x: any) => String(x.id) === String(okovId));
+  return found ? Number(found.cena) || 0 : 0;
+};
+
+
+
+
+
+
+const calculate = async () => {
+  const firstPosition = positions.find((p: any) => p?.profilId);
+
+  const profilId = firstPosition?.profilId;
+  const ispunaId = firstPosition?.ispunaId;
+  const okovId = firstPosition?.okovId;
+
+  const tehnickiMap = profilId ? getTehnickiMapByProfilId(profilId) : {};
+  const ceneMap = profilId ? getCeneMapByProfilId(profilId) : {};
+
+  const ispunaCena = ispunaId ? getIspunaCenaById(ispunaId) : 0;
+  const okovCena = okovId ? getOkovCenaById(okovId) : 0;
+
+  const plastikaCena = ceneMap["PLASTIKA Cena"] || 0;
+
+  const roletnaTip =
+  firstPosition?.roletna === "NADPROZORSKA" ? 1 : 0;
+
+const imaRoletnu =
+  firstPosition?.roletna === "NADPROZORSKA" ||
+  firstPosition?.roletna === "SPOLJNA"
+    ? 1
+    : 0;
+
+const imaKomarnik =
+  firstPosition?.komarnik === "DA"
+    ? 1
+    : 0;
+
+const imaOkov =
+  firstPosition?.okovId ? 1 : 0;
+
+const imaIspunu =
+  firstPosition?.ispunaId ? 1 : 0;
+
+  const res = await fetch("http://localhost:3001/profile/calculate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+  A,
+  B,
+  C,
+  D,
+  vrstaStolarije: firstPosition?.vrsta_stolarije || "",
+  vrstaProzora: firstPosition?.vrsta_prozora || "",
+  tehnicki: tehnickiMap,
+  cene: ceneMap,
+  firma,
+  ispunaCena,
+  okovCena,
+  plastikaCena,
+  roletnaTip,
+  imaRoletnu,
+  imaKomarnik,
+  imaOkov,
+  imaIspunu
+}),
+  });
+
+  const data = await res.json();
+  setRezultati(data);
+};
+
+
+
+
+const izracunajPVC19 = async () => {
+  setLoading(true);
+
+  try {
+    const res = await fetch("http://localhost:3001/profile/calculate-pvc19", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        A,
+        B,
+        C,
+        D,
+        tehnicki: tehnickiValues,
+        cene: priceValues,
+      }),
+    });
+
+    const data = await res.json();
+    setRezultat(data);
+  } catch (err) {
+    console.error(err);
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+
+
+
+const updateFormula = (index, field, value) => {
+  const copy = [...formule];
+  copy[index][field] = value;
+  setFormule(copy);
+
+  triggerPreview(copy); // 🔥 LIVE
+};
+
+
+
+const updateExtraItem = (i: number, field: string, value: any) => {
+  const copy = [...extraItems];
+  (copy[i] as any)[field] = value;
+  setExtraItems(copy);
+};
+
+
+
+
+
+
+
+const saveFormule = async () => {
+  if (!formulaVrstaStolarije || !formulaVrstaProzora) {
+    alert("Izaberi vrstu stolarije i vrstu prozora");
+    return;
+  }
+
+  try {
+    const payload = formule.map((f: any, index: number) => ({
+      ...f,
+      vrstaStolarije: formulaVrstaStolarije,
+      vrstaProzora: formulaVrstaProzora,
+      redosled: index + 1
+    }));
+
+    const res = await fetch("http://localhost:3001/profile/formula", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      throw new Error("Neuspešno čuvanje formula");
+    }
+
+    alert("Sačuvano!");
+  } catch (err) {
+    console.error("Greška pri čuvanju formula:", err);
+    alert("Greška pri čuvanju formula");
+  }
+};
+
+
+
+
+
+
+
+
+  // ---------------- LISTE ----------------
+  const prozori = [
+    { id: 1, naziv: "Fiksni prozor" },
+    { id: 2, naziv: "Jednokrilni prozor" },
+    { id: 3, naziv: "Dvokrilni prozor (šloga)" },
+    { id: 4, naziv: "Dvokrilni prozor (T-prečka)" },
+    { id: 5, naziv: "Prozor + fiks" },
+    { id: 6, naziv: "Trokrilni prozor (šloga)" },
+    { id: 7, naziv: "Trokrilni prozor (T-prečka)" },
+    { id: 8, naziv: "Trokrilni prozor (2 fiksa) A" },
+    { id: 9, naziv: "Trokrilni prozor (fiks + T-prečka) A" },
+    { id: 10, naziv: "Trokrilni prozor (fiks + šloga) A" },
+    { id: 11, naziv: "Trokrilni prozor (2 fiksa)" },
+    { id: 12, naziv: "Trokrilni prozor (fiks + T-prečka)" },
+    { id: 13, naziv: "Trokrilni prozor (fiks + šloga)" },
+    { id: 14, naziv: "Jednokrilni prozor (nadsvetlo)" },
+    { id: 15, naziv: "Prozor + fiks (nadsvetlo)" },
+    { id: 16, naziv: "Dvokrilni prozor (šloga, nadsvetlo)" },
+    { id: 17, naziv: "Dvokrilni prozor (T-prečka, nadsvetlo)" },
+    { id: 18, naziv: "Jednokrilni prozor (nadsvetlo-kip)" },
+    { id: 19, naziv: "Prozor + fiks (nadsvetlo-kip)" },
+    { id: 20, naziv: "Dvokrilni prozor (šloga, nadsvetlo-kip)" },
+    { id: 21, naziv: "Dvokrilni prozor (T-prečka, nadsvetlo-kip)" },
+  ];
+
+  const dimensionRules: Record<string, string[]> = {
+  // samo A i B
+  "Fiksni prozor": ["a", "b"],
+  "Jednokrilni prozor": ["a", "b"],
+  "Dvokrilni prozor (šloga)": ["a", "b"],
+  "Dvokrilni prozor (T-prečka)": ["a", "b"],
+  "Prozor + fiks": ["a", "b"],
+  "Trokrilni prozor (šloga)": ["a", "b"],
+  "Trokrilni prozor (T-prečka)": ["a", "b"],
+  "Trokrilni prozor (2 fiksa) A": ["a", "b"],
+  "Trokrilni prozor (fiks + T-prečka) A": ["a", "b"],
+  "Trokrilni prozor (fiks + šloga) A": ["a", "b"],
+
+  // A B C
+  "Trokrilni prozor (2 fiksa)": ["a", "b", "c"],
+  "Trokrilni prozor (fiks + T-prečka)": ["a", "b", "c"],
+  "Trokrilni prozor (fiks + šloga)": ["a", "b", "c"],
+
+  // A B D
+  "Jednokrilni prozor (nadsvetlo)": ["a", "b", "d"],
+  "Prozor + fiks (nadsvetlo)": ["a", "b", "d"],
+  "Dvokrilni prozor (šloga, nadsvetlo)": ["a", "b", "d"],
+  "Dvokrilni prozor (T-prečka, nadsvetlo)": ["a", "b", "d"],
+  "Jednokrilni prozor (nadsvetlo-kip)": ["a", "b", "d"],
+  "Prozor + fiks (nadsvetlo-kip)": ["a", "b", "d"],
+  "Dvokrilni prozor (šloga, nadsvetlo-kip)": ["a", "b", "d"],
+  "Dvokrilni prozor (T-prečka, nadsvetlo-kip)": ["a", "b", "d"],
+};
+
+const showField = (type: string, field: string) => {
+  if (!type) return false; // ⛔ sada sakriva dok nema izbora
+  return dimensionRules[type]?.includes(field);
+};
+
+
+
+const tehnickiParametri = [
+  "Var profila",
+  "Širina profila Štok",
+  "Širina profila krilo",
+  "Širina profila T prečka",
+  "Zazor za staklo",
+  "Preklop kod krila",
+  "Preklop kod šloge",
+  "Čepovi šloge",
+  "Skraćenje čelika za štok",
+  "Skraćenje čelika za krilo",
+  "Visina kutije nadprozorske roletne"
+];
+
+
+
+
+const elementi = [
+  "ŠTOK",
+  "KRILO",
+  "T prečka",
+  "ŠLOGA",
+  "ČELIK",
+  "LAJSNA",
+  "PLASTIKA",
+  "ROLETNA",
+  "KOMARNIK",
+  "Spojnica 1",
+  "Spojnica 2"
+];
+
+
+
+const sviFormulaElementi = [
+  "Štok",
+"Čelik za štok",
+"Lajsna za štok",
+"Ispuna za štok",
+"Krilo 1",
+"Čelik za krilo 1",
+"Lajsna za krilo 1",
+"Ispuna za krilo 1",
+"Krilo 2",
+"Čelik za krilo 2",
+"Lajsna za krilo 2",
+"Ispuna za krilo 2",
+"T-prečka 1",
+"Čelik za T-prečku 1",
+"T-prečka 2",
+"Čelik za T-prečku 2",
+"Lajsna za nadsvetlo",
+"Ispuna za nadsvetlo",
+"Šloga",
+"ALU Spojnice 1 (kom)",
+"ALU Spojnice 2 (kom)",
+  "Roletna",
+  "Komarnik"
+];
+
+
+
+
+const createEmptyFormulaTemplate = (
+  vrstaStolarije: string,
+  vrstaProzora: string
+) => {
+  return sviFormulaElementi.map((element, index) => ({
+    vrstaStolarije,
+    vrstaProzora,
+    element,
+    s: "",
+    v: "",
+    kom: 1,
+    cena: "",
+    redosled: index + 1
+  }));
+};
+
+
+
+
+
+const loadFormulaByWindowType = async (
+  vrstaStolarije: string,
+  vrstaProzora: string
+) => {
+  if (!vrstaStolarije || !vrstaProzora) {
+    setFormule([]);
+    return;
+  }
+
+  try {
+    const res = await fetch(
+      `http://localhost:3001/profile/formula?vrsta_stolarije=${encodeURIComponent(vrstaStolarije)}&vrsta_prozora=${encodeURIComponent(vrstaProzora)}`
+    );
+
+    if (!res.ok) {
+      throw new Error("Neuspešno učitavanje formula");
+    }
+
+    const data = await res.json();
+
+    if (Array.isArray(data) && data.length > 0) {
+      setFormule(data);
+    } else {
+      setFormule(createEmptyFormulaTemplate(vrstaStolarije, vrstaProzora));
+    }
+  } catch (err) {
+    console.error("Greška pri učitavanju formula:", err);
+    setFormule(createEmptyFormulaTemplate(vrstaStolarije, vrstaProzora));
+  }
+};
+
+
+
+
+useEffect(() => {
+  loadFormulaByWindowType(formulaVrstaStolarije, formulaVrstaProzora);
+}, [formulaVrstaStolarije, formulaVrstaProzora]);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const getPriceValue = (element: string, profilId: number | string) => {
+  const found = profilePrices.find(
+    (x: any) =>
+      x.element === element && String(x.profil) === String(profilId)
+  );
+  return found ? found.cena : "";
+};
+
+
+
+
+
+  // ---------------- LOAD OFFERS ----------------
+  
+  
+const loadProfileParams = () => {
+  fetch("http://localhost:3001/profile/params")
+    .then(res => res.json())
+    .then(setProfileParams);
+};
+
+const loadProfilePrices = () => {
+  fetch("http://localhost:3001/profile/prices")
+    .then(res => res.json())
+    .then(setProfilePrices);
+};
+
+useEffect(() => {
+  loadProfileParams();
+  loadProfilePrices();
+}, []);
+
+
+
+const loadFirma = () => {
+  fetch("http://localhost:3001/settings")
+    .then(res => res.json())
+    .then(data => {
+      console.log("SETTINGS FROM BACKEND:", data);
+
+      const obj: any = {};
+
+      data.forEach((s: any) => {
+        obj[s.key] = s.value;
+      });
+
+      setFirma(obj);
+    })
+    .catch(err => {
+      console.error("GRESKA:", err);
+    });
+};
+
+useEffect(() => {
+  loadFirma();
+}, []);
+
+
+  
+  const loadOffers = async () => {
+    const res = await fetch("http://localhost:3001/offers");
+    const data = await res.json();
+    setOffers(Array.isArray(data) ? data : []);
+  };
+
+  useEffect(() => {
+    loadOffers();
+  }, []);
+
+
+
+
+
+
+
+
+
+const loadTehnicki = async () => {
+  const res = await fetch("http://localhost:3001/profile/tehnicki");
+  const data = await res.json();
+  setTehnickiData(data);
+};
+
+
+
+
+
+
+const getValue = (profil: string, parametar: string) => {
+  const found = tehnicki.find(
+    x => x.profil === profil && x.parametar === parametar
+  );
+
+  return found ? found.vrednost : "";
+};
+
+
+
+
+
+  // ---------------- OPEN FROM TABLE ----------------
+  const openFromTable = async (id: number) => {
+    const res = await fetch(`http://localhost:3001/offers/${id}`);
+    const data = await res.json();
+
+    if (!data.offer) return alert("Nema ponude za ovaj ID");
+
+    setForm({
+  id: data.offer.id || "",
+  naziv: data.offer.naziv || "",
+  adresa: data.offer.adresa || "",
+  telefon: data.offer.telefon || "",
+  pib: data.offer.pib || "",
+  maticni: data.offer.maticni || "",
+  datum: data.offer.datum || "",
+  vrsta_ponude: data.offer.vrsta_ponude || "",
+  valuta: data.offer.valuta || "",
+  popust: data.offer.popust || "",
+  napomena: data.offer.napomena || "",
+});
+
+    // popuni 10 pozicija
+    const filled = Array.isArray(data.items) && data.items.length > 0
+  ? data.items.map((item: any) => {
+      const prozor = prozori.find((x) => x.naziv === item.vrsta_prozora);
+
+      return {
+        vrsta_stolarije: item.vrsta_stolarije || "",
+        vrsta_prozora: item.vrsta_prozora || "",
+        slika: prozor ? prozor.id : null,
+
+        a: Number(item.a) || 0,
+        b: Number(item.b) || 0,
+        c: Number(item.c) || 0,
+        d: Number(item.d) || 0,
+
+        profilId: item.profil ? Number(item.profil) : "",
+        ispunaId: item.ispuna ? Number(item.ispuna) : "",
+        okovId: item.okov ? Number(item.okov) : "",
+
+        profil: item.profil || "",
+        ispuna: item.ispuna || "",
+        okov: item.okov || "",
+
+        otvaranje: item.otvaranje || "",
+        roletna: item.roletna || "",
+        komarnik: item.komarnik || "",
+        kolicina: Number(item.kolicina) || 1,
+      };
+    })
+  : [emptyPosition()];
+
+setPositions(filled);
+
+    setPositions(filled);
+
+    const filledExtra =
+  Array.isArray(data.extraItems) && data.extraItems.length > 0
+    ? data.extraItems.map((x: any) => ({
+        naziv: x.naziv || "",
+        kolicina: Number(x.kolicina) || 1,
+        cena: Number(x.cena) || 0,
+      }))
+    : [emptyExtraItem()];
+
+setExtraItems(filledExtra);
+
+setExtraItems(filledExtra);
+
+
+
+  };
+
+
+
+
+
+
+  // ---------------- SAVE ----------------
+  
+
+const saveValute = async () => {
+  try {
+    console.log("VALUTE SAVE:", valute);
+
+    await fetch("http://localhost:3001/profile/valuta", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(valute),
+    });
+
+    alert("Sačuvano!");
+  } catch (err) {
+    console.error(err);
+    alert("Greška pri čuvanju valuta");
+  }
+};
+
+
+
+const saveOkovi = async () => {
+  await fetch("http://localhost:3001/okov", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(okovi)
+  });
+
+  alert("Sačuvano");
+
+  loadOkovi(); // 🔥 VAŽNO
+};
+
+
+
+const saveProfili = async () => {
+  try {
+    console.log("SALJEM PROFILE:", profili);
+
+    const res = await fetch("http://localhost:3001/profile/profiles", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(profili),
+    });
+
+    const data = await res.json();
+    console.log("ODGOVOR SAVE:", data);
+
+    await loadProfili();
+    console.log("POSLE LOAD:", profili);
+
+    alert("Sačuvano");
+  } catch (err) {
+    console.error("Greška pri čuvanju profila:", err);
+  }
+};
+
+
+
+  
+  const saveFirma = async () => {
+  await fetch("http://localhost:3001/settings", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(firma)
+  });
+
+  alert("Sačuvano");
+};
+  
+  
+  
+  const saveOffer = async () => {
+
+  // 👉 AKO POSTOJI ID → UPDATE
+  if (form.id) {
+
+    await fetch(`http://localhost:3001/offers/${form.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...form,
+        positions,
+        extraItems
+      })
+    });
+
+    alert("Izmenjeno!");
+
+  } else {
+    // 👉 NOVA PONUDA → CREATE
+
+    const res = await fetch("http://localhost:3001/offers", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...form,
+        positions,
+        extraItems
+      })
+    });
+
+    const data = await res.json();
+
+    alert("Sačuvano ID: " + data.id);
+  }
+
+  loadOffers();   // refresh tabele
+  clearForm();    // očisti formu
+};
+
+
+
+
+const saveTehnicki = async () => {
+  await fetch("http://localhost:3001/profile/params", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(tehnicki)
+  });
+
+  alert("Sačuvano!");
+};
+
+
+
+
+
+  // ---------------- CLEAR ----------------
+  const clearForm = () => {
+    setForm({
+      id: 0,
+      naziv: "",
+      adresa: "",
+      telefon: "",
+      pib: "",
+      maticni: "",
+      datum: "",
+      vrsta_ponude: "",
+      valuta: "",
+      popust: "",
+      napomena: "",
+    });
+
+    setPositions([emptyPosition()]);
+
+
+      setExtraItems([emptyExtraItem()]);
+
+
+
+  };
+
+
+
+
+  
+
+  // ---------------- UPDATE ----------------
+  const update = (i: number, field: string, value: any) => {
+    const copy = [...positions];
+    (copy[i] as any)[field] = value;
+    setPositions(copy);
+  };
+
+  const selectProzor = (i: number, naziv: string) => {
+    const p = prozori.find(x => x.naziv === naziv);
+    const copy = [...positions];
+    copy[i].vrsta_prozora = naziv;
+    copy[i].slika = p ? p.id : null;
+    setPositions(copy);
+  };
+
+
+const getParam = (naziv: string) => {
+  return Number(
+    params.find((p: any) => p.naziv === naziv)?.vrednost || 0
+  );
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ✅ PRETVARANJE % u broj
+const percent = (val: any) => Number(val || 0) / 100;
+
+// ✅ GLOBALNI PARAMETRI FIRME
+const OTpad = percent(firma.otpad);
+const ROLETNA = percent(firma.roletna);
+const KOMARNIK = percent(firma.komarnik);
+
+// ako treba broj dana
+const VALUTA_DANA = Number(firma.valuta_placanja || 0);
+
+const vrstePonude = ["RAČUN", "PREDRAČUN"];
+const vrsteStolarije = ["PVC", "ALU"];
+const vrsteOtvaranja = ["LEVO", "DESNO"];
+const vrsteRoletni = ["NADPROZORSKA", "SPOLJNA"];
+const vrsteKomarnika = ["DA"];
+
+
+
+
+
+function izracunajFormula(param: string, profil: string) {
+
+  if (param === "Skraćenje čelika za štok") {
+    const sirina = Number(getValue(profil, "Širina profila Štok")) || 0;
+    return (sirina + 10) * 2;
+  }
+
+  if (param === "Skraćenje čelika za krilo") {
+    const sirina = Number(getValue(profil, "Širina profila krilo")) || 0;
+    return (sirina + 10) * 2;
+  }
+
+  return getValue(profil, param);
+}
+
+
+
+const getTehnickiValue = (element: string, profil: string) => {
+  if (!Array.isArray(tehnickiData)) return "";
+
+  return (
+    tehnickiData.find(
+      (t) => t.element === element && t.profil === profil
+    )?.vrednost ?? ""
+  );
+};
+
+
+
+
+const izracunajTehnicki = (param: string, profilId: number | string) => {
+  const get = (name: string) =>
+    Number(
+      tehnickiData?.find(
+        (t: any) =>
+          t.element === name &&
+          String(t.profil) === String(profilId)
+      )?.vrednost || 0
+    );
+
+  if (param === "Skraćenje čelika za štok") {
+    return (get("Širina profila Štok") + 10) * 2;
+  }
+
+  if (param === "Skraćenje čelika za krilo") {
+    return (get("Širina profila krilo") + 10) * 2;
+  }
+
+  return null;
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+const formulaSuggestions = [
+  "A", "B", "C", "D",
+
+  // TEHNIČKI
+  ...tehnickiParametri,
+
+  // CENE
+  ...elementi.map(e => `${e} Cena`),
+
+  // chaining
+  ...elementi.flatMap(e => [
+    `${e} (Š)`,
+    `${e} (V)`
+  ])
+];
+
+
+const handleAutocomplete = (value: string, index: number, field: string) => {
+  const lastWord = value.split(/[\s()+\-*/]+/).pop()?.toLowerCase() || "";
+
+  const filtered = formulaSuggestions.filter(s =>
+    s.toLowerCase().includes(lastWord)
+  );
+
+  setSuggestions(filtered.slice(0, 5)); // max 5
+  setActiveInput({ i: index, field });
+};
+
+
+const calculatePreview = async () => {
+  const firstPosition = positions.find((p: any) => p?.profilId);
+
+  const profilId = firstPosition?.profilId;
+  const ispunaId = firstPosition?.ispunaId;
+  const okovId = firstPosition?.okovId;
+
+  const tehnickiMap = profilId ? getTehnickiMapByProfilId(profilId) : {};
+  const ceneMap = profilId ? getCeneMapByProfilId(profilId) : {};
+
+  const ispunaCena = ispunaId ? getIspunaCenaById(ispunaId) : 0;
+  const okovCena = okovId ? getOkovCenaById(okovId) : 0;
+
+  const plastikaCena = ceneMap["PLASTIKA Cena"] || 0;
+
+  const roletnaTip =
+  firstPosition?.roletna === "NADPROZORSKA" ? 1 : 0;
+
+const imaRoletnu =
+  firstPosition?.roletna === "NADPROZORSKA" ||
+  firstPosition?.roletna === "SPOLJNA"
+    ? 1
+    : 0;
+
+const imaKomarnik =
+  firstPosition?.komarnik === "DA"
+    ? 1
+    : 0;
+
+const imaOkov =
+  firstPosition?.okovId ? 1 : 0;
+
+const imaIspunu =
+  firstPosition?.ispunaId ? 1 : 0;
+
+
+  const res = await fetch("http://localhost:3001/profile/preview-formula", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+  formule,
+  input: {
+    A,
+    B,
+    C,
+    D,
+    vrstaStolarije: firstPosition?.vrsta_stolarije || "",
+vrstaProzora: firstPosition?.vrsta_prozora || "",
+    tehnicki: tehnickiMap,
+    cene: ceneMap,
+    firma,
+    ispunaCena,
+    okovCena,
+    plastikaCena,
+    roletnaTip,
+    imaRoletnu,
+    imaKomarnik,
+    imaOkov,
+    imaIspunu
+  }
+})
+  });
+
+  const data = await res.json();
+setPreview(Array.isArray(data) ? data : []);
+};
+
+
+const pvc19Formule = [
+  {
+    element: "Štok",
+    s: "A + 2 * Var profila",
+    v: "B + 2 * Var profila",
+    kom: 2,
+    cena: "kom * (S + V) / 1000 * Štok Cena",
+    tip: "PVC_19"
+  },
+  {
+    element: "Čelik za štok",
+    s: "A - Skraćenje čelika za štok",
+    v: "B - Skraćenje čelika za štok",
+    kom: 2,
+    cena: "kom * (S + V) / 1000 * Čelik Cena",
+    tip: "PVC_19"
+  },
+  {
+    element: "Lajsna za štok",
+    s: "(A - 2 * Širina profila Štok - Širina profila T prečka) / 2",
+    v: "D - Širina profila Štok - Širina profila T prečka",
+    kom: 2,
+    cena: "kom * (S + V) / 1000 * Lajsna Cena",
+    tip: "PVC_19"
+  },
+  {
+  element: "Ispuna za štok",
+  s: "ImaIspunu * (Lajsna za štok (Š) - Zazor za staklo)",
+  v: "ImaIspunu * (Lajsna za štok (V) - Zazor za staklo)",
+  kom: 1,
+  cena: "(S + V) / 1000 * Ispuna Cena",
+  tip: "PVC_19"
+},
+
+  {
+    element: "Krilo 1",
+    s: "(A - 2 * Širina profila Štok - Širina profila T prečka) / 2 + 2 * Var profila + 2 * Preklop kod krila",
+    v: "D - Širina profila Štok - Širina profila T prečka + 2 * Var profila + 2 * Preklop kod krila",
+    kom: 2,
+    cena: "kom * (S + V) / 1000 * Krilo Cena",
+    tip: "PVC_19"
+  },
+  {
+    element: "Čelik za krilo 1",
+    s: "Krilo 1 (Š) - 2 * Var profila - Skraćenje čelika za krilo",
+    v: "Krilo 1 (V) - 2 * Var profila - Skraćenje čelika za krilo",
+    kom: 2,
+    cena: "kom * (S + V) / 1000 * Čelik Cena",
+    tip: "PVC_19"
+  },
+  {
+    element: "Lajsna za krilo 1",
+    s: "Krilo 1 (Š) - 2 * Širina profila krilo - 2 * Var profila",
+    v: "Krilo 1 (V) - 2 * Širina profila krilo - 2 * Var profila",
+    kom: 2,
+    cena: "kom * (S + V) / 1000 * Lajsna Cena",
+    tip: "PVC_19"
+  },
+  {
+  element: "Ispuna za krilo 1",
+  s: "ImaIspunu * (Lajsna za krilo 1 (Š) - Zazor za staklo)",
+  v: "ImaIspunu * (Lajsna za krilo 1 (V) - Zazor za staklo)",
+  kom: 1,
+  cena: "(S + V) / 1000 * Ispuna Cena",
+  tip: "PVC_19"
+},
+
+  {
+    element: "Krilo 2",
+    s: "A - 2 * Širina profila Štok + 2 * Var profila + 2 * Preklop kod krila",
+    v: "B - D - Širina profila Štok + 2 * Var profila + 2 * Preklop kod krila",
+    kom: 2,
+    cena: "kom * (S + V) / 1000 * Krilo Cena",
+    tip: "PVC_19"
+  },
+  {
+    element: "Čelik za krilo 2",
+    s: "Krilo 2 (Š) - 2 * Var profila - Skraćenje čelika za krilo",
+    v: "Krilo 2 (V) - 2 * Var profila - Skraćenje čelika za krilo",
+    kom: 2,
+    cena: "kom * (S + V) / 1000 * Čelik Cena",
+    tip: "PVC_19"
+  },
+  {
+    element: "Lajsna za krilo 2",
+    s: "Krilo 2 (Š) - 2 * Širina profila krilo - 2 * Var profila",
+    v: "Krilo 2 (V) - 2 * Širina profila krilo - 2 * Var profila",
+    kom: 2,
+    cena: "kom * (S + V) / 1000 * Lajsna Cena",
+    tip: "PVC_19"
+  },
+  {
+  element: "Ispuna za krilo 2",
+  s: "ImaIspunu * (Lajsna za krilo 2 (Š) - Zazor za staklo)",
+  v: "ImaIspunu * (Lajsna za krilo 2 (V) - Zazor za staklo)",
+  kom: 1,
+  cena: "(S + V) / 1000 * Ispuna Cena",
+  tip: "PVC_19"
+},
+
+  {
+    element: "T-prečka 1",
+    s: "A - 2 * Širina profila Štok",
+    v: "0",
+    kom: 1,
+    cena: "S / 1000 * T prečka Cena",
+    tip: "PVC_19"
+  },
+  {
+    element: "Čelik za T-prečku 1",
+    s: "T-prečka 1 (Š)",
+    v: "0",
+    kom: 1,
+    cena: "S / 1000 * Čelik Cena",
+    tip: "PVC_19"
+  },
+  {
+    element: "T-prečka 2",
+    s: "0",
+    v: "D - Širina profila Štok - Širina profila T prečka",
+    kom: 1,
+    cena: "V / 1000 * T prečka Cena",
+    tip: "PVC_19"
+  },
+  {
+    element: "Čelik za T-prečku 2",
+    s: "0",
+    v: "T-prečka 2 (V)",
+    kom: 1,
+    cena: "V / 1000 * Čelik Cena",
+    tip: "PVC_19"
+  },
+
+{
+  element: "Roletna",
+  s: "ImaRoletnu * A",
+  v: "ImaRoletnu * (B + RoletnaTip * Visina kutije nadprozorske roletne)",
+  kom: 1,
+  cena: "(S / 1000) * (V / 1000) * Roletna Cena * (1 + (Roletna % / 100))",
+  tip: "PVC_19"
+},
+  {
+  element: "Komarnik",
+  s: "ImaKomarnik * A",
+  v: "ImaKomarnik * B",
+  kom: 1,
+  cena: "(S / 1000) * (V / 1000) * Komarnik Cena * (1 + (Komarnik % / 100))",
+  tip: "PVC_19"
+},
+  {
+  element: "Cena",
+  s: "0",
+  v: "0",
+  kom: 1,
+  cena: "(Komarnik Cena + Roletna Cena) + (Štok Cena + Čelik za štok Cena + Lajsna za štok Cena + Ispuna za štok Cena + Krilo 1 Cena + Čelik za krilo 1 Cena + Lajsna za krilo 1 Cena + Ispuna za krilo 1 Cena + Krilo 2 Cena + Čelik za krilo 2 Cena + Lajsna za krilo 2 Cena + Ispuna za krilo 2 Cena + T-prečka 1 Cena + Čelik za T-prečku 1 Cena + T-prečka 2 Cena + Čelik za T-prečku 2 Cena + PLASTIKA + (ImaOkov * OKOV)) * (1 + (Otpad % / 100)) * (1 + (Zarada % / 100))",
+  tip: "PVC_19"
+}
+];
+
+
+
+
+
+
+const [profili, setProfili] = useState(
+  defaultProfil.map((p, i) => ({
+    id: i + 1,
+    naziv: p.naziv
+  }))
+);
+
+const [ispune, setIspune] = useState(
+  defaultIspuna.map((i, idx) => ({
+    id: idx + 1,
+    naziv: i.naziv,
+    cena: i.cena
+  }))
+);
+
+
+const [okovi, setOkovi] = useState(
+  defaultOkov.map((i, idx) => ({
+    id: idx + 1,
+    naziv: i.naziv,
+    cena: i.cena
+  }))
+);
+
+
+const [valute, setValute] = useState(
+  defaultValuta.map((p, i) => ({
+    id: i + 1,
+    naziv: p.naziv
+  }))
+);
+
+
+
+
+
+
+
+
+
+
+const testCena = profilId
+  ? getCena("ŠTOK", profilId, ceneData)
+  : 0;
+
+console.log("Cena štok:", testCena);
+
+
+
+
+
+
+
+const getProfilName = (id: any) => {
+  const found = profili.find((x: any) => String(x.id) === String(id));
+  return found?.naziv || id || "";
+};
+
+const getIspunaName = (id: any) => {
+  const found = ispune.find(
+    (x: any) => String(x.id) === String(id)
+  );
+
+  return found?.naziv || "";
+};
+
+const getOkovName = (id: any) => {
+  const found = okovi.find((x: any) => String(x.id) === String(id));
+  return found?.naziv || id || "";
+};
+
+
+
+
+
+
+
+
+const calculateWorklistPosition = async (p: any) => {
+  const profilId = p.profilId || p.profil;
+const ispunaId = p.ispunaId || p.ispuna;
+const okovId = p.okovId || p.okov;
+
+  const tehnickiMap = profilId ? getTehnickiMapByProfilId(profilId) : {};
+  const ceneMap = profilId ? getCeneMapByProfilId(profilId) : {};
+
+const ispunaCena = getIspunaCenaById(ispunaId);
+
+console.log("ISPUNA TEST:", {
+  ispunaId,
+  ispune,
+  ispunaCena,
+});
+
+const okovCena = getOkovCenaById(okovId);
+  const plastikaCena = ceneMap["PLASTIKA Cena"] || 0;
+
+  const roletnaValue = String(p.roletna || "").trim().toUpperCase();
+
+const roletnaTip =
+  roletnaValue === "NADPROZORSKA" ? 1 : 0;
+
+const imaRoletnu =
+  roletnaValue === "NADPROZORSKA" || roletnaValue === "SPOLJNA"
+    ? 1
+    : 0;
+
+  const imaKomarnik = p.komarnik === "DA" ? 1 : 0;
+  const imaOkov = p.okov ? 1 : 0;
+  const imaIspunu = p.ispuna ? 1 : 0;
+
+  const res = await fetch("http://localhost:3001/profile/calculate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      A: Number(p.a) || 0,
+      B: Number(p.b) || 0,
+      C: Number(p.c) || 0,
+      D: Number(p.d) || 0,
+
+      vrstaStolarije: p.vrsta_stolarije || "",
+      vrstaProzora: p.vrsta_prozora || "",
+
+      tehnicki: tehnickiMap,
+      cene: ceneMap,
+      firma,
+      ispunaCena,
+      okovCena,
+      plastikaCena,
+
+      roletnaTip,
+      imaRoletnu,
+      imaKomarnik,
+      imaOkov,
+      imaIspunu,
+    }),
+  });
+
+  const data = await res.json();
+  return Array.isArray(data) ? data : [];
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const openWorklistOffer = async (id: number) => {
+  const res = await fetch(`http://localhost:3001/offers/${id}`);
+  const data = await res.json();
+
+  if (!data.offer) {
+    alert("Nema ponude za ovaj ID");
+    return;
+  }
+
+  const items = Array.isArray(data.items) ? data.items : [];
+
+  setWorklistOffer(data.offer);
+  setWorklistPositions(items);
+  setWorklistExtraItems(Array.isArray(data.extraItems) ? data.extraItems : []);
+
+  const calculated: Record<number, any[]> = {};
+
+  for (let i = 0; i < items.length; i++) {
+    const p = items[i];
+
+    if (!p.vrsta_prozora) continue;
+
+    const missing: string[] = [];
+    if (!p.vrsta_stolarije) missing.push("vrsta stolarije");
+    if (!p.vrsta_prozora) missing.push("vrsta prozora");
+    if (!p.profil) missing.push("profil");
+    const requiredDims = dimensionRules[p.vrsta_prozora] || [];
+
+if (requiredDims.includes("a") && !p.a) missing.push("A");
+if (requiredDims.includes("b") && !p.b) missing.push("B");
+if (requiredDims.includes("c") && !p.c) missing.push("C");
+if (requiredDims.includes("d") && !p.d) missing.push("D");
+
+    if (missing.length > 0) continue;
+
+    calculated[i] = await calculateWorklistPosition(p);
+  }
+
+  setWorklistResults(calculated);
+};
+
+
+
+
+const getProzorImageId = (vrstaProzora: string) => {
+  const found = prozori.find((x) => x.naziv === vrstaProzora);
+  return found?.id || null;
+};
+
+
+
+
+const addPosition = () => {
+  if (positions.length >= 50) {
+    alert("Maksimalan broj pozicija je 50");
+    return;
+  }
+
+  setPositions(prev => [...prev, emptyPosition()]);
+};
+
+
+
+
+const removePosition = (index: number) => {
+  if (positions.length === 1) {
+    alert("Mora postojati bar jedna pozicija");
+    return;
+  }
+
+  setPositions(prev => prev.filter((_, i) => i !== index));
+};
+
+const removeExtraItem = (index: number) => {
+  if (extraItems.length === 1) {
+    alert("Mora postojati bar jedan red dodatnih usluga/proizvoda");
+    return;
+  }
+
+  setExtraItems(prev => prev.filter((_, i) => i !== index));
+};
+
+
+
+
+const filteredOffers = offers.filter((o: any) => {
+  const q = offerSearch.toLowerCase();
+
+  return (
+    String(o.id || "").includes(q) ||
+    String(o.naziv || "").toLowerCase().includes(q) ||
+    String(o.adresa || "").toLowerCase().includes(q) ||
+    String(o.telefon || "").toLowerCase().includes(q) ||
+    String(o.pib || "").toLowerCase().includes(q)
+  );
+});
+
+const filteredWorklistOffers = offers.filter((o: any) => {
+  const q = worklistSearch.toLowerCase();
+
+  return (
+    String(o.id || "").includes(q) ||
+    String(o.naziv || "").toLowerCase().includes(q) ||
+    String(o.adresa || "").toLowerCase().includes(q) ||
+    String(o.telefon || "").toLowerCase().includes(q) ||
+    String(o.pib || "").toLowerCase().includes(q)
+  );
+});
+
+
+
+const filteredProposalOffers = offers.filter((o: any) => {
+  const q = proposalSearch.toLowerCase();
+
+  return (
+    String(o.id || "").includes(q) ||
+    String(o.naziv || "").toLowerCase().includes(q) ||
+    String(o.adresa || "").toLowerCase().includes(q) ||
+    String(o.telefon || "").toLowerCase().includes(q) ||
+    String(o.pib || "").toLowerCase().includes(q)
+  );
+});
+
+
+
+const getPositionPrice = (results: any[]) => {
+  const total = results.find((x: any) => x.element === "Ukupna cena");
+  return Number(total?.cena) || 0;
+};
+
+const getExtraTotal = (x: any) => {
+  return (Number(x.kolicina) || 0) * (Number(x.cena) || 0);
+};
+
+
+
+
+const openProposalOffer = async (id: number) => {
+  const res = await fetch(`http://localhost:3001/offers/${id}`);
+  const data = await res.json();
+
+  if (!data.offer) {
+    alert("Nema ponude za ovaj ID");
+    return;
+  }
+
+  const items = Array.isArray(data.items) ? data.items : [];
+
+  setProposalOffer(data.offer);
+  setProposalPositions(items);
+  setProposalExtraItems(Array.isArray(data.extraItems) ? data.extraItems : []);
+
+  const calculated: Record<number, any[]> = {};
+
+  for (let i = 0; i < items.length; i++) {
+    const p = items[i];
+
+    if (!p.vrsta_prozora) continue;
+    if (!p.vrsta_stolarije) continue;
+    if (!p.profil) continue;
+    if (!p.a || !p.b) continue;
+
+    calculated[i] = await calculateWorklistPosition(p);
+  }
+
+  setProposalResults(calculated);
+};
+
+
+
+
+const formatCena = (value: number) => {
+  return new Intl.NumberFormat("sr-RS", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(value || 0);
+};
+
+
+
+const printPdf = (type: "proposal" | "worklist") => {
+  document.body.classList.remove("print-proposal", "print-worklist");
+
+  if (type === "proposal") {
+    document.body.classList.add("print-proposal");
+  }
+
+  if (type === "worklist") {
+    document.body.classList.add("print-worklist");
+  }
+
+  setTimeout(() => {
+    window.print();
+    document.body.classList.remove("print-proposal", "print-worklist");
+  }, 100);
+};
+
+
+
+const saveIspune = async () => {
+  await fetch("http://localhost:3001/ispuna", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(ispune),
+  });
+
+  alert("Sačuvano!");
+  loadIspune();
+};
+
+
+const valutaNaziv =
+  valute.find(v => v.id == proposalOffer?.valuta)?.naziv ||
+  proposalOffer?.valuta ||
+  "";
+
+  
+
+
+
+
+console.log("PROFILI FULL:", JSON.stringify(profili, null, 2));
+
+
+console.log("PAGE PROFILI:", profili);
+console.log("FORMA PROFILI:", profili);
+
+console.log("PROFILI STATE:", profili);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  return (
+    <main className="p-6 max-w-7xl mx-auto">
+
+
+
+
+      <Tabs active={activeTab} setActive={setActiveTab} />
+
+ 
+
+<div className="sticky top-[131px] z-50 bg-white border-b py-3 mb-4 flex gap-3">
+  {activeTab === "Forma" && (
+    <>
+      <button
+        onClick={saveOffer}
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        Sačuvaj
+      </button>
+
+      <button
+        onClick={clearForm}
+        className="bg-red-600 text-white px-4 py-2 rounded"
+      >
+        Obriši formu
+      </button>
+    </>
+  )}
+
+  {activeTab === "Radna lista" && (
+    <button
+      onClick={() => printPdf("worklist")}
+      className="bg-blue-600 text-white px-4 py-2 rounded"
+    >
+      Sačuvaj u PDF-u
+    </button>
+  )}
+
+  {activeTab === "Ponude" && (
+    <button
+      onClick={() => printPdf("proposal")}
+      className="bg-blue-600 text-white px-4 py-2 rounded"
+    >
+      Sačuvaj u PDF-u
+    </button>
+  )}
+
+  {activeTab === "Parametri" && (
+    <>
+      {paramTab === "Firma" && (
+        <button onClick={saveFirma} className="bg-blue-600 text-white px-4 py-2 rounded">
+          Sačuvaj firmu
+        </button>
+      )}
+
+      {paramTab === "Ispuna" && (
+        <button onClick={saveIspune} className="bg-blue-600 text-white px-4 py-2 rounded">
+          Sačuvaj ispune
+        </button>
+      )}
+
+      {paramTab === "Profil" && (
+        <button onClick={saveProfili} className="bg-blue-600 text-white px-4 py-2 rounded">
+          Sačuvaj profile
+        </button>
+      )}
+
+      {paramTab === "Okov" && (
+        <button onClick={saveOkovi} className="bg-blue-600 text-white px-4 py-2 rounded">
+          Sačuvaj okov
+        </button>
+      )}
+
+      {paramTab === "Valuta" && (
+        <button onClick={saveValute} className="bg-blue-600 text-white px-4 py-2 rounded">
+          Sačuvaj valute
+        </button>
+      )}
+
+      {paramTab === "Formule" && (
+        <button onClick={saveFormule} className="bg-blue-600 text-white px-4 py-2 rounded">
+          Sačuvaj formule
+        </button>
+      )}
+    </>
+  )}
+</div>
+
+
+
+
+
+      {activeTab === "Forma" && (
+  <>
+    <h1 className="text-3xl font-bold mb-4">FORMA</h1>
+
+
+
+
+    {/* OVDE OSTAVI SVE ŠTO VEĆ IMAŠ ZA FORMU */}
+
+
+<input
+  placeholder="Pretraga ponuda..."
+  value={offerSearch}
+  onChange={(e) => setOfferSearch(e.target.value)}
+  className="border p-2 w-full mb-3"
+/>
+
+
+
+      {/* TABELA */}
+      <div className="border mb-6">
+        <div style={{ maxHeight: "220px", overflowY: "auto" }}>
+          <table className="w-full border-collapse">
+            <thead className="bg-gray-200 sticky top-0">
+              <tr>
+                <th className="border p-2">ID</th>
+                <th className="border p-2">Naziv</th>
+                <th className="border p-2">Adresa</th>
+                <th className="border p-2">Telefon</th>
+                <th className="border p-2">PIB</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredOffers.map(c => (
+                <tr key={c.id}
+                  className="cursor-pointer hover:bg-gray-100"
+                  onClick={() => openFromTable(c.id)}>
+                  <td className="border p-2">{c.id}</td>
+                  <td className="border p-2">{c.naziv}</td>
+                  <td className="border p-2">{c.adresa}</td>
+                  <td className="border p-2">{c.telefon}</td>
+                  <td className="border p-2">{c.pib}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      {/* FORMA */}
+      <div className="grid grid-cols-4 gap-2 mb-6">
+
+        <input value={form.id || ""} readOnly className="border p-2 bg-gray-100"/>
+
+        <input placeholder="Kupac" value={form.naziv || ""}
+          onChange={e => setForm({ ...form, naziv: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="Adresa" value={form.adresa || ""}
+          onChange={e => setForm({ ...form, adresa: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="Telefon" value={form.telefon || ""}
+          onChange={e => setForm({ ...form, telefon: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="PIB" value={form.pib || ""}
+          onChange={e => setForm({ ...form, pib: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="Matični" value={form.maticni || ""}
+          onChange={e => setForm({ ...form, maticni: e.target.value })}
+          className="border p-2"/>
+
+        <input type="date" value={form.datum || ""}
+          onChange={e => setForm({ ...form, datum: e.target.value })}
+          className="border p-2"/>
+
+<select
+  value={form.vrsta_ponude}
+  onChange={e => setForm({ ...form, vrsta_ponude: e.target.value })}
+  className="border p-2"
+>
+  <option value="">Vrsta ponude</option>
+{vrstePonude.map(v => (
+  <option key={v} value={v}>{v}</option>
+))}
+</select>
+
+
+<select
+  value={form.valuta || ""}
+  onChange={(e) => setForm({ ...form, valuta: e.target.value })}
+  className="border p-2"
+>
+  <option value="">Izaberi valutu</option>
+
+  {valute.map((v, index) => (
+    <option key={v.id ?? index} value={v.id ?? index + 1}>
+      {v.naziv}
+    </option>
+  ))}
+</select>
+
+
+
+      
+
+        <input placeholder="Popust" value={form.popust || ""}
+          onChange={e => setForm({ ...form, popust: e.target.value })}
+          className="border p-2"/>
+
+        <input placeholder="Napomena" value={form.napomena || ""}
+          onChange={e => setForm({ ...form, napomena: e.target.value })}
+          className="border p-2 col-span-4"/>
+
+      </div>
+
+      {/* DUGMAD */}
+      
+
+      {/* POZICIJE (NE DIRAMO) */}
+{positions.map((p, i) => (
+  <div key={p.id || i} className="border rounded p-4 mb-6 relative">
+    <button
+    type="button"
+    onClick={() => removePosition(i)}
+    className="absolute top-2 right-2 bg-red-600 text-white w-7 h-7 rounded-full font-bold"
+    title="Obriši poziciju"
+  >
+    ×
+  </button>
+
+          <h2 className="font-bold mb-3">Pozicija {i + 1}</h2>
+
+<div className="grid grid-cols-2 gap-3 mb-4">
+  <select
+    value={p.vrsta_stolarije}
+    onChange={(e) => update(i, "vrsta_stolarije", e.target.value)}
+    className="border p-2"
+  >
+    <option value="">Vrsta stolarije</option>
+    {vrsteStolarije.map((v) => (
+      <option key={v} value={v}>
+        {v}
+      </option>
+    ))}
+  </select>
+
+  <select
+    value={p.vrsta_prozora || ""}
+    onChange={(e) => selectProzor(i, e.target.value)}
+    className="border p-2"
+  >
+    <option value="">Vrsta prozora</option>
+    {prozori.map((x) => (
+      <option key={x.id} value={x.naziv}>
+        {x.naziv}
+      </option>
+    ))}
+  </select>
+</div>
+
+<div className="grid grid-cols-3 gap-4">
+  {/* LEVO - SLIKA */}
+  <div className="border rounded p-3 flex items-center justify-center min-h-[180px]">
+    {p.slika ? (
+      <img
+        src={`/prozori/${p.slika}.jpg`}
+        className="max-h-44 object-contain"
+      />
+    ) : (
+      <span className="text-gray-400">Slika prozora</span>
+    )}
+  </div>
+
+  {/* SREDINA - DIMENZIJE */}
+  <div className="border rounded p-3">
+    <div className="font-bold mb-2">Dimenzije</div>
+
+    <div className="flex flex-col gap-2">
+      {showField(p.vrsta_prozora, "a") && (
+        <div>
+          <label className="text-xs font-semibold">A - širina</label>
+          <input
+            type="number"
+            value={p.a || ""}
+            onChange={(e) => update(i, "a", Number(e.target.value))}
+            className="border p-1 w-full text-sm"
+          />
+        </div>
+      )}
+
+      {showField(p.vrsta_prozora, "b") && (
+        <div>
+          <label className="text-xs font-semibold">B - visina</label>
+          <input
+            type="number"
+            value={p.b || ""}
+            onChange={(e) => update(i, "b", Number(e.target.value))}
+            className="border p-1 w-full text-sm"
+          />
+        </div>
+      )}
+
+      {showField(p.vrsta_prozora, "c") && (
+        <div>
+          <label className="text-xs font-semibold">C</label>
+          <input
+            type="number"
+            value={p.c || ""}
+            onChange={(e) => update(i, "c", Number(e.target.value))}
+            className="border p-1 w-full text-sm"
+          />
+        </div>
+      )}
+
+      {showField(p.vrsta_prozora, "d") && (
+        <div>
+          <label className="text-xs font-semibold">D</label>
+          <input
+            type="number"
+            value={p.d || ""}
+            onChange={(e) => update(i, "d", Number(e.target.value))}
+            className="border p-1 w-full text-sm"
+          />
+        </div>
+      )}
+    </div>
+  </div>
+
+  {/* DESNO - OSTALA POLJA */}
+  <div className="border rounded p-3">
+    <div className="font-bold mb-2">Podaci</div>
+
+    <div className="grid grid-cols-1 gap-2">
+      <select
+        value={p.profilId || ""}
+        onChange={(e) => update(i, "profilId", Number(e.target.value))}
+        className="border p-2"
+      >
+        <option value="">Izaberi profil</option>
+        {profili.map((x) => (
+          <option key={x.id ?? x.naziv} value={x.id}>
+            {x.naziv}
+          </option>
+        ))}
+      </select>
+
+      <select
+        value={p.ispunaId || ""}
+        onChange={(e) => update(i, "ispunaId", Number(e.target.value))}
+        className="border p-2"
+      >
+        <option value="">Izaberi ispunu</option>
+        {ispune.map((x) => (
+          <option key={x.id ?? x.naziv} value={x.id}>
+            {x.naziv}
+          </option>
+        ))}
+      </select>
+
+      <select
+        value={p.okovId || ""}
+        onChange={(e) => update(i, "okovId", Number(e.target.value))}
+        className="border p-2"
+      >
+        <option value="">Izaberi okov</option>
+        {okovi.map((x) => (
+          <option key={x.id ?? x.naziv} value={x.id}>
+            {x.naziv}
+          </option>
+        ))}
+      </select>
+
+      <select
+        value={p.otvaranje}
+        onChange={(e) => update(i, "otvaranje", e.target.value)}
+        className="border p-2"
+      >
+        <option value="">Otvaranje</option>
+        {vrsteOtvaranja.map((v) => (
+          <option key={v} value={v}>
+            {v}
+          </option>
+        ))}
+      </select>
+
+      <select
+        value={p.roletna}
+        onChange={(e) => update(i, "roletna", e.target.value)}
+        className="border p-2"
+      >
+        <option value="">Roletna</option>
+        {vrsteRoletni.map((v) => (
+          <option key={v} value={v}>
+            {v}
+          </option>
+        ))}
+      </select>
+
+      <select
+        value={p.komarnik}
+        onChange={(e) => update(i, "komarnik", e.target.value)}
+        className="border p-2"
+      >
+        <option value="">Komarnik</option>
+        {vrsteKomarnika.map((v) => (
+          <option key={v} value={v}>
+            Komarnik {v}
+          </option>
+        ))}
+      </select>
+
+      <input
+        placeholder="Količina"
+        type="number"
+        value={p.kolicina || ""}
+        onChange={(e) => update(i, "kolicina", Number(e.target.value))}
+        className="border p-2"
+      />
+    </div>
+  </div>
+</div>
+
+    
+
+  </div>
+))}
+
+
+
+
+
+<button
+  onClick={addPosition}
+  className="bg-green-600 text-white px-4 py-2 rounded mb-8"
+>
+  Dodaj poziciju
+</button>
+
+
+
+
+<div className="border rounded p-4 mb-6">
+  <h2 className="font-bold mb-3">Dodatne usluge / proizvodi</h2>
+
+  <table className="border w-full text-sm">
+    <thead className="bg-gray-200">
+      <tr>
+        <th className="border p-2">Dodatna usluga/proizvod</th>
+        <th className="border p-2">Količina</th>
+        <th className="border p-2">Cena</th>
+        <th className="border p-2">Ukupno</th>
+        <th className="border p-2">Brisanje</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {extraItems.map((item, i) => (
+        <tr key={i}>
+          <td className="border p-1">
+            <input
+              className="w-full border p-2"
+              value={item.naziv || ""}
+              onChange={(e) =>
+                updateExtraItem(i, "naziv", e.target.value)
+              }
+            />
+          </td>
+
+          <td className="border p-1">
+            <input
+              type="number"
+              className="w-full border p-2"
+              value={item.kolicina || ""}
+              onChange={(e) =>
+                updateExtraItem(i, "kolicina", Number(e.target.value))
+              }
+            />
+          </td>
+
+          <td className="border p-1">
+            <input
+              type="number"
+              className="w-full border p-2"
+              value={item.cena || ""}
+              onChange={(e) =>
+                updateExtraItem(i, "cena", Number(e.target.value))
+              }
+            />
+          </td>
+
+          <td className="border p-2 text-right font-semibold bg-gray-50">
+            {((Number(item.kolicina) || 0) * (Number(item.cena) || 0)).toFixed(2)}
+          </td>
+          <td className="border p-1 text-center">
+  <button
+    type="button"
+    onClick={() => removeExtraItem(i)}
+    className="bg-red-600 text-white w-7 h-7 rounded-full font-bold"
+    title="Obriši uslugu/proizvod"
+  >
+    ×
+  </button>
+</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  <button
+    onClick={addExtraItem}
+    className="bg-green-600 text-white px-4 py-2 rounded mt-3"
+  >
+    Dodaj uslugu/proizvod
+  </button>
+</div>
+
+
+
+
+  </>
+)}
+
+
+
+
+
+
+
+{activeTab === "Ponude" && (
+  <div className="p-4">
+    <h1 className="text-3xl font-bold mb-4">PONUDE</h1>
+
+    
+
+    <input
+      placeholder="Pretraga ponuda..."
+      value={proposalSearch}
+      onChange={(e) => setProposalSearch(e.target.value)}
+      className="border p-2 w-full mb-3"
+    />
+
+    <div className="border mb-6">
+      <div style={{ maxHeight: "220px", overflowY: "auto" }}>
+        <table className="w-full border-collapse">
+          <thead className="bg-gray-200 sticky top-0">
+            <tr>
+              <th className="border p-2">ID</th>
+              <th className="border p-2">Naziv</th>
+              <th className="border p-2">Adresa</th>
+              <th className="border p-2">Telefon</th>
+              <th className="border p-2">PIB</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {filteredProposalOffers.map((c: any) => (
+              <tr
+                key={c.id}
+                className="cursor-pointer hover:bg-gray-100"
+                onClick={() => openProposalOffer(c.id)}
+              >
+                <td className="border p-2">{c.id}</td>
+                <td className="border p-2">{c.naziv}</td>
+                <td className="border p-2">{c.adresa}</td>
+                <td className="border p-2">{c.telefon}</td>
+                <td className="border p-2">{c.pib}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {!proposalOffer && (
+      <div className="text-gray-500">
+        Izaberi ponudu iz tabele da se prikaže ponuda.
+      </div>
+    )}
+
+    {proposalOffer && (() => {
+
+console.log("VALUTA IZ PONUDE:", proposalOffer.valuta);
+console.log("SVE VALUTE:", valute);
+
+      const rowsPositions = proposalPositions.filter((p) => p.vrsta_prozora);
+      const rowsExtra = proposalExtraItems.filter((x) => x.naziv);
+
+      const valutaNaziv =
+  valute.find((v: any) => String(v.id) === String(proposalOffer.valuta))?.naziv ||
+  valute.find((v: any) => String(v.naziv) === String(proposalOffer.valuta))?.naziv ||
+  String(proposalOffer.valuta || "");
+
+      const positionSubtotal = rowsPositions.reduce((sum, p, index) => {
+        const cena = getPositionPrice(proposalResults[index] || []);
+        return sum + cena * (Number(p.kolicina) || 1);
+      }, 0);
+
+      const extraSubtotal = rowsExtra.reduce((sum, x) => {
+        return sum + getExtraTotal(x);
+      }, 0);
+
+      const ukupno = positionSubtotal + extraSubtotal;
+      const popustProc = Number(proposalOffer.popust) || 0;
+      const popustIznos = ukupno * popustProc / 100;
+
+      const pdvProc = Number(firma.pdv) || 0;
+      const pdvIznos = (ukupno - popustIznos) * pdvProc / 100;
+
+      const zaUplatu = ukupno - popustIznos + pdvIznos;
+
+      return (
+        <div id="proposal-pdf" className="bg-white text-black p-6">
+          {/* ZAGLAVLJE */}
+          <table className="w-full mb-6 text-sm">
+            <tbody>
+              <tr>
+                <td rowSpan={6} className="w-1/4 align-middle text-center">
+                  <div className="border h-28 flex items-center justify-center text-gray-400">
+                    LOGO
+                  </div>
+                </td>
+
+                <td className="w-1/2 font-semibold">
+                  {firma.naziv || ""}, {firma.adresa || ""}
+                </td>
+
+                <td className="w-1/4"></td>
+              </tr>
+
+              <tr>
+                <td>PIB: {firma.pib || ""}</td>
+                <td></td>
+              </tr>
+
+              <tr>
+                <td>Matični broj: {firma.maticni || ""}</td>
+                <td rowSpan={2} className="text-center text-2xl font-bold">
+                  {proposalOffer.vrsta_ponude || "PONUDA"}
+                </td>
+              </tr>
+
+              <tr>
+                <td>Telefon: {firma.telefon || ""}</td>
+              </tr>
+
+              <tr>
+                <td>Email: {firma.email || ""}</td>
+                <td rowSpan={2} className="text-center text-xl font-bold">
+                  ID: {proposalOffer.id}
+                </td>
+              </tr>
+
+              <tr>
+                <td>TR: {firma.tr || ""}</td>
+              </tr>
+            </tbody>
+          </table>
+
+          {/* KUPAC */}
+          <div className="mb-6 text-sm">
+            <div>
+              <strong>Kupac:</strong> {proposalOffer.naziv || ""}, {proposalOffer.adresa || ""}
+            </div>
+            <div><strong>PIB:</strong> {proposalOffer.pib || ""}</div>
+            <div><strong>Matični broj:</strong> {proposalOffer.maticni || ""}</div>
+            <div><strong>Telefon:</strong> {proposalOffer.telefon || ""}</div>
+            <div><strong>Datum ponude:</strong> {proposalOffer.datum || ""}</div>
+          </div>
+
+          {/* TABELA PONUDE */}
+          <table className="w-full border text-sm">
+            <thead className="bg-gray-200">
+              <tr>
+                <th className="border p-2 w-12">Red. br.</th>
+                <th className="border p-2">Naziv</th>
+                <th className="border p-2 w-20">Kol.</th>
+                <th className="border p-2 w-28">Cena</th>
+                <th className="border p-2 w-32">
+                  UKUPNO<br />
+                  <span className="text-xs">{valutaNaziv}</span>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {rowsPositions.map((p, index) => {
+                const cena = getPositionPrice(proposalResults[index] || []);
+                const kol = Number(p.kolicina) || 1;
+                const ukupnoRed = cena * kol;
+
+                return (
+                  <tr key={p.id || index}>
+                    <td className="border p-2 text-center">{index + 1}</td>
+
+                    <td className="border p-2">
+                      <div className="flex gap-4">
+                        <div className="w-32">
+                          {getProzorImageId(p.vrsta_prozora) ? (
+                            <img
+                              src={`/prozori/${getProzorImageId(p.vrsta_prozora)}.jpg`}
+                              className="h-24 object-contain border mb-2"
+                            />
+                          ) : (
+                            <div className="border h-24 flex items-center justify-center text-gray-400">
+                              Slika
+                            </div>
+                          )}
+
+                          <div className="text-xs">
+                            {getVisibleDimensions(p.vrsta_prozora).includes("a") && <div>A={p.a} mm</div>}
+                            {getVisibleDimensions(p.vrsta_prozora).includes("b") && <div>B={p.b} mm</div>}
+                            {getVisibleDimensions(p.vrsta_prozora).includes("c") && <div>C={p.c} mm</div>}
+                            {getVisibleDimensions(p.vrsta_prozora).includes("d") && <div>D={p.d} mm</div>}
+                          </div>
+                        </div>
+
+                        <div className="flex-1">
+                          <div className="font-bold">{p.vrsta_prozora}</div>
+                          <div>Vrsta stolarije: {p.vrsta_stolarije}</div>
+                          <div>Profil: {getProfilName(p.profil)}</div>
+                          <div>Ispuna: {getIspunaName(p.ispuna)}</div>
+                          <div>Okov: {getOkovName(p.okov)}</div>
+                          {p.otvaranje && <div>Otvaranje: {p.otvaranje}</div>}
+                          {p.roletna && <div>Roletna: {p.roletna}</div>}
+                          {p.komarnik && <div>Komarnik: {p.komarnik}</div>}
+                        </div>
+                      </div>
+                    </td>
+
+                    <td className="border p-2 text-center">{kol}</td>
+                    <td className="border p-2 text-right">{formatCena(cena)} </td>
+                    <td className="border p-2 text-right font-semibold">{formatCena(ukupnoRed)} </td>
+                  </tr>
+                );
+              })}
+
+              {rowsExtra.map((x, i) => {
+                const rowIndex = rowsPositions.length + i + 1;
+                const kol = Number(x.kolicina) || 1;
+                const cena = Number(x.cena) || 0;
+                const ukupnoRed = kol * cena;
+
+                return (
+                  <tr key={`extra-${i}`}>
+                    <td className="border p-2 text-center">{rowIndex}</td>
+                    <td className="border p-2 font-semibold">{x.naziv}</td>
+                    <td className="border p-2 text-center">{kol}</td>
+                    <td className="border p-2 text-right">{formatCena(cena)} </td>
+                    <td className="border p-2 text-right font-semibold">{formatCena(ukupnoRed)} </td>
+                  </tr>
+                );
+              })}
+
+              <tr>
+  {/* NAPOMENA (spojene 3 kolone + 4 reda) */}
+  <td className="border p-3 align-top" colSpan={3} rowSpan={4}>
+    <div className="font-semibold mb-2">Napomena:</div>
+    <div className="min-h-[100px]">
+      {proposalOffer.napomena || ""}
+    </div>
+  </td>
+
+  {/* UKUPNO */}
+  <td className="border p-2 font-semibold text-right">
+    Ukupno
+  </td>
+  <td className="border p-2 text-right font-semibold">
+    {formatCena(ukupno)} 
+  </td>
+</tr>
+
+<tr>
+  {/* POPUST */}
+  <td className="border p-2 text-right">
+    Popust {popustProc}%
+  </td>
+  <td className="border p-2 text-right">
+    -{formatCena(popustIznos)} 
+  </td>
+</tr>
+
+<tr>
+  {/* PDV */}
+  <td className="border p-2 text-right">
+    PDV {pdvProc}%
+  </td>
+  <td className="border p-2 text-right">
+    {formatCena(pdvIznos)} 
+  </td>
+</tr>
+
+<tr>
+  {/* ZA UPLATU */}
+  <td className="border p-2 font-bold text-right">
+    Za uplatu
+  </td>
+  <td className="border p-2 text-right font-bold text-lg">
+    {formatCena(zaUplatu)} {valutaNaziv}
+  </td>
+</tr>
+            </tbody>
+          </table>
+
+          
+        </div>
+      );
+    })()}
+  </div>
+)}
+
+
+
+
+
+
+
+
+
+{activeTab === "Radna lista" && (
+  <div className="p-4">
+
+    <h1 className="text-3xl font-bold mb-4">RADNA LISTA</h1>
+
+    
+
+<input
+  placeholder="Pretraga ponuda..."
+  value={worklistSearch}
+  onChange={(e) => setWorklistSearch(e.target.value)}
+  className="border p-2 w-full mb-3"
+/>
+
+
+    {/* TABELA PONUDA */}
+    <div className="border mb-6">
+      <div style={{ maxHeight: "220px", overflowY: "auto" }}>
+        <table className="w-full border-collapse">
+          <thead className="bg-gray-200 sticky top-0">
+            <tr>
+              <th className="border p-2">ID</th>
+              <th className="border p-2">Naziv</th>
+              <th className="border p-2">Adresa</th>
+              <th className="border p-2">Telefon</th>
+              <th className="border p-2">PIB</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {filteredWorklistOffers.map((c) => (
+              <tr
+                key={c.id}
+                className="cursor-pointer hover:bg-gray-100"
+                onClick={() => openWorklistOffer(c.id)}
+              >
+                <td className="border p-2">{c.id}</td>
+                <td className="border p-2">{c.naziv}</td>
+                <td className="border p-2">{c.adresa}</td>
+                <td className="border p-2">{c.telefon}</td>
+                <td className="border p-2">{c.pib}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    {!worklistOffer && (
+      <div className="text-gray-500">
+        Izaberi ponudu iz tabele da se prikaže radna lista.
+      </div>
+    )}
+
+    {worklistOffer && (
+      <div id="worklist-pdf" className="bg-white text-black p-6">
+
+        {/* ZAGLAVLJE FIRME */}
+        <table className="w-full mb-6 text-sm">
+          <tbody>
+            <tr>
+              <td rowSpan={6} className="w-1/4 align-middle text-center">
+                <div className="border h-28 flex items-center justify-center text-gray-400">
+                  LOGO
+                </div>
+              </td>
+
+              <td className="w-1/2 font-semibold">
+                {firma.naziv || ""}, {firma.adresa || ""}
+              </td>
+
+              <td className="w-1/4"></td>
+            </tr>
+
+            <tr>
+              <td>PIB: {firma.pib || ""}</td>
+              <td></td>
+            </tr>
+
+            <tr>
+              <td>Matični broj: {firma.maticni || ""}</td>
+              <td rowSpan={2} className="text-center text-2xl font-bold">
+                RADNI NALOG
+              </td>
+            </tr>
+
+            <tr>
+              <td>Telefon: {firma.telefon || ""}</td>
+            </tr>
+
+            <tr>
+              <td>Email: {firma.email || ""}</td>
+              <td rowSpan={2} className="text-center text-xl font-bold">
+                ID: {worklistOffer.id}
+              </td>
+            </tr>
+
+            <tr>
+              <td>TR: {firma.tr || ""}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        {/* PODACI KUPCA */}
+        <table className="w-full mb-6 text-sm border">
+          <tbody>
+            <tr>
+              <td className="p-2 border">
+                Kupac: {worklistOffer.naziv || ""}, {worklistOffer.adresa || ""}
+              </td>
+            </tr>
+
+            <tr>
+              <td className="p-2 border">
+                PIB: {worklistOffer.pib || ""}
+              </td>
+            </tr>
+
+            <tr>
+              <td className="p-2 border">
+                Matični broj: {worklistOffer.maticni || ""}
+              </td>
+            </tr>
+
+            <tr>
+              <td className="p-2 border">
+                Napomena: {worklistOffer.napomena || ""}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        {/* POZICIJE */}
+        {worklistPositions
+          .filter((p) => p.vrsta_prozora)
+          .map((p, index) => {
+            const missing: string[] = [];
+
+            if (!p.vrsta_stolarije) missing.push("vrsta stolarije");
+            if (!p.vrsta_prozora) missing.push("vrsta prozora");
+            if (!p.profil) missing.push("profil");
+            if (!p.ispuna) missing.push("ispuna");
+            if (!p.okov) missing.push("okov");
+            const requiredDims = dimensionRules[p.vrsta_prozora] || [];
+
+if (requiredDims.includes("a") && !p.a) missing.push("A");
+if (requiredDims.includes("b") && !p.b) missing.push("B");
+if (requiredDims.includes("c") && !p.c) missing.push("C");
+if (requiredDims.includes("d") && !p.d) missing.push("D");
+
+            return (
+              <div key={p.id || index} className="mb-8 border-t pt-4">
+
+                <h2 className="text-xl font-bold mb-2">
+                  Pozicija {index + 1}
+                </h2>
+
+                {missing.length > 0 ? (
+                  <div className="bg-yellow-100 border border-yellow-400 p-3 mb-4">
+                    Pozicija nije kompletna. Nedostaje: {missing.join(", ")}.
+                  </div>
+                ) : (
+                  <>
+                    <div className="mb-3 flex justify-between items-center">
+  <div className="text-lg font-bold">
+    {p.vrsta_prozora}
+  </div>
+
+  <div className="text-lg">
+    Količina: <strong>{p.kolicina || 1}</strong>
+  </div>
+</div>
+
+<div className="mb-4 text-sm">
+  Vrsta stolarije: <strong>{p.vrsta_stolarije}</strong>
+</div>
+
+<div className="grid grid-cols-3 gap-4 text-sm">
+  {/* 1. POLJE - SLIKA I DIMENZIJE */}
+  <div className="border rounded p-3">
+    {getProzorImageId(p.vrsta_prozora) ? (
+      <img
+        src={`/prozori/${getProzorImageId(p.vrsta_prozora)}.jpg`}
+        className="h-40 object-contain border mb-3 mx-auto"
+      />
+    ) : (
+      <div className="border h-40 flex items-center justify-center mb-3">
+        Slika prozora
+      </div>
+    )}
+
+    <div className="space-y-1 font-semibold">
+      {getVisibleDimensions(p.vrsta_prozora).includes("a") && (
+        <div>A = {p.a} mm</div>
+      )}
+
+      {getVisibleDimensions(p.vrsta_prozora).includes("b") && (
+        <div>B = {p.b} mm</div>
+      )}
+
+      {getVisibleDimensions(p.vrsta_prozora).includes("c") && (
+        <div>C = {p.c} mm</div>
+      )}
+
+      {getVisibleDimensions(p.vrsta_prozora).includes("d") && (
+        <div>D = {p.d} mm</div>
+      )}
+    </div>
+  </div>
+
+  {/* 2. POLJE - OSTALI PODACI */}
+  <div className="border rounded p-3">
+    <div className="font-bold mb-2">Podaci</div>
+
+    <div className="space-y-2">
+      <div>Profil: <strong>{getProfilName(p.profil)}</strong></div>
+      <div>Otvaranje: <strong>{p.otvaranje || ""}</strong></div>
+      <div>Ispuna: {getIspunaName(p.ispuna)}</div>
+      <div>Okov: {getOkovName(p.okov)}</div>
+      <div>Roletna: <strong>{p.roletna || ""}</strong></div>
+      <div>Komarnik: <strong>{p.komarnik || ""}</strong></div>
+    </div>
+  </div>
+
+  {/* 3. POLJE - ELEMENTI */}
+  <div className="border rounded p-3">
+    <div className="font-bold mb-2">Elementi prozora</div>
+
+    <table className="w-full border text-sm">
+      <thead className="bg-gray-100">
+        <tr>
+          <th className="border p-1">Element</th>
+          <th className="border p-1">Š</th>
+          <th className="border p-1">V</th>
+          <th className="border p-1">Kom</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {(worklistResults[index] || [])
+          .filter((r: any) => {
+            if (r.element === "Ukupna cena" || r.element === "Cena") return false;
+
+            const isAluSpojnica =
+              r.element.includes("Spojnica") ||
+              r.element.includes("(kom)");
+
+            if (
+              isAluSpojnica &&
+              String(p.vrsta_stolarije).toUpperCase() !== "ALU"
+            ) {
+              return false;
+            }
+
+            if (r.element === "Roletna" && !p.roletna) return false;
+            if (r.element === "Komarnik" && !p.komarnik) return false;
+            if (r.element === "Okov" && !p.okov) return false;
+
+            return Number(r.S) > 0 || Number(r.V) > 0 || isAluSpojnica;
+          })
+          .map((r: any, ri: number) => (
+            <tr key={ri}>
+              <td className="border p-1 font-semibold">{r.element}</td>
+
+              <td className="border p-1 text-center">
+                {Number(r.S) > 0 ? `${Math.round(r.S)} mm` : ""}
+              </td>
+
+              <td className="border p-1 text-center">
+                {Number(r.V) > 0 ? `${Math.round(r.V)} mm` : ""}
+              </td>
+
+              <td className="border p-1 text-center">
+                {(Number(r.kom) || 0) * (Number(p.kolicina) || 1)}
+              </td>
+            </tr>
+          ))}
+
+        <tr>
+          <td className="border p-1 font-semibold">Plastika</td>
+          <td className="border p-1 text-center"></td>
+          <td className="border p-1 text-center"></td>
+          <td className="border p-1 text-center">{Number(p.kolicina) || 1}</td>
+        </tr>
+
+        {(worklistResults[index] || []).length === 0 && (
+          <tr>
+            <td className="border p-1 text-gray-500" colSpan={4}>
+              Nema izračunatih elemenata. Proveri da li su formule sačuvane za ovu vrstu stolarije i prozora.
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+</div>
+                  </>
+                )}
+              </div>
+            );
+          })}
+
+        {/* DODATNE USLUGE */}
+        {worklistExtraItems.filter((x) => x.naziv).length > 0 && (
+          <div className="mt-8">
+            <h2 className="text-xl font-bold mb-2">
+              Dodatne usluge / proizvodi
+            </h2>
+
+            <table className="w-full border text-sm">
+              <thead className="bg-gray-200">
+                <tr>
+                  <th className="border p-2">Naziv</th>
+                  <th className="border p-2">Količina</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {worklistExtraItems
+                  .filter((x) => x.naziv)
+                  .map((x, i) => (
+                    <tr key={i}>
+                      <td className="border p-2">{x.naziv}</td>
+                      <td className="border p-2">{x.kolicina}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+
+      </div>
+    )}
+  </div>
+)}
+
+
+
+
+
+
+
+
+
+{activeTab === "Slike" && (
+  <div className="p-4">
+    <h1 className="text-3xl font-bold mb-6">SLIKE PROZORA</h1>
+
+    <div className="space-y-4">
+
+      {prozori.map((p: any) => (
+        <div
+          key={p.id}
+          className="flex items-center gap-6 border rounded p-4 bg-white"
+        >
+          {/* SLIKA */}
+          <div className="w-40 h-28 flex items-center justify-center border">
+            <img
+              src={`/prozori/${p.id}.jpg`}
+              alt={p.naziv}
+              className="max-h-24 object-contain"
+            />
+          </div>
+
+          {/* NAZIV */}
+          <div className="text-lg font-semibold">
+            {p.naziv}
+          </div>
+        </div>
+      ))}
+
+    </div>
+  </div>
+)}
+
+
+
+
+
+{activeTab === "Uputstvo" && (
+  <div className="p-4">
+    <h1 className="text-3xl font-bold mb-4">UPUTSTVO</h1>
+
+    <div className="border rounded p-6 bg-white">
+      Ovde ćemo kasnije dodati uputstvo za korišćenje aplikacije.
+    </div>
+  </div>
+)}
+
+
+
+
+
+
+
+
+{activeTab === "Parametri" && (
+  <div className="p-4">
+
+<ParamTabs
+  active={paramTab}
+  setActive={setParamTab}
+  
+/>
+
+
+
+
+
+
+
+
+    {paramTab === "Firma" && (
+  <div className="grid grid-cols-3 gap-2">
+
+    <input placeholder="Naziv"
+      value={firma.naziv || ""}
+      onChange={e => setFirma({ ...firma, naziv: e.target.value })}
+      className="border p-2"
+    />
+
+    <input placeholder="Adresa"
+      value={firma.adresa || ""}
+      onChange={e => setFirma({ ...firma, adresa: e.target.value })}
+      className="border p-2"
+    />
+
+    <input placeholder="PIB"
+      value={firma.pib || ""}
+      onChange={e => setFirma({ ...firma, pib: e.target.value })}
+      className="border p-2"
+    />
+
+    <input placeholder="Matični broj"
+      value={firma.maticni || ""}
+      onChange={e => setFirma({ ...firma, maticni: e.target.value })}
+      className="border p-2"
+    />
+
+    <input placeholder="Telefon"
+      value={firma.telefon || ""}
+      onChange={e => setFirma({ ...firma, telefon: e.target.value })}
+      className="border p-2"
+    />
+
+    <input placeholder="Email"
+      value={firma.email || ""}
+      onChange={e => setFirma({ ...firma, email: e.target.value })}
+      className="border p-2"
+    />
+
+    <input placeholder="TR"
+      value={firma.tr || ""}
+      onChange={e => setFirma({ ...firma, tr: e.target.value })}
+      className="border p-2"
+    />
+
+    <input placeholder="Zarada %"
+      value={firma.zarada || ""}
+      onChange={e => setFirma({ ...firma, zarada: e.target.value })}
+      className="border p-2"
+    />
+
+    <input placeholder="PDV %"
+      value={firma.pdv || ""}
+      onChange={e => setFirma({ ...firma, pdv: e.target.value })}
+      className="border p-2"
+    />
+
+    <input placeholder="Otpad %"
+  value={firma.otpad || ""}
+  onChange={e => setFirma({ ...firma, otpad: e.target.value })}
+  className="border p-2"
+/>
+
+<input placeholder="Roletna %"
+  value={firma.roletna || ""}
+  onChange={e => setFirma({ ...firma, roletna: e.target.value })}
+  className="border p-2"
+/>
+
+<input placeholder="Komarnik %"
+  value={firma.komarnik || ""}
+  onChange={e => setFirma({ ...firma, komarnik: e.target.value })}
+  className="border p-2"
+/>
+
+<input placeholder="Valuta plaćanja (dana)"
+  value={firma.valuta_placanja || ""}
+  onChange={e => setFirma({ ...firma, valuta_placanja: e.target.value })}
+  className="border p-2"
+/>
+
+    
+
+
+
+  </div>
+
+
+
+)}
+
+
+
+
+
+{paramTab === "Profil" && (
+  <div className="p-4">
+    <table className="border w-full">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="border p-2">Naziv profila</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {profili.map((p: any, i: number) => (
+          <tr key={p.id}>
+            <td className="border p-2">
+              <input
+                className="w-full p-1 border"
+                value={p.naziv}
+                onChange={(e) => {
+                  const copy = [...profili];
+                  copy[i].naziv = e.target.value;
+                  setProfili(copy);
+                }}
+              />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    
+  </div>
+)}
+
+
+
+
+
+
+
+
+{paramTab === "Ispuna" && (
+  <div>
+
+    <table className="border w-full">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="border p-2">Naziv</th>
+          <th className="border p-2">Cena</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {Array.from({ length: 15 }).map((_, i) => {
+          const item = ispune[i] || { naziv: `Ispuna ${i + 1}`, cena: "" };
+
+          return (
+            <tr key={i}>
+              <td className="border p-2">
+                <input
+                  className="border p-2 w-full"
+                  value={item.naziv || ""}
+                  onChange={e => {
+                    const copy = [...ispune];
+                    copy[i] = { ...item, naziv: e.target.value };
+                    setIspune(copy);
+                  }}
+                />
+              </td>
+
+              <td className="border p-2">
+                <input
+                  type="number"
+                  value={item.cena || ""}
+                  onChange={e => {
+                    const copy = [...ispune];
+                    copy[i] = {
+                      ...item,
+                      cena: e.target.value === "" ? "" : Number(e.target.value)
+                    };
+                    setIspune(copy);
+                  }}
+                  className="w-full border p-1"
+                />
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+
+    {/* 🔥 DUGME MORA OVDE */}
+    
+
+  </div>
+)}
+
+
+
+
+
+
+
+
+
+{paramTab === "Okov" && (
+  <div className="p-4">
+
+    <table className="border w-full">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="border p-2">Naziv</th>
+          <th className="border p-2">Cena</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {Array.from({ length: 5 }).map((_, i) => {
+          const item = okovi[i] || {
+            naziv: `Okov ${i + 1}`,
+            cena: ""
+          };
+
+          return (
+            <tr key={i}>
+              <td className="border p-2">
+                <input
+                  className="border w-full p-1"
+                  value={item.naziv || ""}
+                  onChange={(e) => {
+                    const copy = [...okovi];
+                    copy[i] = { ...item, naziv: e.target.value };
+                    setOkovi(copy);
+                  }}
+                />
+              </td>
+
+              <td className="border p-2">
+                <input
+                  type="number"
+                  className="border w-full p-1"
+                  value={item.cena || ""}
+                  onChange={(e) => {
+                    const copy = [...okovi];
+                    copy[i] = {
+                      ...item,
+                      cena: e.target.value === "" ? "" : Number(e.target.value)
+                    };
+                    setOkovi(copy);
+                  }}
+                />
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+
+    
+
+  </div>
+)}
+
+
+
+
+
+
+
+
+{paramTab === "Valuta" && (
+  <div className="p-4">
+
+    <table className="border w-full">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="border p-2">Naziv valute</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {Array.from({ length: 5 }).map((_, i) => {
+          const item = valute[i] || {
+            naziv:
+              i === 0 ? "RSD" :
+              i === 1 ? "EUR" :
+              `Valuta ${i + 1}`
+          };
+
+          return (
+            <tr key={i}>
+              <td className="border p-2">
+                <input
+                  className="w-full p-1 border"
+                  value={item.naziv || ""}
+                  onChange={(e) => {
+  setValute((prev: any[]) => {
+    const copy = [...(prev || [])];
+
+    copy[i] = {
+      ...(copy[i] || { id: i + 1 }),
+      id: copy[i]?.id ?? i + 1,
+      naziv: e.target.value
+    };
+
+    return copy;
+  });
+}}
+                />
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+
+    
+
+
+
+
+  </div>
+)}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{paramTab === "Tehnicki" && (
+  <div className="overflow-auto">
+    <table className="border w-full text-sm">
+
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="border p-2">Parametar</th>
+
+          {profili.map((p: any) => (
+            <th key={p.id} className="border p-2">
+              {p.naziv}
+            </th>
+          ))}
+        </tr>
+      </thead>
+
+      <tbody>
+        {tehnickiParametri.map((el) => (
+          <tr key={el}>
+            <td className="border p-2 font-semibold">
+              {el}
+            </td>
+
+{profili.map((p: any) => {
+  const found = Array.isArray(tehnickiData)
+    ? tehnickiData.find(
+        (t: any) =>
+          t.element === el &&
+          String(t.profil) === String(p.id)
+      )
+    : null;
+
+              return (
+                <td key={p.id} className="border p-1">
+                  {formulaParametri.includes(el) ? (
+  <div className="w-full p-2 text-center font-semibold bg-gray-100">
+    {izracunajTehnicki(el, p.id)}
+  </div>
+) : (
+  <input
+    type="number"
+    className="w-full p-1 border"
+    value={found?.vrednost ?? ""}
+    onChange={(e) => {
+      const value = e.target.value;
+
+setTehnickiData((prev: any[]) => {
+  const filtered = Array.isArray(prev)
+    ? prev.filter(
+        (t) =>
+          !(t.element === el && String(t.profil) === String(p.id))
+      )
+    : [];
+
+  return [
+    ...filtered,
+    {
+      element: el,
+      profil: String(p.id),
+      vrednost: value,
+    },
+  ];
+});
+
+fetch("http://localhost:3001/profile/tehnicki", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    element: el,
+    profil: String(p.id),
+    vrednost: value,
+  }),
+});
+    }}
+  />
+)}
+                </td>
+              );
+            })}
+          </tr>
+        ))}
+      </tbody>
+
+    </table>
+
+
+
+{rezultati.length > 0 && (
+  <table className="border w-full mt-4 text-sm">
+    <thead className="bg-gray-200">
+      <tr>
+        <th className="border p-2">Element</th>
+        <th className="border p-2">Širina (Š)</th>
+        <th className="border p-2">Visina (V)</th>
+        <th className="border p-2">Kom</th>
+        <th className="border p-2">Cena</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      {rezultati.map((r, i) => (
+        <tr key={i}>
+          <td className="border p-2">{r.element}</td>
+          <td className="border p-2">{r.S?.toFixed(2)}</td>
+          <td className="border p-2">{r.V?.toFixed(2)}</td>
+          <td className="border p-2">{r.kom}</td>
+          <td className="border p-2">{r.cena?.toFixed(2)}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+)}
+
+{rezultati.length > 0 && (
+  <div className="mt-4 text-right font-bold text-lg">
+    Ukupno:{" "}
+    {rezultati
+      .reduce((sum, r) => sum + (r.cena || 0), 0)
+      .toFixed(2)}
+  </div>
+)}
+
+
+
+
+  </div>
+)}
+
+
+
+
+
+
+{paramTab === "Cene" && (
+  <div className="overflow-auto">
+    <table className="border w-full text-sm">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="border p-2">Element</th>
+
+          {profili.map((p: any) => (
+            <th key={p.id} className="border p-2">
+              {p.naziv}
+            </th>
+          ))}
+        </tr>
+      </thead>
+
+      <tbody>
+        {elementi.map((el) => (
+          <tr key={el}>
+            <td className="border p-2 font-semibold">{el}</td>
+
+            {profili.map((p: any) => (
+              <td key={p.id} className="border p-1">
+                <input
+                  type="number"
+                  className="w-full p-1 border"
+                  value={getPriceValue(el, p.id)}
+                  onChange={(e) => {
+                    fetch("http://localhost:3001/profile/prices", {
+                      method: "POST",
+                      headers: { "Content-Type": "application/json" },
+body: JSON.stringify({
+  profil: String(p.id),
+  element: el,
+  cena: e.target.value,
+}),
+                    }).then(() => loadProfilePrices());
+                  }}
+                />
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+)}
+
+
+
+
+
+
+{paramTab === "Formule" && (
+  <div className="overflow-auto">
+
+    <div className="flex gap-2 mb-4">
+  <select
+    value={formulaVrstaStolarije}
+    onChange={(e) => setFormulaVrstaStolarije(e.target.value)}
+    className="border p-2"
+  >
+    <option value="">Vrsta stolarije</option>
+    {vrsteStolarije.map((v) => (
+      <option key={v} value={v}>
+        {v}
+      </option>
+    ))}
+  </select>
+
+  <select
+    value={formulaVrstaProzora}
+    onChange={(e) => setFormulaVrstaProzora(e.target.value)}
+    className="border p-2"
+  >
+    <option value="">Vrsta prozora</option>
+    {prozori.map((p) => (
+      <option key={p.id} value={p.naziv}>
+        {p.naziv}
+      </option>
+    ))}
+  </select>
+</div>
+
+    <div className="flex justify-end mb-2">
+      
+    </div>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    <table className="border w-full text-sm">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="border p-2">Element</th>
+          <th className="border p-2">S formula</th>
+          <th className="border p-2">V formula</th>
+          <th className="border p-2">Kom</th>
+          <th className="border p-2">Cena formula</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {formule.map((f, index) => (
+          <tr key={f.id ?? index}>
+            
+            <td className="border p-2 font-semibold">
+              {f.element}
+            </td>
+
+            <td className="border p-1 relative">
+  <input
+    className="w-full border p-1"
+    value={f.s || ""}
+    onChange={(e) => {
+      updateFormula(index, "s", e.target.value);
+      handleAutocomplete(e.target.value, index, "s");
+    }}
+  />
+
+  {activeInput?.i === index && activeInput?.field === "s" && suggestions.length > 0 && (
+    <div className="absolute bg-white border w-full z-10">
+      {suggestions.map((sug, i) => (
+        <div
+          key={i}
+          className="p-1 hover:bg-gray-200 cursor-pointer"
+          onClick={() => {
+            const newValue = (f.s || "") + sug;
+            updateFormula(index, "s", newValue);
+            setSuggestions([]);
+          }}
+        >
+          {sug}
+        </div>
+      ))}
+    </div>
+  )}
+</td>
+
+            <td className="border p-1 relative">
+  <input
+    className="w-full border p-1"
+    value={f.v || ""}
+    onChange={(e) => {
+      updateFormula(index, "v", e.target.value);
+      handleAutocomplete(e.target.value, index, "v");
+    }}
+  />
+
+  {activeInput?.i === index && activeInput?.field === "v" && suggestions.length > 0 && (
+    <div className="absolute bg-white border w-full z-10">
+      {suggestions.map((sug, i) => (
+        <div
+          key={i}
+          className="p-1 hover:bg-gray-200 cursor-pointer"
+          onClick={() => {
+            const newValue = (f.v || "") + sug;
+            updateFormula(index, "v", newValue);
+            setSuggestions([]);
+          }}
+        >
+          {sug}
+        </div>
+      ))}
+    </div>
+  )}
+</td>
+
+            <td className="border p-1 relative">
+  <input
+    className="w-full border p-1"
+    value={f.kom || ""}
+    onChange={(e) => {
+      updateFormula(index, "kom", e.target.value);
+      handleAutocomplete(e.target.value, index, "kom");
+    }}
+  />
+
+  {activeInput?.i === index && activeInput?.field === "kom" && suggestions.length > 0 && (
+    <div className="absolute bg-white border w-full z-10">
+      {suggestions.map((sug, i) => (
+        <div
+          key={i}
+          className="p-1 hover:bg-gray-200 cursor-pointer"
+          onClick={() => {
+            const newValue = (f.kom || "") + sug;
+            updateFormula(index, "kom", newValue);
+            setSuggestions([]);
+          }}
+        >
+          {sug}
+        </div>
+      ))}
+    </div>
+  )}
+</td>
+
+            <td className="border p-1 relative">
+  <input
+    className="w-full border p-1"
+    value={f.cena || ""}
+    onChange={(e) => {
+      updateFormula(index, "cena", e.target.value);
+      handleAutocomplete(e.target.value, index, "cena");
+    }}
+  />
+
+  {activeInput?.i === index && activeInput?.field === "cena" && suggestions.length > 0 && (
+    <div className="absolute bg-white border w-full z-10">
+      {suggestions.map((sug, i) => (
+        <div
+          key={i}
+          className="p-1 hover:bg-gray-200 cursor-pointer"
+          onClick={() => {
+            const newValue = (f.cena || "") + sug;
+            updateFormula(index, "cena", newValue);
+            setSuggestions([]);
+          }}
+        >
+          {sug}
+        </div>
+      ))}
+    </div>
+  )}
+</td>
+
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+    <div className="mt-6">
+  <h3 className="font-bold mb-2">Preview</h3>
+
+  <table className="border w-full text-sm">
+    <thead className="bg-gray-100">
+      <tr>
+        <th className="border p-2">Element</th>
+        <th className="border p-2">Š</th>
+        <th className="border p-2">V</th>
+        <th className="border p-2">Kom</th>
+        <th className="border p-2">Cena</th>
+      </tr>
+    </thead>
+
+    <tbody>
+  {(Array.isArray(preview) ? preview : []).map((p, i) => (
+    <tr key={i}>
+      <td className="border p-2">{p.element}</td>
+      <td className="border p-2">{Math.round(p.S || 0)}</td>
+      <td className="border p-2">{Math.round(p.V || 0)}</td>
+      <td className="border p-2">{p.kom || 0}</td>
+      <td className="border p-2">
+        {p.cena ? p.cena.toFixed(2) : "0.00"}
+      </td>
+    </tr>
+  ))}
+</tbody>
+  </table>
+
+
+
+</div>
+
+
+
+
+  </div>
+)}
+
+
+
+
+
+
+
+
+
+  </div>
+)}
+
+
+
+
+
+
+
+    </main>
+  );
+
+}
