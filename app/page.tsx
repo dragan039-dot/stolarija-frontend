@@ -2468,12 +2468,12 @@ if (!loggedUser) {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-100">
 
-  <button
-    onClick={installApp}
-    className="fixed top-3 right-3 z-[9999] bg-blue-600 text-white px-3 py-2 rounded shadow text-sm"
-  >
-    Instaliraj App
-  </button>
+<button
+  onClick={installApp}
+  className="fixed top-3 right-3 z-[9999] bg-blue-600 text-white px-3 py-2 rounded shadow text-sm md:hidden"
+>
+  Instaliraj App
+</button>
 
       <div className="bg-white border rounded p-6 w-full max-w-sm shadow">
         <h1 className="text-2xl font-bold mb-4 text-center">
