@@ -3181,7 +3181,7 @@ return (
       <>
         <button
           onClick={saveOffer}
-          className="bg-blue-100 text-white px-2 py-1 rounded"
+          className="bg-blue-900 text-white px-2 py-1 rounded"
         >
           Sačuvaj
         </button>
