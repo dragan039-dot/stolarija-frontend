@@ -39,7 +39,7 @@ export default function ParamTabs({
         <button
           key={tab}
           onClick={() => setActive(tab)}
-          className={`px-4 py-3 rounded whitespace-nowrap text-sm ${
+          className={`px-5 py-4 rounded whitespace-nowrap text-sm ${
             active === tab
               ? "bg-blue-600 text-white"
               : "bg-gray-200"
