@@ -29,7 +29,7 @@ export default function Tabs({ active, setActive, isAdmin }: Props) {
           <button
             key={t}
             onClick={() => setActive(t)}
-            className={`px-3 py-3 rounded font-semibold transition text-sm ${
+            className={`px-2 py-3 rounded font-semibold transition text-sm ${
               active === t
                 ? "bg-blue-600 text-white"
                 : "bg-gray-200 hover:bg-gray-300"
