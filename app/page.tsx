@@ -3763,7 +3763,7 @@ return (
         <th className="border p-2">Kol.</th>
         <th className="border p-2">Cena</th>
         <th className="border p-2">Ukupno</th>
-        <th className="border p-2">Brisanje</th>
+        <th className="border p-2">Bris.</th>
       </tr>
     </thead>
 
