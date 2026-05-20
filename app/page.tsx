@@ -2433,37 +2433,6 @@ const logout = () => {
 
 
 
-
-
-
-
-const installApp = async () => {
-  if (!deferredPrompt) {
-    alert(
-      "Ako koristite iPhone: kliknite Share pa Add to Home Screen. Ako koristite Android, proverite da li ste otvorili sajt u Chrome browseru."
-    );
-    return;
-  }
-
-  deferredPrompt.prompt();
-
-  await deferredPrompt.userChoice;
-
-  setDeferredPrompt(null);
-  setShowInstallButton(false);
-};
-
-
-
-
-
-
-
-
-
-
-
-
 if (!loggedUser) {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -3846,11 +3815,11 @@ return (
   <table className="border w-full text-sm">
     <thead className="bg-gray-200">
       <tr>
-        <th className="border p-2">Dodatna usluga/proizvod</th>
-        <th className="border p-2">Količina</th>
+        <th className="border p-2">Usluge / proizvodi</th>
+        <th className="border p-2">Kol.</th>
         <th className="border p-2">Cena</th>
         <th className="border p-2">Ukupno</th>
-        <th className="border p-2">Brisanje</th>
+        <th className="border p-2">Obriši</th>
       </tr>
     </thead>
 
