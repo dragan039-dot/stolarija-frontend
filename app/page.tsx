@@ -6289,7 +6289,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     </div>
 {/* MOBILNA REKLAMA */}
 {showMobileAd && (
-  <div className="xl:hidden fixed bottom-0 left-0 right-0 z-[1000] bg-yellow-100 border-t p-2 flex justify-between items-center text-sm">
+  <div className="no-print xl:hidden fixed bottom-0 left-0 right-0 z-[1000] bg-yellow-100 border-t p-2 flex justify-between items-center text-sm">
 
     <div
       className="flex-1 cursor-pointer"
