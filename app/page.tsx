@@ -5674,11 +5674,11 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       </select>
     </div>
 <div className="mb-4 flex flex-col sm:flex-row sm:items-center gap-3 flex justify-center">
-    <table className="border text-sm table-fixed w-auto max-w-full">
+    <table className="border text-sm table<table className="border text-sm w-full max-w-full"></div>-fixed w-auto max-w-full">
       <thead className="bg-gray-200">
         <tr>
-<th className="border p-2 min-w-[260px]">Parametar</th>
-<th className="border p-2 w-[140px]">Vrednost</th>
+<th className="border p-2 w-[65%]">Parametar</th>
+<th className="border p-2 w-[35%]">Vrednost</th>
         </tr>
       </thead>
 
@@ -5777,11 +5777,11 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     </div>
 <div className="mb-4 flex flex-col sm:flex-row sm:items-center gap-3 flex justify-center">
  
-    <table className="border text-sm table-fixed w-auto max-w-full">
+    <table className="border text-sm w-full max-w-full">
       <thead className="bg-gray-200">
         <tr>
-          <th className="border p-2 min-w-[260px]">Element</th>
-          <th className="border p-2 w-[140px]">Cena</th>
+          <th className="border p-2 w-[65%]">Element</th>
+          <th className="border p-2 w-[35%]">Cena</th>
         </tr>
       </thead>
 
