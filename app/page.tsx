@@ -5677,8 +5677,8 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     <table className="border text-sm w-auto max-w-full">
       <thead className="bg-gray-200">
         <tr>
-<th className="border p-2 w-[65%]">Parametar</th>
-<th className="border p-2 w-[35%]">Vrednost</th>
+<th className="border p-2 w-[75%]">Parametar</th>
+<th className="border p-2 w-[25%]">Vrednost</th>
         </tr>
       </thead>
 
@@ -5780,8 +5780,8 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     <table className="border text-sm w-auto max-w-full">
       <thead className="bg-gray-200">
         <tr>
-          <th className="border p-2 w-[65%]">Element</th>
-          <th className="border p-2 w-[35%]">Cena</th>
+          <th className="border p-2 w-[75%]">Element</th>
+          <th className="border p-2 w-[25%]">Cena</th>
         </tr>
       </thead>
 
