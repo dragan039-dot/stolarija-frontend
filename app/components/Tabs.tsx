@@ -21,23 +21,21 @@ export default function Tabs({ active, setActive, isAdmin }: Props) {
     : baseTabs;
 
   return (
-    <div className="w-full bg-white border-b py-2">
-      <div className="w-full overflow-x-auto">
-        <div className="flex gap-1 sm:gap-2 w-max mx-auto px-1">
-          {tabs.map((t) => (
-            <button
-              key={t}
-              onClick={() => setActive(t)}
-              className={`px-2 sm:px-4 py-2 rounded font-semibold transition whitespace-nowrap text-xs sm:text-sm ${
-                active === t
-                  ? "bg-blue-600 text-white"
-                  : "bg-gray-200 hover:bg-gray-300"
-              }`}
-            >
-              {t}
-            </button>
-          ))}
-        </div>
+    <div className="bg-white border-b mb-2 py-2">
+      <div className="grid grid-cols-3 gap-1 sm:gap-2">
+        {tabs.map((t) => (
+          <button
+            key={t}
+            onClick={() => setActive(t)}
+            className={`px-2 sm:px-3 py-2 rounded font-semibold transition text-[11px] sm:text-sm ${
+              active === t
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 hover:bg-gray-300"
+            }`}
+          >
+            {t}
+          </button>
+        ))}
       </div>
     </div>
   );
