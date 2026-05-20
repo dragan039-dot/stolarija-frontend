@@ -3759,8 +3759,8 @@ return (
   <table className="border w-full text-sm">
     <thead className="bg-gray-200">
       <tr>
-        <th className="border p-2">Dodatna usluga/proizvod</th>
-        <th className="border p-2">Količina</th>
+        <th className="border p-2">Usluge / proizvodi</th>
+        <th className="border p-2">Kol.</th>
         <th className="border p-2">Cena</th>
         <th className="border p-2">Ukupno</th>
         <th className="border p-2">Brisanje</th>
