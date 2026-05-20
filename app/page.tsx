@@ -5777,7 +5777,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     </div>
 <div className="mb-4 flex flex-col sm:flex-row sm:items-center gap-3 flex justify-center">
  
-    <table className="border text-sm w-full max-w-full">
+    <table className="border text-sm w-auto max-w-full">
       <thead className="bg-gray-200">
         <tr>
           <th className="border p-2 w-[65%]">Element</th>
