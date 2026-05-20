@@ -33,12 +33,13 @@ export default function ParamTabs({
       );
 
   return (
-    <div className="flex gap-2 w-max min-w-full">
+  <div className="w-full overflow-x-auto">
+    <div className="flex gap-2 w-max px-1">
       {tabs.map((tab) => (
         <button
           key={tab}
           onClick={() => setActive(tab)}
-          className={`px-4 py-2 rounded whitespace-nowrap ${
+          className={`px-3 py-2 rounded whitespace-nowrap text-sm ${
             active === tab
               ? "bg-blue-600 text-white"
               : "bg-gray-200"
@@ -48,5 +49,6 @@ export default function ParamTabs({
         </button>
       ))}
     </div>
-  );
+  </div>
+);
 }
