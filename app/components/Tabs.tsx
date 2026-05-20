@@ -22,12 +22,14 @@ export default function Tabs({ active, setActive, isAdmin }: Props) {
 
   return (
     <div className="bg-white border-b mb-2 py-2">
-      <div className="grid grid-cols-3 gap-1 sm:gap-2">
+
+      {/* Telefon */}
+      <div className="grid grid-cols-3 gap-2 sm:hidden">
         {tabs.map((t) => (
           <button
             key={t}
             onClick={() => setActive(t)}
-            className={`px-2 sm:px-3 py-2 rounded font-semibold transition text-[11px] sm:text-sm ${
+            className={`px-3 py-3 rounded font-semibold transition text-sm ${
               active === t
                 ? "bg-blue-600 text-white"
                 : "bg-gray-200 hover:bg-gray-300"
@@ -37,6 +39,24 @@ export default function Tabs({ active, setActive, isAdmin }: Props) {
           </button>
         ))}
       </div>
+
+      {/* Računar */}
+      <div className="hidden sm:flex justify-center gap-2 flex-wrap">
+        {tabs.map((t) => (
+          <button
+            key={t}
+            onClick={() => setActive(t)}
+            className={`px-5 py-3 rounded font-semibold transition text-sm whitespace-nowrap ${
+              active === t
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200 hover:bg-gray-300"
+            }`}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+
     </div>
   );
 }
