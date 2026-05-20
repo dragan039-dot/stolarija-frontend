@@ -225,8 +225,6 @@ const [helpTexts, setHelpTexts] = useState<any[]>([]);
 
 const [adStats, setAdStats] = useState<any[]>([]);
 
-const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
-const [showInstallButton, setShowInstallButton] = useState(false);
 
 
 const addExtraItem = () => {
@@ -2420,23 +2418,9 @@ const logout = () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 if (!loggedUser) {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-100">
-
       <div className="bg-white border rounded p-6 w-full max-w-sm shadow">
         <h1 className="text-2xl font-bold mb-4 text-center">
           Prijava
@@ -2482,29 +2466,6 @@ if (!loggedUser) {
     </main>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 const isAdmin = loggedUser?.role === "ADMIN";
@@ -3087,23 +3048,6 @@ const resetAdClicks = async (key: string) => {
 const isVideoFile = (path: string) => {
   return path.endsWith(".mp4") || path.endsWith(".webm");
 };
-
-
-useEffect(() => {
-  const handler = (e: any) => {
-    e.preventDefault();
-    setDeferredPrompt(e);
-    setShowInstallButton(true);
-  };
-
-  window.addEventListener("beforeinstallprompt", handler);
-
-  return () => {
-    window.removeEventListener("beforeinstallprompt", handler);
-  };
-}, []);
-
-
 
 
 
@@ -3815,11 +3759,11 @@ return (
   <table className="border w-full text-sm">
     <thead className="bg-gray-200">
       <tr>
-        <th className="border p-2">Usluge / proizvodi</th>
-        <th className="border p-2">Kol.</th>
+        <th className="border p-2">Dodatna usluga/proizvod</th>
+        <th className="border p-2">Količina</th>
         <th className="border p-2">Cena</th>
         <th className="border p-2">Ukupno</th>
-        <th className="border p-2">Obriši</th>
+        <th className="border p-2">Brisanje</th>
       </tr>
     </thead>
 
