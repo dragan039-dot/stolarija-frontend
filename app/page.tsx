@@ -3198,7 +3198,7 @@ return (
     {activeTab === "Radna lista" && (
       <button
         onClick={() => printPdf("worklist")}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        className="bg-blue-900 text-white px-2 py-1 rounded"
       >
         Sačuvaj u PDF-u
       </button>
@@ -3207,56 +3207,56 @@ return (
     {activeTab === "Ponude" && (
       <button
         onClick={() => printPdf("proposal")}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
+        className="bg-blue-900 text-white px-2 py-1 rounded"
       >
         Sačuvaj u PDF-u
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Firma" && (
-      <button onClick={saveFirma} className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button onClick={saveFirma} className="bg-blue-900 text-white px-2 py-1 rounded">
         Sačuvaj firmu
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Ispuna" && (
-      <button onClick={saveIspune} className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button onClick={saveIspune} className="bg-blue-900 text-white px-2 py-1 rounded">
         Sačuvaj ispune
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Profil" && (
-      <button onClick={saveProfili} className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button onClick={saveProfili} className="bg-blue-900 text-white px-2 py-1 rounded">
         Sačuvaj profile
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Okov" && (
-      <button onClick={saveOkovi} className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button onClick={saveOkovi} className="bg-blue-900 text-white px-2 py-1 rounded">
         Sačuvaj okov
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Valuta" && (
-      <button onClick={saveValute} className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button onClick={saveValute} className="bg-blue-900 text-white px-2 py-1 rounded">
         Sačuvaj valute
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Tehnicki" && (
-      <button onClick={saveAllTehnicki} className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button onClick={saveAllTehnicki} className="bg-blue-900 text-white px-2 py-1 rounded">
         Sačuvaj tehničke
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Cene" && (
-      <button onClick={saveAllPrices} className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button onClick={saveAllPrices} className="bg-blue-900 text-white px-2 py-1 rounded">
         Sačuvaj cene
       </button>
     )}
 
     {activeTab === "Parametri" && isAdmin && paramTab === "Formule" && (
-      <button onClick={saveFormule} className="bg-blue-600 text-white px-4 py-2 rounded">
+      <button onClick={saveFormule} className="bg-blue-900 text-white px-2 py-1 rounded">
         Sačuvaj formule
       </button>
     )}
@@ -3265,7 +3265,7 @@ return (
 
   <button
     onClick={saveAds}
-    className="bg-blue-600 text-white px-4 py-2 rounded"
+    className="bg-blue-900 text-white px-2 py-1 rounded"
   >
     Sačuvaj reklame
   </button>
@@ -4585,7 +4585,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
       <button
         onClick={saveHelpTexts}
-        className="bg-green-700 text-white px-4 py-2 rounded"
+        className="bg-green-900 text-white px-2 py-1 rounded"
       >
         Sačuvaj
       </button>
@@ -4846,7 +4846,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
   <button
     onClick={() => adminChangeUserPassword(u.id)}
-    className="bg-blue-600 text-white px-2 py-1 rounded ml-2"
+    className="bg-blue-900 text-white px-2 py-1 rounded ml-2"
   >
     Sačuvaj
   </button>
@@ -4866,7 +4866,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 <td className="border p-2 text-center">
   <button
     onClick={() => updateAdminUser(u)}
-    className="bg-blue-600 text-white px-2 py-1 rounded"
+    className="bg-blue-900 text-white px-2 py-1 rounded"
   >
     Sačuvaj
   </button>
