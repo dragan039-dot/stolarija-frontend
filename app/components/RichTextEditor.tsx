@@ -136,6 +136,48 @@ const uploadImage = async (
 };
 
 
+const uploadVideo = async (
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
+  if (!e.target.files?.length) return;
+
+  const file = e.target.files[0];
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const res = await fetch(`${apiUrl}/instruction/upload`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+  if (!res.ok) {
+    alert("Upload video zapisa nije uspeo");
+    return;
+  }
+
+  const data = await res.json();
+
+  const videoHtml = `
+    <video controls style="max-width:100%; margin:10px 0;">
+      <source src="${apiUrl}${data.path}" />
+      Vaš browser ne podržava video.
+    </video>
+  `;
+
+  editor
+    .chain()
+    .focus()
+    .insertContent(videoHtml)
+    .run();
+
+  e.target.value = "";
+};
+
+
   return (
     <div className="border rounded overflow-hidden">
 
@@ -280,6 +322,16 @@ type="button"
     accept=".jpg,.jpeg,.png,.webp,.gif"
     className="hidden"
     onChange={uploadImage}
+  />
+</label>
+
+<label className="px-2 py-1 border rounded cursor-pointer bg-white">
+  Upload video
+  <input
+    type="file"
+    accept=".mp4,.webm"
+    className="hidden"
+    onChange={uploadVideo}
   />
 </label>
 
