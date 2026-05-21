@@ -225,6 +225,7 @@ const [helpTexts, setHelpTexts] = useState<any[]>([]);
 
 const [adStats, setAdStats] = useState<any[]>([]);
 
+const [instructionContent, setInstructionContent] = useState("");
 
 
 const addExtraItem = () => {
@@ -437,6 +438,7 @@ useEffect(() => {
     loadHelpTexts();
     loadAds();
     loadAdStats();
+    loadInstruction();
   }
 }, [loggedUser?.id]);
 
@@ -3051,6 +3053,44 @@ const isVideoFile = (path: string) => {
 
 
 
+const loadInstruction = async () => {
+  try {
+    const res = await apiFetch(`${API_URL}/instruction`, {
+      headers: authHeaders(),
+    });
+
+    if (!res.ok) return;
+
+    const data = await res.json();
+    setInstructionContent(data.content || "");
+  } catch (err) {
+    console.error("Greška pri učitavanju uputstva:", err);
+  }
+};
+
+const saveInstruction = async () => {
+  try {
+    const res = await apiFetch(`${API_URL}/instruction`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({
+        content: instructionContent,
+      }),
+    });
+
+    if (!res.ok) {
+      alert("Greška pri čuvanju uputstva");
+      return;
+    }
+
+    alert("Uputstvo je sačuvano");
+    loadInstruction();
+  } catch (err) {
+    alert("Greška pri čuvanju uputstva");
+  }
+};
+
+
 
 
 
@@ -4560,11 +4600,18 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
 {activeTab === "Uputstvo" && (
   <div className="p-4">
-    <h1 className="text-3xl font-bold mb-4">UPUTSTVO</h1>
+    <h1 className="text-2xl font-bold mb-4">
+      Uputstvo
+    </h1>
 
-    <div className="border rounded p-6 bg-white">
-      Uputstvo za korišćenje aplikacije.
-    </div>
+    <div
+      className="bg-white border rounded p-4 prose max-w-none"
+      dangerouslySetInnerHTML={{
+        __html:
+          instructionContent ||
+          "<p>Uputstvo još nije uneto.</p>",
+      }}
+    />
   </div>
 )}
 
@@ -5993,6 +6040,44 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
 
 
 
+
+
+
+
+{paramTab === "Uređivanje uputstva" && isAdmin && (
+  <div className="p-4">
+    <h2 className="text-2xl font-bold mb-4">
+      Uređivanje uputstva
+    </h2>
+
+    <textarea
+      className="w-full min-h-[300px] border p-3 font-mono text-sm"
+      value={instructionContent}
+      onChange={(e) => setInstructionContent(e.target.value)}
+      placeholder="Ovde unesite HTML sadržaj uputstva..."
+    />
+
+    <button
+      onClick={saveInstruction}
+      className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
+    >
+      Sačuvaj uputstvo
+    </button>
+
+    <h3 className="text-xl font-bold mt-6 mb-2">
+      Pregled
+    </h3>
+
+    <div
+      className="bg-white border rounded p-4"
+      dangerouslySetInnerHTML={{
+        __html:
+          instructionContent ||
+          "<p>Uputstvo još nije uneto.</p>",
+      }}
+    />
+  </div>
+)}
 
 
 

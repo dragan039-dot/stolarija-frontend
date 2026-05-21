@@ -16,6 +16,7 @@ const allTabs = [
   "Cene",
   "Formule",
   "Reklame",
+  "Uređivanje uputstva",
 ];
 
 export default function ParamTabs({
@@ -29,7 +30,8 @@ export default function ParamTabs({
     : allTabs.filter(
         (t) =>
           t !== "Formule" &&
-          t !== "Reklame"
+          t !== "Reklame" &&
+          t !== "Uređivanje uputstva"
       );
 
   return (
