@@ -127,9 +127,12 @@ const uploadImage = async (
   editor
     .chain()
     .focus()
-    .setImage({
-      src: `${apiUrl}${data.path}`,
-    })
+    .insertContent(`
+  <img
+    src="${apiUrl}${data.path}"
+    style="width:50%; max-width:100%; display:block; margin:10px auto;"
+  />
+`)
     .run();
 
   e.target.value = "";
@@ -162,7 +165,7 @@ const uploadVideo = async (
   const data = await res.json();
 
   const videoHtml = `
-    <video controls style="max-width:100%; margin:10px 0;">
+    <video controls style="width:70%; max-width:100%; display:block; margin:10px auto;">
       <source src="${apiUrl}${data.path}" />
       Vaš browser ne podržava video.
     </video>
@@ -176,6 +179,41 @@ const uploadVideo = async (
 
   e.target.value = "";
 };
+
+
+const insertYouTube = () => {
+  const url = window.prompt("Unesi YouTube link");
+
+  if (!url) return;
+
+  let videoId = "";
+
+  if (url.includes("watch?v=")) {
+    videoId = url.split("watch?v=")[1].split("&")[0];
+  } else if (url.includes("youtu.be/")) {
+    videoId = url.split("youtu.be/")[1].split("?")[0];
+  }
+
+  if (!videoId) {
+    alert("Neispravan YouTube link");
+    return;
+  }
+
+  const html = `
+    <div style="width:100%; max-width:700px; margin:15px auto;">
+      <iframe
+        width="100%"
+        height="400"
+        src="https://www.youtube.com/embed/${videoId}"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    </div>
+  `;
+
+  editor.chain().focus().insertContent(html).run();
+};
+
 
 
   return (
@@ -334,6 +372,15 @@ type="button"
     onChange={uploadVideo}
   />
 </label>
+
+
+<button
+  type="button"
+  onClick={insertYouTube}
+  className="px-2 py-1 border rounded"
+>
+  YouTube
+</button>
 
         <select
           onChange={(e) =>
