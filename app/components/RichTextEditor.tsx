@@ -82,22 +82,17 @@ export default function RichTextEditor({
       .run();
   };
 
-  const setFontSize = (
-    size: string
-  ) => {
+  const setFontSize = (size: string) => {
+  if (!size) return;
 
-    editor
-      .chain()
-      .focus()
-      .setMark(
-        "textStyle",
-        {
-          style: `font-size:${size}`,
-        }
-      )
-      .run();
-
-  };
+  editor
+    .chain()
+    .focus()
+    .setMark("textStyle", {
+      style: `font-size: ${size}`,
+    })
+    .run();
+};
 
   return (
     <div className="border rounded overflow-hidden">
@@ -107,6 +102,7 @@ export default function RichTextEditor({
       <div className="flex flex-wrap gap-2 p-2 border-b bg-gray-100">
 
         <button
+type="button"
           onClick={() =>
             editor.chain().focus().toggleBold().run()
           }
@@ -116,6 +112,7 @@ export default function RichTextEditor({
         </button>
 
         <button
+type="button"
           onClick={() =>
             editor.chain().focus().toggleItalic().run()
           }
@@ -125,6 +122,7 @@ export default function RichTextEditor({
         </button>
 
         <button
+type="button"
           onClick={() =>
             editor.chain().focus().toggleUnderline().run()
           }
@@ -134,6 +132,7 @@ export default function RichTextEditor({
         </button>
 
         <button
+type="button"
           onClick={() =>
             editor.chain().focus().toggleHighlight().run()
           }
@@ -143,6 +142,7 @@ export default function RichTextEditor({
         </button>
 
         <button
+type="button"
           onClick={() =>
             editor.chain().focus().setTextAlign("left").run()
           }
@@ -152,6 +152,7 @@ export default function RichTextEditor({
         </button>
 
         <button
+type="button"
           onClick={() =>
             editor.chain().focus().setTextAlign("center").run()
           }
@@ -161,6 +162,7 @@ export default function RichTextEditor({
         </button>
 
         <button
+type="button"
           onClick={() =>
             editor.chain().focus().setTextAlign("right").run()
           }
@@ -170,6 +172,7 @@ export default function RichTextEditor({
         </button>
 
         <button
+type="button"
           onClick={() =>
             editor.chain().focus().toggleBulletList().run()
           }
@@ -179,6 +182,7 @@ export default function RichTextEditor({
         </button>
 
         <button
+type="button"
           onClick={() =>
             editor.chain().focus().toggleOrderedList().run()
           }
@@ -188,6 +192,7 @@ export default function RichTextEditor({
         </button>
 
         <button
+type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({
               level: 1,
@@ -199,6 +204,7 @@ export default function RichTextEditor({
         </button>
 
         <button
+type="button"
           onClick={() =>
             editor.chain().focus().toggleHeading({
               level: 2,
@@ -210,6 +216,7 @@ export default function RichTextEditor({
         </button>
 
         <button
+type="button"
           onClick={addLink}
           className="px-2 py-1 border rounded"
         >
@@ -217,6 +224,7 @@ export default function RichTextEditor({
         </button>
 
         <button
+type="button"
           onClick={addImage}
           className="px-2 py-1 border rounded"
         >
