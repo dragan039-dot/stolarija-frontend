@@ -13,11 +13,15 @@ import Highlight from "@tiptap/extension-highlight";
 type Props = {
   content: string;
   onChange: (html: string) => void;
+  apiUrl: string;
+  token: string | null;
 };
 
 export default function RichTextEditor({
   content,
   onChange,
+  apiUrl,
+  token,
 }: Props) {
 
   const editor = useEditor({
@@ -93,6 +97,44 @@ export default function RichTextEditor({
     })
     .run();
 };
+
+
+const uploadImage = async (
+  e: React.ChangeEvent<HTMLInputElement>
+) => {
+  if (!e.target.files?.length) return;
+
+  const file = e.target.files[0];
+
+  const formData = new FormData();
+  formData.append("file", file);
+
+  const res = await fetch(`${apiUrl}/instruction/upload`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+  if (!res.ok) {
+    alert("Upload slike nije uspeo");
+    return;
+  }
+
+  const data = await res.json();
+
+  editor
+    .chain()
+    .focus()
+    .setImage({
+      src: `${apiUrl}${data.path}`,
+    })
+    .run();
+
+  e.target.value = "";
+};
+
 
   return (
     <div className="border rounded overflow-hidden">
@@ -230,6 +272,16 @@ type="button"
         >
           Slika
         </button>
+
+<label className="px-2 py-1 border rounded cursor-pointer bg-white">
+  Upload slike
+  <input
+    type="file"
+    accept=".jpg,.jpeg,.png,.webp,.gif"
+    className="hidden"
+    onChange={uploadImage}
+  />
+</label>
 
         <select
           onChange={(e) =>

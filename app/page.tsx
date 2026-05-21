@@ -6051,6 +6051,8 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     <RichTextEditor
   content={instructionContent}
   onChange={setInstructionContent}
+  apiUrl={API_URL}
+  token={typeof window !== "undefined" ? localStorage.getItem("token") : null}
 />
 
     <button
