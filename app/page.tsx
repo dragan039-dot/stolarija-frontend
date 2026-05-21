@@ -19,9 +19,7 @@ import { valutaData as defaultValuta } from "./data/valuta";
 
 
 import { getCena, getTehnicki, getOkovCena, getIspunaCena } from "./utils/calc";
-
-
-
+import RichTextEditor from "./components/RichTextEditor";
 
 
 
@@ -6050,12 +6048,10 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       Uređivanje uputstva
     </h2>
 
-    <textarea
-      className="w-full min-h-[300px] border p-3 font-mono text-sm"
-      value={instructionContent}
-      onChange={(e) => setInstructionContent(e.target.value)}
-      placeholder="Ovde unesite HTML sadržaj uputstva..."
-    />
+    <RichTextEditor
+  content={instructionContent}
+  onChange={setInstructionContent}
+/>
 
     <button
       onClick={saveInstruction}
