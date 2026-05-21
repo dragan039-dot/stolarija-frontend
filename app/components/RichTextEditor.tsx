@@ -6,6 +6,9 @@ import Underline from "@tiptap/extension-underline";
 import TextAlign from "@tiptap/extension-text-align";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
+import { TextStyle } from "@tiptap/extension-text-style";
+import Color from "@tiptap/extension-color";
+import Highlight from "@tiptap/extension-highlight";
 
 type Props = {
   content: string;
@@ -16,17 +19,24 @@ export default function RichTextEditor({
   content,
   onChange,
 }: Props) {
+
   const editor = useEditor({
     extensions: [
       StarterKit,
 
       Underline,
 
+      TextStyle,
+
+      Color,
+
+      Highlight,
+
+      Image,
+
       Link.configure({
         openOnClick: false,
       }),
-
-      Image,
 
       TextAlign.configure({
         types: ["heading", "paragraph"],
@@ -42,10 +52,58 @@ export default function RichTextEditor({
 
   if (!editor) return null;
 
+  const addLink = () => {
+    const url = window.prompt("Unesi link");
+
+    if (!url) return;
+
+    editor
+      .chain()
+      .focus()
+      .setLink({
+        href: url,
+      })
+      .run();
+  };
+
+  const addImage = () => {
+    const url = window.prompt(
+      "Unesi URL slike"
+    );
+
+    if (!url) return;
+
+    editor
+      .chain()
+      .focus()
+      .setImage({
+        src: url,
+      })
+      .run();
+  };
+
+  const setFontSize = (
+    size: string
+  ) => {
+
+    editor
+      .chain()
+      .focus()
+      .setMark(
+        "textStyle",
+        {
+          style: `font-size:${size}`,
+        }
+      )
+      .run();
+
+  };
+
   return (
     <div className="border rounded overflow-hidden">
 
-      {/* Toolbar */}
+      {/* TOOLBAR */}
+
       <div className="flex flex-wrap gap-2 p-2 border-b bg-gray-100">
 
         <button
@@ -73,6 +131,15 @@ export default function RichTextEditor({
           className="px-2 py-1 border rounded underline"
         >
           U
+        </button>
+
+        <button
+          onClick={() =>
+            editor.chain().focus().toggleHighlight().run()
+          }
+          className="px-2 py-1 border rounded"
+        >
+          Marker
         </button>
 
         <button
@@ -113,6 +180,26 @@ export default function RichTextEditor({
 
         <button
           onClick={() =>
+            editor.chain().focus().toggleOrderedList().run()
+          }
+          className="px-2 py-1 border rounded"
+        >
+          1. Lista
+        </button>
+
+        <button
+          onClick={() =>
+            editor.chain().focus().toggleHeading({
+              level: 1,
+            }).run()
+          }
+          className="px-2 py-1 border rounded"
+        >
+          H1
+        </button>
+
+        <button
+          onClick={() =>
             editor.chain().focus().toggleHeading({
               level: 2,
             }).run()
@@ -122,9 +209,62 @@ export default function RichTextEditor({
           H2
         </button>
 
+        <button
+          onClick={addLink}
+          className="px-2 py-1 border rounded"
+        >
+          Link
+        </button>
+
+        <button
+          onClick={addImage}
+          className="px-2 py-1 border rounded"
+        >
+          Slika
+        </button>
+
+        <select
+          onChange={(e) =>
+            setFontSize(e.target.value)
+          }
+          className="border rounded px-2"
+        >
+          <option>
+            Veličina
+          </option>
+
+          <option value="12px">
+            12
+          </option>
+
+          <option value="14px">
+            14
+          </option>
+
+          <option value="16px">
+            16
+          </option>
+
+          <option value="18px">
+            18
+          </option>
+
+          <option value="22px">
+            22
+          </option>
+
+          <option value="28px">
+            28
+          </option>
+
+          <option value="36px">
+            36
+          </option>
+
+        </select>
+
       </div>
 
-      {/* Editor */}
       <EditorContent
         editor={editor}
         className="min-h-[300px] p-4 bg-white"
