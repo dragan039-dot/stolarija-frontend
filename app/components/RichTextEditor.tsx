@@ -190,7 +190,9 @@ const insertYouTube = () => {
 
   if (url.includes("watch?v=")) {
     videoId = url.split("watch?v=")[1].split("&")[0];
-  } else if (url.includes("youtu.be/")) {
+  }
+
+  if (url.includes("youtu.be/")) {
     videoId = url.split("youtu.be/")[1].split("?")[0];
   }
 
@@ -199,19 +201,17 @@ const insertYouTube = () => {
     return;
   }
 
-  const html = `
-    <div style="width:100%; max-width:700px; margin:15px auto;">
-      <iframe
-        width="100%"
-        height="400"
-        src="https://www.youtube.com/embed/${videoId}"
-        frameborder="0"
-        allowfullscreen
-      ></iframe>
-    </div>
-  `;
-
-  editor.chain().focus().insertContent(html).run();
+  editor
+    .chain()
+    .focus()
+    .insertContent(`
+      <p>
+        <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
+          Pogledaj YouTube video
+        </a>
+      </p>
+    `)
+    .run();
 };
 
 
