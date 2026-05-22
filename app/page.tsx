@@ -231,6 +231,16 @@ const [adStats, setAdStats] = useState<any[]>([]);
 
 const [instructionContent, setInstructionContent] = useState("");
 
+const [selectedLanguageId, setSelectedLanguageId] = useState("");
+
+
+
+
+
+
+
+
+
 
 const addExtraItem = () => {
   if (extraItems.length >= 30) {
@@ -3147,6 +3157,52 @@ const saveTranslations = async () => {
 };
 
 
+const getTranslationValue = (key: string, lang: any) => {
+  const item = translations.find(
+    (t: any) =>
+      t.key === key &&
+      Number(t.languageId) === Number(lang.id)
+  );
+
+  return item?.value || "";
+};
+
+const setTranslationValue = (
+  key: string,
+  lang: any,
+  value: string
+) => {
+  if (!lang.id) {
+    alert("Prvo sačuvaj jezike, pa onda unosi prevode.");
+    return;
+  }
+
+  setTranslations((prev: any[]) => {
+    const copy = [...prev];
+
+    const index = copy.findIndex(
+      (t: any) =>
+        t.key === key &&
+        Number(t.languageId) === Number(lang.id)
+    );
+
+    if (index >= 0) {
+      copy[index] = {
+        ...copy[index],
+        value,
+      };
+    } else {
+      copy.push({
+        key,
+        languageId: lang.id,
+        value,
+      });
+    }
+
+    return copy;
+  });
+};
+
 
 
 
@@ -3271,12 +3327,39 @@ return (
             Korisnik: <strong>{loggedUser.username}</strong> ({loggedUser.role})
           </span>
 
+
+
+          <select
+  value={selectedLanguageId}
+  onChange={(e) => setSelectedLanguageId(e.target.value)}
+  className="border p-1 rounded"
+>
+  <option value="">SR</option>
+
+  {languages
+    .filter((l: any) => l.enabled)
+    .map((l: any) => (
+      <option key={l.id} value={l.id}>
+        {l.name}
+      </option>
+    ))}
+</select>
+
+
+
+
           <button
             onClick={logout}
             className="bg-gray-700 text-white px-3 py-1 rounded"
           >
             Odjavi se
           </button>
+
+
+          
+
+
+
         </div>
 
 
@@ -6224,17 +6307,12 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
 
                 <label className="flex items-center gap-1 justify-center text-xs">
                   <input
-                    type="checkbox"
-                    checked={!!lang.enabled}
-                    onChange={(e) => {
-                      const copy = [...languages];
-                      copy[index] = {
-                        ...copy[index],
-                        enabled: e.target.checked,
-                      };
-                      setLanguages(copy);
-                    }}
-                  />
+  className="border p-1 w-full"
+  value={getTranslationValue(key, lang)}
+  onChange={(e) =>
+    setTranslationValue(key, lang, e.target.value)
+  }
+/>
                   prikaži
                 </label>
               </th>
