@@ -3120,14 +3120,19 @@ const loadTranslations = async () => {
 
 
 const saveLanguages = async () => {
-  await apiFetch(`${API_URL}/translation/languages`, {
+  const res = await apiFetch(`${API_URL}/translation/languages`, {
     method: "POST",
     headers: authHeaders(),
     body: JSON.stringify(languages),
   });
 
+  if (!res.ok) {
+    alert("Greška pri čuvanju jezika");
+    return;
+  }
+
   alert("Jezici su sačuvani");
-  loadLanguages();
+  await loadLanguages();
 };
 
 const saveTranslations = async () => {
