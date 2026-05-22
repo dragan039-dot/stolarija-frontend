@@ -140,6 +140,12 @@ const [adminPasswords, setAdminPasswords] = useState<Record<number, string>>({})
 
 const [selectedProfilId, setSelectedProfilId] = useState<string>("");
 
+const [languages, setLanguages] = useState<any[]>([]);
+const [translations, setTranslations] = useState<any[]>([]);
+
+
+
+
 
 
 const safeProfili = Array.isArray(params.profil)
@@ -437,6 +443,8 @@ useEffect(() => {
     loadAds();
     loadAdStats();
     loadInstruction();
+    loadLanguages();
+    loadTranslations();
   }
 }, [loggedUser?.id]);
 
@@ -3088,6 +3096,51 @@ const saveInstruction = async () => {
   }
 };
 
+const loadLanguages = async () => {
+  const res = await apiFetch(`${API_URL}/translation/languages`, {
+    headers: authHeaders(),
+  });
+
+  if (!res.ok) return;
+
+  const data = await res.json();
+  setLanguages(Array.isArray(data) ? data : []);
+};
+
+const loadTranslations = async () => {
+  const res = await apiFetch(`${API_URL}/translation`, {
+    headers: authHeaders(),
+  });
+
+  if (!res.ok) return;
+
+  const data = await res.json();
+  setTranslations(Array.isArray(data) ? data : []);
+};
+
+
+const saveLanguages = async () => {
+  await apiFetch(`${API_URL}/translation/languages`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(languages),
+  });
+
+  alert("Jezici su sačuvani");
+  loadLanguages();
+};
+
+const saveTranslations = async () => {
+  await apiFetch(`${API_URL}/translation`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(translations),
+  });
+
+  alert("Prevodi su sačuvani");
+  loadTranslations();
+};
+
 
 
 
@@ -3104,6 +3157,29 @@ console.log("PAGE PROFILI:", profili);
 console.log("FORMA PROFILI:", profili);
 
 console.log("PROFILI STATE:", profili);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -6078,6 +6154,168 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
 )}
 
 
+
+
+
+
+{paramTab === "Prevodi" && isAdmin && (
+  <div className="p-4">
+    <h2 className="text-2xl font-bold mb-4">Prevodi</h2>
+
+    <div className="mb-4 flex gap-2 flex-wrap">
+      <button
+        onClick={() =>
+          setLanguages([
+            ...languages,
+            {
+              code: `LANG${languages.length + 1}`,
+              name: `Jezik ${languages.length + 1}`,
+              enabled: false,
+              sortOrder: languages.length + 1,
+            },
+          ])
+        }
+        className="bg-green-600 text-white px-4 py-2 rounded"
+      >
+        Dodaj jezik
+      </button>
+
+      <button
+        onClick={saveLanguages}
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        Sačuvaj jezike
+      </button>
+
+      <button
+        onClick={saveTranslations}
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        Sačuvaj prevode
+      </button>
+    </div>
+
+    <div className="overflow-x-auto border">
+      <table className="border-collapse text-sm min-w-[900px]">
+        <thead className="bg-gray-200">
+          <tr>
+            <th className="border p-2 min-w-[220px]">Tekst na sajtu</th>
+
+            {languages.map((lang, index) => (
+              <th key={index} className="border p-2 min-w-[180px]">
+                <input
+                  className="border p-1 w-full mb-1"
+                  value={lang.name || ""}
+                  onChange={(e) => {
+                    const copy = [...languages];
+                    copy[index] = {
+                      ...copy[index],
+                      name: e.target.value,
+                      code: e.target.value,
+                    };
+                    setLanguages(copy);
+                  }}
+                />
+
+                <label className="flex items-center gap-1 justify-center text-xs">
+                  <input
+                    type="checkbox"
+                    checked={!!lang.enabled}
+                    onChange={(e) => {
+                      const copy = [...languages];
+                      copy[index] = {
+                        ...copy[index],
+                        enabled: e.target.checked,
+                      };
+                      setLanguages(copy);
+                    }}
+                  />
+                  prikaži
+                </label>
+              </th>
+            ))}
+          </tr>
+        </thead>
+
+        <tbody>
+          {[
+            "Forma",
+            "Ponude",
+            "Radna lista",
+            "Parametri",
+            "Kupac",
+            "Adresa",
+            "Telefon",
+            "PIB",
+            "Matični",
+            "Datum",
+            "Vrsta ponude",
+            "Izaberi valutu",
+            "Popust",
+            "Napomena",
+            "Sačuvaj",
+            "Obriši formu",
+            "Profil",
+            "Ispuna",
+            "Okov",
+            "Valuta",
+            "Tehnički",
+            "Cene",
+            "Formule",
+            "Uputstvo",
+          ].map((key) => (
+            <tr key={key}>
+              <td className="border p-2 font-semibold bg-gray-50">
+                {key}
+              </td>
+
+              {languages.map((lang) => {
+                const item = translations.find(
+                  (t: any) =>
+                    t.key === key &&
+                    Number(t.languageId) === Number(lang.id)
+                );
+
+                return (
+                  <td key={`${key}-${lang.id || lang.code}`} className="border p-2">
+                    <input
+                      className="border p-1 w-full"
+                      value={item?.value || ""}
+                      onChange={(e) => {
+                        const copy = [...translations];
+
+                        const index = copy.findIndex(
+                          (t: any) =>
+                            t.key === key &&
+                            Number(t.languageId) === Number(lang.id)
+                        );
+
+                        if (index >= 0) {
+                          copy[index] = {
+                            ...copy[index],
+                            value: e.target.value,
+                          };
+                        } else if (lang.id) {
+                          copy.push({
+                            key,
+                            languageId: lang.id,
+                            value: e.target.value,
+                          });
+                        }
+
+                        setTranslations(copy);
+                      }}
+                    />
+                  </td>
+                );
+              })}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}
 
 
 

@@ -17,6 +17,7 @@ const allTabs = [
   "Formule",
   "Reklame",
   "Uređivanje uputstva",
+  "Prevodi",
 ];
 
 export default function ParamTabs({
