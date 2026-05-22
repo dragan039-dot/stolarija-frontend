@@ -6307,12 +6307,17 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
 
                 <label className="flex items-center gap-1 justify-center text-xs">
                   <input
-  className="border p-1 w-full"
-  value={getTranslationValue(key, lang)}
-  onChange={(e) =>
-    setTranslationValue(key, lang, e.target.value)
-  }
-/>
+                    type="checkbox"
+                    checked={!!lang.enabled}
+                    onChange={(e) => {
+                      const copy = [...languages];
+                      copy[index] = {
+                        ...copy[index],
+                        enabled: e.target.checked,
+                      };
+                      setLanguages(copy);
+                    }}
+                  />
                   prikaži
                 </label>
               </th>
@@ -6362,33 +6367,12 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
                 return (
                   <td key={`${key}-${lang.id || lang.code}`} className="border p-2">
                     <input
-                      className="border p-1 w-full"
-                      value={item?.value || ""}
-                      onChange={(e) => {
-                        const copy = [...translations];
-
-                        const index = copy.findIndex(
-                          (t: any) =>
-                            t.key === key &&
-                            Number(t.languageId) === Number(lang.id)
-                        );
-
-                        if (index >= 0) {
-                          copy[index] = {
-                            ...copy[index],
-                            value: e.target.value,
-                          };
-                        } else if (lang.id) {
-                          copy.push({
-                            key,
-                            languageId: lang.id,
-                            value: e.target.value,
-                          });
-                        }
-
-                        setTranslations(copy);
-                      }}
-                    />
+  className="border p-1 w-full"
+  value={getTranslationValue(key, lang)}
+  onChange={(e) =>
+    setTranslationValue(key, lang, e.target.value)
+  }
+/>
                   </td>
                 );
               })}
