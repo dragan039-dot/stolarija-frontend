@@ -3204,6 +3204,18 @@ const setTranslationValue = (
 };
 
 
+const t = (key: string) => {
+  if (!selectedLanguageId) return key;
+
+  const item = translations.find(
+    (x: any) =>
+      x.key === key &&
+      Number(x.languageId) === Number(selectedLanguageId)
+  );
+
+  return item?.value || key;
+};
+
 
 
 
@@ -3374,7 +3386,12 @@ return (
 
 <div className="sticky top-0 z-950 bg-white border-b shadow-sm mb-0">
   <div className="py-0 flex justify-center">
-      <Tabs active={activeTab} setActive={setActiveTab} isAdmin={isAdmin} />
+      <Tabs
+  active={activeTab}
+  setActive={setActiveTab}
+  isAdmin={isAdmin}
+  translate={t}
+/>
 </div>
 
   <div className="py-0 flex justify-between items-center mb-0">

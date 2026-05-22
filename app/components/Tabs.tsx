@@ -4,6 +4,7 @@ type Props = {
   active: string;
   setActive: (tab: string) => void;
   isAdmin?: boolean;
+  translate?: (key: string) => string;
 };
 
 const baseTabs = [
@@ -27,7 +28,7 @@ export default function Tabs({ active, setActive, isAdmin }: Props) {
       <div className="grid grid-cols-3 gap-2 sm:hidden">
         {tabs.map((t) => (
           <button
-            key={t}
+            key={translate ? translate(t) : t}
             onClick={() => setActive(t)}
             className={`px-2 py-3 rounded font-semibold transition text-sm ${
               active === t
@@ -35,7 +36,7 @@ export default function Tabs({ active, setActive, isAdmin }: Props) {
                 : "bg-gray-200 hover:bg-gray-300"
             }`}
           >
-            {t}
+            {translate ? translate(t) : t}
           </button>
         ))}
       </div>
@@ -44,7 +45,7 @@ export default function Tabs({ active, setActive, isAdmin }: Props) {
       <div className="hidden sm:flex justify-center gap-2 flex-wrap">
         {tabs.map((t) => (
           <button
-            key={t}
+            key={translate ? translate(t) : t}
             onClick={() => setActive(t)}
             className={`px-5 py-3 rounded font-semibold transition text-sm whitespace-nowrap ${
               active === t
@@ -52,7 +53,7 @@ export default function Tabs({ active, setActive, isAdmin }: Props) {
                 : "bg-gray-200 hover:bg-gray-300"
             }`}
           >
-            {t}
+            {translate ? translate(t) : t}
           </button>
         ))}
       </div>
