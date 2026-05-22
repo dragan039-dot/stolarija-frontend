@@ -21,6 +21,7 @@ import { valutaData as defaultValuta } from "./data/valuta";
 import { getCena, getTehnicki, getOkovCena, getIspunaCena } from "./utils/calc";
 import RichTextEditor from "./components/RichTextEditor";
 
+import React from "react";
 
 
 
@@ -6341,61 +6342,90 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
             ))}
           </tr>
         </thead>
+<tbody>
+  {[
+    {
+      title: "Glavni tabovi",
+      items: [
+        "Forma",
+        "Ponude",
+        "Radna lista",
+        "Slike",
+        "Uputstvo",
+        "Parametri",
+        "Uputstva",
+        "Administracija",
+      ],
+    },
+    {
+      title: "Forma",
+      items: [
+        "Kupac",
+        "Adresa",
+        "Telefon",
+        "PIB",
+        "Matični",
+        "Datum",
+        "Vrsta ponude",
+        "Izaberi valutu",
+        "Popust",
+        "Napomena",
+        "Sačuvaj",
+        "Obriši formu",
+      ],
+    },
+    {
+      title: "Parametri",
+      items: [
+        "Profil",
+        "Ispuna",
+        "Okov",
+        "Valuta",
+        "Tehnički",
+        "Cene",
+        "Formule",
+        "Uputstvo",
+        "Reklame",
+        "Prevodi",
+        "Uređivanje uputstva",
+      ],
+    },
+  ].map((group) => (
+    <React.Fragment key={group.title}>
+      <tr>
+        <td
+          colSpan={languages.length + 1}
+          className="border p-2 bg-blue-100 font-bold text-blue-800"
+        >
+          {group.title}
+        </td>
+      </tr>
 
-        <tbody>
-          {[
-            "Forma",
-            "Ponude",
-            "Radna lista",
-            "Parametri",
-            "Kupac",
-            "Adresa",
-            "Telefon",
-            "PIB",
-            "Matični",
-            "Datum",
-            "Vrsta ponude",
-            "Izaberi valutu",
-            "Popust",
-            "Napomena",
-            "Sačuvaj",
-            "Obriši formu",
-            "Profil",
-            "Ispuna",
-            "Okov",
-            "Valuta",
-            "Tehnički",
-            "Cene",
-            "Formule",
-            "Uputstvo",
-          ].map((key) => (
-            <tr key={key}>
-              <td className="border p-2 font-semibold bg-gray-50">
-                {key}
-              </td>
+      {group.items.map((key) => (
+        <tr key={key}>
+          <td className="border p-2 font-semibold bg-gray-50">
+            {key}
+          </td>
 
-              {languages.map((lang) => {
-                const item = translations.find(
-                  (t: any) =>
-                    t.key === key &&
-                    Number(t.languageId) === Number(lang.id)
-                );
-
-                return (
-                  <td key={`${key}-${lang.id || lang.code}`} className="border p-2">
-                    <input
-  className="border p-1 w-full"
-  value={getTranslationValue(key, lang)}
-  onChange={(e) =>
-    setTranslationValue(key, lang, e.target.value)
-  }
-/>
-                  </td>
-                );
-              })}
-            </tr>
+          {languages.map((lang) => (
+            <td
+              key={`${key}-${lang.id || lang.code}`}
+              className="border p-2"
+            >
+              <input
+                className="border p-1 w-full"
+                value={getTranslationValue(key, lang)}
+                onChange={(e) =>
+                  setTranslationValue(key, lang, e.target.value)
+                }
+              />
+            </td>
           ))}
-        </tbody>
+        </tr>
+      ))}
+    </React.Fragment>
+  ))}
+</tbody>
       </table>
     </div>
   </div>
