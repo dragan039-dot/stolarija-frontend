@@ -3797,12 +3797,11 @@ return (
   </option>
 
   <optgroup label={t("Standardni")}>
-    {prozori
-      .filter(
-        (x) =>
-          !x.naziv.includes("nadsvetlo")
-      )
-      .map((x) => (
+
+    {[1,2,3,4,5,6,7,8,9,10,11,12,13]
+      .map(id => prozori.find(p => p.id === id))
+      .filter(Boolean)
+      .map((x:any) => (
         <option
           key={x.id}
           value={x.naziv}
@@ -3810,16 +3809,15 @@ return (
           {t(x.naziv)}
         </option>
       ))}
+
   </optgroup>
 
   <optgroup label={t("Nadsvetlo")}>
-    {prozori
-      .filter(
-        (x) =>
-          x.naziv.includes("(nadsvetlo)") &&
-          !x.naziv.includes("kip")
-      )
-      .map((x) => (
+
+    {[14,15,16,17]
+      .map(id => prozori.find(p => p.id === id))
+      .filter(Boolean)
+      .map((x:any) => (
         <option
           key={x.id}
           value={x.naziv}
@@ -3827,15 +3825,15 @@ return (
           {t(x.naziv)}
         </option>
       ))}
+
   </optgroup>
 
   <optgroup label={t("Nadsvetlo kip")}>
-    {prozori
-      .filter(
-        (x) =>
-          x.naziv.includes("nadsvetlo-kip")
-      )
-      .map((x) => (
+
+    {[18,19,20,21]
+      .map(id => prozori.find(p => p.id === id))
+      .filter(Boolean)
+      .map((x:any) => (
         <option
           key={x.id}
           value={x.naziv}
@@ -3843,6 +3841,7 @@ return (
           {t(x.naziv)}
         </option>
       ))}
+
   </optgroup>
 </select>
 </div>
