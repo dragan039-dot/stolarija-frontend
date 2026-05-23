@@ -245,7 +245,7 @@ const [selectedLanguageId, setSelectedLanguageId] = useState("");
 
 const addExtraItem = () => {
   if (extraItems.length >= 30) {
-    alert("Maksimalan broj dodatnih usluga/proizvoda je 30");
+    alert(t("Maksimalan broj dodatnih usluga/proizvoda je 30"));
     return;
   }
 
@@ -285,7 +285,7 @@ const apiFetch = async (url: string, options: RequestInit = {}) => {
 
     if (!sessionExpiredShown) {
       setSessionExpiredShown(true);
-      alert("Sesija je istekla. Prijavite se ponovo.");
+      alert(t("Sesija je istekla. Prijavite se ponovo."));
     }
 
     setLoggedUser(null);
@@ -544,7 +544,7 @@ const loadParams = async () => {
 
 
 const addParam = async () => {
-  if (!grupa || !nazivParam) return alert("Popuni sve");
+  if (!grupa || !nazivParam) return alert(t("Popuni sve"));
 
   await apiFetch(`${API_URL}/params`, {
     method: "POST",
@@ -877,7 +877,7 @@ const updateExtraItem = (i: number, field: string, value: any) => {
 
 const saveFormule = async () => {
   if (!formulaVrstaStolarije || !formulaVrstaProzora) {
-    alert("Izaberi vrstu stolarije i vrstu prozora");
+    alert(t("Izaberi vrstu stolarije i vrstu prozora"));
     return;
   }
 
@@ -1291,7 +1291,7 @@ const getValue = (profil: string, parametar: string) => {
   });
     const data = await res.json();
 
-    if (!data.offer) return alert("Nema ponude za ovaj ID");
+    if (!data.offer) return alert(t("Nema ponude za ovaj ID"));
 
     setOriginalVrstaPonude(data.offer.vrsta_ponude || "");
 
@@ -1382,7 +1382,7 @@ const saveValute = async () => {
     ),
   });
 
-  alert("Valute sačuvane");
+  alert(t("Valute sačuvane"));
   loadValute();
 };
 
@@ -1400,7 +1400,7 @@ const saveOkovi = async () => {
     ),
   });
 
-  alert("Okovi sačuvani");
+  alert(t("Okovi sačuvani"));
   loadOkov();
 };
 
@@ -1408,7 +1408,7 @@ const saveOkovi = async () => {
 
 const saveProfili = async () => {
   if (!loggedUser?.id) {
-    alert("Korisnik nije prijavljen");
+    alert(t("Korisnik nije prijavljen"));
     return;
   }
 
@@ -1425,11 +1425,11 @@ const saveProfili = async () => {
   });
 
   if (!res.ok) {
-    alert("Greška pri čuvanju profila");
+    alert(t("Greška pri čuvanju profila"));
     return;
   }
 
-  alert("Profili su sačuvani");
+  alert(t("Profili su sačuvani"));
   loadProfili();
 };
 
@@ -1449,15 +1449,15 @@ const saveProfili = async () => {
 
     if (!res.ok) {
       const err = await res.json();
-      alert(err.message || "Greška pri čuvanju firme");
+      alert(err.message || t("Greška pri čuvanju firme"));
       return;
     }
 
-    alert("Sačuvano");
+    alert(t("Sačuvano"));
     loadFirma();
   } catch (err) {
     console.error(err);
-    alert("Backend nije dostupan. Proveri da li je backend pokrenut.");
+    alert(t("Backend nije dostupan. Proveri da li je backend pokrenut."));
   }
 };
   
@@ -1473,7 +1473,7 @@ const saveProfili = async () => {
 
 
 if (!form.vrsta_ponude || !String(form.vrsta_ponude).trim()) {
-  alert("Morate izabrati vrstu ponude.");
+  alert(t("Morate izabrati vrstu ponude."));
   return;
 }
 
@@ -1486,7 +1486,7 @@ const isChangingOfferType =
   form.vrsta_ponude !== originalVrstaPonude;
 
 if (isChangingOfferType) {
-  alert("Promenjena je vrsta ponude. Biće kreiran novi dokument sa novim brojem.");
+  alert(t("Promenjena je vrsta ponude. Biće kreiran novi dokument sa novim brojem."));
 }
 
   // 👉 AKO POSTOJI ID → UPDATE
@@ -1504,7 +1504,7 @@ if (isChangingOfferType) {
       })
     });
 
-    alert("Izmenjeno!");
+    alert(t("Izmenjeno!"));
 
   } else {
     // 👉 NOVA PONUDA → CREATE
@@ -1528,7 +1528,7 @@ const formForCreate = {
     });
 
     const data = await res.json();
-    alert("Sačuvano: " + (data.brojPonude || data.id));
+    alert(t("Sačuvano: ") + (data.brojPonude || data.id));
   }
 
   loadOffers();   // refresh tabele
@@ -1552,7 +1552,7 @@ const saveTehnicki = async () => {
     body: JSON.stringify(tehnicki)
   });
 
-  alert("Sačuvano!");
+  alert(t("Sačuvano!"));
 };
 
 
@@ -1993,7 +1993,7 @@ const openWorklistOffer = async (id: number) => {
   const data = await res.json();
 
   if (!data.offer) {
-    alert("Nema ponude za ovaj ID");
+    alert(t("Nema ponude za ovaj ID"));
     return;
   }
 
@@ -2132,7 +2132,7 @@ const openProposalOffer = async (id: number) => {
   const data = await res.json();
 
   if (!data.offer) {
-    alert("Nema ponude za ovaj ID");
+    alert(t("Nema ponude za ovaj ID"));
     return;
   }
 
@@ -2247,7 +2247,7 @@ const saveIspune = async () => {
     ),
   });
 
-  alert("Ispune sačuvane");
+  alert(t("Ispune sačuvane"));
   loadIspune();
 };
 
@@ -2319,7 +2319,7 @@ const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
   if (!file) return;
 
   if (file.size > 2 * 1024 * 1024) {
-    alert("Logo ne sme biti veći od 2MB.");
+    alert(t("Logo ne sme biti veći od 2MB."));
     return;
   }
 
@@ -2500,7 +2500,7 @@ const loadAdminUsers = async () => {
 
 const createAdminUser = async () => {
   if (!newUser.username.trim()) {
-    alert("Unesite korisničko ime");
+    alert(t("Unesite korisničko ime"));
     return;
   }
 
@@ -2534,7 +2534,7 @@ const createAdminUser = async () => {
 
 const changeMyPassword = async () => {
   if (!passwordForm.oldPassword || !passwordForm.newPassword) {
-    alert("Unesite staru i novu šifru");
+    alert(t("Unesite staru i novu šifru"));
     return;
   }
 
@@ -2550,11 +2550,11 @@ const changeMyPassword = async () => {
 
   if (!res.ok) {
     const err = await res.json();
-    alert(err.message || "Greška pri promeni šifre");
+    alert(err.message || t("Greška pri promeni šifre"));
     return;
   }
 
-  alert("Šifra je promenjena");
+  alert(t("Šifra je promenjena"));
   setPasswordForm({ oldPassword: "", newPassword: "" });
 };
 
@@ -2807,7 +2807,7 @@ const downloadBackupFile = async (fileName: string) => {
   );
 
   if (!res.ok) {
-    alert("Niste prijavljeni ili download nije uspeo");
+    alert(t("Niste prijavljeni ili download nije uspeo"));
     return;
   }
 
@@ -2847,7 +2847,7 @@ const saveAllTehnicki = async () => {
   }
 
   await loadTehnicki();
-  alert("Tehnički parametri su sačuvani");
+  alert(t("Tehnički parametri su sačuvani"));
 };
 
 const saveAllPrices = async () => {
@@ -2871,7 +2871,7 @@ const saveAllPrices = async () => {
   }
 
   await loadProfilePrices();
-  alert("Cene su sačuvane");
+  alert(t("Cene su sačuvane"));
 };
 
 
@@ -2941,7 +2941,7 @@ const getHelpText = (fieldName: string) => {
     (h: any) => h.fieldName === fieldName
   );
 
-  return found?.text || "Uputstvo nije definisano";
+  return found?.text || t("Uputstvo nije definisano");
 };
 
 
@@ -3337,7 +3337,7 @@ return (
     
         <div className="flex justify-end items-center gap-3 mb-2 text-sm">
           <span>
-            Korisnik: <strong>{loggedUser.username}</strong> ({loggedUser.role})
+            {t("Korisnik")}: <strong>{loggedUser.username}</strong> ({loggedUser.role})
           </span>
 
 
@@ -3365,7 +3365,7 @@ return (
             onClick={logout}
             className="bg-gray-700 text-white px-3 py-1 rounded"
           >
-            Odjavi se
+            {t("Odjavi se")}
           </button>
 
 
@@ -3378,7 +3378,7 @@ return (
 
         {licenseDaysLeft !== null && licenseDaysLeft <= 15 && licenseDaysLeft >= 0 && (
   <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 p-3 rounded mb-3 text-sm">
-    Licenca ističe za <strong>{licenseDaysLeft}</strong> dana. Kontaktirajte administratora za obnovu.
+    {t("Licenca ističe za")} <strong>{licenseDaysLeft}</strong>{t(" dana. Kontaktirajte administratora za obnovu.")}
   </div>
 )}
 
@@ -3403,14 +3403,14 @@ return (
           onClick={saveOffer}
           className="bg-blue-900 text-white px-2 py-1 rounded"
         >
-          Sačuvaj
+          {t("Sačuvaj")}
         </button>
 
         <button
           onClick={clearForm}
           className="bg-red-600 text-white px-2 py-1 rounded"
         >
-          Obriši formu
+          {t("Obriši formu")}
         </button>
       </>
     )}
@@ -3420,7 +3420,7 @@ return (
         onClick={() => printPdf("worklist")}
         className="bg-blue-900 text-white px-2 py-1 rounded"
       >
-        Sačuvaj u PDF-u
+        {t("Sačuvaj u PDF-u")}
       </button>
     )}
 
@@ -3429,55 +3429,55 @@ return (
         onClick={() => printPdf("proposal")}
         className="bg-blue-900 text-white px-2 py-1 rounded"
       >
-        Sačuvaj u PDF-u
+        {t("Sačuvaj u PDF-u")}
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Firma" && (
       <button onClick={saveFirma} className="bg-blue-900 text-white px-2 py-1 rounded">
-        Sačuvaj firmu
+        {t("Sačuvaj firmu")}
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Ispuna" && (
       <button onClick={saveIspune} className="bg-blue-900 text-white px-2 py-1 rounded">
-        Sačuvaj ispune
+        {t("Sačuvaj ispune")}
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Profil" && (
       <button onClick={saveProfili} className="bg-blue-900 text-white px-2 py-1 rounded">
-        Sačuvaj profile
+        {t("Sačuvaj profile")}
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Okov" && (
       <button onClick={saveOkovi} className="bg-blue-900 text-white px-2 py-1 rounded">
-        Sačuvaj okov
+        {t("Sačuvaj okov")}
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Valuta" && (
       <button onClick={saveValute} className="bg-blue-900 text-white px-2 py-1 rounded">
-        Sačuvaj valute
+        {t("Sačuvaj valute")}
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Tehnicki" && (
       <button onClick={saveAllTehnicki} className="bg-blue-900 text-white px-2 py-1 rounded">
-        Sačuvaj tehničke
+        {t("Sačuvaj tehničke")}
       </button>
     )}
 
     {activeTab === "Parametri" && paramTab === "Cene" && (
       <button onClick={saveAllPrices} className="bg-blue-900 text-white px-2 py-1 rounded">
-        Sačuvaj cene
+        {t("Sačuvaj cene")}
       </button>
     )}
 
     {activeTab === "Parametri" && isAdmin && paramTab === "Formule" && (
       <button onClick={saveFormule} className="bg-blue-900 text-white px-2 py-1 rounded">
-        Sačuvaj formule
+        {t("Sačuvaj formule")}
       </button>
     )}
     {activeTab === "Parametri" && isAdmin && paramTab === "Reklame" && (
@@ -3487,7 +3487,7 @@ return (
     onClick={saveAds}
     className="bg-blue-900 text-white px-2 py-1 rounded"
   >
-    Sačuvaj reklame
+    {t("Sačuvaj reklame")}
   </button>
 )}
   </div>
@@ -3516,7 +3516,7 @@ return (
 
       {activeTab === "Forma" && (
   <>
-    <h1 className="text-3xl font-bold mb-4">FORMA</h1>
+    <h1 className="text-3xl font-bold mb-4">{t("FORMA")}</h1>
 
 
 
@@ -3525,7 +3525,7 @@ return (
 
 
 <input
-  placeholder="Pretraga ponuda..."
+  placeholder={t("Pretraga ponuda...")}
   value={offerSearch}
   onChange={(e) => setOfferSearch(e.target.value)}
   className="border p-2 w-full mb-3"
@@ -3539,12 +3539,12 @@ return (
           <table className="w-full min-w-[860px] border-collapse text-sm table-fixed">
             <thead className="bg-gray-200 sticky top-0">
               <tr>
-<th className="border p-2 w-[90px]">ID</th>
-<th className="border p-2 min-w-[220px]">Naziv</th>
-<th className="border p-2 min-w-[160px]">Adresa</th>
-<th className="border p-2 w-[160px]">Telefon</th>
-<th className="border p-2 w-[120px]">PIB</th>
-<th className="border p-2 w-[110px]">Datum</th>
+<th className="border p-2 w-[90px]">{t("ID")}</th>
+<th className="border p-2 min-w-[220px]">{t("Naziv")}</th>
+<th className="border p-2 min-w-[160px]">{t("Adresa")}</th>
+<th className="border p-2 w-[160px]">{t("Telefon")}</th>
+<th className="border p-2 w-[120px]">{t("PIB")}</th>
+<th className="border p-2 w-[110px]">{t("Datum")}</th>
               </tr>
             </thead>
             <tbody>
@@ -3591,21 +3591,31 @@ return (
  <input
       value={form.brojPonude || ""}
       readOnly
-      placeholder="Broj ponude"
+      placeholder={t("Broj ponude")}
       className="border p-2 bg-gray-100"
     />
 
 
-    <select
-      value={form.vrsta_ponude}
-      onChange={(e) => setForm({ ...form, vrsta_ponude: e.target.value })}
-      className="border p-2 bg-yellow-50 border-yellow-400"
-    >
-      <option value="">Vrsta ponude</option>
-      {vrstePonude.map((v) => (
-        <option key={v} value={v}>{v}</option>
-      ))}
-    </select>
+<select
+  value={form.vrsta_ponude}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      vrsta_ponude: e.target.value,
+    })
+  }
+  className="border p-2 bg-yellow-50 border-yellow-400"
+>
+  <option value="">
+    {t("Vrsta ponude")}
+  </option>
+
+  {vrstePonude.map((v) => (
+    <option key={v} value={v}>
+      {t(v)}
+    </option>
+  ))}
+</select>
 
 
       
@@ -3623,7 +3633,7 @@ return (
 
     <div className="relative">
       <input
-        placeholder="Kupac"
+        placeholder={t("Kupac")}
         value={form.naziv || ""}
         onChange={(e) => handleCustomerNameChange(e.target.value)}
         onFocus={() => {
@@ -3653,7 +3663,7 @@ return (
     </div>
 
     <input
-      placeholder="Adresa"
+      placeholder={t("Adresa")}
       value={form.adresa || ""}
       onChange={(e) => setForm({ ...form, adresa: e.target.value })}
       className="border p-2"
@@ -3679,7 +3689,7 @@ return (
         onChange={(e) => setForm({ ...form, valuta: e.target.value })}
         className="border p-2"
       >
-        <option value="">Izaberi valutu</option>
+        <option value="">{t("Izaberi valutu")}</option>
         {valute.map((v, index) => (
           <option key={v.id ?? index} value={v.id ?? index + 1}>
             {v.naziv}
@@ -3691,14 +3701,14 @@ return (
 
     <div className="grid grid-cols-2 gap-4">
       <input
-        placeholder="PIB"
+        placeholder={t("PIB")}
         value={form.pib || ""}
         onChange={(e) => handlePibChange(e.target.value)}
         className="border p-2 bg-yellow-50 border-yellow-400"
       />
 
       <input
-        placeholder="Matični"
+        placeholder={t("Matični")}
         value={form.maticni || ""}
         onChange={(e) => setForm({ ...form, maticni: e.target.value })}
         className="border p-2"
@@ -3711,7 +3721,7 @@ return (
 
 
     <input
-      placeholder="Popust %"
+      placeholder={t("Popust %")}
       value={form.popust || ""}
       onChange={(e) => setForm({ ...form, popust: e.target.value })}
       className="border p-2"
@@ -3719,7 +3729,7 @@ return (
 
 
       <input
-    placeholder="Napomena"
+    placeholder={t("Napomena")}
     value={form.napomena || ""}
     onChange={(e) => setForm({ ...form, napomena: e.target.value })}
     className="border p-2"
@@ -3747,39 +3757,56 @@ return (
     type="button"
     onClick={() => removePosition(i)}
     className="absolute top-2 right-2 bg-red-600 text-white w-7 h-7 rounded-full font-bold"
-    title="Obriši poziciju"
+    title={t("Obriši poziciju")}
   >
     ×
   </button>
 
-          <h2 className="font-bold mb-3">Pozicija {i + 1}</h2>
+          <h2 className="font-bold mb-3">{t("Pozicija")} {i + 1}</h2>
 
 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-  <select
-    value={p.vrsta_stolarije}
-    onChange={(e) => update(i, "vrsta_stolarije", e.target.value)}
-    className="border p-2"
-  >
-    <option value="">Vrsta stolarije</option>
-    {vrsteStolarije.map((v) => (
-      <option key={v} value={v}>
-        {v}
-      </option>
-    ))}
-  </select>
+<select
+  value={p.vrsta_stolarije}
+  onChange={(e) =>
+    update(
+      i,
+      "vrsta_stolarije",
+      e.target.value
+    )
+  }
+  className="border p-2"
+>
+  <option value="">
+    {t("Vrsta stolarije")}
+  </option>
 
-  <select
-    value={p.vrsta_prozora || ""}
-    onChange={(e) => selectProzor(i, e.target.value)}
-    className="border p-2"
-  >
-    <option value="">Vrsta prozora</option>
-    {prozori.map((x) => (
-      <option key={x.id} value={x.naziv}>
-        {x.naziv}
-      </option>
-    ))}
-  </select>
+  {vrsteStolarije.map((v) => (
+    <option key={v} value={v}>
+      {t(v)}
+    </option>
+  ))}
+</select>
+
+<select
+  value={p.vrsta_prozora || ""}
+  onChange={(e) =>
+    selectProzor(i, e.target.value)
+  }
+  className="border p-2"
+>
+  <option value="">
+    {t("Vrsta prozora")}
+  </option>
+
+  {prozori.map((x) => (
+    <option
+      key={x.id}
+      value={x.naziv}
+    >
+      {t(x.naziv)}
+    </option>
+  ))}
+</select>
 </div>
 
 <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -3788,12 +3815,12 @@ return (
 
   {/* SREDINA - DIMENZIJE */}
   <div className="border rounded p-3">
-    <div className="font-bold mb-2">Dimenzije</div>
+    <div className="font-bold mb-2">{t("Dimenzije")}</div>
 
     <div className="flex flex-col gap-2 mb-4">
       {showField(p.vrsta_prozora, "a") && (
         <div>
-          <label className="text-xs font-semibold">A - širina</label>
+          <label className="text-xs font-semibold">{t("A - širina")}</label>
           <input
             type="number"
             value={p.a || ""}
@@ -3805,7 +3832,7 @@ return (
 
       {showField(p.vrsta_prozora, "b") && (
         <div>
-          <label className="text-xs font-semibold">B - visina</label>
+          <label className="text-xs font-semibold">{t("B - visina")}</label>
           <input
             type="number"
             value={p.b || ""}
@@ -3853,7 +3880,7 @@ return (
   className="max-w-full h-auto object-contain mx-auto"
 />
     ) : (
-      <span className="text-gray-400">Slika prozora</span>
+      <span className="text-gray-400">{t("Slika prozora")}</span>
     )}
   </div>
   </div>
@@ -3862,7 +3889,7 @@ return (
 
   {/* DESNO - OSTALA POLJA */}
   <div className="border rounded p-3">
-    <div className="font-bold mb-2">Podaci</div>
+    <div className="font-bold mb-2">{t("Podaci")}</div>
 
     <div className="grid grid-cols-1 gap-2">
       <select
@@ -3870,7 +3897,7 @@ return (
         onChange={(e) => update(i, "profilId", Number(e.target.value))}
         className="border p-2"
       >
-        <option value="">Izaberi profil</option>
+        <option value="">{t("Izaberi profil")}</option>
         {profili.map((x) => (
           <option key={x.id ?? x.naziv} value={x.id}>
             {x.naziv}
@@ -3883,7 +3910,7 @@ return (
         onChange={(e) => update(i, "ispunaId", Number(e.target.value))}
         className="border p-2"
       >
-        <option value="">Izaberi ispunu</option>
+        <option value="">{t("Izaberi ispunu")}</option>
         {ispune.map((x) => (
           <option key={x.id ?? x.naziv} value={x.id}>
             {x.naziv}
@@ -3896,7 +3923,7 @@ return (
         onChange={(e) => update(i, "okovId", Number(e.target.value))}
         className="border p-2"
       >
-        <option value="">Izaberi okov</option>
+        <option value="">{t("Izaberi okov")}</option>
         {okovi.map((x) => (
           <option key={x.id ?? x.naziv} value={x.id}>
             {x.naziv}
@@ -3904,47 +3931,74 @@ return (
         ))}
       </select>
 
-      <select
-        value={p.otvaranje}
-        onChange={(e) => update(i, "otvaranje", e.target.value)}
-        className="border p-2"
-      >
-        <option value="">Otvaranje</option>
-        {vrsteOtvaranja.map((v) => (
-          <option key={v} value={v}>
-            {v}
-          </option>
-        ))}
-      </select>
+<select
+  value={p.otvaranje}
+  onChange={(e) =>
+    update(
+      i,
+      "otvaranje",
+      e.target.value
+    )
+  }
+  className="border p-2"
+>
+  <option value="">
+    {t("Otvaranje")}
+  </option>
 
-      <select
-        value={p.roletna}
-        onChange={(e) => update(i, "roletna", e.target.value)}
-        className="border p-2"
-      >
-        <option value="">Roletna</option>
-        {vrsteRoletni.map((v) => (
-          <option key={v} value={v}>
-            {v}
-          </option>
-        ))}
-      </select>
+  {vrsteOtvaranja.map((v) => (
+    <option key={v} value={v}>
+      {t(v)}
+    </option>
+  ))}
+</select>
 
-      <select
-        value={p.komarnik}
-        onChange={(e) => update(i, "komarnik", e.target.value)}
-        className="border p-2"
-      >
-        <option value="">Komarnik</option>
-        {vrsteKomarnika.map((v) => (
-          <option key={v} value={v}>
-            Komarnik {v}
-          </option>
-        ))}
-      </select>
+<select
+  value={p.roletna}
+  onChange={(e) =>
+    update(
+      i,
+      "roletna",
+      e.target.value
+    )
+  }
+  className="border p-2"
+>
+  <option value="">
+    {t("Roletna")}
+  </option>
+
+  {vrsteRoletni.map((v) => (
+    <option key={v} value={v}>
+      {t(v)}
+    </option>
+  ))}
+</select>
+
+<select
+  value={p.komarnik}
+  onChange={(e) =>
+    update(
+      i,
+      "komarnik",
+      e.target.value
+    )
+  }
+  className="border p-2"
+>
+  <option value="">
+    {t("Komarnik")}
+  </option>
+
+  {vrsteKomarnika.map((v) => (
+    <option key={v} value={v}>
+      {t("Komarnik")} {t(v)}
+    </option>
+  ))}
+</select>
 
       <input
-        placeholder="Količina"
+        placeholder={t("Količina")}
         type="number"
         value={p.kolicina || ""}
         onChange={(e) => update(i, "kolicina", Number(e.target.value))}
@@ -3967,23 +4021,23 @@ return (
   onClick={addPosition}
   className="bg-green-600 text-white px-4 py-2 rounded mb-8"
 >
-  Dodaj poziciju
+  {t("Dodaj poziciju")}
 </button>
 
 
 
 
 <div className="border rounded p-4 mb-6">
-  <h2 className="font-bold mb-3">Dodatne usluge / proizvodi</h2>
+  <h2 className="font-bold mb-3">{t("Dodatne usluge / proizvodi")}</h2>
 
   <table className="border w-full text-sm">
     <thead className="bg-gray-200">
       <tr>
-        <th className="border p-2">Usluge / proizvodi</th>
-        <th className="border p-2">Kol.</th>
-        <th className="border p-2">Cena</th>
-        <th className="border p-2">Ukupno</th>
-        <th className="border p-2">Bris.</th>
+        <th className="border p-2">{t("Usluge / proizvodi")}</th>
+        <th className="border p-2">{t("Kol.")}</th>
+        <th className="border p-2">{t("Cena")}</th>
+        <th className="border p-2">{t("Ukupno")}</th>
+        <th className="border p-2">{t("Bris.")}</th>
       </tr>
     </thead>
 
@@ -4030,7 +4084,7 @@ return (
     type="button"
     onClick={() => removeExtraItem(i)}
     className="bg-red-600 text-white w-7 h-7 rounded-full font-bold"
-    title="Obriši uslugu/proizvod"
+    title={t("Obriši uslugu/proizvod")}
   >
     ×
   </button>
@@ -4044,7 +4098,7 @@ return (
     onClick={addExtraItem}
     className="bg-green-600 text-white px-4 py-2 rounded mt-3"
   >
-    Dodaj uslugu/proizvod
+    {t("Dodaj uslugu/proizvod")}
   </button>
 </div>
 
@@ -4067,7 +4121,7 @@ return (
     
 
     <input
-      placeholder="Pretraga ponuda..."
+      placeholder={t("Pretraga ponuda...")}
       value={proposalSearch}
       onChange={(e) => setProposalSearch(e.target.value)}
       className="border p-2 w-full mb-3"
@@ -4079,12 +4133,12 @@ return (
         <table className="w-full border-collapse">
           <thead className="bg-gray-200 sticky top-0">
             <tr>
-              <th className="border p-2">Br.</th>
-              <th className="border p-2">Naziv</th>
-              <th className="border p-2">Adresa</th>
-              <th className="border p-2">Telefon</th>
-              <th className="border p-2">PIB</th>
-              <th className="border p-2">Datum</th>
+              <th className="border p-2">{t("Br")}.</th>
+              <th className="border p-2">{t("Naziv")}</th>
+              <th className="border p-2">{t("Adresa")}</th>
+              <th className="border p-2">{t("Telefon")}</th>
+              <th className="border p-2">{t("PIB")}</th>
+              <th className="border p-2">{t("Datum")}</th>
             </tr>
           </thead>
 
@@ -4110,7 +4164,7 @@ return (
 
     {!proposalOffer && (
       <div className="text-gray-500">
-        Izaberi ponudu iz tabele da se prikaže ponuda.
+        {t("Izaberi ponudu iz tabele da se prikaže ponuda.")}
       </div>
     )}
 
@@ -4160,7 +4214,7 @@ console.log("SVE VALUTE:", valute);
       className="max-w-full max-h-full object-contain"
     />
   ) : (
-    <span className="text-gray-400">LOGO</span>
+    <span className="text-gray-400">{t("LOGO")}</span>
   )}
 </div>
                 </td>
@@ -4173,30 +4227,30 @@ console.log("SVE VALUTE:", valute);
               </tr>
 
               <tr>
-                <td>PIB: {firma.pib || ""}</td>
+                <td>{t("PIB")}: {firma.pib || ""}</td>
                 <td></td>
               </tr>
 
               <tr>
-                <td>Matični broj: {firma.maticni || ""}</td>
+                <td>{t("Matični broj")}: {firma.maticni || ""}</td>
                 <td rowSpan={2} className="text-center text-2xl font-bold">
                   {proposalOffer.vrsta_ponude || "PONUDA"}
                 </td>
               </tr>
 
               <tr>
-                <td>Telefon: {firma.telefon || ""}</td>
+                <td>{t("Telefon")}: {firma.telefon || ""}</td>
               </tr>
 
               <tr>
-                <td>Email: {firma.email || ""}</td>
+                <td>{t("Email")}: {firma.email || ""}</td>
                 <td rowSpan={2} className="text-center text-xl font-bold">
-                  Br. {proposalOffer.brojPonude || proposalOffer.id}
+                  {t("Br")}. {proposalOffer.brojPonude || proposalOffer.id}
                 </td>
               </tr>
 
               <tr>
-                <td>TR: {firma.tr || ""}</td>
+                <td>{t("TR")}: {firma.tr || ""}</td>
               </tr>
             </tbody>
           </table>
@@ -4204,15 +4258,15 @@ console.log("SVE VALUTE:", valute);
           {/* KUPAC */}
           <div className="mb-6 text-sm">
             <div>
-              <strong>Kupac:</strong> {proposalOffer.naziv || ""}, {proposalOffer.adresa || ""}
+              <strong>{t("Kupac")}:</strong> {proposalOffer.naziv || ""}, {proposalOffer.adresa || ""}
             </div>
-            <div><strong>PIB:</strong> {proposalOffer.pib || ""}</div>
-            <div><strong>Matični broj:</strong> {proposalOffer.maticni || ""}</div>
-            <div><strong>Telefon:</strong> {proposalOffer.telefon || ""}</div>
-            <div><strong>Datum ponude:</strong> {formatDate(proposalOffer.datum)}</div>
+            <div><strong>{t("PIB")}:</strong> {proposalOffer.pib || ""}</div>
+            <div><strong>{t("Matični broj")}:</strong> {proposalOffer.maticni || ""}</div>
+            <div><strong>{t("Telefon")}:</strong> {proposalOffer.telefon || ""}</div>
+            <div><strong>{t("Datum ponude")}:</strong> {formatDate(proposalOffer.datum)}</div>
             <div>
-  <strong>Valuta plaćanja:</strong>{" "}
-  {firma.valuta_placanja || ""} dana
+  <strong>{t("Valuta plaćanja")}:</strong>{" "}
+  {firma.valuta_placanja || ""} {t("dana")}
 </div>
           </div>
 
@@ -4220,12 +4274,12 @@ console.log("SVE VALUTE:", valute);
           <table className="w-full text-sm">
             <thead className="bg-gray-100">
               <tr className="border-b border-gray-400">
-                <th className="p-2 w-12">Red. br.</th>
-                <th className="p-2">Naziv</th>
-                <th className="p-2 w-20">Kol.</th>
-                <th className="p-2 w-28">Cena</th>
+                <th className="p-2 w-12">{t("Red. br.")}</th>
+                <th className="p-2">{t("Naziv")}</th>
+                <th className="p-2 w-20">{t("Kol.")}</th>
+                <th className="p-2 w-28">{t("Cena")}</th>
                 <th className="p-2 w-32">
-                  UKUPNO<br />
+                  {t("UKUPNO")}<br />
                   <span className="text-xs">{valutaNaziv}</span>
                 </th>
               </tr>
@@ -4251,7 +4305,7 @@ console.log("SVE VALUTE:", valute);
                             />
                           ) : (
                             <div className="h-24 flex items-center justify-center text-gray-400">
-                              Slika
+                              {t("Slika")}
                             </div>
                           )}
 
@@ -4265,13 +4319,13 @@ console.log("SVE VALUTE:", valute);
 
                         <div className="flex-1">
                           <div className="font-bold">{p.vrsta_prozora}</div>
-                          <div>Vrsta stolarije: {p.vrsta_stolarije}</div>
-                          <div>Profil: {getProfilName(p.profil)}</div>
-                          <div>Ispuna: {getIspunaName(p.ispuna)}</div>
-                          <div>Okov: {getOkovName(p.okov)}</div>
-                          {p.otvaranje && <div>Otvaranje: {p.otvaranje}</div>}
-                          {p.roletna && <div>Roletna: {p.roletna}</div>}
-                          {p.komarnik && <div>Komarnik: {p.komarnik}</div>}
+                          <div>{t("Vrsta stolarije")}: {p.vrsta_stolarije}</div>
+                          <div>{t("Profil")}: {getProfilName(p.profil)}</div>
+                          <div>{t("Ispuna")}: {getIspunaName(p.ispuna)}</div>
+                          <div>{t("Okov")}: {getOkovName(p.okov)}</div>
+                          {p.otvaranje && <div>{t("Otvaranje")}: {p.otvaranje}</div>}
+                          {p.roletna && <div>{t("Roletna")}: {p.roletna}</div>}
+                          {p.komarnik && <div>{t("Komarnik")}: {p.komarnik}</div>}
                         </div>
                       </div>
                     </td>
@@ -4303,7 +4357,7 @@ console.log("SVE VALUTE:", valute);
               <tr className="border-b border-gray-400">
   {/* NAPOMENA (spojene 3 kolone + 4 reda) */}
   <td className="p-3 align-top" colSpan={3} rowSpan={4}>
-    <div className="font-semibold mb-2">Napomena:</div>
+    <div className="font-semibold mb-2">{t("Napomena")}:</div>
     <div className="min-h-[100px]">
       {proposalOffer.napomena || ""}
     </div>
@@ -4311,7 +4365,7 @@ console.log("SVE VALUTE:", valute);
 
   {/* UKUPNO */}
   <td className="p-2 font-semibold text-right">
-    Ukupno
+    {t("Ukupno")}
   </td>
   <td className="p-2 text-right font-semibold">
     {formatCena(ukupno)} 
@@ -4321,7 +4375,7 @@ console.log("SVE VALUTE:", valute);
 <tr className="border-b border-gray-400">
   {/* POPUST */}
   <td className="p-2 text-right">
-    Popust {popustProc}%
+    {t("Popust")} {popustProc}%
   </td>
   <td className="p-2 text-right">
     -{formatCena(popustIznos)} 
@@ -4331,7 +4385,7 @@ console.log("SVE VALUTE:", valute);
 <tr className="border-b border-gray-400">
   {/* PDV */}
   <td className="p-2 text-right">
-    PDV {pdvProc}%
+    {t("PDV")} {pdvProc}%
   </td>
   <td className="p-2 text-right">
     {formatCena(pdvIznos)} 
@@ -4341,7 +4395,7 @@ console.log("SVE VALUTE:", valute);
 <tr>
   {/* ZA UPLATU */}
   <td className="p-2 font-bold text-right">
-    Za uplatu
+    {t("Za uplatu")}
   </td>
   <td className="p-2 text-right font-bold text-lg">
     {formatCena(zaUplatu)} 
@@ -4368,12 +4422,12 @@ console.log("SVE VALUTE:", valute);
 {activeTab === "Radna lista" && (
   <div className="p-4">
 
-    <h1 className="text-3xl font-bold mb-4">RADNA LISTA</h1>
+    <h1 className="text-3xl font-bold mb-4">{t("RADNA LISTA")}</h1>
 
     
 
 <input
-  placeholder="Pretraga ponuda..."
+  placeholder={t("Pretraga ponuda...")}
   value={worklistSearch}
   onChange={(e) => setWorklistSearch(e.target.value)}
   className="border p-2 w-full mb-3"
@@ -4386,12 +4440,12 @@ console.log("SVE VALUTE:", valute);
         <table className="w-full border-collapse">
           <thead className="bg-gray-200 sticky top-0">
             <tr>
-              <th className="border p-2">Br.</th>
-              <th className="border p-2">Naziv</th>
-              <th className="border p-2">Adresa</th>
-              <th className="border p-2">Telefon</th>
-              <th className="border p-2">PIB</th>
-              <th className="border p-2">Datum</th>
+              <th className="border p-2">{t("Br")}.</th>
+              <th className="border p-2">{t("Naziv")}</th>
+              <th className="border p-2">{t("Adresa")}</th>
+              <th className="border p-2">{t("Telefon")}</th>
+              <th className="border p-2">{t("PIB")}</th>
+              <th className="border p-2">{t("Datum")}</th>
             </tr>
           </thead>
 
@@ -4417,7 +4471,7 @@ console.log("SVE VALUTE:", valute);
 
     {!worklistOffer && (
       <div className="text-gray-500">
-        Izaberi ponudu iz tabele da se prikaže radna lista.
+        {t("Izaberi ponudu iz tabele da se prikaže radna lista.")}
       </div>
     )}
 
@@ -4437,7 +4491,7 @@ console.log("SVE VALUTE:", valute);
       className="max-w-full max-h-full object-contain"
     />
   ) : (
-    <span className="text-gray-400">LOGO</span>
+    <span className="text-gray-400">{t("LOGO")}</span>
   )}
 </div>
               </td>
@@ -4450,30 +4504,30 @@ console.log("SVE VALUTE:", valute);
             </tr>
 
             <tr>
-              <td>PIB: {firma.pib || ""}</td>
+              <td>{t("PIB")}: {firma.pib || ""}</td>
               <td></td>
             </tr>
 
             <tr>
-              <td>Matični broj: {firma.maticni || ""}</td>
+              <td>{t("Matični broj")}: {firma.maticni || ""}</td>
               <td rowSpan={2} className="text-center text-2xl font-bold">
-                RADNI NALOG
+                {t("RADNI NALOG")}
               </td>
             </tr>
 
             <tr>
-              <td>Telefon: {firma.telefon || ""}</td>
+              <td>{t("Telefon")}: {firma.telefon || ""}</td>
             </tr>
 
             <tr>
-              <td>Email: {firma.email || ""}</td>
+              <td>{t("Email")}: {firma.email || ""}</td>
               <td rowSpan={2} className="text-center text-xl font-bold">
                 Br. {worklistOffer.brojPonude || worklistOffer.id}
               </td>
             </tr>
 
             <tr>
-              <td>TR: {firma.tr || ""}</td>
+              <td>{t("TR")}: {firma.tr || ""}</td>
             </tr>
           </tbody>
         </table>
@@ -4481,20 +4535,20 @@ console.log("SVE VALUTE:", valute);
         {/* PODACI KUPCA */}
 <div className="mb-6 text-sm">
   <div>
-    <strong>Kupac:</strong>{" "}
+    <strong>{t("Kupac")}:</strong>{" "}
     {worklistOffer.naziv || ""}, {worklistOffer.adresa || ""}
   </div>
 
   <div>
-    <strong>PIB:</strong> {worklistOffer.pib || ""}
+    <strong>{t("PIB")}:</strong> {worklistOffer.pib || ""}
   </div>
 
   <div>
-    <strong>Datum ponude:</strong> {formatDate(worklistOffer.datum)}
+    <strong>{t("Datum ponude")}:</strong> {formatDate(worklistOffer.datum)}
   </div>
 
   <div>
-    <strong>Napomena:</strong> {worklistOffer.napomena || ""}
+    <strong>{t("Napomena")}:</strong> {worklistOffer.napomena || ""}
   </div>
 </div>
 
@@ -4521,12 +4575,12 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
               <div key={p.id || index} className="mb-8 border-t pt-4">
 
                 <h2 className="text-xl font-bold mb-2">
-                  Pozicija {index + 1}
+                  {t("Pozicija")} {index + 1}
                 </h2>
 
                 {missing.length > 0 ? (
                   <div className="bg-yellow-100 border border-yellow-400 p-3 mb-4">
-                    Pozicija nije kompletna. Nedostaje: {missing.join(", ")}.
+                    {t("Pozicija nije kompletna. Nedostaje")}: {missing.join(", ")}.
                   </div>
                 ) : (
                   <>
@@ -4536,12 +4590,12 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
   </div>
 
   <div className="text-lg">
-    Količina: <strong>{p.kolicina || 1}</strong>
+    {t("Količina")}: <strong>{p.kolicina || 1}</strong>
   </div>
 </div>
 
 <div className="mb-4 text-sm">
-  Vrsta stolarije: <strong>{p.vrsta_stolarije}</strong>
+  {t("Vrsta stolarije")}: <strong>{p.vrsta_stolarije}</strong>
 </div>
 
 <div className="grid grid-cols-2 gap-4 text-sm">
@@ -4556,7 +4610,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
       />
     ) : (
       <div className="border h-40 flex items-center justify-center mb-3">
-        Slika prozora
+        {t("Slika prozora")}
       </div>
     )}
 
@@ -4592,15 +4646,15 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
   {/* 2. POLJE - OSTALI PODACI */}
   <div className="rounded p-1">
-    <div className="font-bold mb-2">Podaci</div>
+    <div className="font-bold mb-2">{t("Podaci")}</div>
 
     <div className="space-y-2">
-      <div>Profil: <strong>{getProfilName(p.profil)}</strong></div>
-      <div>Otvaranje: <strong>{p.otvaranje || ""}</strong></div>
-      <div>Ispuna: {getIspunaName(p.ispuna)}</div>
-      <div>Okov: {getOkovName(p.okov)}</div>
-      <div>Roletna: <strong>{p.roletna || ""}</strong></div>
-      <div>Komarnik: <strong>{p.komarnik || ""}</strong></div>
+      <div>{t("Profil")}: <strong>{getProfilName(p.profil)}</strong></div>
+      <div>{t("Otvaranje")}: <strong>{p.otvaranje || ""}</strong></div>
+      <div>{t("Ispuna")}: {getIspunaName(p.ispuna)}</div>
+      <div>{t("Okov")}: {getOkovName(p.okov)}</div>
+      <div>{t("Roletna")}: <strong>{p.roletna || ""}</strong></div>
+      <div>{t("Komarnik")}: <strong>{p.komarnik || ""}</strong></div>
     </div>
 
   </div>
@@ -4622,17 +4676,17 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
   {/* 3. POLJE - ELEMENTI */}
   <div className="rounded p-1">
-    <div className="font-bold mb-2">Elementi prozora</div>
+    <div className="font-bold mb-2">{t("Elementi prozora")}</div>
 
     <table className="w-full border text-sm">
       <thead className="bg-gray-100">
         <tr>
-          <th className="border p-1">Element</th>
-          <th className="border p-1">Š<br />
+          <th className="border p-1">{t("Element")}</th>
+          <th className="border p-1">{t("Š")}<br />
                   <span className="text-xs">(mm)</span></th>
-          <th className="border p-1">V<br />
+          <th className="border p-1">{t("V")}<br />
                   <span className="text-xs">(mm)</span></th>
-          <th className="border p-1">Kom</th>
+          <th className="border p-1">{t("Kom")}</th>
         </tr>
       </thead>
 
@@ -4677,7 +4731,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
           ))}
 
         <tr>
-          <td className="border p-1 font-semibold">Plastika</td>
+          <td className="border p-1 font-semibold">{t("Plastika")}</td>
           <td className="border p-1 text-center"></td>
           <td className="border p-1 text-center"></td>
           <td className="border p-1 text-center">{Number(p.kolicina) || 1}</td>
@@ -4686,7 +4740,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
         {(worklistResults[index] || []).length === 0 && (
           <tr>
             <td className="border p-1 text-gray-500" colSpan={4}>
-              Nema izračunatih elemenata. Proveri da li su formule sačuvane za ovu vrstu stolarije i prozora.
+              {t("Nema izračunatih elemenata. Proveri da li su formule sačuvane za ovu vrstu stolarije i prozora.")}
             </td>
           </tr>
         )}
@@ -4704,14 +4758,14 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
         {worklistExtraItems.filter((x) => x.naziv).length > 0 && (
           <div className="mt-8">
             <h2 className="text-xl font-bold mb-2">
-              Dodatne usluge / proizvodi
+              {t("Dodatne usluge / proizvodi")}
             </h2>
 
             <table className="w-full border text-sm">
               <thead className="bg-gray-200">
                 <tr>
-                  <th className="border p-2">Naziv</th>
-                  <th className="border p-2">Količina</th>
+                  <th className="border p-2">{t("Naziv")}</th>
+                  <th className="border p-2">{t("Količina")}</th>
                 </tr>
               </thead>
 
@@ -5370,7 +5424,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
   <input
     type="text"
-    placeholder="Pretraga ponuda..."
+    placeholder={t("Pretraga ponuda...")}
     value={adminOfferSearch}
     onChange={(e) => setAdminOfferSearch(e.target.value)}
     className="border p-2 rounded mb-3 w-80"
@@ -5447,25 +5501,25 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
     
 
-    <input placeholder="Naziv"
+    <input placeholder={t("Naziv")}
       value={firma.naziv || ""}
       onChange={e => setFirma({ ...firma, naziv: e.target.value })}
       className="border p-2"
     />
 
-    <input placeholder="Adresa"
+    <input placeholder={t("Adresa")}
       value={firma.adresa || ""}
       onChange={e => setFirma({ ...firma, adresa: e.target.value })}
       className="border p-2"
     />
 
-    <input placeholder="Email"
+    <input placeholder={t("Email")}
       value={firma.email || ""}
       onChange={e => setFirma({ ...firma, email: e.target.value })}
       className="border p-2"
     />
 
-    <input placeholder="TR"
+    <input placeholder={t("TR")}
       value={firma.tr || ""}
       onChange={e => setFirma({ ...firma, tr: e.target.value })}
       className="border p-2"
@@ -5483,19 +5537,19 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
     <div className="grid grid-cols-3 gap-4">
 
 
-    <input placeholder="PIB"
+    <input placeholder={t("PIB")}
       value={firma.pib || ""}
       onChange={e => setFirma({ ...firma, pib: e.target.value })}
       className="border p-2"
     />
 
-    <input placeholder="Matični broj"
+    <input placeholder={t("Matični broj")}
       value={firma.maticni || ""}
       onChange={e => setFirma({ ...firma, maticni: e.target.value })}
       className="border p-2"
     />
 
-    <input placeholder="Telefon"
+    <input placeholder={t("Telefon")}
       value={firma.telefon || ""}
       onChange={e => setFirma({ ...firma, telefon: e.target.value })}
       className="border p-2"
@@ -5506,19 +5560,19 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
 
 
-    <input placeholder="Zarada %"
+    <input placeholder={t("Zarada %")}
       value={firma.zarada || ""}
       onChange={e => setFirma({ ...firma, zarada: e.target.value })}
       className="border p-2"
     />
 
-    <input placeholder="PDV %"
+    <input placeholder={t("PDV %")}
       value={firma.pdv || ""}
       onChange={e => setFirma({ ...firma, pdv: e.target.value })}
       className="border p-2"
     />
 
-<input placeholder="Valuta plaćanja (dana)"
+<input placeholder={t("Valuta plaćanja (dana)")}
   value={firma.valuta_placanja || ""}
   onChange={e => setFirma({ ...firma, valuta_placanja: e.target.value })}
   className="border p-2"
@@ -5529,19 +5583,19 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
     <div className="grid grid-cols-3 gap-4">
 
 
-    <input placeholder="Otpad %"
+    <input placeholder={t("Otpad %")}
   value={firma.otpad || ""}
   onChange={e => setFirma({ ...firma, otpad: e.target.value })}
   className="border p-2"
 />
 
-<input placeholder="Roletna %"
+<input placeholder={t("Roletna %")}
   value={firma.roletna || ""}
   onChange={e => setFirma({ ...firma, roletna: e.target.value })}
   className="border p-2"
 />
 
-<input placeholder="Komarnik %"
+<input placeholder={t("Komarnik %")}
   value={firma.komarnik || ""}
   onChange={e => setFirma({ ...firma, komarnik: e.target.value })}
   className="border p-2"
@@ -5566,7 +5620,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
 <div className="col-span-3 border rounded p-3">
   <label className="font-semibold block mb-2">
-    Logo firme / slika do 2MB
+    {t("Logo firme / slika do 2MB")}
   </label>
 
   <input
@@ -5592,11 +5646,11 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
 <div className="col-span-3 border rounded p-4 mt-4">
-  <h2 className="font-bold mb-3">Promena šifre</h2>
+  <h2 className="font-bold mb-3">{t("Promena šifre")}</h2>
 
   <input
     type="password"
-    placeholder="Stara šifra"
+    placeholder={t("Stara šifra")}
     value={passwordForm.oldPassword}
     onChange={(e) =>
       setPasswordForm({ ...passwordForm, oldPassword: e.target.value })
@@ -5606,7 +5660,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
   <input
     type="password"
-    placeholder="Nova šifra"
+    placeholder={t("Nova šifra")}
     value={passwordForm.newPassword}
     onChange={(e) =>
       setPasswordForm({ ...passwordForm, newPassword: e.target.value })
@@ -5618,7 +5672,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
     onClick={changeMyPassword}
     className="bg-blue-600 text-white px-4 py-2 rounded"
   >
-    Promeni šifru
+    {t("Promeni šifru")}
   </button>
 </div>
 
@@ -5648,7 +5702,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
     <table className="border text-sm table-fixed w-auto max-w-full">
       <thead className="bg-gray-200">
         <tr>
-          <th className="border p-2">Naziv profila</th>
+          <th className="border p-2">{t("Naziv profila")}</th>
         </tr>
       </thead>
 
@@ -5688,8 +5742,8 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
     <table className="border text-sm table-fixed w-auto max-w-full">
       <thead className="bg-gray-200">
         <tr>
-          <th className="border p-2 min-w-[260px]">Naziv</th>
-          <th className="border p-2 w-[140px]">Cena</th>
+          <th className="border p-2 min-w-[260px]">{t("Naziv")}</th>
+          <th className="border p-2 w-[140px]">{t("Cena")}</th>
         </tr>
       </thead>
 
@@ -5752,8 +5806,8 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
     <table className="border text-sm table-fixed w-auto max-w-full">
       <thead className="bg-gray-200">
         <tr>
-          <th className="border p-2 min-w-[260px]">Naziv</th>
-          <th className="border p-2 w-[140px]">Cena</th>
+          <th className="border p-2 min-w-[260px]">{t("Naziv")}</th>
+          <th className="border p-2 w-[140px]">{t("Cena")}</th>
         </tr>
       </thead>
 
@@ -5817,7 +5871,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
     <table className="border text-sm table-fixed w-auto max-w-full">
       <thead className="bg-gray-200">
         <tr>
-          <th className="border p-2">Naziv valute</th>
+          <th className="border p-2">{t("Naziv valute")}</th>
         </tr>
       </thead>
 
@@ -5892,7 +5946,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 onChange={(e) => setSelectedProfilId(e.target.value)}
         className="border p-2 rounded w-full max-w-sm"
       >
-        <option value="">Izaberi profil</option>
+        <option value="">{t("Izaberi profil")}</option>
         {profili.map((p: any) => (
           <option key={p.id} value={p.id}>
             {p.naziv}
@@ -5904,8 +5958,8 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     <table className="border text-sm w-auto max-w-full">
       <thead className="bg-gray-200">
         <tr>
-<th className="border p-2 w-[75%]">Parametar</th>
-<th className="border p-2 w-[25%]">Vrednost</th>
+<th className="border p-2 w-[75%]">{t("Parametar")}</th>
+<th className="border p-2 w-[25%]">{t("Vrednost")}</th>
         </tr>
       </thead>
 
@@ -5994,7 +6048,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
 onChange={(e) => setSelectedProfilId(e.target.value)}
         className="border p-2 rounded w-full max-w-sm"
       >
-<option value="">Izaberi profil</option>
+<option value="">{t("Izaberi profil")}</option>
         {profili.map((p: any) => (
           <option key={p.id} value={p.id}>
             {p.naziv}
@@ -6007,8 +6061,8 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     <table className="border text-sm w-auto max-w-full">
       <thead className="bg-gray-200">
         <tr>
-          <th className="border p-2 w-[75%]">Element</th>
-          <th className="border p-2 w-[25%]">Cena</th>
+          <th className="border p-2 w-[75%]">{t("Element")}</th>
+          <th className="border p-2 w-[25%]">{t("Cena")}</th>
         </tr>
       </thead>
 
@@ -6343,54 +6397,415 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
           </tr>
         </thead>
 <tbody>
-  {[
-    {
-      title: "Glavni tabovi",
-      items: [
-        "Forma",
-        "Ponude",
-        "Radna lista",
-        "Slike",
-        "Uputstvo",
-        "Parametri",
-        "Uputstva",
-        "Administracija",
-      ],
-    },
-    {
-      title: "Forma",
-      items: [
-        "Kupac",
-        "Adresa",
-        "Telefon",
-        "PIB",
-        "Matični",
-        "Datum",
-        "Vrsta ponude",
-        "Izaberi valutu",
-        "Popust",
-        "Napomena",
-        "Sačuvaj",
-        "Obriši formu",
-      ],
-    },
-    {
-      title: "Parametri",
-      items: [
-        "Profil",
-        "Ispuna",
-        "Okov",
-        "Valuta",
-        "Tehnički",
-        "Cene",
-        "Formule",
-        "Uputstvo",
-        "Reklame",
-        "Prevodi",
-        "Uređivanje uputstva",
-      ],
-    },
-  ].map((group) => (
+{[
+  {
+    title: "Glavni tabovi",
+    items: [
+      "Forma",
+      "Ponude",
+      "Radna lista",
+      "Slike",
+      "Uputstvo",
+      "Parametri",
+      "Uputstva",
+      "Administracija",
+    ],
+  },
+  {
+    title: "Login",
+    items: [
+      "Korisničko ime",
+      "Šifra",
+      "Prijavi se",
+      "Odjavi se",
+      "Prikaži šifru",
+      "Instaliraj App",
+      "Pogrešno korisničko ime ili šifra",
+      "Backend nije dostupan",
+      "Sesija je istekla. Prijavite se ponovo.",
+      "Licenca ističe za",
+      " dana. Kontaktirajte administratora za obnovu.",
+      "Promena šifre",
+    ],
+  },
+  {
+    title: "Forma - podaci o kupcu",
+    items: [
+      "Broj ponude",
+      "Br",
+      "ID",
+      "Kupac",
+      "Adresa",
+      "Telefon",
+      "PIB",
+      "Matični",
+      "Matični broj",
+      "Datum",
+      "Vrsta ponude",
+      "Izaberi valutu",
+      "Popust",
+      "Popust %",
+      "Napomena",
+      "Sačuvaj",
+      "Obriši formu",
+      "Pretraga ponuda...",
+      "Red. br.",
+      "Kol.",
+      "UKUPNO",
+      "Za uplatu",
+    ],
+  },
+  {
+    title: "Forma - pozicije",
+    items: [
+      "Pozicije",
+      "Pozicija",
+      "Dodaj poziciju",
+      "Obriši poziciju",
+      "Vrsta stolarije",
+      "Vrsta prozora",
+      "Slika prozora",
+      "Dimenzije",
+      "Podaci",
+      "A - širina",
+      "B - visina",
+      "C",
+      "D",
+      "Izaberi ispunu",
+      "Izaberi okov",
+      "Otvaranje",
+      "Roletna",
+      "Komarnik",
+      "Količina",
+      "Ukupna cena",
+      "Maksimalan broj pozicija je 50",
+      "Mora postojati bar jedna pozicija",
+      "Nema izračunatih elemenata. Proveri da li su formule sačuvane za ovu vrstu stolarije i prozora.",
+    ],
+  },
+  {
+    title: "Vrste ponude i opcije",
+    items: [
+      "RAČUN",
+      "PREDRAČUN",
+      "PVC",
+      "ALU",
+      "LEVO",
+      "DESNO",
+      "NADPROZORSKA",
+      "SPOLJNA",
+      "DA",
+      "Izaberi ponudu iz tabele da se prikaže ponuda.",
+      "Datum ponude",
+      "Naziv valute",
+    ],
+  },
+  {
+    title: "Vrste prozora",
+    items: [
+      "Fiksni prozor",
+      "Jednokrilni prozor",
+      "Dvokrilni prozor (šloga)",
+      "Dvokrilni prozor (T-prečka)",
+      "Prozor + fiks",
+      "Trokrilni prozor (šloga)",
+      "Trokrilni prozor (T-prečka)",
+      "Trokrilni prozor (2 fiksa) A",
+      "Trokrilni prozor (fiks + T-prečka) A",
+      "Trokrilni prozor (fiks + šloga) A",
+      "Trokrilni prozor (2 fiksa)",
+      "Trokrilni prozor (fiks + T-prečka)",
+      "Trokrilni prozor (fiks + šloga)",
+      "Jednokrilni prozor (nadsvetlo)",
+      "Prozor + fiks (nadsvetlo)",
+      "Dvokrilni prozor (šloga, nadsvetlo)",
+      "Dvokrilni prozor (T-prečka, nadsvetlo)",
+      "Jednokrilni prozor (nadsvetlo-kip)",
+      "Prozor + fiks (nadsvetlo-kip)",
+      "Dvokrilni prozor (šloga, nadsvetlo-kip)",
+      "Dvokrilni prozor (T-prečka, nadsvetlo-kip)",
+    ],
+  },
+  {
+    title: "Parametri - tabovi",
+    items: [
+      "Firma",
+      "Profil",
+      "Ispuna",
+      "Okov",
+      "Valuta",
+      "Tehnicki",
+      "Tehnički",
+      "Cene",
+      "Formule",
+      "Reklame",
+      "Uređivanje uputstva",
+      "Prevodi",
+      "Slika",
+    ],
+  },
+  {
+    title: "Firma",
+    items: [
+      "Logo",
+      "TR",
+      "Email",
+      "PDV %",
+      "Otpad %",
+      "Zarada %",
+      "Roletna %",
+      "Komarnik %",
+      "Valuta plaćanja (dana)",
+      "Sačuvaj firmu",
+      "Sačuvano",
+      "Greška pri čuvanju firme",
+      "Valuta plaćanja",
+      "dana",
+      "Bris.",
+    ],
+  },
+  {
+    title: "Profili / Ispune / Okovi / Valute",
+    items: [
+      "Naziv",
+      "Naziv profila",
+      "Cena",
+      "Profil 1",
+      "Ispuna 1",
+      "Okov 1",
+      "Valuta 1",
+      "Sačuvaj profile",
+      "Sačuvaj ispune",
+      "Sačuvaj okov",
+      "Sačuvaj valute",
+      "Profili su sačuvani",
+      "Ispune sačuvane",
+      "Okovi sačuvani",
+      "Valute sačuvane",
+    ],
+  },
+  {
+    title: "Tehnički parametri",
+    items: [
+      "Izaberi profil",
+      "Parametar",
+      "Vrednost",
+      "Sačuvaj tehničke",
+      "Tehnički parametri su sačuvani",
+      "Var profila",
+      "Širina profila Štok",
+      "Širina profila krilo",
+      "Širina profila T prečka",
+      "Zazor za staklo",
+      "Preklop kod krila",
+      "Preklop kod šloge",
+      "Čepovi šloge",
+      "Skraćenje čelika za štok",
+      "Skraćenje čelika za krilo",
+      "Visina kutije nadprozorske roletne",
+    ],
+  },
+  {
+    title: "Cene - elementi",
+    items: [
+      "Element",
+      "ŠTOK",
+      "KRILO",
+      "T prečka",
+      "ŠLOGA",
+      "ČELIK",
+      "LAJSNA",
+      "PLASTIKA",
+      "ROLETNA",
+      "KOMARNIK",
+      "ALU Spojnica Štok 1",
+      "ALU Spojnica Štok 2",
+      "ALU Spojnica Štok 3",
+      "ALU Spojnica Štok 4",
+      "ALU Spojnica T 1",
+      "ALU Spojnica T 2",
+      "ALU Spojnica T 3",
+      "ALU Spojnica Krilo 1",
+      "ALU Spojnica Krilo 2",
+      "ALU Spojnica Krilo 3",
+      "ALU Spojnica Krilo 4",
+      "Sačuvaj cene",
+      "Cene su sačuvane",
+    ],
+  },
+  {
+    title: "Formule",
+    items: [
+      "Š",
+      "V",
+      "Kom",
+      "Preview",
+      "Sačuvaj formule",
+      "Izaberi vrstu stolarije i vrstu prozora",
+      "Greška pri čuvanju formula",
+      "Neuspešno čuvanje formula",
+      "Neuspešno učitavanje formula",
+      "Štok",
+      "Čelik za štok",
+      "Lajsna za štok",
+      "Ispuna za štok",
+      "Krilo 1",
+      "Čelik za krilo 1",
+      "Lajsna za krilo 1",
+      "Ispuna za krilo 1",
+      "Krilo 2",
+      "Čelik za krilo 2",
+      "Lajsna za krilo 2",
+      "Ispuna za krilo 2",
+      "T-prečka 1",
+      "Čelik za T-prečku 1",
+      "T-prečka 2",
+      "Čelik za T-prečku 2",
+      "Lajsna za nadsvetlo",
+      "Ispuna za nadsvetlo",
+      "Šloga",
+    ],
+  },
+  {
+    title: "Ponude / Radna lista",
+    items: [
+      "PONUDA",
+      "Radni nalog",
+      "Ponuda",
+      "Dokument",
+      "Sačuvaj u PDF-u",
+      "Nema ponude za ovaj ID",
+      "Izmenjeno!",
+      "Sačuvano:",
+      "Morate uneti naziv kupca.",
+      "Morate izabrati vrstu ponude.",
+      "Promenjena je vrsta ponude. Biće kreiran novi dokument sa novim brojem.",
+      "Izaberi ponudu iz tabele da se prikaže radna lista.",
+      "Pozicija nije kompletna. Nedostaje",
+      "Logo firme / slika do 2MB",
+      "Sva prava zadržana",
+    ],
+  },
+  {
+    title: "Dodatne stavke",
+    items: [
+      "Dodatne usluge / proizvodi",
+      "Dodaj stavku",
+      "Maksimalan broj dodatnih usluga/proizvoda je 30",
+    ],
+  },
+  {
+    title: "Reklame",
+    items: [
+      "Levi baner",
+      "Desni baner",
+      "Mobilni baner",
+      "Vaš baner ovde",
+      "Tekst",
+      "Link",
+      "Slika / GIF",
+      "Preporučeno",
+      "Klikovi",
+      "Reset",
+      "Sačuvaj reklame",
+      "Reklame sačuvane",
+    ],
+  },
+  {
+    title: "Uputstvo",
+    items: [
+      "Uputstvo",
+      "Uputstvo još nije uneto.",
+      "Uređivanje uputstva",
+      "Sačuvaj uputstvo",
+      "Uputstvo je sačuvano",
+      "Greška pri čuvanju uputstva",
+      "Greška pri učitavanju uputstva",
+      "Upload slike",
+      "Upload video",
+      "Upload slike nije uspeo",
+      "Upload video zapisa nije uspeo",
+      "YouTube",
+      "Unesi YouTube link",
+      "Neispravan YouTube link",
+    ],
+  },
+  {
+    title: "Administracija - korisnici",
+    items: [
+      "Korisnik",
+      "Korisnici",
+      "Novi korisnik",
+      "Uloga",
+      "Licenca",
+      "Broj uređaja",
+      "Kreiraj korisnika",
+      "Obriši korisnika",
+      "Vrati korisnika",
+      "Korisnik je kreiran",
+      "Korisnik je izmenjen",
+      "Korisnik je obrisan",
+      "Korisnik je vraćen",
+      "Korisnik nije prijavljen",
+      "Da li sigurno želite da obrišete korisnika?",
+      "Prikaži arhivirane korisnike",
+      "Sakrij arhivirane korisnike",
+      "Unesite korisničko ime",
+      "Unesite novu šifru",
+      "USER",
+      "ADMIN",
+    ],
+  },
+  {
+    title: "Administracija - šifre i uređaji",
+    items: [
+      "Stara šifra",
+      "Nova šifra",
+      "Promeni šifru",
+      "Šifra je promenjena",
+      "Greška pri promeni šifre",
+      "Unesite staru i novu šifru",
+      "Uređaji",
+      "Obriši uređaj",
+      "Obriši sve uređaje",
+      "Da li sigurno želite da obrišete sve uređaje za ovog korisnika?",
+      "Uputstvo nije definisano",
+    ],
+  },
+  {
+    title: "Backup",
+    items: [
+      "Backup",
+      "Napravi backup",
+      "Backup napravljen:",
+      "Backup nije napravljen",
+      "Backup je obrisan",
+      "Restore",
+      "Restore nije uspeo",
+      "Sigurnosni backup pre restore-a:",
+      "Niste prijavljeni ili download nije uspeo",
+      "Da li sigurno želite da obrišete backup?",
+    ],
+  },
+  {
+    title: "Prevodi",
+    items: [
+      "Prevodi",
+      "Dodaj jezik",
+      "Sačuvaj jezike",
+      "Sačuvaj prevode",
+      "Jezici su sačuvani",
+      "Prevodi su sačuvani",
+      "Tekst na sajtu",
+      "prikaži",
+      "Glavni tabovi",
+      "Login",
+      "Forma - podaci o kupcu",
+      "Forma - pozicije",
+      "Parametri - tabovi",
+    ],
+  },
+].map((group) => (
     <React.Fragment key={group.title}>
       <tr>
         <td
@@ -6677,7 +7092,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
 
 
 <div className="fixed bottom-0 left-0 right-0 bg-white border-t text-center text-xs text-gray-600 py-1 z-50">
-  © {new Date().getFullYear()} www.sajt.com - Sva prava zadržana
+  © {new Date().getFullYear()} www.sajt.com - {t("Sva prava zadržana")}
 </div>
 
       </main>
