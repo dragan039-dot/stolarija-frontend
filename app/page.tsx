@@ -3789,23 +3789,61 @@ return (
 
 <select
   value={p.vrsta_prozora || ""}
-  onChange={(e) =>
-    selectProzor(i, e.target.value)
-  }
+  onChange={(e) => selectProzor(i, e.target.value)}
   className="border p-2"
 >
   <option value="">
     {t("Vrsta prozora")}
   </option>
 
-  {prozori.map((x) => (
-    <option
-      key={x.id}
-      value={x.naziv}
-    >
-      {t(x.naziv)}
-    </option>
-  ))}
+  <optgroup label={t("Standardni")}>
+    {prozori
+      .filter(
+        (x) =>
+          !x.naziv.includes("nadsvetlo")
+      )
+      .map((x) => (
+        <option
+          key={x.id}
+          value={x.naziv}
+        >
+          {t(x.naziv)}
+        </option>
+      ))}
+  </optgroup>
+
+  <optgroup label={t("Nadsvetlo")}>
+    {prozori
+      .filter(
+        (x) =>
+          x.naziv.includes("(nadsvetlo)") &&
+          !x.naziv.includes("kip")
+      )
+      .map((x) => (
+        <option
+          key={x.id}
+          value={x.naziv}
+        >
+          {t(x.naziv)}
+        </option>
+      ))}
+  </optgroup>
+
+  <optgroup label={t("Nadsvetlo kip")}>
+    {prozori
+      .filter(
+        (x) =>
+          x.naziv.includes("nadsvetlo-kip")
+      )
+      .map((x) => (
+        <option
+          key={x.id}
+          value={x.naziv}
+        >
+          {t(x.naziv)}
+        </option>
+      ))}
+  </optgroup>
 </select>
 </div>
 
@@ -6524,6 +6562,9 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Prozor + fiks (nadsvetlo-kip)",
       "Dvokrilni prozor (šloga, nadsvetlo-kip)",
       "Dvokrilni prozor (T-prečka, nadsvetlo-kip)",
+      "Standardni",
+      "Nadsvetlo",
+      "Nadsvetlo kip",
     ],
   },
   {
