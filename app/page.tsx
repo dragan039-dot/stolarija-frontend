@@ -766,9 +766,16 @@ const imaRoletnu =
     : 0;
 
 const imaKomarnik =
-  firstPosition?.komarnik === "DA"
-    ? 1
-    : 0;
+  firstPosition?.komarnik ? 1 : 0;
+
+    const roletnaCena = firstPosition?.vrsta_roletne
+  ? getRoletnaCenaByNaziv(firstPosition.vrsta_roletne)
+  : 0;
+
+const komarnikCena = firstPosition?.komarnik
+  ? getKomarnikCenaByNaziv(firstPosition.komarnik)
+  : 0;
+
 
 const imaOkov =
   firstPosition?.okovId ? 1 : 0;
@@ -802,6 +809,8 @@ const D = Number(firstPosition?.d) || 0;
   roletnaTip,
   imaRoletnu,
   imaKomarnik,
+  roletnaCena,
+  komarnikCena,
   imaOkov,
   imaIspunu,
   userId: loggedUser.id
@@ -1768,9 +1777,16 @@ const imaRoletnu =
     : 0;
 
 const imaKomarnik =
-  firstPosition?.komarnik === "DA"
-    ? 1
-    : 0;
+  firstPosition?.komarnik ? 1 : 0;
+
+const roletnaCena = firstPosition?.vrsta_roletne
+  ? getRoletnaCenaByNaziv(firstPosition.vrsta_roletne)
+  : 0;
+
+const komarnikCena = firstPosition?.komarnik
+  ? getKomarnikCenaByNaziv(firstPosition.komarnik)
+  : 0;
+
 
 const imaOkov =
   firstPosition?.okovId ? 1 : 0;
@@ -1809,6 +1825,8 @@ vrstaProzora: firstPosition?.vrsta_prozora || "",
     roletnaTip,
     imaRoletnu,
     imaKomarnik,
+    roletnaCena,
+    komarnikCena,
     imaOkov,
     imaIspunu,
     userId: loggedUser.id
@@ -1943,6 +1961,9 @@ const imaRoletnu =
     : 0;
 
   const imaKomarnik = p.komarnik === "DA" ? 1 : 0;
+
+
+  
   const imaOkov = p.okov ? 1 : 0;
   const imaIspunu = p.ispuna ? 1 : 0;
 
@@ -3318,6 +3339,27 @@ const saveKomarnici = async () => {
   alert(t("Komarnici sačuvani"));
   loadKomarnici();
 };
+
+const getRoletnaCenaByNaziv = (naziv: string) => {
+  const found = roletne.find(
+    (x: any) => x.naziv === naziv
+  );
+
+  return Number(found?.cena) || 0;
+};
+
+const getKomarnikCenaByNaziv = (naziv: string) => {
+  const found = komarnici.find(
+    (x: any) => x.naziv === naziv
+  );
+
+  return Number(found?.cena) || 0;
+};
+
+
+
+
+
 
 
 
