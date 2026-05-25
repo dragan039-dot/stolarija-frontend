@@ -1952,6 +1952,16 @@ console.log("ISPUNA TEST:", {
 });
 
 const okovCena = getOkovCenaById(okovId);
+
+
+const roletnaCena = p.vrsta_roletne
+  ? getRoletnaCenaByNaziv(p.vrsta_roletne)
+  : 0;
+
+const komarnikCena = p.komarnik
+  ? getKomarnikCenaByNaziv(p.komarnik)
+  : 0;
+
   const plastikaCena = ceneMap["PLASTIKA Cena"] || 0;
 
   const roletnaValue = String(p.roletna || "").trim().toUpperCase();
@@ -1964,7 +1974,10 @@ const imaRoletnu =
     ? 1
     : 0;
 
-  const imaKomarnik = p.komarnik === "DA" ? 1 : 0;
+  const imaKomarnik =
+  p.komarnik
+    ? 1
+    : 0;
 
 
   
@@ -1993,6 +2006,8 @@ const imaRoletnu =
       roletnaTip,
       imaRoletnu,
       imaKomarnik,
+      roletnaCena,
+      komarnikCena,
       imaOkov,
       imaIspunu,
       userId: loggedUser.id
