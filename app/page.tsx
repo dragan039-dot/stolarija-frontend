@@ -61,6 +61,7 @@ type Position = {
   okovId?: string | number;
   otvaranje: string;
   roletna: string;
+  vrsta_roletne: string;
   komarnik: string;
   kolicina: number;
 };
@@ -601,6 +602,7 @@ const deleteParam = async (id: number) => {
   okov: "",
   otvaranje: "",
   roletna: "",
+  vrsta_roletne: "",
   komarnik: "",
   kolicina: 1,
 });
@@ -4133,6 +4135,35 @@ return (
   ))}
 </select>
 
+{p.roletna && (
+  <select
+    value={p.vrsta_roletne || ""}
+    onChange={(e)=>
+      update(
+        i,
+        "vrsta_roletne",
+        e.target.value
+      )
+    }
+    className="border p-2"
+  >
+    <option value="">
+      {t("Vrsta roletne")}
+    </option>
+
+    {roletne
+      .filter((x)=>x.naziv)
+      .map((x)=>(
+        <option
+          key={x.id || x.naziv}
+          value={x.naziv}
+        >
+          {x.naziv}
+        </option>
+      ))}
+  </select>
+)}
+
 <select
   value={p.komarnik}
   onChange={(e) =>
@@ -4148,11 +4179,16 @@ return (
     {t("Komarnik")}
   </option>
 
-  {vrsteKomarnika.map((v) => (
-    <option key={v} value={v}>
-      {t("Komarnik")} {t(v)}
-    </option>
-  ))}
+  {komarnici
+    .filter((x)=>x.naziv)
+    .map((x)=>(
+      <option
+        key={x.id || x.naziv}
+        value={x.naziv}
+      >
+        {x.naziv}
+      </option>
+    ))}
 </select>
 
       <input
@@ -6873,6 +6909,13 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Ispune sačuvane",
       "Okovi sačuvani",
       "Valute sačuvane",
+      "Roletna",
+      "Vrsta roletne",
+      "Komarnik",
+      "Sačuvaj roletne",
+      "Sačuvaj komarnike",
+      "Roletne sačuvane",
+      "Komarnici sačuvani",
     ],
   },
   {
