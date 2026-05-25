@@ -33,7 +33,7 @@ export default function ParamTabs({
         (t) =>
           t !== "Formule" &&
           t !== "Reklame" &&
-          t !== "Uređivanje uputstva"
+          t !== "Uređivanje uputstva" &&
           t !== "Prevodi"  
       );
 
