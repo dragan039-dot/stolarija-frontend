@@ -4099,7 +4099,7 @@ return (
     <img
       src={`/prozori/${p.slika}.jpg`}
       alt=""
-      className="window-image mx-auto object-contain w-[160px] sm:w-[180px] lg:w-[220px] h-auto"
+      className="window-image mx-auto object-contain w-[180px] sm:w-[180px] lg:w-[220px] h-auto"
     />
   ) : (
     <span className="text-gray-400">
