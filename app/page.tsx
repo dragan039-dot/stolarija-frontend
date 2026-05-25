@@ -1026,8 +1026,6 @@ const elementi = [
   "ČELIK",
   "LAJSNA",
   "PLASTIKA",
-  "ROLETNA",
-  "KOMARNIK",
   "ALU Spojnica Štok 1",
 "ALU Spojnica Štok 2",
 "ALU Spojnica Štok 3",
