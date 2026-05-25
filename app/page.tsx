@@ -4662,9 +4662,9 @@ console.log("SVE VALUTE:", valute);
           </table>
 
           
-        </div>
       );
     })()}
+  </div>
 )}
 
 
