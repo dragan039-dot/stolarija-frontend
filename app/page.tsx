@@ -4095,16 +4095,18 @@ return (
   
   {/* LEVO - SLIKA */}
   <div className="w-full overflow-hidden">
-    {p.slika ? (
-      <img
-  src={`/prozori/${p.slika}.jpg`}
-  alt=""
-  className="max-w-full h-auto object-contain mx-auto"
-/>
-    ) : (
-      <span className="text-gray-400">{t("Slika prozora")}</span>
-    )}
-  </div>
+  {p.slika ? (
+    <img
+      src={`/prozori/${p.slika}.jpg`}
+      alt=""
+      className="window-image mx-auto object-contain w-[120px] sm:w-[180px] lg:w-[220px] h-auto"
+    />
+  ) : (
+    <span className="text-gray-400">
+      {t("Slika prozora")}
+    </span>
+  )}
+</div>
   </div>
 
 
@@ -4339,7 +4341,7 @@ return (
   <button
     type="button"
     onClick={() => removeExtraItem(i)}
-    className="bg-red-600 text-white w-4 h-4 rounded-full font-bold"
+    className="bg-red-600 text-white w-5 h-5 rounded-full font-bold"
     title={t("Obriši uslugu/proizvod")}
   >
     ×
