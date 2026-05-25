@@ -11,13 +11,14 @@ const allTabs = [
   "Profil",
   "Ispuna",
   "Okov",
+  "Roletna",
+  "Komarnik",
   "Valuta",
   "Tehnicki",
   "Cene",
   "Formule",
   "Reklame",
   "Uređivanje uputstva",
-  "Prevodi",
 ];
 
 export default function ParamTabs({
@@ -33,6 +34,7 @@ export default function ParamTabs({
           t !== "Formule" &&
           t !== "Reklame" &&
           t !== "Uređivanje uputstva"
+          t !== "Prevodi"  
       );
 
   return (

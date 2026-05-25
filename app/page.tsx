@@ -234,7 +234,8 @@ const [instructionContent, setInstructionContent] = useState("");
 
 const [selectedLanguageId, setSelectedLanguageId] = useState("");
 
-
+const [roletne, setRoletne] = useState<any[]>([]);
+const [komarnici, setKomarnici] = useState<any[]>([]);
 
 
 
@@ -456,6 +457,8 @@ useEffect(() => {
     loadInstruction();
     loadLanguages();
     loadTranslations();
+    loadRoletne();
+    loadKomarnici();
   }
 }, [loggedUser?.id]);
 
@@ -3217,6 +3220,102 @@ const t = (key: string) => {
   return item?.value || key;
 };
 
+const loadRoletne = () => {
+  if (!loggedUser?.id) return;
+
+  apiFetch(`${API_URL}/roletna?userId=${loggedUser.id}`, {
+    headers: authHeaders(),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      const list = Array.isArray(data) ? data : [];
+
+      setRoletne(
+        Array.from({ length: 15 }, (_, index) => {
+          const item = list[index];
+
+          return {
+            id: item?.id ?? undefined,
+            naziv: item?.naziv || `Roletna ${index + 1}`,
+            cena: Number(item?.cena) || 0,
+          };
+        })
+      );
+    })
+    .catch(() => {
+      setRoletne(
+        Array.from({ length: 15 }, (_, index) => ({
+          naziv: `Roletna ${index + 1}`,
+          cena: 0,
+        }))
+      );
+    });
+};
+
+const loadKomarnici = () => {
+  if (!loggedUser?.id) return;
+
+  apiFetch(`${API_URL}/komarnik?userId=${loggedUser.id}`, {
+    headers: authHeaders(),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      const list = Array.isArray(data) ? data : [];
+
+      setKomarnici(
+        Array.from({ length: 15 }, (_, index) => {
+          const item = list[index];
+
+          return {
+            id: item?.id ?? undefined,
+            naziv: item?.naziv || `Komarnik ${index + 1}`,
+            cena: Number(item?.cena) || 0,
+          };
+        })
+      );
+    })
+    .catch(() => {
+      setKomarnici(
+        Array.from({ length: 15 }, (_, index) => ({
+          naziv: `Komarnik ${index + 1}`,
+          cena: 0,
+        }))
+      );
+    });
+};
+
+
+const saveRoletne = async () => {
+  await apiFetch(`${API_URL}/roletna`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(
+      roletne.map((x) => ({
+        ...x,
+        userId: loggedUser.id,
+      }))
+    ),
+  });
+
+  alert(t("Roletne sačuvane"));
+  loadRoletne();
+};
+
+const saveKomarnici = async () => {
+  await apiFetch(`${API_URL}/komarnik`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(
+      komarnici.map((x) => ({
+        ...x,
+        userId: loggedUser.id,
+      }))
+    ),
+  });
+
+  alert(t("Komarnici sačuvani"));
+  loadKomarnici();
+};
 
 
 
@@ -3456,6 +3555,28 @@ return (
         {t("Sačuvaj okov")}
       </button>
     )}
+
+
+    {activeTab === "Roletna" && (
+  <button
+    onClick={saveRoletne}
+    className="bg-blue-900 text-white px-2 py-1 rounded"
+  >
+    {t("Sačuvaj roletne")}
+  </button>
+)}
+
+{activeTab === "Komarnik" && (
+  <button
+    onClick={saveKomarnici}
+    className="bg-blue-900 text-white px-2 py-1 rounded"
+  >
+    {t("Sačuvaj komarnike")}
+  </button>
+)}
+
+
+
 
     {activeTab === "Parametri" && paramTab === "Valuta" && (
       <button onClick={saveValute} className="bg-blue-900 text-white px-2 py-1 rounded">
@@ -5894,6 +6015,136 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
   </div>
 )}
+
+
+
+
+
+
+
+
+{paramTab === "Roletna" && (
+  <div className="p-4 flex justify-center">
+    <table className="border text-sm w-full max-w-[520px]">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="border p-2">{t("Naziv")}</th>
+          <th className="border p-2 w-[140px]">{t("Cena")}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {Array.from({ length: 15 }).map((_, i) => {
+          const item = roletne[i] || {
+            naziv: `Roletna ${i + 1}`,
+            cena: 0,
+          };
+
+          return (
+            <tr key={i}>
+              <td className="border p-2">
+                <input
+                  className="border w-full p-1"
+                  value={item.naziv || ""}
+                  onChange={(e) => {
+                    const copy = [...roletne];
+                    copy[i] = {
+                      ...item,
+                      naziv: e.target.value,
+                    };
+                    setRoletne(copy);
+                  }}
+                />
+              </td>
+
+              <td className="border p-2">
+                <input
+                  type="number"
+                  className="border w-full p-1 text-right"
+                  value={item.cena || ""}
+                  onChange={(e) => {
+                    const copy = [...roletne];
+                    copy[i] = {
+                      ...item,
+                      cena:
+                        e.target.value === ""
+                          ? ""
+                          : Number(e.target.value),
+                    };
+                    setRoletne(copy);
+                  }}
+                />
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+)}
+
+{paramTab === "Komarnik" && (
+  <div className="p-4 flex justify-center">
+    <table className="border text-sm w-full max-w-[520px]">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="border p-2">{t("Naziv")}</th>
+          <th className="border p-2 w-[140px]">{t("Cena")}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {Array.from({ length: 15 }).map((_, i) => {
+          const item = komarnici[i] || {
+            naziv: `Komarnik ${i + 1}`,
+            cena: 0,
+          };
+
+          return (
+            <tr key={i}>
+              <td className="border p-2">
+                <input
+                  className="border w-full p-1"
+                  value={item.naziv || ""}
+                  onChange={(e) => {
+                    const copy = [...komarnici];
+                    copy[i] = {
+                      ...item,
+                      naziv: e.target.value,
+                    };
+                    setKomarnici(copy);
+                  }}
+                />
+              </td>
+
+              <td className="border p-2">
+                <input
+                  type="number"
+                  className="border w-full p-1 text-right"
+                  value={item.cena || ""}
+                  onChange={(e) => {
+                    const copy = [...komarnici];
+                    copy[i] = {
+                      ...item,
+                      cena:
+                        e.target.value === ""
+                          ? ""
+                          : Number(e.target.value),
+                    };
+                    setKomarnici(copy);
+                  }}
+                />
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+)}
+
+
+
 
 
 
