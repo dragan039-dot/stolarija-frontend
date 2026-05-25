@@ -4293,7 +4293,7 @@ return (
         <th className="border p-2">{t("Kol.")}</th>
         <th className="border p-2">{t("Cena")}</th>
         <th className="border p-2">{t("Ukupno")}</th>
-        <th className="border p-2">{t("Bris.")}</th>
+        <th className="border p-2">{t("")}</th>
       </tr>
     </thead>
 
@@ -4339,7 +4339,7 @@ return (
   <button
     type="button"
     onClick={() => removeExtraItem(i)}
-    className="bg-red-600 text-white w-7 h-7 rounded-full font-bold"
+    className="bg-red-600 text-white w-4 h-4 rounded-full font-bold"
     title={t("Obriši uslugu/proizvod")}
   >
     ×
