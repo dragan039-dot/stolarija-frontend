@@ -3722,7 +3722,7 @@ return (
           <table className="w-full min-w-[860px] border-collapse text-sm table-fixed">
             <thead className="bg-gray-200 sticky top-0">
               <tr>
-<th className="border p-2 w-[90px]">{t("ID")}</th>
+<th className="border p-2 w-[90px]">{t("Br")}</th>
 <th className="border p-2 min-w-[220px]">{t("Naziv")}</th>
 <th className="border p-2 min-w-[160px]">{t("Adresa")}</th>
 <th className="border p-2 w-[160px]">{t("Telefon")}</th>
@@ -4373,8 +4373,8 @@ return (
 
 
 {activeTab === "Ponude" && (
-  <div className="p-4">
-    <h1 className="text-3xl font-bold mb-4">PONUDE</h1>
+  <div>
+    <h1 className="text-3xl font-bold mb-4">{t("PONUDE")}</h1>
 
     
 
@@ -4391,7 +4391,7 @@ return (
           <table className="w-full min-w-[860px] border-collapse text-sm table-fixed">
             <thead className="bg-gray-200 sticky top-0">
               <tr>
-<th className="border p-2 w-[90px]">{t("ID")}</th>
+<th className="border p-2 w-[90px]">{t("Br")}</th>
 <th className="border p-2 min-w-[220px]">{t("Naziv")}</th>
 <th className="border p-2 min-w-[160px]">{t("Adresa")}</th>
 <th className="border p-2 w-[160px]">{t("Telefon")}</th>
@@ -4679,7 +4679,7 @@ console.log("SVE VALUTE:", valute);
 
 
 {activeTab === "Radna lista" && (
-  <div className="p-4">
+  <div>
 
     <h1 className="text-3xl font-bold mb-4">{t("RADNA LISTA")}</h1>
 
@@ -4698,14 +4698,14 @@ console.log("SVE VALUTE:", valute);
       <div style={{ maxHeight: "220px", overflowY: "auto" }}>
         <table className="w-full border-collapse">
           <thead className="bg-gray-200 sticky top-0">
-            <tr>
-              <th className="border p-2">{t("Br")}.</th>
-              <th className="border p-2">{t("Naziv")}</th>
-              <th className="border p-2">{t("Adresa")}</th>
-              <th className="border p-2">{t("Telefon")}</th>
-              <th className="border p-2">{t("PIB")}</th>
-              <th className="border p-2">{t("Datum")}</th>
-            </tr>
+              <tr>
+<th className="border p-2 w-[90px]">{t("Br")}</th>
+<th className="border p-2 min-w-[220px]">{t("Naziv")}</th>
+<th className="border p-2 min-w-[160px]">{t("Adresa")}</th>
+<th className="border p-2 w-[160px]">{t("Telefon")}</th>
+<th className="border p-2 w-[120px]">{t("PIB")}</th>
+<th className="border p-2 w-[110px]">{t("Datum")}</th>
+              </tr>
           </thead>
 
           <tbody>
