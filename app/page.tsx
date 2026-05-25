@@ -4390,35 +4390,32 @@ return (
         <div style={{ maxHeight: "220px", overflowY: "auto" }}>
           <table className="w-full min-w-[860px] border-collapse text-sm table-fixed">
             <thead className="bg-gray-200 sticky top-0">
-            <tr>
-              <th className="border p-2">{t("Br")}.</th>
-              <th className="border p-2">{t("Naziv")}</th>
-              <th className="border p-2">{t("Adresa")}</th>
-              <th className="border p-2">{t("Telefon")}</th>
-              <th className="border p-2">{t("PIB")}</th>
-              <th className="border p-2">{t("Datum")}</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {filteredProposalOffers.map((c: any) => (
-              <tr
-                key={c.id}
-                className="cursor-pointer hover:bg-gray-100"
-                onClick={() => openProposalOffer(c.id)}
-              >
-                <td className="border p-2">{c.brojPonude || c.id}</td>
-                <td className="border p-2">{c.naziv}</td>
-                <td className="border p-2">{c.adresa}</td>
-                <td className="border p-2">{c.telefon}</td>
-                <td className="border p-2">{c.pib}</td>
-                <td className="border p-2">{formatDate(c.datum)}</td>
+              <tr>
+<th className="border p-2 w-[90px]">{t("ID")}</th>
+<th className="border p-2 min-w-[220px]">{t("Naziv")}</th>
+<th className="border p-2 min-w-[160px]">{t("Adresa")}</th>
+<th className="border p-2 w-[160px]">{t("Telefon")}</th>
+<th className="border p-2 w-[120px]">{t("PIB")}</th>
+<th className="border p-2 w-[110px]">{t("Datum")}</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredOffers.map(c => (
+                <tr key={c.id}
+                  className="cursor-pointer hover:bg-gray-100"
+                  onClick={() => openFromTable(c.id)}>
+                  <td className="border p-2">{c.brojPonude || c.id}</td>
+                  <td className="border p-2">{c.naziv}</td>
+                  <td className="border p-2">{c.adresa}</td>
+                  <td className="border p-2">{c.telefon}</td>
+                  <td className="border p-2">{c.pib}</td>
+                  <td className="border p-2">{formatDate(c.datum)}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
 
     {!proposalOffer && (
       <div className="text-gray-500">
