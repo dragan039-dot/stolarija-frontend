@@ -1351,6 +1351,7 @@ const getValue = (profil: string, parametar: string) => {
 
         otvaranje: item.otvaranje || "",
         roletna: item.roletna || "",
+        vrsta_roletne: item.vrsta_roletne || "",
         komarnik: item.komarnik || "",
         kolicina: Number(item.kolicina) || 1,
       };
