@@ -3557,7 +3557,7 @@ return (
     )}
 
 
-    {activeTab === "Roletna" && (
+    {activeTab === "Parametri" && paramTab === "Roletna" && (
   <button
     onClick={saveRoletne}
     className="bg-blue-900 text-white px-2 py-1 rounded"
@@ -3566,7 +3566,7 @@ return (
   </button>
 )}
 
-{activeTab === "Komarnik" && (
+{activeTab === "Parametri" && paramTab === "Komarnik" && (
   <button
     onClick={saveKomarnici}
     className="bg-blue-900 text-white px-2 py-1 rounded"
