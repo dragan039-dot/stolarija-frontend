@@ -3910,13 +3910,10 @@ return (
       className="border p-2"
     />
 
+        <input placeholder={t("Telefon")} value={form.telefon || ""}
+          onChange={e => setForm({ ...form, telefon: e.target.value })}
+          className="border p-2"/>
 
-      <input
-    placeholder={t("Napomena")}
-    value={form.napomena || ""}
-    onChange={(e) => setForm({ ...form, napomena: e.target.value })}
-    className="border p-2"
-  />
 
     </div>
 
@@ -3924,7 +3921,12 @@ return (
   </div>
 
   {/* NAPOMENA PREKO CELE ŠIRINE */}
-
+      <input
+    placeholder={t("Napomena")}
+    value={form.napomena || ""}
+    onChange={(e) => setForm({ ...form, napomena: e.target.value })}
+    className="border p-2"
+  />
 
 </div>
 
