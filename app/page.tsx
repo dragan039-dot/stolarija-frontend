@@ -766,7 +766,9 @@ const imaRoletnu =
     : 0;
 
 const imaKomarnik =
-  firstPosition?.komarnik ? 1 : 0;
+  firstPosition?.komarnik
+    ? 1
+    : 0;
 
     const roletnaCena = firstPosition?.vrsta_roletne
   ? getRoletnaCenaByNaziv(firstPosition.vrsta_roletne)
@@ -1777,7 +1779,9 @@ const imaRoletnu =
     : 0;
 
 const imaKomarnik =
-  firstPosition?.komarnik ? 1 : 0;
+  firstPosition?.komarnik
+    ? 1
+    : 0;
 
 const roletnaCena = firstPosition?.vrsta_roletne
   ? getRoletnaCenaByNaziv(firstPosition.vrsta_roletne)
