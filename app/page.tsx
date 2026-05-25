@@ -4911,6 +4911,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
       <div>{t("Ispuna")}: {getIspunaName(p.ispuna)}</div>
       <div>{t("Okov")}: {getOkovName(p.okov)}</div>
       <div>{t("Roletna")}: <strong>{p.roletna || ""}</strong></div>
+      <div>{t("Vrsta roletne")}: <strong>{p.vrsta_roletne}</strong></div>
       <div>{t("Komarnik")}: <strong>{p.komarnik || ""}</strong></div>
     </div>
 
