@@ -4373,8 +4373,9 @@ return (
 
 
 {activeTab === "Ponude" && (
-  <div className="p-4">
-    <h1 className="text-3xl font-bold mb-4">PONUDE</h1>
+
+
+    <h1 className="text-3xl font-bold mb-4">{t("PONUDE")}</h1>
 
     
 
@@ -4664,7 +4665,6 @@ console.log("SVE VALUTE:", valute);
         </div>
       );
     })()}
-  </div>
 )}
 
 
