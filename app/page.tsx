@@ -4386,10 +4386,10 @@ return (
     />
 
     {/* TABELA */}
-<div className="offer-search-table w-full overflow-x-auto border mb-6">
-      <div style={{ maxHeight: "220px", overflowY: "auto" }}>
-        <table className="w-full border-collapse">
-          <thead className="bg-gray-200 sticky top-0">
+      <div className="border mb-6">
+        <div style={{ maxHeight: "220px", overflowY: "auto" }}>
+          <table className="w-full min-w-[860px] border-collapse text-sm table-fixed">
+            <thead className="bg-gray-200 sticky top-0">
             <tr>
               <th className="border p-2">{t("Br")}.</th>
               <th className="border p-2">{t("Naziv")}</th>
