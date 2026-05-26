@@ -4386,8 +4386,8 @@ return (
     />
 
     {/* TABELA */}
-      <div className="border mb-6">
-        <div style={{ maxHeight: "220px", overflowY: "auto" }}>
+      <div className="no-print border mb-6">
+        <div style={{ maxHeight: "220px", overflowY: "auto"  }}>
           <table className="w-full min-w-[860px] border-collapse text-sm table-fixed">
             <thead className="bg-gray-200 sticky top-0">
               <tr>
@@ -4694,7 +4694,7 @@ console.log("SVE VALUTE:", valute);
 
 
     {/* TABELA PONUDA */}
-      <div className="border mb-6">
+      <div className="no-print border mb-6">
         <div style={{ maxHeight: "220px", overflowY: "auto" }}>
           <table className="w-full min-w-[860px] border-collapse text-sm table-fixed">
             <thead className="bg-gray-200 sticky top-0">
