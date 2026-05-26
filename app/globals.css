@@ -140,12 +140,13 @@ body {
 
 
 button {
-  transition: all 0.15s ease;
+  transition: transform 0.12s ease, filter 0.12s ease, background-color 0.12s ease !important;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button:active {
-  transform: scale(0.95);
-  filter: brightness(0.85);
+  transform: scale(0.94) !important;
+  filter: brightness(0.75) !important;
 }
 
 
