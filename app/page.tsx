@@ -63,6 +63,7 @@ type Position = {
   roletna: string;
   vrsta_roletne: string;
   komarnik: string;
+  dod_element: string;
   kolicina: number;
 };
 
@@ -607,6 +608,7 @@ const deleteParam = async (id: number) => {
   roletna: "",
   vrsta_roletne: "",
   komarnik: "",
+  dod_element: "",
   kolicina: 1,
 });
 
@@ -1964,6 +1966,13 @@ const komarnikCena = p.komarnik
   ? getKomarnikCenaByNaziv(p.komarnik)
   : 0;
 
+  const dodatniElementCena =
+  p.dod_element
+    ? getDodatniElementCenaByNaziv(
+        p.dod_element
+      )
+    : 0;
+
   const plastikaCena = ceneMap["PLASTIKA Cena"] || 0;
 
   const roletnaValue = String(p.roletna || "").trim().toUpperCase();
@@ -2012,6 +2021,7 @@ const imaRoletnu =
       komarnikCena,
       imaOkov,
       imaIspunu,
+      dodatniElementCena,
       userId: loggedUser.id
     }),
   });
@@ -3378,6 +3388,19 @@ const getKomarnikCenaByNaziv = (naziv: string) => {
 };
 
 
+const getDodatniElementCenaByNaziv = (
+  naziv: string
+) => {
+  const found =
+    dodatniElementi.find(
+      (x:any)=>
+        x.naziv===naziv
+    );
+
+  return Number(found?.cena) || 0;
+};
+
+
 const loadDodatniElementi = () => {
   if (!loggedUser?.id) return;
 
@@ -3693,7 +3716,7 @@ return (
 )}
 
 
-{paramTab === "Dod. elementi" && (
+{activeTab === "Parametri" && paramTab === "Dod. elementi" && (
   <button
     onClick={saveDodatniElementi}
     className="bg-blue-900 text-white px-2 py-1 rounded"
@@ -4320,6 +4343,36 @@ return (
     ))}
 </select>
 
+
+<select
+  value={p.dod_element || ""}
+  onChange={(e) =>
+    update(
+      i,
+      "dod_element",
+      e.target.value
+    )
+  }
+  className="border p-2"
+>
+  <option value="">
+    {t("Dod. element")}
+  </option>
+
+  {dodatniElementi
+    .filter((x)=>x.naziv)
+    .map((x)=>(
+      <option
+        key={x.id || x.naziv}
+        value={x.naziv}
+      >
+        {x.naziv}
+      </option>
+    ))}
+</select>
+
+
+
       <input
         placeholder={t("Količina")}
         type="number"
@@ -4650,6 +4703,7 @@ console.log("SVE VALUTE:", valute);
                           {p.roletna && <div>{t("Roletna")}: {p.roletna}</div>}
                           {p.vrsta_roletne && ( <div>{t("Vrsta roletne")}: {p.vrsta_roletne}</div>)}
                           {p.komarnik && <div>{t("Komarnik")}: {p.komarnik}</div>}
+                          {p.dod_element && <div>{t("Dod. element")}:{" "}{p.dod_element}</div>}
                         </div>
                       </div>
                     </td>
