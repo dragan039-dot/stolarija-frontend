@@ -4865,7 +4865,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
     {getProzorImageId(p.vrsta_prozora) ? (
       <img
         src={`/prozori/${getProzorImageId(p.vrsta_prozora)}.jpg`}
-        className="h-40 object-contain mb-3 mx-auto"
+        className="h-20 object-contain mb-3 mx-auto"
       />
     ) : (
       <div className="border h-40 flex items-center justify-center mb-3">
