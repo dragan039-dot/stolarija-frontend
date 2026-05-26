@@ -139,5 +139,15 @@ body {
 }
 
 
+button {
+  transition: all 0.15s ease;
+}
+
+button:active {
+  transform: scale(0.95);
+  filter: brightness(0.85);
+}
+
+
 
 }
