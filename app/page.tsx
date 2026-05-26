@@ -5058,9 +5058,9 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
   {/* 3. POLJE - ELEMENTI */}
   <div className="rounded p-1">
-    <div className="font-bold mb-2">{t("Elementi prozora")}</div>
+    <div className="font-bold text-sm mb-2">{t("Elementi prozora")}</div>
 
-    <table className="w-full border text-sm">
+    <table className="w-full border text-xs">
       <thead className="bg-gray-100">
         <tr>
           <th className="border p-1">{t("Element")}</th>
