@@ -5025,7 +5025,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 
   {/* 2. POLJE - OSTALI PODACI */}
   <div className="rounded p-1 text-xs">
-    <div className="font-bold text-base mb-2">{t("Podaci")}</div>
+    <div className="font-bold text-sm mb-2">{t("Podaci")}</div>
 
     <div className="space-y-2">
       <div>{t("Profil")}: <strong>{getProfilName(p.profil)}</strong></div>
