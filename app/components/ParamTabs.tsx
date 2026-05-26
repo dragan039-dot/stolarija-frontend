@@ -13,6 +13,7 @@ const allTabs = [
   "Okov",
   "Roletna",
   "Komarnik",
+  "Dod. elementi",
   "Valuta",
   "Tehnicki",
   "Cene",

@@ -238,6 +238,8 @@ const [selectedLanguageId, setSelectedLanguageId] = useState("");
 const [roletne, setRoletne] = useState<any[]>([]);
 const [komarnici, setKomarnici] = useState<any[]>([]);
 
+const [dodatniElementi, setDodatniElementi] = useState<any[]>([]);
+
 
 
 
@@ -460,6 +462,7 @@ useEffect(() => {
     loadTranslations();
     loadRoletne();
     loadKomarnici();
+    loadDodatniElementi();
   }
 }, [loggedUser?.id]);
 
@@ -3375,6 +3378,58 @@ const getKomarnikCenaByNaziv = (naziv: string) => {
 };
 
 
+const loadDodatniElementi = () => {
+  if (!loggedUser?.id) return;
+
+  apiFetch(`${API_URL}/dodatni-element?userId=${loggedUser.id}`, {
+    headers: authHeaders(),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      const list = Array.isArray(data) ? data : [];
+
+      setDodatniElementi(
+        Array.from({ length: 15 }, (_, index) => {
+          const item = list[index];
+
+          return {
+            id: item?.id ?? undefined,
+            naziv: item?.naziv || `Dodatni element ${index + 1}`,
+            cena: Number(item?.cena) || 0,
+          };
+        })
+      );
+    })
+    .catch(() => {
+      setDodatniElementi(
+        Array.from({ length: 15 }, (_, index) => ({
+          naziv: `Dodatni element ${index + 1}`,
+          cena: 0,
+        }))
+      );
+    });
+};
+
+
+const saveDodatniElementi = async () => {
+  await apiFetch(`${API_URL}/dodatni-element`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify(
+      dodatniElementi.map((x) => ({
+        ...x,
+        userId: loggedUser.id,
+      }))
+    ),
+  });
+
+  alert(t("Dodatni elementi sačuvani"));
+  loadDodatniElementi();
+};
+
+
+
+
 
 
 
@@ -3634,6 +3689,16 @@ return (
     className="bg-blue-900 text-white px-2 py-1 rounded"
   >
     {t("Sačuvaj komarnike")}
+  </button>
+)}
+
+
+{paramTab === "Dod. elementi" && (
+  <button
+    onClick={saveDodatniElementi}
+    className="bg-blue-600 text-white px-4 py-2 rounded"
+  >
+    {t("Sačuvaj dod. elemente")}
   </button>
 )}
 
@@ -6245,6 +6310,72 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
   </div>
 )}
 
+
+
+
+
+
+
+
+{paramTab === "Dod. elementi" && (
+  <div className="p-4 flex justify-center">
+    <table className="border text-sm w-full max-w-[520px]">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="border p-2">{t("Naziv")}</th>
+          <th className="border p-2 w-[140px]">{t("Cena")}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {Array.from({ length: 15 }).map((_, i) => {
+          const item = dodatniElementi[i] || {
+            naziv: `Dodatni element ${i + 1}`,
+            cena: 0,
+          };
+
+          return (
+            <tr key={i}>
+              <td className="border p-2">
+                <input
+                  className="border w-full p-1"
+                  value={item.naziv || ""}
+                  onChange={(e) => {
+                    const copy = [...dodatniElementi];
+                    copy[i] = {
+                      ...item,
+                      naziv: e.target.value,
+                    };
+                    setDodatniElementi(copy);
+                  }}
+                />
+              </td>
+
+              <td className="border p-2">
+                <input
+                  type="number"
+                  className="border w-full p-1 text-right"
+                  value={item.cena || ""}
+                  onChange={(e) => {
+                    const copy = [...dodatniElementi];
+                    copy[i] = {
+                      ...item,
+                      cena:
+                        e.target.value === ""
+                          ? ""
+                          : Number(e.target.value),
+                    };
+                    setDodatniElementi(copy);
+                  }}
+                />
+              </td>
+            </tr>
+          );
+        })}
+      </tbody>
+    </table>
+  </div>
+)}
 
 
 
