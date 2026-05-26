@@ -4704,7 +4704,7 @@ console.log("SVE VALUTE:", valute);
                           {p.roletna && <div>{t("Roletna")}: {p.roletna}</div>}
                           {p.vrsta_roletne && ( <div>{t("Vrsta roletne")}: {p.vrsta_roletne}</div>)}
                           {p.komarnik && <div>{t("Komarnik")}: {p.komarnik}</div>}
-                          {p.dod_element && <div>{t("Dod. element")}: {p.dod_element}</div>}
+                          {p.dod_element && <div>{t("Dod. element")}:{" "}{p.dod_element}</div>}
                         </div>
                       </div>
                     </td>
