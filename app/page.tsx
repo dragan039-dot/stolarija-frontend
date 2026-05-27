@@ -5533,12 +5533,11 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 <select
   value={u.defaultLanguageId || ""}
   onChange={(e) =>
-    updateAdminUserField(
-      u.id,
-      "defaultLanguageId",
-      e.target.value
-    )
-  }
+  updateAdminUser({
+    ...u,
+    defaultLanguageId: e.target.value,
+  })
+}
   className="border p-1"
 >
   <option value="">SR</option>
