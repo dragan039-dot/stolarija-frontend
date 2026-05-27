@@ -191,6 +191,7 @@ const [newUser, setNewUser] = useState({
   role: "USER",
   licenseEnd: "",
   maxDevices: 1,
+  defaultLanguageId: "",
 });
 
 const [passwordForm, setPasswordForm] = useState({
@@ -5404,6 +5405,27 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
         />
       </div>
 
+<select
+  value={newUser.defaultLanguageId}
+  onChange={(e) =>
+    setNewUser({
+      ...newUser,
+      defaultLanguageId: e.target.value,
+    })
+  }
+  className="border p-2"
+>
+  <option value="">SR</option>
+
+  {languages
+    .filter((l: any) => l.enabled)
+    .map((l: any) => (
+      <option key={l.id} value={l.id}>
+        {l.name}
+      </option>
+    ))}
+</select>
+
       <button
         onClick={createAdminUser}
         className="bg-blue-600 text-white px-4 py-2 rounded mt-3"
@@ -5506,6 +5528,28 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
     }
     className="border p-1"
   />
+
+<select
+  value={u.defaultLanguageId || ""}
+  onChange={(e) =>
+    updateAdminUserField(
+      u.id,
+      "defaultLanguageId",
+      e.target.value
+    )
+  }
+  className="border p-1"
+>
+  <option value="">SR</option>
+
+  {languages
+    .filter((l: any) => l.enabled)
+    .map((l: any) => (
+      <option key={l.id} value={l.id}>
+        {l.name}
+      </option>
+    ))}
+</select>
 
   <button
     onClick={() => adminChangeUserPassword(u.id)}
