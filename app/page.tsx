@@ -2572,11 +2572,11 @@ const createAdminUser = async () => {
   const data = await res.json();
 
   if (!res.ok) {
-    alert(data.message || "Greška pri kreiranju korisnika");
+    alert(data.message || t("Greška pri kreiranju korisnika"));
     return;
   }
 
-  alert("Korisnik je kreiran");
+  alert(t("Korisnik je kreiran"));
 
   setNewUser({
     username: "",
@@ -2584,6 +2584,7 @@ const createAdminUser = async () => {
     role: "USER",
     licenseEnd: "",
     maxDevices: 1,
+    defaultLanguageId: "",
   });
 
   loadAdminUsers();
