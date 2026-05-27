@@ -494,6 +494,11 @@ useEffect(() => {
   document.body.style.overflow = "";
 
   const savedUser = localStorage.getItem("loggedUser");
+  const savedLang = localStorage.getItem("selectedLanguageId");
+
+if (savedLang) {
+  setSelectedLanguageId(savedLang);
+}
 
   if (savedUser) {
     setLoggedUser(JSON.parse(savedUser));
@@ -2462,12 +2467,12 @@ const login = async () => {
     const data = await res.json();
 
     if (!res.ok) {
-      setLoginError(data.message || "Greška pri prijavi");
+      setLoginError(data.message || t("Greška pri prijavi"));
       return;
     }
 
     if (!data.token || !data.user) {
-      setLoginError("Login odgovor nije ispravan");
+      setLoginError(t("Login odgovor nije ispravan"));
       console.log("LOGIN DATA:", data);
       return;
     }
@@ -2475,11 +2480,18 @@ const login = async () => {
     localStorage.setItem("token", data.token);
     localStorage.setItem("loggedUser", JSON.stringify(data.user));
 
+    const langId = data.user?.defaultLanguageId
+      ? String(data.user.defaultLanguageId)
+      : localStorage.getItem("selectedLanguageId") || "";
+
+    setSelectedLanguageId(langId);
+    localStorage.setItem("selectedLanguageId", langId);
+
     setSessionExpiredShown(false);
     setLoggedUser(data.user);
   } catch (err) {
     console.error("LOGIN ERROR:", err);
-    setLoginError("Backend nije dostupan");
+    setLoginError(t("Backend nije dostupan"));
   }
 };
 
@@ -3586,7 +3598,10 @@ return (
 
           <select
   value={selectedLanguageId}
-  onChange={(e) => setSelectedLanguageId(e.target.value)}
+  onChange={(e) => {
+  setSelectedLanguageId(e.target.value);
+  localStorage.setItem("selectedLanguageId", e.target.value);
+}}
   className="border p-1 rounded"
 >
   <option value="">SR</option>
