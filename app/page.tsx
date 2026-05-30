@@ -1038,6 +1038,8 @@ const tehnickiParametri = [
   "Širina profila Štok",
   "Širina profila krilo",
   "Širina profila T prečka",
+  "Širina profila Prag",
+"Širina profila Gornja vođica",
   "Zazor za staklo",
   "Preklop kod krila",
   "Preklop kod šloge",
@@ -1065,10 +1067,14 @@ const elementi = [
   "ŠTOK",
   "KRILO",
   "T prečka",
+  "Prag",
+"Gornja vođica",
   "ŠLOGA",
   "ČELIK",
   "LAJSNA",
   "PLASTIKA",
+  "Čepovi šloge",
+"Dihtung guma",
   "ALU Spojnica Štok 1",
 "ALU Spojnica Štok 2",
 "ALU Spojnica Štok 3",
@@ -1116,7 +1122,13 @@ const sviFormulaElementi = [
 "ALU Spojnica Krilo 3",
 "ALU Spojnica Krilo 4",
   "Roletna",
-  "Komarnik"
+  "Komarnik",
+  "Prag",
+"Čelik za Prag",
+"Gornja vođica",
+"Čelik za Gornju vođicu",
+"Čepovi šloge",
+"Dihtung guma",
 ];
 
 
