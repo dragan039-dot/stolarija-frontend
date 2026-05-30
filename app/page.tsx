@@ -53,6 +53,7 @@ type Position = {
   b: number;
   c: number;
   d: number;
+  e: number;
   profil: string;
   profilId?: string | number;
   ispuna: string;
@@ -607,6 +608,7 @@ const deleteParam = async (id: number) => {
   b: 0,
   c: 0,
   d: 0,
+  e: 0,
   profil: "",
   ispuna: "",
   okov: "",
@@ -1349,6 +1351,7 @@ const getValue = (profil: string, parametar: string) => {
         b: Number(item.b) || 0,
         c: Number(item.c) || 0,
         d: Number(item.d) || 0,
+        e: Number(item.e) || 0,
 
         profilId: item.profil ? Number(item.profil) : "",
         ispunaId: item.ispuna ? Number(item.ispuna) : "",
@@ -2084,6 +2087,7 @@ if (requiredDims.includes("a") && !p.a) missing.push("A");
 if (requiredDims.includes("b") && !p.b) missing.push("B");
 if (requiredDims.includes("c") && !p.c) missing.push("C");
 if (requiredDims.includes("d") && !p.d) missing.push("D");
+if (requiredDims.includes("e") && !p.e) missing.push("E");
 
     if (missing.length > 0) continue;
 
@@ -4193,6 +4197,19 @@ return (
           />
         </div>
       )}
+
+      {showField(p.vrsta_prozora, "e") && (
+        <div>
+          <label className="text-xs font-semibold">E</label>
+          <input
+            type="number"
+            value={p.d || ""}
+            onChange={(e) => update(i, "e", Number(e.target.value))}
+            className="border p-1 w-full text-sm"
+          />
+        </div>
+      )}
+
     </div>
 
 
@@ -4708,6 +4725,7 @@ console.log("SVE VALUTE:", valute);
                             {getVisibleDimensions(p.vrsta_prozora).includes("b") && <div>B={p.b} mm</div>}
                             {getVisibleDimensions(p.vrsta_prozora).includes("c") && <div>C={p.c} mm</div>}
                             {getVisibleDimensions(p.vrsta_prozora).includes("d") && <div>D={p.d} mm</div>}
+                            {getVisibleDimensions(p.vrsta_prozora).includes("e") && <div>D={p.e} {t("krila")}</div>}
                           </div>
                         </div>
 
@@ -4966,6 +4984,7 @@ if (requiredDims.includes("a") && !p.a) missing.push("A");
 if (requiredDims.includes("b") && !p.b) missing.push("B");
 if (requiredDims.includes("c") && !p.c) missing.push("C");
 if (requiredDims.includes("d") && !p.d) missing.push("D");
+if (requiredDims.includes("e") && !p.e) missing.push("E");
 
             return (
               <div key={p.id || index} className="mb-8 border-t pt-4">
@@ -5034,6 +5053,11 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
       {getVisibleDimensions(p.vrsta_prozora).includes("d") && (
         <div>D = {p.d} mm</div>
       )}
+
+      {getVisibleDimensions(p.vrsta_prozora).includes("e") && (
+        <div>E = {p.e} {t("krila")}</div>
+      )}
+
     </div>
   </div>
 
