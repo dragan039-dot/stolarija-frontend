@@ -1095,6 +1095,10 @@ const sviFormulaElementi = [
 "Čelik za štok",
 "Lajsna za štok",
 "Ispuna za štok",
+"Prag",
+"Čelik za Prag",
+"Gornja vođica",
+"Čelik za Gornju vođicu",
 "Krilo 1",
 "Čelik za krilo 1",
 "Lajsna za krilo 1",
@@ -1110,6 +1114,8 @@ const sviFormulaElementi = [
 "Lajsna za nadsvetlo",
 "Ispuna za nadsvetlo",
 "Šloga",
+"Čepovi šloge",
+"Dihtung guma",
 "ALU Spojnica Štok 1",
 "ALU Spojnica Štok 2",
 "ALU Spojnica Štok 3",
@@ -1123,12 +1129,7 @@ const sviFormulaElementi = [
 "ALU Spojnica Krilo 4",
   "Roletna",
   "Komarnik",
-  "Prag",
-"Čelik za Prag",
-"Gornja vođica",
-"Čelik za Gornju vođicu",
-"Čepovi šloge",
-"Dihtung guma",
+  
 ];
 
 
