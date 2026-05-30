@@ -803,6 +803,7 @@ const A = Number(firstPosition?.a) || 0;
 const B = Number(firstPosition?.b) || 0;
 const C = Number(firstPosition?.c) || 0;
 const D = Number(firstPosition?.d) || 0;
+const E = Number(firstPosition?.e) || 0;
   
 
   const res = await apiFetch(`${API_URL}/profile/calculate`, {
@@ -813,6 +814,7 @@ const D = Number(firstPosition?.d) || 0;
   B,
   C,
   D,
+  E,
   vrstaStolarije: firstPosition?.vrsta_stolarije || "",
   vrstaProzora: firstPosition?.vrsta_prozora || "",
   tehnicki: tehnickiMap,
@@ -851,6 +853,7 @@ const A = Number(firstPosition?.a) || 0;
 const B = Number(firstPosition?.b) || 0;
 const C = Number(firstPosition?.c) || 0;
 const D = Number(firstPosition?.d) || 0;
+const E = Number(firstPosition?.e) || 0;
 
 
 
@@ -863,6 +866,7 @@ const D = Number(firstPosition?.d) || 0;
         B,
         C,
         D,
+        E,
         tehnicki: tehnickiValues,
         cene: priceValues,
         userId: loggedUser.id
@@ -965,6 +969,17 @@ const saveFormule = async () => {
     { id: 19, naziv: "Prozor + fiks (nadsvetlo-kip)" },
     { id: 20, naziv: "Dvokrilni prozor (šloga, nadsvetlo-kip)" },
     { id: 21, naziv: "Dvokrilni prozor (T-prečka, nadsvetlo-kip)" },
+    { id: 22, naziv: "Klizni standardni" },
+    { id: 23, naziv: "Preklopno-klizni sistem" },
+    { id: 24, naziv: "Harmonika sistem" },
+    { id: 25, naziv: "Dvokrilni (krilo + fiks)" },
+    { id: 26, naziv: "Dvokrilni (2 krila)" },
+    { id: 27, naziv: "Trokrilni (krilo + 2 fiksa)" },
+    { id: 28, naziv: "Trokrilni (2 krila + fiks)" },
+    { id: 29, naziv: "Trokrilni (3 krila)" },
+    { id: 30, naziv: "Četvorokrilni (4 krila)" },
+    { id: 31, naziv: "Četvorokrilni (2 krila + 2 fiksa)" },
+    { id: 32, naziv: "Šestokrilni" },
   ];
 
   const dimensionRules: Record<string, string[]> = {
@@ -979,6 +994,14 @@ const saveFormule = async () => {
   "Trokrilni prozor (2 fiksa) A": ["a", "b"],
   "Trokrilni prozor (fiks + T-prečka) A": ["a", "b"],
   "Trokrilni prozor (fiks + šloga) A": ["a", "b"],
+  "Dvokrilni (krilo + fiks)": ["a", "b"],
+"Dvokrilni (2 krila)": ["a", "b"],
+"Trokrilni (krilo + 2 fiksa)": ["a", "b"],
+"Trokrilni (2 krila + fiks)": ["a", "b"],
+"Trokrilni (3 krila)": ["a", "b"],
+"Četvorokrilni (4 krila)": ["a", "b"],
+"Četvorokrilni (2 krila + 2 fiksa)": ["a", "b"],
+"Šestokrilni": ["a", "b"],
 
   // A B C
   "Trokrilni prozor (2 fiksa)": ["a", "b", "c"],
@@ -994,6 +1017,13 @@ const saveFormule = async () => {
   "Prozor + fiks (nadsvetlo-kip)": ["a", "b", "d"],
   "Dvokrilni prozor (šloga, nadsvetlo-kip)": ["a", "b", "d"],
   "Dvokrilni prozor (T-prečka, nadsvetlo-kip)": ["a", "b", "d"],
+
+  // A B E
+"Klizni standardni": ["a", "b", "e"],
+"Preklopno-klizni sistem": ["a", "b", "e"],
+"Harmonika sistem": ["a", "b", "e"],
+
+
 };
 
 const showField = (type: string, field: string) => {
@@ -1819,6 +1849,7 @@ const A = Number(firstPosition?.a) || 0;
 const B = Number(firstPosition?.b) || 0;
 const C = Number(firstPosition?.c) || 0;
 const D = Number(firstPosition?.d) || 0;
+const E = Number(firstPosition?.e) || 0;
 
   
 
@@ -1832,6 +1863,7 @@ const D = Number(firstPosition?.d) || 0;
     B,
     C,
     D,
+    E,
     vrstaStolarije: firstPosition?.vrsta_stolarije || "",
 vrstaProzora: firstPosition?.vrsta_prozora || "",
     tehnicki: tehnickiMap,
@@ -2013,6 +2045,7 @@ const imaRoletnu =
       B: Number(p.b) || 0,
       C: Number(p.c) || 0,
       D: Number(p.d) || 0,
+      E: Number(p.e) || 0,
 
       vrstaStolarije: p.vrsta_stolarije || "",
       vrstaProzora: p.vrsta_prozora || "",
@@ -4138,6 +4171,29 @@ return (
       ))}
 
   </optgroup>
+
+<optgroup label={t("Klizni sistem")}>
+  {[22, 23, 24]
+    .map((id) => prozori.find((p) => p.id === id))
+    .filter(Boolean)
+    .map((x: any) => (
+      <option key={x.id} value={x.naziv}>
+        {t(x.naziv)}
+      </option>
+    ))}
+</optgroup>
+
+<optgroup label={t("Podizno-klizni sistem")}>
+  {[25, 26, 27, 28, 29, 30, 31, 32]
+    .map((id) => prozori.find((p) => p.id === id))
+    .filter(Boolean)
+    .map((x: any) => (
+      <option key={x.id} value={x.naziv}>
+        {t(x.naziv)}
+      </option>
+    ))}
+</optgroup>
+
 </select>
 </div>
 
@@ -4203,7 +4259,7 @@ return (
           <label className="text-xs font-semibold">E</label>
           <input
             type="number"
-            value={p.d || ""}
+            value={p.e || ""}
             onChange={(e) => update(i, "e", Number(e.target.value))}
             className="border p-1 w-full text-sm"
           />
@@ -4725,7 +4781,7 @@ console.log("SVE VALUTE:", valute);
                             {getVisibleDimensions(p.vrsta_prozora).includes("b") && <div>B={p.b} mm</div>}
                             {getVisibleDimensions(p.vrsta_prozora).includes("c") && <div>C={p.c} mm</div>}
                             {getVisibleDimensions(p.vrsta_prozora).includes("d") && <div>D={p.d} mm</div>}
-                            {getVisibleDimensions(p.vrsta_prozora).includes("e") && <div>D={p.e} {t("krila")}</div>}
+                            {getVisibleDimensions(p.vrsta_prozora).includes("e") && <div>E={p.e} {t("krila")}</div>}
                           </div>
                         </div>
 
