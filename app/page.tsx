@@ -5187,26 +5187,37 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
       <tbody>
         {(worklistResults[index] || [])
-          .filter((r: any) => {
-            if (r.element === "Ukupna cena" || r.element === "Cena") return false;
+.filter((r: any) => {
+  if (
+    r.element === "Ukupna cena" ||
+    r.element === "Cena"
+  ) {
+    return false;
+  }
 
-            const isAluSpojnica =
-              r.element.includes("Spojnica") ||
-              r.element.includes("(kom)");
+  const isAluSpojnica =
+    r.element.includes("Spojnica") ||
+    r.element.includes("(kom)");
 
-            if (
-              isAluSpojnica &&
-              String(p.vrsta_stolarije).toUpperCase() !== "ALU"
-            ) {
-              return false;
-            }
+  if (
+    isAluSpojnica &&
+    String(p.vrsta_stolarije).toUpperCase() !== "ALU"
+  ) {
+    return false;
+  }
 
-            if (r.element === "Roletna" && !p.roletna) return false;
-            if (r.element === "Komarnik" && !p.komarnik) return false;
-            if (r.element === "Okov" && !p.okov) return false;
+  if (r.element === "Roletna" && !p.roletna) return false;
+  if (r.element === "Komarnik" && !p.komarnik) return false;
+  if (r.element === "Okov" && !p.okov) return false;
 
-            return Number(r.S) > 0 || Number(r.V) > 0 || isAluSpojnica;
-          })
+  return (
+    Number(r.S) > 0 ||
+    Number(r.V) > 0 ||
+    Number(r.kom) > 0 ||
+    Number(r.cena) > 0 ||
+    isAluSpojnica
+  );
+})
           .map((r: any, ri: number) => (
             <tr key={ri}>
               <td className="border p-1 font-semibold">{r.element}</td>
