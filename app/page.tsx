@@ -5085,13 +5085,16 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
   {t("Vrsta stolarije")}: <strong>{p.vrsta_stolarije}</strong>
 </div>
 
-{/* 1. POLJE - SLIKA + DIMENZIJE + PODACI */}
-<div className="rounded p-1">
 
-  {/* GORNJI DEO */}
-  <div className="flex gap-4 mb-4">
 
-    {/* SLIKA */}
+
+
+{/* 1. POLJE - SLIKA, DIMENZIJE I PODACI */}
+<div className="rounded p-1 text-xs">
+
+  {/* GORE: SLIKA LEVO, DIMENZIJE DESNO */}
+  <div className="flex gap-4 items-start mb-3">
+
     <div className="flex-1">
       {getProzorImageId(p.vrsta_prozora) ? (
         <img
@@ -5105,90 +5108,53 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
       )}
     </div>
 
-    {/* DIMENZIJE */}
-    <div className="w-40">
-      <div className="font-bold text-sm mb-2">
+    <div className="w-32 font-semibold text-xs">
+      <div className="font-bold text-sm mb-1">
         {t("Dimenzije")}
       </div>
 
-      <div className="space-y-1 font-semibold text-sm">
+      {getVisibleDimensions(p.vrsta_prozora).includes("a") && (
+        <div>A = {p.a} mm</div>
+      )}
 
-        {getVisibleDimensions(p.vrsta_prozora).includes("a") && (
-          <div>A = {p.a} mm</div>
-        )}
+      {getVisibleDimensions(p.vrsta_prozora).includes("b") && (
+        <div>B = {p.b} mm</div>
+      )}
 
-        {getVisibleDimensions(p.vrsta_prozora).includes("b") && (
-          <div>B = {p.b} mm</div>
-        )}
+      {getVisibleDimensions(p.vrsta_prozora).includes("c") && (
+        <div>C = {p.c} mm</div>
+      )}
 
-        {getVisibleDimensions(p.vrsta_prozora).includes("c") && (
-          <div>C = {p.c} mm</div>
-        )}
+      {getVisibleDimensions(p.vrsta_prozora).includes("d") && (
+        <div>D = {p.d} mm</div>
+      )}
 
-        {getVisibleDimensions(p.vrsta_prozora).includes("d") && (
-          <div>D = {p.d} mm</div>
-        )}
-
-        {getVisibleDimensions(p.vrsta_prozora).includes("e") && (
-          <div>
-            E = {p.e} {t("krila")}
-          </div>
-        )}
-
-      </div>
+      {getVisibleDimensions(p.vrsta_prozora).includes("e") && (
+        <div>E = {p.e} {t("krila")}</div>
+      )}
     </div>
   </div>
 
-  {/* DONJI DEO - PODACI */}
-  <div className="rounded p-1 text-xs">
-
-    <div className="font-bold text-sm mb-2">
+  {/* DOLE: PODACI U JEDNOJ KOLONI */}
+  <div>
+    <div className="font-bold text-sm mb-1">
       {t("Podaci")}
     </div>
 
-    <div className="grid grid-cols-2 gap-x-6 gap-y-1">
-
-      <div>
-        {t("Profil")}:{" "}
-        <strong>{getProfilName(p.profil)}</strong>
-      </div>
-
-      <div>
-        {t("Otvaranje")}:{" "}
-        <strong>{p.otvaranje || ""}</strong>
-      </div>
-
-      <div>
-        {t("Ispuna")}: {getIspunaName(p.ispuna)}
-      </div>
-
-      <div>
-        {t("Okov")}: {getOkovName(p.okov)}
-      </div>
-
-      <div>
-        {t("Roletna")}:{" "}
-        <strong>{p.roletna || ""}</strong>
-      </div>
-
-      <div>
-        {t("Vrsta roletne")}:{" "}
-        <strong>{p.vrsta_roletne}</strong>
-      </div>
-
-      <div>
-        {t("Komarnik")}:{" "}
-        <strong>{p.komarnik || ""}</strong>
-      </div>
-
-      <div>
-        {t("Dod. element")}:{" "}
-        <strong>{p.dod_element}</strong>
-      </div>
-
+    <div className="space-y-1">
+      <div>{t("Profil")}: <strong>{getProfilName(p.profil)}</strong></div>
+      <div>{t("Otvaranje")}: <strong>{p.otvaranje || ""}</strong></div>
+      <div>{t("Ispuna")}: {getIspunaName(p.ispuna)}</div>
+      <div>{t("Okov")}: {getOkovName(p.okov)}</div>
+      <div>{t("Roletna")}: <strong>{p.roletna || ""}</strong></div>
+      <div>{t("Vrsta roletne")}: <strong>{p.vrsta_roletne}</strong></div>
+      <div>{t("Komarnik")}: <strong>{p.komarnik || ""}</strong></div>
+      <div>{t("Dod. element")}: <strong>{p.dod_element}</strong></div>
     </div>
-
   </div>
+
+</div>
+
 
 
 
