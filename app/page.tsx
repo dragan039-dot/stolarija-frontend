@@ -5091,81 +5091,101 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
 <div className="grid grid-cols-2 gap-4 text-sm">
 
-
-  {/* 1. POLJE - SLIKA I DIMENZIJE */}
+  {/* 1. POLJE - SLIKA, DIMENZIJE I PODACI */}
   <div className="rounded p-1">
-    {getProzorImageId(p.vrsta_prozora) ? (
-      <img
-        src={`/prozori/${getProzorImageId(p.vrsta_prozora)}.jpg`}
-        className="h-30 object-contain mb-3 mx-auto"
-      />
-    ) : (
-      <div className="border h-40 flex items-center justify-center mb-3">
-        {t("Slika prozora")}
+
+    {/* GORE: SLIKA LEVO, DIMENZIJE DESNO */}
+    <div className="grid grid-cols-2 gap-3 mb-3 items-start">
+
+      <div>
+        {getProzorImageId(p.vrsta_prozora) ? (
+          <img
+            src={`/prozori/${getProzorImageId(p.vrsta_prozora)}.jpg`}
+            className="h-30 object-contain mx-auto"
+          />
+        ) : (
+          <div className="border h-40 flex items-center justify-center">
+            {t("Slika prozora")}
+          </div>
+        )}
       </div>
-    )}
 
+      <div className="rounded p-1 text-xs">
+        <div className="font-bold text-sm mb-2">
+          {t("Dimenzije")}
+        </div>
 
-</div>
+        <div className="space-y-1 font-semibold">
+          {getVisibleDimensions(p.vrsta_prozora).includes("a") && (
+            <div>A = {p.a} mm</div>
+          )}
 
+          {getVisibleDimensions(p.vrsta_prozora).includes("b") && (
+            <div>B = {p.b} mm</div>
+          )}
 
+          {getVisibleDimensions(p.vrsta_prozora).includes("c") && (
+            <div>C = {p.c} mm</div>
+          )}
 
+          {getVisibleDimensions(p.vrsta_prozora).includes("d") && (
+            <div>D = {p.d} mm</div>
+          )}
 
-<div className="grid grid-cols-2 gap-4 text-sm">
-  <div className="rounded p-1">
-
-
-    <div className="space-y-1 font-semibold">
-      {getVisibleDimensions(p.vrsta_prozora).includes("a") && (
-        <div>A = {p.a} mm</div>
-      )}
-
-      {getVisibleDimensions(p.vrsta_prozora).includes("b") && (
-        <div>B = {p.b} mm</div>
-      )}
-
-      {getVisibleDimensions(p.vrsta_prozora).includes("c") && (
-        <div>C = {p.c} mm</div>
-      )}
-
-      {getVisibleDimensions(p.vrsta_prozora).includes("d") && (
-        <div>D = {p.d} mm</div>
-      )}
-
-      {getVisibleDimensions(p.vrsta_prozora).includes("e") && (
-        <div>E = {p.e} {t("krila")}</div>
-      )}
-
-    </div>
-  </div>
-
-
-
-
-  {/* 2. POLJE - OSTALI PODACI */}
-  <div className="rounded p-1 text-xs">
-    <div className="font-bold text-sm mb-2">{t("Podaci")}</div>
-
-    <div className="space-y-2">
-      <div>{t("Profil")}: <strong>{getProfilName(p.profil)}</strong></div>
-      <div>{t("Otvaranje")}: <strong>{p.otvaranje || ""}</strong></div>
-      <div>{t("Ispuna")}: {getIspunaName(p.ispuna)}</div>
-      <div>{t("Okov")}: {getOkovName(p.okov)}</div>
-      <div>{t("Roletna")}: <strong>{p.roletna || ""}</strong></div>
-      <div>{t("Vrsta roletne")}: <strong>{p.vrsta_roletne}</strong></div>
-      <div>{t("Komarnik")}: <strong>{p.komarnik || ""}</strong></div>
-      <div>{t("Dod. element")}:{" "} <strong>{p.dod_element}</strong></div>
-     
+          {getVisibleDimensions(p.vrsta_prozora).includes("e") && (
+            <div>
+              E = {p.e} {t("krila")}
+            </div>
+          )}
+        </div>
+      </div>
     </div>
 
+    {/* DOLE: PODACI U JEDNOJ KOLONI */}
+    <div className="rounded p-1 text-xs">
+      <div className="font-bold text-sm mb-2">
+        {t("Podaci")}
+      </div>
+
+      <div className="space-y-1">
+        <div>
+          {t("Profil")}: <strong>{getProfilName(p.profil)}</strong>
+        </div>
+
+        <div>
+          {t("Otvaranje")}: <strong>{p.otvaranje || ""}</strong>
+        </div>
+
+        <div>
+          {t("Ispuna")}: {getIspunaName(p.ispuna)}
+        </div>
+
+        <div>
+          {t("Okov")}: {getOkovName(p.okov)}
+        </div>
+
+        <div>
+          {t("Roletna")}: <strong>{p.roletna || ""}</strong>
+        </div>
+
+        {p.vrsta_roletne && (
+          <div>
+            {t("Vrsta roletne")}: <strong>{p.vrsta_roletne}</strong>
+          </div>
+        )}
+
+        <div>
+          {t("Komarnik")}: <strong>{p.komarnik || ""}</strong>
+        </div>
+
+        {p.dod_element && (
+          <div>
+            {t("Dod. element")}: <strong>{p.dod_element}</strong>
+          </div>
+        )}
+      </div>
+    </div>
   </div>
-
-
-
-
-  </div>
-
-
 
 
 
