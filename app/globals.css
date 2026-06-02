@@ -82,7 +82,7 @@ body {
 
   body.print-proposal::after,
   body.print-worklist::after {
-    content: "www.k&msoft.com";
+    content: "www.pvckalkulator.com";
     position: fixed;
     left: 10mm;
     bottom: 5mm;

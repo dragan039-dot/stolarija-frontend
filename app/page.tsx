@@ -7884,7 +7884,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
 
 
 <div className="fixed bottom-0 left-0 right-0 bg-white border-t text-center text-xs text-gray-600 py-1 z-50">
-  © {new Date().getFullYear()} www.sajt.com - {t("Sva prava zadržana")}
+  © {new Date().getFullYear()} www.pvckalkulator.com - {t("Sva prava zadržana")}
 </div>
 
       </main>
