@@ -243,6 +243,7 @@ const [komarnici, setKomarnici] = useState<any[]>([]);
 
 const [dodatniElementi, setDodatniElementi] = useState<any[]>([]);
 
+const [siteRequests, setSiteRequests] = useState<any[]>([]);
 
 
 
@@ -3518,6 +3519,26 @@ const saveDodatniElementi = async () => {
   loadDodatniElementi();
 };
 
+const loadSiteRequests = async () => {
+  const res = await apiFetch(`${API_URL}/site-requests`, {
+    headers: authHeaders(),
+  });
+
+  const data = await res.json();
+  setSiteRequests(Array.isArray(data) ? data : []);
+};
+
+const deleteSiteRequest = async (id: number) => {
+  if (!confirm("Da li sigurno želite da obrišete zahtev?")) return;
+
+  await apiFetch(`${API_URL}/site-requests/${id}`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
+
+  loadSiteRequests();
+};
+
 
 
 
@@ -5986,6 +6007,77 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
       ))}
     </tbody>
   </table>
+</div>
+
+
+
+
+<div className="border rounded p-4 bg-white mt-6">
+  <div className="flex justify-between items-center mb-3">
+    <h2 className="text-xl font-bold">
+      Zahtevi sa sajta
+    </h2>
+
+    <button
+      onClick={loadSiteRequests}
+      className="bg-blue-600 text-white px-4 py-2 rounded"
+    >
+      Učitaj zahteve
+    </button>
+  </div>
+
+  <div className="overflow-x-auto">
+    <table className="w-full min-w-[900px] text-sm border">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="border p-2">Datum</th>
+          <th className="border p-2">Firma</th>
+          <th className="border p-2">PIB</th>
+          <th className="border p-2">Kontakt osoba</th>
+          <th className="border p-2">Telefon</th>
+          <th className="border p-2">Email</th>
+          <th className="border p-2">Broj korisnika</th>
+          <th className="border p-2">Poruka</th>
+          <th className="border p-2">Brisanje</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {siteRequests.map((r: any) => (
+          <tr key={r.id}>
+            <td className="border p-2">
+              {r.createdAt ? formatDate(r.createdAt) : ""}
+            </td>
+            <td className="border p-2">{r.firma}</td>
+            <td className="border p-2">{r.pib}</td>
+            <td className="border p-2">{r.kontaktOsoba}</td>
+            <td className="border p-2">{r.telefon}</td>
+            <td className="border p-2">{r.email}</td>
+            <td className="border p-2">{r.brojKorisnika}</td>
+            <td className="border p-2 max-w-[260px] whitespace-pre-wrap">
+              {r.poruka}
+            </td>
+            <td className="border p-2 text-center">
+              <button
+                onClick={() => deleteSiteRequest(r.id)}
+                className="bg-red-600 text-white px-3 py-1 rounded"
+              >
+                Obriši
+              </button>
+            </td>
+          </tr>
+        ))}
+
+        {siteRequests.length === 0 && (
+          <tr>
+            <td className="border p-3 text-gray-500" colSpan={9}>
+              Nema učitanih zahteva.
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 
