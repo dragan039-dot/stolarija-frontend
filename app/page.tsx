@@ -3543,7 +3543,7 @@ const updateSiteRequest = async (
   status: string,
   adminNapomena: string
 ) => {
-  await apiFetch(`${API_URL}/site-requests/${id}`, {
+  const res = await apiFetch(`${API_URL}/site-requests/${id}`, {
     method: "PUT",
     headers: {
       ...authHeaders(),
@@ -3555,6 +3555,13 @@ const updateSiteRequest = async (
     }),
   });
 
+  if (!res.ok) {
+    const data = await res.json();
+    alert(data.message || "Greška pri čuvanju zahteva");
+    return;
+  }
+
+  alert("Zahtev je sačuvan");
   loadSiteRequests();
 };
 
