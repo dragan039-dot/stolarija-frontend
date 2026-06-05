@@ -111,7 +111,7 @@ const sendRequest = async () => {
           </div>
 
           <a
-            href="/"
+            href="https://app.pvckalkulator.com"
             className="rounded-xl bg-blue-500 px-7 py-3 text-center font-bold text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
           >
             Login
@@ -155,7 +155,7 @@ const sendRequest = async () => {
 
               <div className="flex flex-col gap-3 sm:flex-row">
                 <a
-                  href="/"
+                  href="https://app.pvckalkulator.com"
                   className="rounded-xl bg-blue-500 px-8 py-4 text-center text-lg font-black shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
                 >
                   Prijavi se u aplikaciju
