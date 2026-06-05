@@ -151,7 +151,6 @@ const [translations, setTranslations] = useState<any[]>([]);
 
 
 
-
 const safeProfili = Array.isArray(params.profil)
   ? params.profil
   : [];
@@ -245,7 +244,7 @@ const [dodatniElementi, setDodatniElementi] = useState<any[]>([]);
 
 const [siteRequests, setSiteRequests] = useState<any[]>([]);
 
-
+const [siteRequestSearch, setSiteRequestSearch] = useState("");
 
 
 
@@ -3539,6 +3538,38 @@ const deleteSiteRequest = async (id: number) => {
   loadSiteRequests();
 };
 
+const updateSiteRequest = async (
+  id: number,
+  status: string,
+  adminNapomena: string
+) => {
+  await apiFetch(`${API_URL}/site-requests/${id}`, {
+    method: "PUT",
+    headers: {
+      ...authHeaders(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      status,
+      adminNapomena,
+    }),
+  });
+
+  loadSiteRequests();
+};
+
+
+const filteredSiteRequests = siteRequests.filter((r: any) => {
+  const search = siteRequestSearch.toLowerCase();
+
+  return (
+    (r.firma || "").toLowerCase().includes(search) ||
+    (r.pib || "").toLowerCase().includes(search) ||
+    (r.telefon || "").toLowerCase().includes(search) ||
+    (r.email || "").toLowerCase().includes(search)
+  );
+});
+
 
 
 
@@ -6026,7 +6057,15 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
     </button>
   </div>
 
-  <div className="overflow-x-auto">
+<input
+  type="text"
+  placeholder="Pretraga po firmi, PIB-u, telefonu ili email-u..."
+  className="border rounded px-3 py-2 w-full mb-3"
+  value={siteRequestSearch}
+  onChange={(e) => setSiteRequestSearch(e.target.value)}
+/>
+
+  <div className="overflow-x-auto overflow-y-auto max-h-[400px]">
     <table className="w-full min-w-[900px] text-sm border">
       <thead className="bg-gray-200">
         <tr>
@@ -6038,12 +6077,17 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
           <th className="border p-2">Email</th>
           <th className="border p-2">Broj korisnika</th>
           <th className="border p-2">Poruka</th>
+          <th className="border p-2">Status</th>
+<th className="border p-2">Napomena</th>
+<th className="border p-2">Sačuvaj</th>
           <th className="border p-2">Brisanje</th>
         </tr>
       </thead>
 
+
+
       <tbody>
-        {siteRequests.map((r: any) => (
+        {filteredSiteRequests.map((r: any) => (
           <tr key={r.id}>
             <td className="border p-2">
               {r.createdAt ? formatDate(r.createdAt) : ""}
@@ -6057,6 +6101,52 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
             <td className="border p-2 max-w-[260px] whitespace-pre-wrap">
               {r.poruka}
             </td>
+
+<td className="border p-2">
+  <select
+    defaultValue={r.status || "Novi"}
+    id={`status-${r.id}`}
+    className="border rounded p-1"
+  >
+    <option>Novi</option>
+    <option>Kontaktiran</option>
+    <option>Poslata ponuda</option>
+    <option>Pretplaćen</option>
+    <option>Odbijen</option>
+  </select>
+</td>
+
+<td className="border p-2">
+  <textarea
+    id={`napomena-${r.id}`}
+    defaultValue={r.adminNapomena || ""}
+    className="border rounded p-1 w-full min-w-[180px]"
+  />
+</td>
+
+<td className="border p-2 text-center">
+  <button
+    onClick={() =>
+      updateSiteRequest(
+        r.id,
+        (
+          document.getElementById(
+            `status-${r.id}`
+          ) as HTMLSelectElement
+        ).value,
+        (
+          document.getElementById(
+            `napomena-${r.id}`
+          ) as HTMLTextAreaElement
+        ).value
+      )
+    }
+    className="bg-green-600 text-white px-3 py-1 rounded"
+  >
+    Sačuvaj
+  </button>
+</td>
+
             <td className="border p-2 text-center">
               <button
                 onClick={() => deleteSiteRequest(r.id)}
