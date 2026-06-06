@@ -97,6 +97,28 @@ const sendRequest = async () => {
     },
   ];
 
+
+
+const packages = [
+  "START - 2 uređaja - 99 € godišnje",
+  "BUSINESS - 5 uređaja - 199 € godišnje",
+  "PRO - 10 uređaja - 299 € godišnje",
+  "ENTERPRISE - 20 uređaja - 599 € / 10 godina",
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <header className="sticky top-0 z-50 border-b border-white/10 bg-slate-950/90 backdrop-blur">
@@ -148,9 +170,9 @@ const sendRequest = async () => {
               </h1>
 
               <p className="mb-8 max-w-xl text-lg text-slate-300">
-                PVC Kalkulator omogućava firmama da brzo kreiraju ponude,
-                radne naloge, obračun elemenata, PDF dokumente i da upravljaju
-                parametrima, cenama, korisnicima i jezicima.
+                PVC Kalkulator omogućava firmama da izrade ponudu i radnu listu
+u svega nekoliko klikova, uz automatski obračun elemenata, cena
+i PDF dokumenata.
               </p>
 
               <div className="flex flex-col gap-3 sm:flex-row">
@@ -361,17 +383,24 @@ const sendRequest = async () => {
     }
   />
 
-  <input
-    className="rounded-xl border border-white/10 bg-slate-900 p-3 md:col-span-2"
-    placeholder="Broj korisnika"
-    value={requestForm.brojKorisnika}
-    onChange={(e) =>
-      setRequestForm({
-        ...requestForm,
-        brojKorisnika: e.target.value,
-      })
-    }
-  />
+<select
+  className="rounded-xl border border-white/10 bg-slate-900 p-3 md:col-span-2"
+  value={requestForm.brojKorisnika}
+  onChange={(e) =>
+    setRequestForm({
+      ...requestForm,
+      brojKorisnika: e.target.value,
+    })
+  }
+>
+  <option value="">Izaberite paket</option>
+
+  {packages.map((p) => (
+    <option key={p} value={p}>
+      {p}
+    </option>
+  ))}
+</select>
 
   {/* Honeypot zaštita - ovo korisnik ne vidi */}
   <input
