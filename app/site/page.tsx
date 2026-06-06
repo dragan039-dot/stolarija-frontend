@@ -66,13 +66,13 @@ const sendRequest = async () => {
   }
 };
 
-  const tabs = [
-    "Početna",
-    "O aplikaciji",
-    "Video uputstva",
-    "Zahtev za ponudu",
-    "Kontakt",
-  ];
+const tabs = [
+  "Početna",
+  "O aplikaciji",
+  "Cene paketa",
+  "Zahtev za ponudu",
+  "Kontakt",
+];
 
   const videos = [
     {
@@ -289,40 +289,225 @@ i PDF dokumenata.
                 </div>
               ))}
             </div>
+
+
+<div className="mt-10">
+  <h3 className="mb-3 text-2xl font-black">
+    Video uputstva
+  </h3>
+
+  <p className="mb-6 text-slate-300">
+    Pogledajte kratka uputstva kako se koristi aplikacija.
+  </p>
+
+  <div className="grid gap-6 md:grid-cols-2">
+    {videos.map((video) => (
+      <div
+        key={video.videoId}
+        className="rounded-2xl border border-white/10 bg-slate-900/70 p-4"
+      >
+        <h4 className="mb-1 text-lg font-black">
+          {video.title}
+        </h4>
+
+        <p className="mb-4 text-sm text-slate-300">
+          {video.text}
+        </p>
+
+        <div className="aspect-video overflow-hidden rounded-xl bg-slate-950">
+          <iframe
+            className="h-full w-full"
+            src={`https://www.youtube.com/embed/${video.videoId}`}
+            title={video.title}
+            allowFullScreen
+          />
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+
           </div>
         </section>
       )}
 
-      {activeTab === "Video uputstva" && (
-        <section className="mx-auto max-w-7xl px-4 py-12">
-          <h2 className="mb-3 text-4xl font-black">Video uputstva</h2>
-          <p className="mb-8 text-slate-300">
-            Ovde možete postaviti YouTube video snimke koji se gledaju direktno
-            na sajtu.
+
+
+{activeTab === "Cene paketa" && (
+  <section className="mx-auto max-w-7xl px-4 py-12">
+    <div className="mb-8 rounded-3xl border border-blue-400/20 bg-blue-500/10 p-8">
+      <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
+        <div>
+          <div className="mb-2 text-sm font-bold uppercase tracking-wide text-blue-300">
+            Besplatna proba
+          </div>
+
+          <h2 className="mb-3 text-4xl font-black">
+            Isprobajte aplikaciju potpuno besplatno 10 dana
+          </h2>
+
+          <p className="max-w-3xl text-slate-300">
+            Tokom probnog perioda možete koristiti kompletnu aplikaciju:
+            ponude, radne liste, parametre, formule, PDF dokumente i rad
+            sa više uređaja.
           </p>
+        </div>
 
-          <div className="grid gap-6 md:grid-cols-2">
-            {videos.map((video) => (
-              <div
-                key={video.videoId}
-                className="rounded-2xl border border-white/10 bg-white/10 p-4"
-              >
-                <h3 className="mb-1 text-xl font-black">{video.title}</h3>
-                <p className="mb-4 text-sm text-slate-300">{video.text}</p>
+        <button
+          onClick={() => setActiveTab("Zahtev za ponudu")}
+          className="rounded-xl bg-blue-500 px-8 py-4 text-lg font-black shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
+        >
+          Zatraži probni period
+        </button>
+      </div>
+    </div>
 
-                <div className="aspect-video overflow-hidden rounded-xl bg-slate-900">
-                  <iframe
-                    className="h-full w-full"
-                    src={`https://www.youtube.com/embed/${video.videoId}`}
-                    title={video.title}
-                    allowFullScreen
-                  />
-                </div>
-              </div>
-            ))}
+    <div className="mb-10 text-center">
+      <h2 className="mb-3 text-4xl font-black">
+        Cene paketa
+      </h2>
+
+      <p className="mx-auto max-w-3xl text-slate-300">
+        Aplikacija radi online i dostupna je sa laptopa, tableta i telefona.
+        Ponuda i radna lista izrađuju se u par klikova, uz automatski obračun
+        i čuvanje podataka.
+      </p>
+    </div>
+
+    <div className="grid gap-6 lg:grid-cols-4">
+      {[
+        {
+          name: "START",
+          devices: "2 uređaja",
+          price: "99 €",
+          period: "godišnje",
+          renew: "Produženje: 49 € godišnje",
+          popular: false,
+          features: [
+            "2 uređaja",
+            "Laptop, tablet i telefon",
+            "Online pristup",
+            "Backup podataka",
+            "Tehnička podrška",
+          ],
+        },
+        {
+          name: "BUSINESS",
+          devices: "5 uređaja",
+          price: "199 €",
+          period: "godišnje",
+          renew: "Produženje: 99 € godišnje",
+          popular: true,
+          features: [
+            "5 uređaja",
+            "Laptop, tablet i telefon",
+            "Online pristup",
+            "Backup podataka",
+            "Prioritetna podrška",
+          ],
+        },
+        {
+          name: "PRO",
+          devices: "10 uređaja",
+          price: "299 €",
+          period: "godišnje",
+          renew: "Produženje: 149 € godišnje",
+          popular: false,
+          features: [
+            "10 uređaja",
+            "Neograničen broj ponuda",
+            "Više korisnika",
+            "Online pristup",
+            "Backup podataka",
+            "Prioritetna podrška",
+          ],
+        },
+        {
+          name: "ENTERPRISE",
+          devices: "20 uređaja",
+          price: "599 €",
+          period: "10 godina",
+          renew: "Bez godišnje obnove",
+          popular: false,
+          features: [
+            "20 uređaja",
+            "Dugoročna licenca",
+            "Online pristup",
+            "Backup podataka",
+            "Prioritetna podrška",
+            "Prilagođavanja po zahtevu",
+          ],
+        },
+      ].map((pack) => (
+        <div
+          key={pack.name}
+          className={`relative rounded-3xl border p-6 ${
+            pack.popular
+              ? "border-blue-400 bg-blue-500/15 shadow-2xl shadow-blue-500/20"
+              : "border-white/10 bg-white/10"
+          }`}
+        >
+          {pack.popular && (
+            <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-blue-500 px-4 py-1 text-xs font-black uppercase">
+              Najpopularniji
+            </div>
+          )}
+
+          <div className="mb-4 text-center">
+            <div className="text-sm font-black text-blue-300">
+              {pack.name}
+            </div>
+
+            <div className="mt-1 text-2xl font-black">
+              {pack.devices}
+            </div>
+
+            <div className="mt-5">
+              <span className="text-5xl font-black">
+                {pack.price}
+              </span>
+              <span className="text-slate-300">
+                {" "} / {pack.period}
+              </span>
+            </div>
           </div>
-        </section>
-      )}
+
+          <ul className="mb-6 space-y-3 text-sm text-slate-300">
+            {pack.features.map((f) => (
+              <li key={f}>✓ {f}</li>
+            ))}
+          </ul>
+
+          <div className="mb-5 rounded-2xl bg-slate-900/70 p-4 text-center text-sm font-bold text-slate-200">
+            {pack.renew}
+          </div>
+
+          <button
+            onClick={() => {
+              setRequestForm({
+                ...requestForm,
+                brojKorisnika: packages.find((p) =>
+                  p.startsWith(pack.name)
+                ) || "",
+              });
+              setActiveTab("Zahtev za ponudu");
+            }}
+            className={`w-full rounded-xl px-5 py-3 font-black transition active:scale-95 ${
+              pack.popular
+                ? "bg-blue-500 text-white hover:bg-blue-400"
+                : "border border-blue-400 text-blue-300 hover:bg-blue-500 hover:text-white"
+            }`}
+          >
+            Izaberi paket
+          </button>
+        </div>
+      ))}
+    </div>
+  </section>
+)}
+
+
 
       {activeTab === "Zahtev za ponudu" && (
         <section className="mx-auto max-w-4xl px-4 py-12">
