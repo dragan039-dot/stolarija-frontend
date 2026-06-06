@@ -537,11 +537,12 @@ i PDF dokumenata.
     </option>
   ))}
 </select>
+<br/>
 
 <div className="grid gap-4 md:grid-cols-2">
   <input
     className="rounded-xl border border-white/10 bg-slate-900 p-3"
-    placeholder="Firma *"
+    placeholder="Firma * / Ime i prezime"
     value={requestForm.firma}
     onChange={(e) =>
       setRequestForm({ ...requestForm, firma: e.target.value })
