@@ -519,6 +519,9 @@ i PDF dokumenata.
               perioda i podešavanja aplikacije.
             </p>
 
+
+<div className="grid gap-4 md:grid-cols-2">
+
 <select
   className="rounded-xl border border-white/10 bg-slate-900 p-3 md:col-span-2"
   value={requestForm.brojKorisnika}
@@ -537,7 +540,7 @@ i PDF dokumenata.
     </option>
   ))}
 </select>
-<br/>
+</div>
 
 <div className="grid gap-4 md:grid-cols-2">
   <input
