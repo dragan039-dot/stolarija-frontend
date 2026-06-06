@@ -519,6 +519,25 @@ i PDF dokumenata.
               perioda i podešavanja aplikacije.
             </p>
 
+<select
+  className="rounded-xl border border-white/10 bg-slate-900 p-3 md:col-span-2"
+  value={requestForm.brojKorisnika}
+  onChange={(e) =>
+    setRequestForm({
+      ...requestForm,
+      brojKorisnika: e.target.value,
+    })
+  }
+>
+  <option value="">Izaberite paket</option>
+
+  {packages.map((p) => (
+    <option key={p} value={p}>
+      {p}
+    </option>
+  ))}
+</select>
+
 <div className="grid gap-4 md:grid-cols-2">
   <input
     className="rounded-xl border border-white/10 bg-slate-900 p-3"
@@ -568,24 +587,7 @@ i PDF dokumenata.
     }
   />
 
-<select
-  className="rounded-xl border border-white/10 bg-slate-900 p-3 md:col-span-2"
-  value={requestForm.brojKorisnika}
-  onChange={(e) =>
-    setRequestForm({
-      ...requestForm,
-      brojKorisnika: e.target.value,
-    })
-  }
->
-  <option value="">Izaberite paket</option>
 
-  {packages.map((p) => (
-    <option key={p} value={p}>
-      {p}
-    </option>
-  ))}
-</select>
 
   {/* Honeypot zaštita - ovo korisnik ne vidi */}
   <input
