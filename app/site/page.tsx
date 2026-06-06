@@ -229,6 +229,83 @@ i PDF dokumenata.
             </div>
           </section>
 
+<section className="mx-auto max-w-7xl px-4 pb-16">
+  <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+
+    <div>
+      <div className="mb-2 text-sm font-black uppercase tracking-wider text-blue-300">
+        Brzina i jednostavnost
+      </div>
+
+      <h2 className="mb-5 text-4xl font-black">
+        Ponuda i radna lista u par klikova
+      </h2>
+
+      <p className="mb-5 text-lg text-slate-300">
+        Nakon unosa dimenzija i izbora sistema,
+        aplikacija automatski obračunava profile,
+        ispune, okove, roletne i ostale elemente.
+      </p>
+
+      <p className="mb-8 text-lg text-slate-300">
+        Za svega nekoliko minuta možete izraditi
+        profesionalnu ponudu i kompletnu radnu listu
+        spremnu za proizvodnju.
+      </p>
+
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+          <div className="text-2xl font-black text-blue-300">✓</div>
+          <div className="font-bold">Automatski obračun</div>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+          <div className="text-2xl font-black text-blue-300">✓</div>
+          <div className="font-bold">PDF dokumenti</div>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+          <div className="text-2xl font-black text-blue-300">✓</div>
+          <div className="font-bold">Radne liste</div>
+        </div>
+
+        <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
+          <div className="text-2xl font-black text-blue-300">✓</div>
+          <div className="font-bold">Online pristup</div>
+        </div>
+      </div>
+    </div>
+
+    <div className="rounded-3xl border border-white/10 bg-white/10 p-6">
+      <div className="rounded-2xl bg-slate-900 p-6">
+        <div className="mb-4 text-xl font-black">
+          Primer radnog procesa
+        </div>
+
+        <div className="space-y-4">
+          <div className="rounded-xl bg-slate-800 p-4">
+            1. Unos kupca i dimenzija
+          </div>
+
+          <div className="rounded-xl bg-slate-800 p-4">
+            2. Izbor sistema i profila
+          </div>
+
+          <div className="rounded-xl bg-slate-800 p-4">
+            3. Automatski obračun elemenata
+          </div>
+
+          <div className="rounded-xl bg-slate-800 p-4">
+            4. Kreiranje ponude i radne liste
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
           <section className="mx-auto max-w-7xl px-4 pb-16">
             <div className="grid gap-4 md:grid-cols-4">
               {[
@@ -546,7 +623,7 @@ i PDF dokumenata.
 <div className="grid gap-4 md:grid-cols-2">
   <input
     className="rounded-xl border border-white/10 bg-slate-900 p-3"
-    placeholder="Firma * / Ime i prezime"
+    placeholder="Firma / Ime i prezime *"
     value={requestForm.firma}
     onChange={(e) =>
       setRequestForm({ ...requestForm, firma: e.target.value })
