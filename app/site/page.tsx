@@ -157,175 +157,219 @@ const packages = [
         </nav>
       </header>
 
-      {activeTab === "Početna" && (
-        <>
-          <section className="mx-auto grid max-w-7xl gap-10 px-4 py-16 lg:grid-cols-2 lg:items-center">
-            <div>
-              <div className="mb-4 inline-flex rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-2 text-sm font-bold text-blue-300">
-                Web aplikacija za PVC i ALU stolariju
-              </div>
 
-              <h1 className="mb-6 text-4xl font-black leading-tight md:text-6xl">
-                Brža izrada ponuda i radnih lista za stolariju
-              </h1>
 
-              <p className="mb-8 max-w-xl text-lg text-slate-300">
-                PVC Kalkulator omogućava firmama da izrade ponudu i radnu listu
-u svega nekoliko klikova, uz automatski obračun elemenata, cena
-i PDF dokumenata.
-              </p>
+{activeTab === "Početna" && (
+  <>
+    <section className="mx-auto max-w-7xl px-4 py-12">
+      <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <div className="mb-5 inline-flex rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-2 text-sm font-black uppercase tracking-wide text-blue-300">
+            Moderan · brz · pouzdan
+          </div>
 
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <a
-                  href="https://app.pvckalkulator.com"
-                  className="rounded-xl bg-blue-500 px-8 py-4 text-center text-lg font-black shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
-                >
-                  Prijavi se u aplikaciju
-                </a>
+          <h1 className="mb-6 text-4xl font-black leading-tight md:text-6xl">
+            Profesionalni softver za izradu ponuda i radnih lista
+            <span className="text-blue-400"> PVC i ALU stolarije</span>
+          </h1>
 
-                <button
-                  onClick={() => setActiveTab("Zahtev za ponudu")}
-                  className="rounded-xl border border-white/20 bg-white/10 px-8 py-4 text-lg font-bold text-white transition hover:bg-white/20 active:scale-95"
-                >
-                  Pošalji zahtev
-                </button>
-              </div>
+          <p className="mb-4 max-w-2xl text-lg text-slate-300">
+            Ponuda i radna lista izrađuju se u par klikova, uz automatski
+            obračun profila, ispuna, okova, roletni i ostalih elemenata.
+          </p>
+
+          <p className="mb-8 max-w-2xl text-slate-400">
+            Aplikacija radi online i dostupna je sa laptopa, tableta i telefona.
+            Svi podaci su sačuvani i dostupni kad god vam zatrebaju.
+          </p>
+
+          <div className="mb-8 flex flex-col gap-3 sm:flex-row">
+            <button
+              onClick={() => setActiveTab("Zahtev za ponudu")}
+              className="rounded-xl bg-blue-500 px-8 py-4 text-center text-lg font-black shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
+            >
+              Besplatna proba 10 dana
+            </button>
+
+            <a
+              href="https://app.pvckalkulator.com"
+              className="rounded-xl border border-white/20 bg-white/10 px-8 py-4 text-center text-lg font-bold text-white transition hover:bg-white/20 active:scale-95"
+            >
+              Prijava u aplikaciju
+            </a>
+          </div>
+
+          <div className="grid gap-3 text-sm text-slate-300 sm:grid-cols-2">
+            <div>✓ Online pristup</div>
+            <div>✓ Sačuvani podaci</div>
+            <div>✓ Automatski obračuni</div>
+            <div>✓ PDF ponude i radne liste</div>
+          </div>
+        </div>
+
+        <div className="rounded-3xl border border-white/10 bg-white/10 p-5 shadow-2xl">
+          <div className="rounded-2xl bg-slate-900 p-5">
+            <div className="mb-4 flex gap-2">
+              <span className="h-3 w-3 rounded-full bg-red-400" />
+              <span className="h-3 w-3 rounded-full bg-yellow-400" />
+              <span className="h-3 w-3 rounded-full bg-green-400" />
             </div>
 
-            <div className="rounded-3xl border border-white/10 bg-white/10 p-4 shadow-2xl">
-              <div className="rounded-2xl bg-slate-900 p-4">
-                <div className="mb-4 flex gap-2">
-                  <span className="h-3 w-3 rounded-full bg-red-400" />
-                  <span className="h-3 w-3 rounded-full bg-yellow-400" />
-                  <span className="h-3 w-3 rounded-full bg-green-400" />
+            <div className="grid gap-4">
+              <div className="rounded-xl bg-white p-4 text-slate-900">
+                <div className="mb-2 text-sm font-bold text-blue-600">
+                  PVC Kalkulator
                 </div>
 
-                <div className="rounded-xl bg-slate-800 p-4">
-                  <div className="mb-4 h-8 w-48 rounded bg-blue-500/70" />
+                <div className="grid grid-cols-3 gap-2 text-xs">
+                  <div className="rounded bg-slate-100 p-2">Ponude</div>
+                  <div className="rounded bg-slate-100 p-2">Kupci</div>
+                  <div className="rounded bg-slate-100 p-2">PDF</div>
+                </div>
+              </div>
 
-                  <div className="grid gap-3">
-                    <div className="rounded-lg bg-white p-3 text-slate-900">
-                      <div className="font-bold">Ponuda R-15/26</div>
-                      <div className="text-sm text-slate-500">
-                        Kupac, pozicije, dimenzije i cena
-                      </div>
-                    </div>
+              <div className="rounded-xl bg-slate-800 p-4">
+                <div className="mb-3 h-4 w-44 rounded bg-blue-400/70" />
+                <div className="grid gap-2">
+                  <div className="h-8 rounded bg-slate-700" />
+                  <div className="h-8 rounded bg-slate-700" />
+                  <div className="h-8 rounded bg-slate-700" />
+                </div>
+              </div>
 
-                    <div className="grid grid-cols-3 gap-3">
-                      <div className="rounded-lg bg-slate-700 p-4" />
-                      <div className="rounded-lg bg-slate-700 p-4" />
-                      <div className="rounded-lg bg-slate-700 p-4" />
-                    </div>
-
-                    <div className="rounded-lg bg-white p-3 text-slate-900">
-                      <div className="font-bold">Radna lista</div>
-                      <div className="text-sm text-slate-500">
-                        Elementi prozora spremni za proizvodnju
-                      </div>
-                    </div>
-                  </div>
+              <div className="grid grid-cols-3 gap-3">
+                <div className="rounded-xl bg-blue-500/20 p-4 text-center text-xs">
+                  Ponuda
+                </div>
+                <div className="rounded-xl bg-blue-500/20 p-4 text-center text-xs">
+                  Radna lista
+                </div>
+                <div className="rounded-xl bg-blue-500/20 p-4 text-center text-xs">
+                  Obračun
                 </div>
               </div>
             </div>
-          </section>
-
-<section className="mx-auto max-w-7xl px-4 pb-16">
-  <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
-
-    <div>
-      <div className="mb-2 text-sm font-black uppercase tracking-wider text-blue-300">
-        Brzina i jednostavnost
+          </div>
+        </div>
       </div>
+    </section>
 
-      <h2 className="mb-5 text-4xl font-black">
-        Ponuda i radna lista u par klikova
+    <section className="border-y border-white/10 bg-white/5">
+      <div className="mx-auto grid max-w-7xl gap-4 px-4 py-6 md:grid-cols-6">
+        {[
+          ["Ponude", "Izrada ponuda u nekoliko klikova"],
+          ["Radne liste", "Detaljni elementi za proizvodnju"],
+          ["Obračuni", "Automatski obračun cena"],
+          ["PDF dokumenti", "Profesionalna štampa"],
+          ["Više korisnika", "Rad više zaposlenih"],
+          ["Online", "Pristup sa bilo kog uređaja"],
+        ].map(([title, text]) => (
+          <div key={title} className="rounded-2xl bg-slate-900/60 p-4">
+            <div className="mb-1 font-black text-blue-300">{title}</div>
+            <div className="text-xs text-slate-400">{text}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section className="mx-auto max-w-7xl px-4 py-16">
+      <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+        <div>
+          <div className="mb-2 text-sm font-black uppercase tracking-wider text-blue-300">
+            Brzina i jednostavnost
+          </div>
+
+          <h2 className="mb-5 text-4xl font-black">
+            Ponuda i radna lista u par klikova
+          </h2>
+
+          <p className="mb-5 text-lg text-slate-300">
+            Nakon unosa dimenzija i izbora sistema, aplikacija automatski
+            obračunava profile, ispune, okove, roletne i ostale elemente.
+          </p>
+
+          <p className="mb-8 text-lg text-slate-300">
+            Za svega nekoliko minuta možete izraditi profesionalnu ponudu i
+            kompletnu radnu listu spremnu za proizvodnju.
+          </p>
+        </div>
+
+        <div className="rounded-3xl border border-white/10 bg-white/10 p-6">
+          <div className="mb-5 text-xl font-black">Primer radnog procesa</div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              "1. Unos kupca i dimenzija",
+              "2. Izbor sistema i profila",
+              "3. Automatski obračun elemenata",
+              "4. Kreiranje ponude i radne liste",
+            ].map((step) => (
+              <div key={step} className="rounded-2xl bg-slate-900/70 p-5">
+                {step}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="mx-auto max-w-7xl px-4 pb-16">
+      <h2 className="mb-8 text-center text-4xl font-black">
+        Zašto PVC Kalkulator?
       </h2>
 
-      <p className="mb-5 text-lg text-slate-300">
-        Nakon unosa dimenzija i izbora sistema,
-        aplikacija automatski obračunava profile,
-        ispune, okove, roletne i ostale elemente.
-      </p>
-
-      <p className="mb-8 text-lg text-slate-300">
-        Za svega nekoliko minuta možete izraditi
-        profesionalnu ponudu i kompletnu radnu listu
-        spremnu za proizvodnju.
-      </p>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-          <div className="text-2xl font-black text-blue-300">✓</div>
-          <div className="font-bold">Automatski obračun</div>
+      <div className="grid gap-6 md:grid-cols-3">
+        <div className="rounded-2xl border border-white/10 bg-white/10 p-6">
+          <h3 className="mb-3 text-xl font-black">Ušteda vremena</h3>
+          <p className="text-slate-300">
+            Ponude i radne liste izrađuju se brzo, pregledno i bez ručnog
+            računanja.
+          </p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-          <div className="text-2xl font-black text-blue-300">✓</div>
-          <div className="font-bold">PDF dokumenti</div>
+        <div className="rounded-2xl border border-white/10 bg-white/10 p-6">
+          <h3 className="mb-3 text-xl font-black">Manje grešaka</h3>
+          <p className="text-slate-300">
+            Automatski obračuni smanjuju mogućnost grešaka u dimenzijama i
+            cenama.
+          </p>
         </div>
 
-        <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-          <div className="text-2xl font-black text-blue-300">✓</div>
-          <div className="font-bold">Radne liste</div>
-        </div>
-
-        <div className="rounded-2xl border border-white/10 bg-white/10 p-4">
-          <div className="text-2xl font-black text-blue-300">✓</div>
-          <div className="font-bold">Online pristup</div>
+        <div className="rounded-2xl border border-white/10 bg-white/10 p-6">
+          <h3 className="mb-3 text-xl font-black">Rad sa bilo kog mesta</h3>
+          <p className="text-slate-300">
+            Pristup aplikaciji sa računara, tableta ili telefona, gde god se
+            nalazite.
+          </p>
         </div>
       </div>
-    </div>
+    </section>
 
-    <div className="rounded-3xl border border-white/10 bg-white/10 p-6">
-      <div className="rounded-2xl bg-slate-900 p-6">
-        <div className="mb-4 text-xl font-black">
-          Primer radnog procesa
-        </div>
+    <section className="mx-auto max-w-7xl px-4 pb-16">
+      <div className="rounded-3xl border border-blue-400/20 bg-blue-500/10 p-10 text-center">
+        <h2 className="mb-4 text-4xl font-black">
+          Isprobajte aplikaciju potpuno besplatno
+        </h2>
 
-        <div className="space-y-4">
-          <div className="rounded-xl bg-slate-800 p-4">
-            1. Unos kupca i dimenzija
-          </div>
+        <p className="mx-auto mb-8 max-w-3xl text-slate-300">
+          Dobijate kompletan pristup aplikaciji tokom probnog perioda od 10
+          dana.
+        </p>
 
-          <div className="rounded-xl bg-slate-800 p-4">
-            2. Izbor sistema i profila
-          </div>
-
-          <div className="rounded-xl bg-slate-800 p-4">
-            3. Automatski obračun elemenata
-          </div>
-
-          <div className="rounded-xl bg-slate-800 p-4">
-            4. Kreiranje ponude i radne liste
-          </div>
-        </div>
+        <button
+          onClick={() => setActiveTab("Zahtev za ponudu")}
+          className="rounded-xl bg-blue-500 px-8 py-4 text-lg font-black shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
+        >
+          Započni besplatnu probu
+        </button>
       </div>
-    </div>
+    </section>
+  </>
+)}
 
-  </div>
-</section>
 
 
-          <section className="mx-auto max-w-7xl px-4 pb-16">
-            <div className="grid gap-4 md:grid-cols-4">
-              {[
-                ["Ponude", "Brzo kreiranje i čuvanje ponuda."],
-                ["Radne liste", "Pregled elemenata za proizvodnju."],
-                ["Formule", "Dinamički obračun svih sistema."],
-                ["Više jezika", "Prevod aplikacije po korisniku."],
-              ].map(([title, text]) => (
-                <div
-                  key={title}
-                  className="rounded-2xl border border-white/10 bg-white/10 p-5"
-                >
-                  <h3 className="mb-2 text-xl font-black">{title}</h3>
-                  <p className="text-sm text-slate-300">{text}</p>
-                </div>
-              ))}
-            </div>
-          </section>
-        </>
-      )}
+
 
       {activeTab === "O aplikaciji" && (
         <section className="mx-auto max-w-5xl px-4 py-12">
@@ -733,6 +777,30 @@ i PDF dokumenata.
           </div>
         </section>
       )}
+
+
+<section className="mx-auto max-w-6xl px-4 pb-16">
+  <div className="rounded-3xl border border-blue-400/20 bg-blue-500/10 p-10 text-center">
+
+    <h2 className="mb-4 text-4xl font-black">
+      Isprobajte aplikaciju potpuno besplatno
+    </h2>
+
+    <p className="mx-auto mb-8 max-w-3xl text-slate-300">
+      Dobijate kompletan pristup aplikaciji tokom probnog perioda od 10 dana.
+    </p>
+
+    <button
+      onClick={() => setActiveTab("Zahtev za ponudu")}
+      className="rounded-xl bg-blue-500 px-8 py-4 text-lg font-black shadow-lg shadow-blue-500/30 hover:bg-blue-400"
+    >
+      Započni besplatnu probu
+    </button>
+
+  </div>
+</section>
+
+
 
       <footer className="border-t border-white/10 py-6 text-center text-sm text-slate-500">
         © {new Date().getFullYear()} PVC Kalkulator. Sva prava zadržana.
