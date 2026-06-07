@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 export default function PublicSite() {
   const [activeTab, setActiveTab] = useState("Početna");
@@ -207,50 +208,17 @@ const packages = [
           </div>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-white/10 p-5 shadow-2xl">
-          <div className="rounded-2xl bg-slate-900 p-5">
-            <div className="mb-4 flex gap-2">
-              <span className="h-3 w-3 rounded-full bg-red-400" />
-              <span className="h-3 w-3 rounded-full bg-yellow-400" />
-              <span className="h-3 w-3 rounded-full bg-green-400" />
-            </div>
-
-            <div className="grid gap-4">
-              <div className="rounded-xl bg-white p-4 text-slate-900">
-                <div className="mb-2 text-sm font-bold text-blue-600">
-                  PVC Kalkulator
-                </div>
-
-                <div className="grid grid-cols-3 gap-2 text-xs">
-                  <div className="rounded bg-slate-100 p-2">Ponude</div>
-                  <div className="rounded bg-slate-100 p-2">Kupci</div>
-                  <div className="rounded bg-slate-100 p-2">PDF</div>
-                </div>
-              </div>
-
-              <div className="rounded-xl bg-slate-800 p-4">
-                <div className="mb-3 h-4 w-44 rounded bg-blue-400/70" />
-                <div className="grid gap-2">
-                  <div className="h-8 rounded bg-slate-700" />
-                  <div className="h-8 rounded bg-slate-700" />
-                  <div className="h-8 rounded bg-slate-700" />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
-                <div className="rounded-xl bg-blue-500/20 p-4 text-center text-xs">
-                  Ponuda
-                </div>
-                <div className="rounded-xl bg-blue-500/20 p-4 text-center text-xs">
-                  Radna lista
-                </div>
-                <div className="rounded-xl bg-blue-500/20 p-4 text-center text-xs">
-                  Obračun
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+<div className="overflow-hidden rounded-3xl border border-white/10 bg-white/10 shadow-2xl">
+  <Image
+    src="/site/hero.png"
+    alt="PVC Kalkulator aplikacija"
+    width={900}
+    height={600}
+    className="h-full w-full object-cover"
+    priority
+  />
+</div>
+        
       </div>
     </section>
 
@@ -294,22 +262,15 @@ const packages = [
           </p>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-white/10 p-6">
-          <div className="mb-5 text-xl font-black">Primer radnog procesa</div>
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              "1. Unos kupca i dimenzija",
-              "2. Izbor sistema i profila",
-              "3. Automatski obračun elemenata",
-              "4. Kreiranje ponude i radne liste",
-            ].map((step) => (
-              <div key={step} className="rounded-2xl bg-slate-900/70 p-5">
-                {step}
-              </div>
-            ))}
-          </div>
-        </div>
+<div className="overflow-hidden rounded-3xl border border-white/10 bg-white/10 shadow-2xl">
+  <Image
+    src="/site/workflow.png"
+    alt="Ponuda i radna lista u par klikova"
+    width={900}
+    height={600}
+    className="h-full w-full object-cover"
+  />
+</div>
       </div>
     </section>
 
@@ -343,6 +304,17 @@ const packages = [
           </p>
         </div>
       </div>
+
+<div className="mt-8 overflow-hidden rounded-3xl border border-white/10 bg-white/10 shadow-2xl">
+  <Image
+    src="/site/devices.png"
+    alt="Rad sa bilo kog uređaja"
+    width={1200}
+    height={700}
+    className="h-full w-full object-cover"
+  />
+</div>
+
     </section>
 
     <section className="mx-auto max-w-7xl px-4 pb-16">
