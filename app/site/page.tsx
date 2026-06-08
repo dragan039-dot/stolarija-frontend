@@ -317,25 +317,8 @@ const packages = [
 
     </section>
 
-    <section className="mx-auto max-w-7xl px-4 pb-16">
-      <div className="rounded-3xl border border-blue-400/20 bg-blue-500/10 p-10 text-center">
-        <h2 className="mb-4 text-4xl font-black">
-          Isprobajte aplikaciju potpuno besplatno
-        </h2>
 
-        <p className="mx-auto mb-8 max-w-3xl text-slate-300">
-          Dobijate kompletan pristup aplikaciji tokom probnog perioda od 10
-          dana.
-        </p>
 
-        <button
-          onClick={() => setActiveTab("Zahtev za ponudu")}
-          className="rounded-xl bg-blue-500 px-8 py-4 text-lg font-black shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
-        >
-          Započni besplatnu probu
-        </button>
-      </div>
-    </section>
   </>
 )}
 
