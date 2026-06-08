@@ -30,16 +30,13 @@ const sendRequest = async () => {
   setRequestLoading(true);
 
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/site-requests`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestForm),
-      }
-    );
+const res = await fetch("/api/site-requests", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(requestForm),
+});
 
     const data = await res.json();
 
