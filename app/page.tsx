@@ -3578,6 +3578,28 @@ const filteredSiteRequests = siteRequests.filter((r: any) => {
 });
 
 
+const slikeGrupe = [
+  {
+    naziv: "Standardni",
+    ids: [1,2,3,4,5,6,7,8,9,10,11,12,13],
+  },
+  {
+    naziv: "Nadsvetlo",
+    ids: [14,15,16,17],
+  },
+  {
+    naziv: "Nadsvetlo kip",
+    ids: [18,19,20,21],
+  },
+  {
+    naziv: "Klizni sistem",
+    ids: [22,23,24],
+  },
+  {
+    naziv: "Podizno-klizni sistem",
+    ids: [25,26,27,28,29,30,31,32],
+  },
+];
 
 
 
@@ -5395,35 +5417,68 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
 
 
+
+
+
+
+
+
+
+
+
 {activeTab === "Slike" && (
-  <div className="w-full overflow-x-auto flex justify-center">
-    <h1 className="text-3xl font-bold mb-6 flex justify-center"> </h1>
-    
+  <div className="max-w-7xl mx-auto p-6">
 
-    <div className="space-y-4">
+    <h2 className="text-3xl font-bold mb-8">
+      Slike prozora
+    </h2>
 
-      {prozori.map((p: any) => (
-        <div
-          key={p.id}
-          className="flex items-center gap-6 border rounded p-4 bg-white"
-        >
-          {/* SLIKA */}
-          <div className="w-40 h-28 flex items-center justify-center border">
-            <img
-              src={`/prozori/${p.id}.jpg`}
-              alt={p.naziv}
-              className="max-h-24 object-contain"
-            />
+    <div className="space-y-10">
+
+      {slikeGrupe.map((grupa) => (
+
+        <div key={grupa.naziv}>
+
+          <h3 className="text-2xl font-bold mb-4 bg-gray-100 p-3 rounded">
+            {grupa.naziv}
+          </h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+
+            {grupa.ids
+              .map(id => prozori.find(p => p.id === id))
+              .filter(Boolean)
+              .map((p:any) => (
+
+                <div
+                  key={p.id}
+                  className="border rounded-lg bg-white p-4 shadow-sm hover:shadow-md transition"
+                >
+
+                  <div className="h-40 flex items-center justify-center border rounded mb-3">
+                    <img
+                      src={`/prozori/${p.id}.jpg`}
+                      alt={p.naziv}
+                      className="max-h-36 object-contain"
+                    />
+                  </div>
+
+                  <div className="font-semibold text-center">
+                    {p.naziv}
+                  </div>
+
+                </div>
+
+              ))}
+
           </div>
 
-          {/* NAZIV */}
-          <div className="text-lg font-semibold">
-            {p.naziv}
-          </div>
         </div>
+
       ))}
 
     </div>
+
   </div>
 )}
 

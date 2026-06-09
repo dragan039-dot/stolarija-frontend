@@ -98,10 +98,10 @@ const tabs = [
 
 
 const packages = [
-  "START - 2 uređaja - 99 € godišnje",
-  "BUSINESS - 5 uređaja - 199 € godišnje",
-  "PRO - 10 uređaja - 299 € godišnje",
-  "ENTERPRISE - 20 uređaja - 599 € / 10 godina",
+  "START - 2 uređaja - 199 € godišnje",
+  "BUSINESS - 5 uređaja - 299 € godišnje",
+  "PRO - 10 uređaja - 499 € godišnje",
+  "ENTERPRISE - 20 uređaja - 1599 € / 10 godina",
 ];
 
 
@@ -453,9 +453,9 @@ const packages = [
         {
           name: "START",
           devices: "2 uređaja",
-          price: "99 €",
+          price: "199 €",
           period: "godišnje",
-          renew: "Produženje: 49 € godišnje",
+          renew: "Produženje: 50% od cene godišnje",
           popular: false,
           features: [
             "2 uređaja",
@@ -468,9 +468,9 @@ const packages = [
         {
           name: "BUSINESS",
           devices: "5 uređaja",
-          price: "199 €",
+          price: "299 €",
           period: "godišnje",
-          renew: "Produženje: 99 € godišnje",
+          renew: "Produženje: 50% od cene godišnje",
           popular: true,
           features: [
             "5 uređaja",
@@ -483,9 +483,9 @@ const packages = [
         {
           name: "PRO",
           devices: "10 uređaja",
-          price: "299 €",
+          price: "499 €",
           period: "godišnje",
-          renew: "Produženje: 149 € godišnje",
+          renew: "Produženje: 50% od cene godišnje",
           popular: false,
           features: [
             "10 uređaja",
@@ -499,7 +499,7 @@ const packages = [
         {
           name: "ENTERPRISE",
           devices: "20 uređaja",
-          price: "599 €",
+          price: "1599 €",
           period: "10 godina",
           renew: "Bez godišnje obnove",
           popular: false,
