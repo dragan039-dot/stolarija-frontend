@@ -784,6 +784,9 @@ const imaRoletnu =
     ? 1
     : 0;
 
+    const imaTprecka =
+  Number(firstPosition?.e) > 1 ? 1 : 0;
+
 const imaKomarnik =
   firstPosition?.komarnik
     ? 1
@@ -831,6 +834,7 @@ const E = Number(firstPosition?.e) || 0;
   plastikaCena,
   roletnaTip,
   imaRoletnu,
+imaTprecka,
   imaKomarnik,
   roletnaCena,
   komarnikCena,
@@ -990,7 +994,7 @@ const saveFormule = async () => {
 
   const dimensionRules: Record<string, string[]> = {
   // samo A i B
-  "Fiksni prozor": ["a", "b"],
+
   "Jednokrilni prozor": ["a", "b"],
   "Dvokrilni prozor (šloga)": ["a", "b"],
   "Dvokrilni prozor (T-prečka)": ["a", "b"],
@@ -1025,6 +1029,7 @@ const saveFormule = async () => {
   "Dvokrilni prozor (T-prečka, nadsvetlo-kip)": ["a", "b", "d"],
 
   // A B E
+    "Fiksni prozor": ["a", "b", "e"],
 "Klizni standardni": ["a", "b", "e"],
 "Preklopno-klizni sistem": ["a", "b", "e"],
 "Harmonika sistem": ["a", "b", "e"],
@@ -1844,6 +1849,9 @@ const imaRoletnu =
     ? 1
     : 0;
 
+    const imaTprecka =
+  Number(firstPosition?.e) > 1 ? 1 : 0;
+
 const imaKomarnik =
   firstPosition?.komarnik
     ? 1
@@ -1896,6 +1904,7 @@ vrstaProzora: firstPosition?.vrsta_prozora || "",
     plastikaCena,
     roletnaTip,
     imaRoletnu,
+imaTprecka,
     imaKomarnik,
     roletnaCena,
     komarnikCena,
@@ -2049,11 +2058,13 @@ const imaRoletnu =
     ? 1
     : 0;
 
+    const imaTprecka =
+  Number(p.e) > 1 ? 1 : 0;
+
   const imaKomarnik =
   p.komarnik
     ? 1
     : 0;
-
 
   
   const imaOkov = p.okov ? 1 : 0;
@@ -2078,7 +2089,7 @@ const imaRoletnu =
       ispunaCena,
       okovCena,
       plastikaCena,
-
+imaTprecka,
       roletnaTip,
       imaRoletnu,
       imaKomarnik,
