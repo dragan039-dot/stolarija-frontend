@@ -8163,16 +8163,16 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
 
       {/* DESNA REKLAMA - SAMO DESKTOP */}
       <aside
-  onClick={() => openAdLink("leftBanner")}
+  onClick={() => openAdLink("rightBanner")}
   className="hidden xl:block sticky top-4 h-[600px] overflow-hidden cursor-pointer"
 >
 
-  {getAdValue("leftBannerImage") ? (
+  {getAdValue("rightBannerImage") ? (
 
-    isVideoFile(getAdValue("leftBannerImage")) ? (
+    isVideoFile(getAdValue("rightBannerImage")) ? (
 
       <video
-        src={`${API_URL}${getAdValue("leftBannerImage")}`}
+        src={`${API_URL}${getAdValue("rightBannerImage")}`}
         className="w-full h-full object-cover"
         muted
         loop
@@ -8183,7 +8183,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     ) : (
 
       <img
-        src={`${API_URL}${getAdValue("leftBannerImage")}`}
+        src={`${API_URL}${getAdValue("rightBannerImage")}`}
         className="w-full h-full object-cover"
         alt=""
       />
@@ -8193,7 +8193,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
   ) : (
 
     <div className="h-full flex items-center justify-center bg-gray-100">
-      {getAdValue("leftBanner") || "Levi baner"}
+      {getAdValue("rightBanner") || "Desni baner"}
     </div>
 
   )}
