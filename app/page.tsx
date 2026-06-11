@@ -4378,7 +4378,7 @@ return (
 
       {showField(p.vrsta_prozora, "e") && (
         <div>
-          <label className="text-xs font-semibold">{t("E - broj krila")}</label>
+          <label className="text-xs font-semibold">{t("E - broj krila / stakala")}</label>
           <input
             type="number"
             value={p.e || ""}
@@ -4903,7 +4903,7 @@ console.log("SVE VALUTE:", valute);
                             {getVisibleDimensions(p.vrsta_prozora).includes("b") && <div>B={p.b} mm</div>}
                             {getVisibleDimensions(p.vrsta_prozora).includes("c") && <div>C={p.c} mm</div>}
                             {getVisibleDimensions(p.vrsta_prozora).includes("d") && <div>D={p.d} mm</div>}
-                            {getVisibleDimensions(p.vrsta_prozora).includes("e") && <div>E={p.e} {t("krila")}</div>}
+                            {getVisibleDimensions(p.vrsta_prozora).includes("e") && <div>E={p.e} {t("krila / stakala")}</div>}
                           </div>
                         </div>
 
@@ -5240,7 +5240,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
           {getVisibleDimensions(p.vrsta_prozora).includes("e") && (
             <div>
-              E = {p.e} {t("krila")}
+              E = {p.e} {t("krila / stakala")}
             </div>
           )}
         </div>
@@ -7521,7 +7521,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "B - visina",
       "C",
       "D",
-      "E - broj krila",
+      "E - broj krila / stakala",
       "Izaberi ispunu",
       "Izaberi okov",
       "Otvaranje",
