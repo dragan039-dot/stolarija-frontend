@@ -461,7 +461,6 @@ const packages = [
             "2 uređaja",
             "Laptop, tablet i telefon",
             "Online pristup",
-            "Backup podataka",
             "Tehnička podrška",
           ],
         },
@@ -476,7 +475,6 @@ const packages = [
             "5 uređaja",
             "Laptop, tablet i telefon",
             "Online pristup",
-            "Backup podataka",
             "Prioritetna podrška",
           ],
         },
@@ -492,7 +490,6 @@ const packages = [
             "Neograničen broj ponuda",
             "Više korisnika",
             "Online pristup",
-            "Backup podataka",
             "Prioritetna podrška",
           ],
         },
@@ -500,14 +497,13 @@ const packages = [
           name: "ENTERPRISE",
           devices: "20 uređaja",
           price: "1599 €",
-          period: "10 godina",
+          period: "5 godina",
           renew: "Bez godišnje obnove",
           popular: false,
           features: [
             "20 uređaja",
             "Dugoročna licenca",
             "Online pristup",
-            "Backup podataka",
             "Prioritetna podrška",
             "Prilagođavanja po zahtevu",
           ],
@@ -714,16 +710,26 @@ const packages = [
               <p>
                 Za dodatne informacije, probni period ili podešavanje aplikacije
                 možete nas kontaktirati.
+                Pošaljite poruku na neki od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehnički službe.
+              </p>
+
+              <p>
+                Pošaljite poruku na jedan od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehnički službe.
               </p>
 
               <p>
                 <strong className="text-white">Email:</strong>{" "}
-                office@pvckalkulator.com
+                pvckalkulator1@gmail.com
               </p>
 
               <p>
                 <strong className="text-white">Web:</strong>{" "}
                 pvckalkulator.com
+              </p>
+
+              <p>
+                <strong className="text-white">Viber/WhatsApp:</strong>{" "}
+                +381 62 858 2 333
               </p>
             </div>
           </div>
