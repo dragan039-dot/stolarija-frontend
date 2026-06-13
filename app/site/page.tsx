@@ -182,6 +182,15 @@ const tSite = (key: string) => {
             </div>
           </div>
 
+
+
+          <a
+            href="https://app.pvckalkulator.com"
+            className="rounded-xl bg-blue-500 px-7 py-3 text-center font-bold text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
+          >
+            {tSite("Login")}
+          </a>
+
 <select
   value={siteLanguage}
   onChange={(e) => {
@@ -199,12 +208,7 @@ const tSite = (key: string) => {
   ))}
 </select>
 
-          <a
-            href="https://app.pvckalkulator.com"
-            className="rounded-xl bg-blue-500 px-7 py-3 text-center font-bold text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
-          >
-            Login
-          </a>
+
         </div>
 
         <nav className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 pb-4">
@@ -218,7 +222,7 @@ const tSite = (key: string) => {
                   : "bg-white/10 text-slate-300 hover:bg-white/20"
               }`}
             >
-              {tab}
+              {tSite(tab)}
             </button>
           ))}
         </nav>
@@ -232,17 +236,16 @@ const tSite = (key: string) => {
       <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
           <div className="mb-5 inline-flex rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-2 text-sm font-black uppercase tracking-wide text-blue-300">
-            Moderan · brz · pouzdan
+            {tSite("Moderan · brz · pouzdan")}
           </div>
 
           <h1 className="mb-6 text-4xl font-black leading-tight md:text-6xl">
-            Profesionalni softver za izradu ponuda i radnih lista
-            <span className="text-blue-400"> PVC i ALU stolarije</span>
+            {tSite("Profesionalni softver za izradu ponuda i radnih lista PVC i ALU stolarije")}
+            
           </h1>
 
           <p className="mb-4 max-w-2xl text-lg text-slate-300">
-            Ponuda i radna lista izrađuju se u par klikova, uz automatski
-            obračun profila, ispuna, okova, roletni i ostalih elemenata.
+            {tSite("Ponuda i radna lista izrađuju se u par klikova, uz automatski obračun profila, ispuna, okova, roletni i ostalih elemenata.")}
           </p>
 
           <p className="mb-8 max-w-2xl text-slate-400">

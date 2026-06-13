@@ -4435,7 +4435,7 @@ return (
 
       {showField(p.vrsta_prozora, "e") && (
         <div>
-          <label className="text-xs font-semibold">{t("E - broj krila / stakala")}</label>
+          <label className="text-xs font-semibold">{t("E - broj krila / fiksa")}</label>
           <input
             type="number"
             value={p.e || ""}
