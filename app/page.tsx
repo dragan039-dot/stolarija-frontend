@@ -7975,40 +7975,81 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
 
 
 {paramTab === "Prevodi site" && isAdmin && (
-  <div className="p-4">
-    <h2 className="text-2xl font-bold mb-4">
-      Prevodi site
-    </h2>
+<div className="mb-4 flex gap-2 flex-wrap">
+  <button
+    onClick={() =>
+      setLanguages([
+        ...languages,
+        {
+          code: `LANG${languages.length + 1}`,
+          name: `Jezik ${languages.length + 1}`,
+          enabled: false,
+          sortOrder: languages.length + 1,
+        },
+      ])
+    }
+    className="bg-green-600 text-white px-4 py-2 rounded"
+  >
+    Dodaj jezik
+  </button>
 
-    <div className="mb-4 flex gap-2 flex-wrap">
-      <button
-        onClick={saveSiteTranslations}
-        className="bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        Sačuvaj prevode site
-      </button>
-    </div>
+  <button
+    onClick={saveLanguages}
+    className="bg-blue-600 text-white px-4 py-2 rounded"
+  >
+    Sačuvaj jezike
+  </button>
 
-    <div className="overflow-x-auto border">
+  <button
+    onClick={saveSiteTranslations}
+    className="bg-blue-600 text-white px-4 py-2 rounded"
+  >
+    Sačuvaj prevode site
+  </button>
+
+
       <table className="border-collapse text-sm min-w-[900px]">
-        <thead className="bg-gray-200">
-          <tr>
-            <th className="border p-2 min-w-[260px]">
-              Tekst na site-u
-            </th>
+<thead className="bg-gray-200">
+  <tr>
+    <th className="border p-2 min-w-[260px]">
+      Tekst na site-u
+    </th>
 
-            {languages
-              .filter((lang: any) => lang.enabled)
-              .map((lang: any) => (
-                <th
-                  key={lang.id || lang.code}
-                  className="border p-2 min-w-[200px]"
-                >
-                  {lang.name}
-                </th>
-              ))}
-          </tr>
-        </thead>
+    {languages.map((lang, index) => (
+      <th key={index} className="border p-2 min-w-[180px]">
+        <input
+          className="border p-1 w-full mb-1"
+          value={lang.name || ""}
+          onChange={(e) => {
+            const copy = [...languages];
+            copy[index] = {
+              ...copy[index],
+              name: e.target.value,
+              code: e.target.value,
+            };
+            setLanguages(copy);
+          }}
+        />
+
+        <label className="flex items-center gap-1 justify-center text-xs">
+          <input
+            type="checkbox"
+            checked={!!lang.enabled}
+            onChange={(e) => {
+              const copy = [...languages];
+              copy[index] = {
+                ...copy[index],
+                enabled: e.target.checked,
+              };
+              setLanguages(copy);
+            }}
+          />
+          prikaži
+        </label>
+      </th>
+    ))}
+  </tr>
+</thead>
 
         <tbody>
           {[
@@ -8133,7 +8174,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
             <React.Fragment key={group.title}>
               <tr>
                 <td
-                  colSpan={languages.filter((l: any) => l.enabled).length + 1}
+                  colSpan={languages.length + 1}
                   className="border p-2 bg-blue-100 font-bold text-blue-800"
                 >
                   {group.title}
@@ -8147,7 +8188,6 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
                   </td>
 
                   {languages
-                    .filter((lang: any) => lang.enabled)
                     .map((lang: any) => (
                       <td
                         key={`${key}-${lang.id || lang.code}`}
@@ -8173,7 +8213,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
         </tbody>
       </table>
     </div>
-  </div>
+    
 )}
 
 
