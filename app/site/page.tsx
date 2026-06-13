@@ -1,10 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function PublicSite() {
   const [activeTab, setActiveTab] = useState("Početna");
+
+const [siteTranslations, setSiteTranslations] = useState<any[]>([]);
+const [siteLanguage, setSiteLanguage] = useState("SR");
+const [siteLanguages, setSiteLanguages] = useState<any[]>([]);
+
   const [requestForm, setRequestForm] = useState({
   firma: "",
   pib: "",
@@ -105,6 +110,53 @@ const packages = [
 ];
 
 
+useEffect(() => {
+  const savedLang = localStorage.getItem("siteLanguage");
+
+  if (savedLang) {
+    setSiteLanguage(savedLang);
+  }
+
+  const loadSiteData = async () => {
+    try {
+      const [translationsRes, languagesRes] = await Promise.all([
+        fetch("/api/site-translations"),
+        fetch("/api/languages"),
+      ]);
+
+      const translationsData = await translationsRes.json();
+      const languagesData = await languagesRes.json();
+
+      setSiteTranslations(Array.isArray(translationsData) ? translationsData : []);
+      setSiteLanguages(
+        Array.isArray(languagesData)
+          ? languagesData.filter((l: any) => l.enabled)
+          : []
+      );
+    } catch (err) {
+      console.error("SITE TRANSLATIONS ERROR:", err);
+    }
+  };
+
+  loadSiteData();
+}, []);
+
+
+const tSite = (key: string) => {
+  const lang = siteLanguages.find(
+    (l: any) =>
+      String(l.code).toLowerCase() === String(siteLanguage).toLowerCase() ||
+      String(l.name).toLowerCase() === String(siteLanguage).toLowerCase()
+  );
+
+  const found = siteTranslations.find(
+    (x: any) => x.key === key && x.languageId === lang?.id
+  );
+
+  return found?.value || key;
+};
+
+
 
 
 
@@ -129,6 +181,23 @@ const packages = [
               Softver za ponude, radne liste i kalkulacije stolarije
             </div>
           </div>
+
+<select
+  value={siteLanguage}
+  onChange={(e) => {
+    setSiteLanguage(e.target.value);
+    localStorage.setItem("siteLanguage", e.target.value);
+  }}
+  className="rounded-xl border border-white/20 bg-slate-900 px-3 py-3 text-white"
+>
+  {siteLanguages.length === 0 && <option value="SR">SR</option>}
+
+  {siteLanguages.map((lang: any) => (
+    <option key={lang.id} value={lang.code || lang.name}>
+      {lang.name}
+    </option>
+  ))}
+</select>
 
           <a
             href="https://app.pvckalkulator.com"
@@ -186,14 +255,14 @@ const packages = [
               onClick={() => setActiveTab("Zahtev za ponudu")}
               className="rounded-xl bg-blue-500 px-8 py-4 text-center text-lg font-black shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
             >
-              Besplatna proba 10 dana
+              {tSite("Besplatna proba 10 dana")}
             </button>
 
             <a
               href="https://app.pvckalkulator.com"
               className="rounded-xl border border-white/20 bg-white/10 px-8 py-4 text-center text-lg font-bold text-white transition hover:bg-white/20 active:scale-95"
             >
-              Prijava u aplikaciju
+              {tSite("Prijava u aplikaciju")}
             </a>
           </div>
 
@@ -728,7 +797,7 @@ const packages = [
               </p>
 
               <p>
-                <strong className="text-white">Viber/WhatsApp:</strong>{" "}
+                <strong className="text-white">Viber / WhatsApp:</strong>{" "}
                 +381 62 858 2 333
               </p>
             </div>

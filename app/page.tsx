@@ -130,6 +130,7 @@ const [backupFiles, setBackupFiles] = useState<any[]>([]);
 
 const [logoPreview, setLogoPreview] = useState<string>("");
 
+const [siteTranslations, setSiteTranslations] = useState<any[]>([]);
 
 
   const [params, setParams] = useState<any>({
@@ -472,6 +473,7 @@ useEffect(() => {
     loadRoletne();
     loadKomarnici();
     loadDodatniElementi();
+    loadSiteTranslations();
   }
 }, [loggedUser?.id]);
 
@@ -3626,6 +3628,61 @@ const toggleSlikeGrupa = (naziv: string) => {
   }));
 };
 
+const loadSiteTranslations = async () => {
+  const res = await apiFetch(`${API_URL}/site-translations`, {
+    headers: authHeaders(),
+  });
+
+  const data = await res.json();
+  setSiteTranslations(Array.isArray(data) ? data : []);
+};
+
+const getSiteTranslationValue = (key: string, lang: any) => {
+  const found = siteTranslations.find(
+    (x: any) => x.key === key && x.languageId === lang.id
+  );
+
+  return found?.value || "";
+};
+
+const setSiteTranslationValue = (key: string, lang: any, value: string) => {
+  setSiteTranslations((prev: any[]) => {
+    const existing = prev.find(
+      (x: any) => x.key === key && x.languageId === lang.id
+    );
+
+    if (existing) {
+      return prev.map((x: any) =>
+        x.key === key && x.languageId === lang.id
+          ? { ...x, value }
+          : x
+      );
+    }
+
+    return [
+      ...prev,
+      {
+        key,
+        languageId: lang.id,
+        value,
+      },
+    ];
+  });
+};
+
+const saveSiteTranslations = async () => {
+  await apiFetch(`${API_URL}/site-translations/save`, {
+    method: "POST",
+    headers: {
+      ...authHeaders(),
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(siteTranslations),
+  });
+
+  alert("Prevodi site-a su sačuvani");
+  loadSiteTranslations();
+};
 
 
 
@@ -7909,6 +7966,216 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     </div>
   </div>
 )}
+
+
+
+
+
+
+
+
+{paramTab === "Prevodi site" && isAdmin && (
+  <div className="p-4">
+    <h2 className="text-2xl font-bold mb-4">
+      Prevodi site
+    </h2>
+
+    <div className="mb-4 flex gap-2 flex-wrap">
+      <button
+        onClick={saveSiteTranslations}
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        Sačuvaj prevode site
+      </button>
+    </div>
+
+    <div className="overflow-x-auto border">
+      <table className="border-collapse text-sm min-w-[900px]">
+        <thead className="bg-gray-200">
+          <tr>
+            <th className="border p-2 min-w-[260px]">
+              Tekst na site-u
+            </th>
+
+            {languages
+              .filter((lang: any) => lang.enabled)
+              .map((lang: any) => (
+                <th
+                  key={lang.id || lang.code}
+                  className="border p-2 min-w-[200px]"
+                >
+                  {lang.name}
+                </th>
+              ))}
+          </tr>
+        </thead>
+
+        <tbody>
+          {[
+            {
+              title: "Navigacija",
+              items: [
+                "Početna",
+                "O aplikaciji",
+                "Cene paketa",
+                "Zahtev za ponudu",
+                "Kontakt",
+                "Login",
+                "Prijava u aplikaciju",
+              ],
+            },
+            {
+              title: "Početna",
+              items: [
+                "Moderan · brz · pouzdan",
+                "Profesionalni softver za izradu ponuda i radnih lista PVC i ALU stolarije",
+                "Ponuda i radna lista izrađuju se u par klikova, uz automatski obračun profila, ispuna, okova, roletni i ostalih elemenata.",
+                "Aplikacija radi online i dostupna je sa laptopa, tableta i telefona.",
+                "Besplatna proba 10 dana",
+                "Online pristup",
+                "Sačuvani podaci",
+                "Automatski obračuni",
+                "PDF ponude i radne liste",
+              ],
+            },
+            {
+              title: "Prednosti",
+              items: [
+                "Ponude",
+                "Izrada ponuda u nekoliko klikova",
+                "Radne liste",
+                "Detaljni elementi za proizvodnju",
+                "Obračuni",
+                "Automatski obračun cena",
+                "PDF dokumenti",
+                "Profesionalna štampa",
+                "Više korisnika",
+                "Rad više zaposlenih",
+                "Online",
+                "Pristup sa bilo kog uređaja",
+                "Brzina i jednostavnost",
+                "Ponuda i radna lista u par klikova",
+                "Nakon unosa dimenzija i izbora sistema, aplikacija automatski obračunava profile, ispune, okove, roletne i ostale elemente.",
+                "Za svega nekoliko minuta možete izraditi profesionalnu ponudu i kompletnu radnu listu spremnu za proizvodnju.",
+                "Primer radnog procesa",
+                "Zašto PVC Kalkulator?",
+                "Ušteda vremena",
+                "Manje grešaka",
+                "Rad sa bilo kog mesta",
+              ],
+            },
+            {
+              title: "O aplikaciji",
+              items: [
+                "PVC Kalkulator je poslovna web aplikacija namenjena firmama koje se bave PVC i ALU stolarijom.",
+                "Sistem omogućava izradu ponuda, radnih lista, obračun elemenata i PDF dokumentaciju.",
+                "Video uputstva",
+                "Pogledajte kratka uputstva kako se koristi aplikacija.",
+              ],
+            },
+            {
+              title: "Cene paketa",
+              items: [
+                "Isprobajte aplikaciju potpuno besplatno 10 dana",
+                "Tokom probnog perioda možete koristiti kompletnu aplikaciju.",
+                "Zatraži probni period",
+                "Cene paketa",
+                "START",
+                "BUSINESS",
+                "PRO",
+                "ENTERPRISE",
+                "Najpopularniji",
+                "2 uređaja",
+                "5 uređaja",
+                "10 uređaja",
+                "20 uređaja",
+                "99 €",
+                "199 €",
+                "299 €",
+                "599 €",
+                "godišnje",
+                "10 godina",
+                "Produženje: 49 € godišnje",
+                "Produženje: 99 € godišnje",
+                "Produženje: 149 € godišnje",
+                "Bez godišnje obnove",
+                "Izaberi paket",
+              ],
+            },
+            {
+              title: "Zahtev za ponudu",
+              items: [
+                "Pošaljite osnovne podatke i kontaktiraćemo vas u vezi probnog perioda i podešavanja aplikacije.",
+                "Firma",
+                "PIB",
+                "Kontakt osoba",
+                "Telefon",
+                "Email",
+                "Izaberite paket",
+                "Poruka",
+                "Pošalji zahtev",
+                "Slanje...",
+                "Zahtev je uspešno poslat.",
+                "Firma i telefon su obavezni.",
+                "Greška pri slanju zahteva.",
+                "Greška pri povezivanju sa serverom.",
+              ],
+            },
+            {
+              title: "Kontakt",
+              items: [
+                "Za dodatne informacije, probni period ili podešavanje aplikacije možete nas kontaktirati.",
+                "Web",
+                "Sva prava zadržana.",
+              ],
+            },
+          ].map((group) => (
+            <React.Fragment key={group.title}>
+              <tr>
+                <td
+                  colSpan={languages.filter((l: any) => l.enabled).length + 1}
+                  className="border p-2 bg-blue-100 font-bold text-blue-800"
+                >
+                  {group.title}
+                </td>
+              </tr>
+
+              {group.items.map((key) => (
+                <tr key={key}>
+                  <td className="border p-2 font-semibold bg-gray-50">
+                    {key}
+                  </td>
+
+                  {languages
+                    .filter((lang: any) => lang.enabled)
+                    .map((lang: any) => (
+                      <td
+                        key={`${key}-${lang.id || lang.code}`}
+                        className="border p-2"
+                      >
+                        <input
+                          className="border p-1 w-full"
+                          value={getSiteTranslationValue(key, lang)}
+                          onChange={(e) =>
+                            setSiteTranslationValue(
+                              key,
+                              lang,
+                              e.target.value
+                            )
+                          }
+                        />
+                      </td>
+                    ))}
+                </tr>
+              ))}
+            </React.Fragment>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+)}
+
 
 
 
