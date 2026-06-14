@@ -3745,6 +3745,7 @@ const copyDemoDataToUser = async (userId: number, username: string) => {
 
 
 
+
 console.log("PROFILI FULL:", JSON.stringify(profili, null, 2));
 
 
