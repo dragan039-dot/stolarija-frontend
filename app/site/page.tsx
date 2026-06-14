@@ -156,14 +156,6 @@ useEffect(() => {
   const savedLang = localStorage.getItem("siteLanguage");
   if (savedLang) setSiteLanguage(savedLang);
 
-  fetch("/api/languages")
-    .then((res) => res.json())
-    .then((data) => {
-      setSiteLanguages(Array.isArray(data) ? data : []);
-    })
-    .catch(() => {
-      setSiteLanguages([]);
-    });
 
   fetch("/api/site-translations")
     .then((res) => res.json())
