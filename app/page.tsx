@@ -6553,30 +6553,50 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
       className="border p-2"
     />
  </div>
+<div className="grid grid-cols-3 gap-4">
 
-    <div className="grid grid-cols-3 gap-4">
-
-
-
-    <input placeholder={t("Zarada %")}
+  <div>
+    <div className="mb-1 text-xs text-gray-500">
+      {t("Zarada %")}
+    </div>
+    <input
+      placeholder={t("Zarada %")}
       value={firma.zarada || ""}
       onChange={e => setFirma({ ...firma, zarada: e.target.value })}
-      className="border p-2"
+      className="border p-2 w-full"
     />
+  </div>
 
-    <input placeholder={t("PDV %")}
+  <div>
+    <div className="mb-1 text-xs text-gray-500">
+      {t("PDV %")}
+    </div>
+    <input
+      placeholder={t("PDV %")}
       value={firma.pdv || ""}
       onChange={e => setFirma({ ...firma, pdv: e.target.value })}
-      className="border p-2"
+      className="border p-2 w-full"
     />
+  </div>
 
-<input placeholder={t("Valuta plaćanja (dana)")}
-  value={firma.valuta_placanja || ""}
-  onChange={e => setFirma({ ...firma, valuta_placanja: e.target.value })}
-  className="border p-2"
-/>
+  <div>
+    <div className="mb-1 text-xs text-gray-500">
+      {t("Valuta plaćanja (dana)")}
+    </div>
+    <input
+      placeholder={t("Valuta plaćanja (dana)")}
+      value={firma.valuta_placanja || ""}
+      onChange={e =>
+        setFirma({
+          ...firma,
+          valuta_placanja: e.target.value,
+        })
+      }
+      className="border p-2 w-full"
+    />
+  </div>
 
- </div>
+</div>
 
     <div className="grid grid-cols-3 gap-4">
 
