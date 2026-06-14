@@ -656,10 +656,10 @@ const loadProfili = () => {
       const normalized = Array.from({ length: 15 }, (_, index) => {
         const item = list[index];
 
-        return {
-          id: item?.id ?? index + 1,
-          naziv: item?.naziv || `Profil ${index + 1}`,
-        };
+return {
+  id: item?.id ?? index + 1,
+  naziv: item?.naziv || `Profil ${index + 1}`,
+};
       });
 
       setProfili(normalized);
