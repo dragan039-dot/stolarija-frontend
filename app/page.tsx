@@ -3684,6 +3684,28 @@ const saveSiteTranslations = async () => {
   loadSiteTranslations();
 };
 
+  const videos = [
+    {
+      title: "Početak rada",
+      text: "Osnovno upoznavanje sa aplikacijom.",
+      videoId: "eN5z1mu6j4M",
+    },
+    {
+      title: "Kreiranje ponude",
+      text: "Kako se unosi kupac, pozicije i čuva ponuda.",
+      videoId: "YOUTUBE_VIDEO_ID_2",
+    },
+    {
+      title: "Radna lista",
+      text: "Pregled elemenata i priprema za proizvodnju.",
+      videoId: "YOUTUBE_VIDEO_ID_3",
+    },
+    {
+      title: "Podešavanje parametara",
+      text: "Profili, cene, tehnički parametri i formule.",
+      videoId: "YOUTUBE_VIDEO_ID_4",
+    },
+  ];
 
 
 
@@ -5572,20 +5594,43 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
 
 {activeTab === "Uputstvo" && (
-  <div className="p-4">
-    <h1 className="text-2xl font-bold mb-4">
-      Uputstvo
-    </h1>
+ 
+<div className="mt-10">
+  <h3 className="mb-3 text-2xl font-black">
+    Video uputstva
+  </h3>
 
-    <div
-      className="bg-white border rounded p-4 prose max-w-none"
-      dangerouslySetInnerHTML={{
-        __html:
-          instructionContent ||
-          "<p>Uputstvo još nije uneto.</p>",
-      }}
-    />
+  <p className="mb-6 text-slate-300">
+    Pogledajte kratka uputstva kako se koristi aplikacija.
+  </p>
+
+  <div className="grid gap-6 md:grid-cols-2">
+    {videos.map((video) => (
+      <div
+        key={video.videoId}
+        className="rounded-2xl border border-white/10 bg-slate-900/70 p-4"
+      >
+        <h4 className="mb-1 text-lg font-black">
+          {video.title}
+        </h4>
+
+        <p className="mb-4 text-sm text-slate-300">
+          {video.text}
+        </p>
+
+        <div className="aspect-video overflow-hidden rounded-xl bg-slate-950">
+          <iframe
+            className="h-full w-full"
+            src={`https://www.youtube.com/embed/${video.videoId}`}
+            title={video.title}
+            allowFullScreen
+          />
+        </div>
+      </div>
+    ))}
   </div>
+</div>
+
 )}
 
 
