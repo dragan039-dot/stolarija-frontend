@@ -24,6 +24,28 @@ const [siteLanguages, setSiteLanguages] = useState<any[]>([]);
 const [requestMessage, setRequestMessage] = useState("");
 const [requestLoading, setRequestLoading] = useState(false);
 
+
+
+
+
+useEffect(() => {
+  const saved = localStorage.getItem("siteLanguage");
+  if (saved) setSiteLanguage(saved);
+}, []);
+
+useEffect(() => {
+  fetch("/api/languages")
+    .then((res) => res.json())
+    .then((data) => setSiteLanguages(Array.isArray(data) ? data : []))
+    .catch(() => setSiteLanguages([]));
+
+  fetch("/api/site-translations")
+    .then((res) => res.json())
+    .then((data) => setSiteTranslations(Array.isArray(data) ? data : []))
+    .catch(() => setSiteTranslations([]));
+}, []);
+
+
 const sendRequest = async () => {
   setRequestMessage("");
 
@@ -120,13 +142,12 @@ const packages = [
 const t = (key: string) => {
   const lang = (siteLanguage || "SR").toUpperCase();
 
-  const found = siteTranslations.find(
-    (x: any) =>
-      x.key === key &&
-      (x.language || x.lang || x.code || "").toUpperCase() === lang
-  );
+  const found = siteTranslations.find((x: any) => {
+    const itemLang = (x.language || x.lang || x.code || x.languageCode || "").toUpperCase();
+    return x.key === key && itemLang === lang;
+  });
 
-  return found?.value || key;
+  return found?.value || found?.text || key;
 };
 
 
@@ -206,7 +227,7 @@ const tSite = (key: string) => {
 <select
   value={siteLanguage}
   onChange={(e) => {
-    const lang = e.target.value;
+    const lang = e.target.value.toUpperCase();
     setSiteLanguage(lang);
     localStorage.setItem("siteLanguage", lang);
   }}
