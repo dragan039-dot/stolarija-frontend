@@ -206,31 +206,33 @@ const tSite = (key: string) => {
             </div>
           </div>
 
-<select
-  value={selectedLanguageId}
-  onChange={(e) => {
-    setSelectedLanguageId(e.target.value);
-    localStorage.setItem("selectedLanguageId", e.target.value);
-  }}
-  className="rounded-xl border border-white/20 bg-slate-900 px-3 py-3 text-white"
->
-  <option value="">SR</option>
+<div className="flex items-center gap-3">
+  <select
+    value={selectedLanguageId}
+    onChange={(e) => {
+      setSelectedLanguageId(e.target.value);
+      localStorage.setItem("selectedLanguageId", e.target.value);
+    }}
+    className="rounded-xl border border-white/20 bg-slate-900 px-3 py-3 text-white"
+  >
+    <option value="">SR</option>
 
-  {languages
-    .filter((l: any) => l.enabled)
-    .map((l: any) => (
-      <option key={l.id} value={String(l.id)}>
-        {l.name}
-      </option>
-    ))}
-</select>
+    {languages
+      .filter((l: any) => l.enabled)
+      .map((l: any) => (
+        <option key={l.id} value={String(l.id)}>
+          {l.name}
+        </option>
+      ))}
+  </select>
 
-          <a
-            href="https://app.pvckalkulator.com"
-            className="rounded-xl bg-blue-500 px-7 py-3 text-center font-bold text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
-          >
-            {tSite("Login")}
-          </a>
+  <a
+    href="https://app.pvckalkulator.com"
+    className="rounded-xl bg-blue-500 px-7 py-3 text-center font-bold text-white shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
+  >
+    {tSite("Login")}
+  </a>
+</div>
 
         </div>
 
