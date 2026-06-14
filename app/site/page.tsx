@@ -9,6 +9,8 @@ export default function PublicSite() {
 const [siteTranslations, setSiteTranslations] = useState<any[]>([]);
 const [siteLanguage, setSiteLanguage] = useState("SR");
 const [siteLanguages, setSiteLanguages] = useState<any[]>([]);
+const [selectedLanguageId, setSelectedLanguageId] = useState("");
+const [languages, setLanguages] = useState<any[]>([]);
 
   const [requestForm, setRequestForm] = useState({
   firma: "",
@@ -29,15 +31,13 @@ const [requestLoading, setRequestLoading] = useState(false);
 
 
 useEffect(() => {
-  const saved = localStorage.getItem("siteLanguage");
-  if (saved) setSiteLanguage(saved);
-}, []);
+  const saved = localStorage.getItem("selectedLanguageId");
+  if (saved) setSelectedLanguageId(saved);
 
-useEffect(() => {
-  fetch("/api/languages")
+  fetch("/api/translation/languages")
     .then((res) => res.json())
-    .then((data) => setSiteLanguages(Array.isArray(data) ? data : []))
-    .catch(() => setSiteLanguages([]));
+    .then((data) => setLanguages(Array.isArray(data) ? data : []))
+    .catch(() => setLanguages([]));
 
   fetch("/api/site-translations")
     .then((res) => res.json())
@@ -177,14 +177,13 @@ useEffect(() => {
 
 
 const tSite = (key: string) => {
-  const lang = (siteLanguage || "SR").toUpperCase();
+  if (!selectedLanguageId) return key;
 
-  if (lang === "SR") return key;
-
-  const found = siteTranslations.find((x: any) => {
-    const code = (x.language?.code || x.language?.name || "").toUpperCase();
-    return x.key === key && code === lang;
-  });
+  const found = siteTranslations.find(
+    (x: any) =>
+      x.key === key &&
+      String(x.languageId) === String(selectedLanguageId)
+  );
 
   return found?.value?.trim() || key;
 };
@@ -216,21 +215,22 @@ const tSite = (key: string) => {
           </div>
 
 <select
-  value={siteLanguage}
+  value={selectedLanguageId}
   onChange={(e) => {
-    const lang = e.target.value.toUpperCase();
-    setSiteLanguage(lang);
-    localStorage.setItem("siteLanguage", lang);
+    setSelectedLanguageId(e.target.value);
+    localStorage.setItem("selectedLanguageId", e.target.value);
   }}
   className="rounded-xl border border-white/20 bg-slate-900 px-3 py-3 text-white"
 >
-  {siteLanguages.length === 0 && <option value="SR">SR</option>}
+  <option value="">SR</option>
 
-  {siteLanguages.map((lang: any) => (
-    <option key={lang.id} value={(lang.code || lang.name).toUpperCase()}>
-      {lang.name}
-    </option>
-  ))}
+  {languages
+    .filter((l: any) => l.enabled)
+    .map((l: any) => (
+      <option key={l.id} value={String(l.id)}>
+        {l.name}
+      </option>
+    ))}
 </select>
 
           <a
