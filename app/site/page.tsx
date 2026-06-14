@@ -153,18 +153,18 @@ const t = (key: string) => {
 
 
 useEffect(() => {
-  const savedLang = localStorage.getItem("siteLanguage");
-  if (savedLang) setSiteLanguage(savedLang);
+  const saved = localStorage.getItem("selectedLanguageId");
+  if (saved) setSelectedLanguageId(saved);
 
+  fetch("/api/translation/languages")
+    .then((res) => res.json())
+    .then((data) => setLanguages(Array.isArray(data) ? data : []))
+    .catch(() => setLanguages([]));
 
   fetch("/api/site-translations")
     .then((res) => res.json())
-    .then((data) => {
-      setSiteTranslations(Array.isArray(data) ? data : []);
-    })
-    .catch(() => {
-      setSiteTranslations([]);
-    });
+    .then((data) => setSiteTranslations(Array.isArray(data) ? data : []))
+    .catch(() => setSiteTranslations([]));
 }, []);
 
 
