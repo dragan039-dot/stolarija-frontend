@@ -6490,222 +6490,256 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
     {paramTab === "Firma" && (
       
 
-      
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+<div className="space-y-6">
 
-  {/* LEVA KOLONA */}
-  <div className="grid grid-cols-1 gap-4">
+  {/* PODACI FIRME */}
+  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
+    {/* LEVA KOLONA */}
+    <div className="space-y-4">
 
-    
+      <div>
+        <div className="mb-1 text-xs text-gray-500">
+          {t("Naziv")}
+        </div>
+        <input
+          value={firma.naziv || ""}
+          onChange={e => setFirma({ ...firma, naziv: e.target.value })}
+          className="border p-2 w-full rounded"
+        />
+      </div>
 
-    <input placeholder={t("Naziv")}
-      value={firma.naziv || ""}
-      onChange={e => setFirma({ ...firma, naziv: e.target.value })}
-      className="border p-2"
-    />
+      <div>
+        <div className="mb-1 text-xs text-gray-500">
+          {t("Adresa")}
+        </div>
+        <input
+          value={firma.adresa || ""}
+          onChange={e => setFirma({ ...firma, adresa: e.target.value })}
+          className="border p-2 w-full rounded"
+        />
+      </div>
 
-    <input placeholder={t("Adresa")}
-      value={firma.adresa || ""}
-      onChange={e => setFirma({ ...firma, adresa: e.target.value })}
-      className="border p-2"
-    />
+      <div>
+        <div className="mb-1 text-xs text-gray-500">
+          {t("Email")}
+        </div>
+        <input
+          value={firma.email || ""}
+          onChange={e => setFirma({ ...firma, email: e.target.value })}
+          className="border p-2 w-full rounded"
+        />
+      </div>
 
-    <input placeholder={t("Email")}
-      value={firma.email || ""}
-      onChange={e => setFirma({ ...firma, email: e.target.value })}
-      className="border p-2"
-    />
+      <div>
+        <div className="mb-1 text-xs text-gray-500">
+          {t("TR")}
+        </div>
+        <input
+          value={firma.tr || ""}
+          onChange={e => setFirma({ ...firma, tr: e.target.value })}
+          className="border p-2 w-full rounded"
+        />
+      </div>
 
-    <input placeholder={t("TR")}
-      value={firma.tr || ""}
-      onChange={e => setFirma({ ...firma, tr: e.target.value })}
-      className="border p-2"
-    />
-
-  </div>
-
-
-
-
-
-  {/* DESNA KOLONA */}
-  <div className="grid grid-cols-1 gap-4">
-
-    <div className="grid grid-cols-3 gap-4">
-
-
-    <input placeholder={t("PIB")}
-      value={firma.pib || ""}
-      onChange={e => setFirma({ ...firma, pib: e.target.value })}
-      className="border p-2"
-    />
-
-    <input placeholder={t("Matični broj")}
-      value={firma.maticni || ""}
-      onChange={e => setFirma({ ...firma, maticni: e.target.value })}
-      className="border p-2"
-    />
-
-    <input placeholder={t("Telefon")}
-      value={firma.telefon || ""}
-      onChange={e => setFirma({ ...firma, telefon: e.target.value })}
-      className="border p-2"
-    />
- </div>
-<div className="grid grid-cols-3 gap-4">
-
-  <div>
-    <div className="mb-1 text-xs text-gray-500">
-      {t("Zarada %")}
     </div>
-    <input
-      placeholder={t("Zarada %")}
-      value={firma.zarada || ""}
-      onChange={e => setFirma({ ...firma, zarada: e.target.value })}
-      className="border p-2 w-full"
-    />
-  </div>
 
-  <div>
-    <div className="mb-1 text-xs text-gray-500">
-      {t("PDV %")}
+    {/* DESNA KOLONA */}
+    <div className="space-y-4">
+
+      <div className="grid grid-cols-3 gap-4">
+
+        <div>
+          <div className="mb-1 text-xs text-gray-500">
+            {t("PIB")}
+          </div>
+          <input
+            value={firma.pib || ""}
+            onChange={e => setFirma({ ...firma, pib: e.target.value })}
+            className="border p-2 w-full rounded"
+          />
+        </div>
+
+        <div>
+          <div className="mb-1 text-xs text-gray-500">
+            {t("Matični broj")}
+          </div>
+          <input
+            value={firma.maticni || ""}
+            onChange={e => setFirma({ ...firma, maticni: e.target.value })}
+            className="border p-2 w-full rounded"
+          />
+        </div>
+
+        <div>
+          <div className="mb-1 text-xs text-gray-500">
+            {t("Telefon")}
+          </div>
+          <input
+            value={firma.telefon || ""}
+            onChange={e => setFirma({ ...firma, telefon: e.target.value })}
+            className="border p-2 w-full rounded"
+          />
+        </div>
+
+      </div>
+
+      <div className="grid grid-cols-3 gap-4">
+
+        <div>
+          <div className="mb-1 text-xs text-gray-500">
+            {t("Zarada %")}
+          </div>
+          <input
+            value={firma.zarada || ""}
+            onChange={e => setFirma({ ...firma, zarada: e.target.value })}
+            className="border p-2 w-full rounded"
+          />
+        </div>
+
+        <div>
+          <div className="mb-1 text-xs text-gray-500">
+            {t("PDV %")}
+          </div>
+          <input
+            value={firma.pdv || ""}
+            onChange={e => setFirma({ ...firma, pdv: e.target.value })}
+            className="border p-2 w-full rounded"
+          />
+        </div>
+
+        <div>
+          <div className="mb-1 text-xs text-gray-500">
+            {t("Valuta plaćanja (dana)")}
+          </div>
+          <input
+            value={firma.valuta_placanja || ""}
+            onChange={e =>
+              setFirma({
+                ...firma,
+                valuta_placanja: e.target.value,
+              })
+            }
+            className="border p-2 w-full rounded"
+          />
+        </div>
+
+      </div>
+
+      <div className="grid grid-cols-3 gap-4">
+
+        <div>
+          <div className="mb-1 text-xs text-gray-500">
+            {t("Otpad %")}
+          </div>
+          <input
+            value={firma.otpad || ""}
+            onChange={e => setFirma({ ...firma, otpad: e.target.value })}
+            className="border p-2 w-full rounded"
+          />
+        </div>
+
+        <div>
+          <div className="mb-1 text-xs text-gray-500">
+            {t("Roletna %")}
+          </div>
+          <input
+            value={firma.roletna || ""}
+            onChange={e => setFirma({ ...firma, roletna: e.target.value })}
+            className="border p-2 w-full rounded"
+          />
+        </div>
+
+        <div>
+          <div className="mb-1 text-xs text-gray-500">
+            {t("Komarnik %")}
+          </div>
+          <input
+            value={firma.komarnik || ""}
+            onChange={e => setFirma({ ...firma, komarnik: e.target.value })}
+            className="border p-2 w-full rounded"
+          />
+        </div>
+
+      </div>
+
     </div>
+
+  </div>
+
+  {/* LOGO */}
+  <div className="border rounded-xl p-4">
+
+    <h2 className="font-semibold mb-3">
+      {t("Logo firme")}
+    </h2>
+
     <input
-      placeholder={t("PDV %")}
-      value={firma.pdv || ""}
-      onChange={e => setFirma({ ...firma, pdv: e.target.value })}
-      className="border p-2 w-full"
+      type="file"
+      accept="image/*"
+      onChange={handleLogoUpload}
+      className="border p-2 w-full rounded"
     />
-  </div>
 
-  <div>
-    <div className="mb-1 text-xs text-gray-500">
-      {t("Valuta plaćanja (dana)")}
-    </div>
-    <input
-      placeholder={t("Valuta plaćanja (dana)")}
-      value={firma.valuta_placanja || ""}
-      onChange={e =>
-        setFirma({
-          ...firma,
-          valuta_placanja: e.target.value,
-        })
-      }
-      className="border p-2 w-full"
-    />
-  </div>
-
-</div>
-
-    <div className="grid grid-cols-3 gap-4">
-
-
-    <input placeholder={t("Otpad %")}
-  value={firma.otpad || ""}
-  onChange={e => setFirma({ ...firma, otpad: e.target.value })}
-  className="border p-2"
-/>
-
-<input placeholder={t("Roletna %")}
-  value={firma.roletna || ""}
-  onChange={e => setFirma({ ...firma, roletna: e.target.value })}
-  className="border p-2"
-/>
-
-<input placeholder={t("Komarnik %")}
-  value={firma.komarnik || ""}
-  onChange={e => setFirma({ ...firma, komarnik: e.target.value })}
-  className="border p-2"
-/>
-
- </div>
-
-
-<br />
-
-
+    {(logoPreview || firma.logo) && (
+      <div className="mt-4 border rounded bg-white w-56 h-32 flex items-center justify-center">
+        <img
+          src={logoPreview || firma.logo}
+          alt="Logo"
+          className="max-w-full max-h-full object-contain"
+        />
+      </div>
+    )}
 
   </div>
 
+  {/* PROMENA ŠIFRE */}
+  <div className="border rounded-xl p-4">
 
+    <h2 className="font-semibold mb-4">
+      {t("Promena šifre")}
+    </h2>
 
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 
-
-
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
-<div className="col-span-3 border rounded p-3">
-  <label className="font-semibold block mb-2">
-    {t("Logo firme / slika do 2MB")}
-  </label>
-
-  <input
-    type="file"
-    accept="image/*"
-    onChange={handleLogoUpload}
-    className="border p-2 w-full"
-  />
-
-  {(logoPreview || firma.logo) && (
-    <div className="mt-3 border w-48 h-28 flex items-center justify-center bg-white">
-      <img
-        src={logoPreview || firma.logo}
-        alt="Logo"
-        className="max-w-full max-h-full object-contain"
+      <input
+        type="password"
+        placeholder={t("Stara šifra")}
+        value={passwordForm.oldPassword}
+        onChange={(e) =>
+          setPasswordForm({
+            ...passwordForm,
+            oldPassword: e.target.value,
+          })
+        }
+        className="border p-2 rounded"
       />
+
+      <input
+        type="password"
+        placeholder={t("Nova šifra")}
+        value={passwordForm.newPassword}
+        onChange={(e) =>
+          setPasswordForm({
+            ...passwordForm,
+            newPassword: e.target.value,
+          })
+        }
+        className="border p-2 rounded"
+      />
+
+      <button
+        onClick={changeMyPassword}
+        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded"
+      >
+        {t("Promeni šifru")}
+      </button>
+
     </div>
-  )}
-</div>
-</div>
-
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
-<div className="col-span-3 border rounded p-4 mt-4">
-  <h2 className="font-bold mb-3">{t("Promena šifre")}</h2>
-
-  <input
-    type="password"
-    placeholder={t("Stara šifra")}
-    value={passwordForm.oldPassword}
-    onChange={(e) =>
-      setPasswordForm({ ...passwordForm, oldPassword: e.target.value })
-    }
-    className="border p-2 mr-2"
-  />
-
-  <input
-    type="password"
-    placeholder={t("Nova šifra")}
-    value={passwordForm.newPassword}
-    onChange={(e) =>
-      setPasswordForm({ ...passwordForm, newPassword: e.target.value })
-    }
-    className="border p-2 mr-2"
-  />
-
-  <button
-    onClick={changeMyPassword}
-    className="bg-blue-600 text-white px-4 py-2 rounded"
-  >
-    {t("Promeni šifru")}
-  </button>
-</div>
-
 
   </div>
 
-
-
-
-
-  </div>
-
-
-
-
+</div>
 
 
 
