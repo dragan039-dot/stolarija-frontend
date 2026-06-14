@@ -5624,31 +5624,50 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
 
 {activeTab === "Uputstvo" && (
- 
-<div className="mt-10">
-  <h3 className="mb-3 text-2xl font-black">
-    Video uputstva
-  </h3>
+ <div className="mt-10">
 
-  <p className="mb-6 text-slate-300">
-    Pogledajte kratka uputstva kako se koristi aplikacija.
-  </p>
+  <div className="mb-8 text-center">
+    <h3 className="text-3xl font-bold text-slate-900 dark:text-white">
+      Video uputstva
+    </h3>
 
-  <div className="grid gap-6 md:grid-cols-2">
+    <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+      Pogledajte kratka video uputstva za rad u aplikaciji.
+    </p>
+  </div>
+
+  <div className="grid gap-8 md:grid-cols-2">
+
     {videos.map((video) => (
       <div
         key={video.videoId}
-        className="rounded-2xl border border-white/10 bg-slate-900/70 p-4"
+        className="
+          overflow-hidden
+          rounded-2xl
+          border
+          border-slate-200
+          bg-white
+          shadow-sm
+          transition-all
+          hover:shadow-lg
+          dark:border-slate-700
+          dark:bg-slate-900
+        "
       >
-        <h4 className="mb-1 text-lg font-black">
-          {video.title}
-        </h4>
 
-        <p className="mb-4 text-sm text-slate-300">
-          {video.text}
-        </p>
+        <div className="border-b border-slate-200 p-4 dark:border-slate-700">
 
-        <div className="aspect-video overflow-hidden rounded-xl bg-slate-950">
+          <h4 className="text-lg font-semibold text-slate-900 dark:text-white">
+            {video.title}
+          </h4>
+
+          <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            {video.text}
+          </p>
+
+        </div>
+
+        <div className="aspect-video bg-black">
           <iframe
             className="h-full w-full"
             src={`https://www.youtube.com/embed/${video.videoId}`}
@@ -5656,11 +5675,13 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
             allowFullScreen
           />
         </div>
+
       </div>
     ))}
-  </div>
-</div>
 
+  </div>
+
+</div>
 )}
 
 
