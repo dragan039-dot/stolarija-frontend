@@ -3708,6 +3708,35 @@ const saveSiteTranslations = async () => {
   ];
 
 
+const copyDemoDataToUser = async (userId: number, username: string) => {
+  if (username === "DEMO") {
+    alert("Ne možete kopirati DEMO podatke u DEMO korisnika.");
+    return;
+  }
+
+  const ok = confirm(
+    `Da li želite da kopirate DEMO parametre, cene i test ponude korisniku "${username}"?\n\nStari parametri, cene i ponude ovog korisnika biće zamenjeni.`
+  );
+
+  if (!ok) return;
+
+  const res = await apiFetch(`${API_URL}/auth/users/copy-demo-data`, {
+    method: "POST",
+    headers: authHeaders(),
+    body: JSON.stringify({ userId }),
+  });
+
+  const data = await res.json().catch(() => null);
+
+  if (!res.ok) {
+    alert(data?.message || "Greška prilikom kopiranja DEMO podataka.");
+    return;
+  }
+
+  alert("DEMO podaci su uspešno kopirani korisniku.");
+};
+
+
 
 
 
@@ -5857,6 +5886,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
             <th className="border p-2">Uređaja</th>
             <th className="border p-2">Nova šifra</th>
             <th className="border p-2">Uređaji</th>
+            <th className="border p-2">Demo</th>
             <th className="border p-2">Izmena</th>
             <th className="border p-2">Brisanje</th>
           </tr>
@@ -5967,6 +5997,17 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
   >
     Uređaji
   </button>
+</td>
+
+
+<td className="border p-2 text-center">
+<button
+  type="button"
+  onClick={() => copyDemoDataToUser(u.id, u.username)}
+  className="rounded-lg bg-emerald-600 px-3 py-1 text-xs font-semibold text-white hover:bg-emerald-700"
+>
+  DEMO
+</button>
 </td>
 
 
