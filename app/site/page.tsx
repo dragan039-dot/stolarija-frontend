@@ -110,6 +110,27 @@ const packages = [
 ];
 
 
+
+
+
+
+
+
+
+const t = (key: string) => {
+  const lang = (siteLanguage || "SR").toUpperCase();
+
+  const found = siteTranslations.find(
+    (x: any) =>
+      x.key === key &&
+      (x.language || x.lang || x.code || "").toUpperCase() === lang
+  );
+
+  return found?.value || key;
+};
+
+
+
 useEffect(() => {
   const savedLang = localStorage.getItem("siteLanguage");
 
@@ -182,7 +203,23 @@ const tSite = (key: string) => {
             </div>
           </div>
 
+<select
+  value={siteLanguage}
+  onChange={(e) => {
+    const lang = e.target.value;
+    setSiteLanguage(lang);
+    localStorage.setItem("siteLanguage", lang);
+  }}
+  className="rounded-xl border border-white/20 bg-slate-900 px-3 py-3 text-white"
+>
+  {siteLanguages.length === 0 && <option value="SR">SR</option>}
 
+  {siteLanguages.map((lang: any) => (
+    <option key={lang.id} value={(lang.code || lang.name || "SR").toUpperCase()}>
+      {lang.name}
+    </option>
+  ))}
+</select>
 
           <a
             href="https://app.pvckalkulator.com"
@@ -190,24 +227,6 @@ const tSite = (key: string) => {
           >
             {tSite("Login")}
           </a>
-
-<select
-  value={siteLanguage}
-  onChange={(e) => {
-    setSiteLanguage(e.target.value);
-    localStorage.setItem("siteLanguage", e.target.value);
-  }}
-  className="rounded-xl border border-white/20 bg-slate-900 px-3 py-3 text-white"
->
-  {siteLanguages.length === 0 && <option value="SR">SR</option>}
-
-  {siteLanguages.map((lang: any) => (
-    <option key={lang.id} value={lang.code || lang.name}>
-      {lang.name}
-    </option>
-  ))}
-</select>
-
 
         </div>
 
