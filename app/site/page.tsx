@@ -154,48 +154,39 @@ const t = (key: string) => {
 
 useEffect(() => {
   const savedLang = localStorage.getItem("siteLanguage");
+  if (savedLang) setSiteLanguage(savedLang);
 
-  if (savedLang) {
-    setSiteLanguage(savedLang);
-  }
+  fetch("/api/languages")
+    .then((res) => res.json())
+    .then((data) => {
+      setSiteLanguages(Array.isArray(data) ? data : []);
+    })
+    .catch(() => {
+      setSiteLanguages([]);
+    });
 
-  const loadSiteData = async () => {
-    try {
-      const [translationsRes, languagesRes] = await Promise.all([
-        fetch("/api/site-translations"),
-        fetch("/api/languages"),
-      ]);
-
-      const translationsData = await translationsRes.json();
-      const languagesData = await languagesRes.json();
-
-      setSiteTranslations(Array.isArray(translationsData) ? translationsData : []);
-      setSiteLanguages(
-        Array.isArray(languagesData)
-          ? languagesData.filter((l: any) => l.enabled)
-          : []
-      );
-    } catch (err) {
-      console.error("SITE TRANSLATIONS ERROR:", err);
-    }
-  };
-
-  loadSiteData();
+  fetch("/api/site-translations")
+    .then((res) => res.json())
+    .then((data) => {
+      setSiteTranslations(Array.isArray(data) ? data : []);
+    })
+    .catch(() => {
+      setSiteTranslations([]);
+    });
 }, []);
 
 
 const tSite = (key: string) => {
-  const lang = siteLanguages.find(
-    (l: any) =>
-      String(l.code).toLowerCase() === String(siteLanguage).toLowerCase() ||
-      String(l.name).toLowerCase() === String(siteLanguage).toLowerCase()
-  );
+  const lang = (siteLanguage || "SR").toUpperCase();
 
-  const found = siteTranslations.find(
-    (x: any) => x.key === key && x.languageId === lang?.id
-  );
+  if (lang === "SR") return key;
 
-  return found?.value || key;
+  const found = siteTranslations.find((x: any) => {
+    const code = (x.language?.code || x.language?.name || "").toUpperCase();
+    return x.key === key && code === lang;
+  });
+
+  return found?.value?.trim() || key;
 };
 
 
@@ -236,7 +227,7 @@ const tSite = (key: string) => {
   {siteLanguages.length === 0 && <option value="SR">SR</option>}
 
   {siteLanguages.map((lang: any) => (
-    <option key={lang.id} value={(lang.code || lang.name || "SR").toUpperCase()}>
+    <option key={lang.id} value={(lang.code || lang.name).toUpperCase()}>
       {lang.name}
     </option>
   ))}
