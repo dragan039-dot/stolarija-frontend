@@ -1395,6 +1395,16 @@ const getValue = (profil: string, parametar: string) => {
 
     setOriginalVrstaPonude(data.offer.vrsta_ponude || "");
 
+
+
+    const openedValuta =
+  valute.find((v: any) => String(v.id) === String(data.offer.valuta))?.id ||
+  valute.find((v: any) => String(v.naziv) === String(data.offer.valuta))?.id ||
+  data.offer.valuta ||
+  "";
+
+
+
     setForm({
   id: data.offer.id || "",
   brojPonude: data.offer.brojPonude || "",
@@ -1405,7 +1415,7 @@ const getValue = (profil: string, parametar: string) => {
   maticni: data.offer.maticni || "",
   datum: data.offer.datum || "",
   vrsta_ponude: data.offer.vrsta_ponude || "",
-  valuta: data.offer.valuta || "",
+  valuta: openedValuta,
   popust: data.offer.popust || "",
   napomena: data.offer.napomena || "",
 });
