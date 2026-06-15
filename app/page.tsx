@@ -456,31 +456,50 @@ const loadValute = () => {
 
 
 useEffect(() => {
-  if (loggedUser?.id) {
-    loadIspune();
-    loadValute();
-    loadProfili();
-    loadTehnicki();
-    loadParams();
-    loadOkov();
-    loadProfileParams();
-    loadHelpTexts();
-    loadAds();
-    loadAdStats();
-    loadInstruction();
-    loadLanguages();
-    loadTranslations();
-    loadRoletne();
-    loadKomarnici();
-    loadDodatniElementi();
-    loadSiteTranslations();
-  }
+  if (!loggedUser?.id) return;
+
+  loadIspune();
+  loadOkov();
+  loadValute();
+  loadProfili();
+  loadRoletne();
+  loadKomarnici();
+  loadDodatniElementi();
+  loadFirma();
+  loadOffers();
 }, [loggedUser?.id]);
 
 
+useEffect(() => {
+  if (!loggedUser?.id) return;
+
+  if (
+    paramTab === "Tehnicki" ||
+    paramTab === "Cene" ||
+    paramTab === "Formula"
+  ) {
+    loadTehnicki();
+    loadProfilePrices();
+    loadProfileParams();
+    loadParams();
+  }
+}, [loggedUser?.id, paramTab]);
 
 
 
+useEffect(() => {
+  if (!loggedUser?.id) return;
+
+  if (activeTab === "Administracija" && loggedUser.role === "ADMIN") {
+    loadAdminUsers();
+    loadLanguages();
+    loadTranslations();
+    loadAds();
+    loadAdStats();
+    loadInstruction();
+    loadSiteTranslations();
+  }
+}, [loggedUser?.id, activeTab]);
 
 
 
@@ -517,11 +536,7 @@ if (savedLang) {
 }, []);
 
 
-useEffect(() => {
-  if (loggedUser?.role === "ADMIN") {
-    loadAdminUsers();
-  }
-}, [loggedUser]);
+
 
 
 
