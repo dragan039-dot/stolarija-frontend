@@ -157,6 +157,10 @@ const [openSlikeGrupe, setOpenSlikeGrupe] = useState<Record<string, boolean>>({
 });
 
 
+const [selectedFormOfferId, setSelectedFormOfferId] = useState<number | null>(null);
+const [selectedProposalOfferId, setSelectedProposalOfferId] = useState<number | null>(null);
+const [selectedWorklistOfferId, setSelectedWorklistOfferId] = useState<number | null>(null);
+
 
 const safeProfili = Array.isArray(params.profil)
   ? params.profil
@@ -252,7 +256,6 @@ const [dodatniElementi, setDodatniElementi] = useState<any[]>([]);
 const [siteRequests, setSiteRequests] = useState<any[]>([]);
 
 const [siteRequestSearch, setSiteRequestSearch] = useState("");
-
 
 
 
@@ -1395,6 +1398,8 @@ const getValue = (profil: string, parametar: string) => {
 
     setOriginalVrstaPonude(data.offer.vrsta_ponude || "");
 
+    setSelectedFormOfferId(id);
+
 
 
     const openedValuta =
@@ -2219,6 +2224,7 @@ calculatedPairs.forEach((pair) => {
 });
 
 setWorklistResults(calculated);
+setSelectedWorklistOfferId(id);
 };
 
 
@@ -2361,6 +2367,7 @@ calculatedPairs.forEach((pair) => {
 });
 
 setProposalResults(calculated);
+setSelectedFormOfferId(id);
 };
 
 
@@ -4165,9 +4172,18 @@ return (
             </thead>
             <tbody>
               {filteredOffers.map(c => (
-                <tr key={c.id}
-                  className="cursor-pointer hover:bg-gray-100"
-                  onClick={() => openFromTable(c.id)}>
+                <tr
+  key={c.id}
+  className={`cursor-pointer transition ${
+  selectedFormOfferId === c.id
+    ? "bg-blue-100 shadow-inner"
+    : "hover:bg-gray-100"
+}`}
+  onClick={() => {
+    setSelectedFormOfferId(c.id);
+    openFromTable(c.id);
+  }}
+>
                   <td className="border p-2">{c.brojPonude || c.id}</td>
                   <td className="border p-2">{c.naziv}</td>
                   <td className="border p-2">{c.adresa}</td>
@@ -4902,10 +4918,17 @@ return (
           <tbody>
             {filteredProposalOffers.map((c: any) => (
               <tr
-                key={c.id}
-                className="cursor-pointer hover:bg-gray-100"
-                onClick={() => openProposalOffer(c.id)}
-              >
+  key={c.id}
+  className={`cursor-pointer transition ${
+  selectedProposalOfferId === c.id
+    ? "bg-blue-100 shadow-inner"
+    : "hover:bg-gray-100"
+}`}
+  onClick={() => {
+    setSelectedProposalOfferId(c.id);
+    openProposalOffer(c.id);
+  }}
+>
                 <td className="border p-2">{c.brojPonude || c.id}</td>
                 <td className="border p-2">{c.naziv}</td>
                 <td className="border p-2">{c.adresa}</td>
@@ -5211,10 +5234,17 @@ console.log("SVE VALUTE:", valute);
           <tbody>
             {filteredWorklistOffers.map((c) => (
               <tr
-                key={c.id}
-                className="cursor-pointer hover:bg-gray-100"
-                onClick={() => openWorklistOffer(c.id)}
-              >
+  key={c.id}
+  className={`cursor-pointer transition ${
+  selectedWorklistOfferId === c.id
+    ? "bg-blue-100 shadow-inner"
+    : "hover:bg-gray-100"
+}`}
+  onClick={() => {
+    setSelectedWorklistOfferId(c.id);
+    openWorklistOffer(c.id);
+  }}
+>
                 <td className="border p-2">{c.brojPonude || c.id}</td>
                 <td className="border p-2">{c.naziv}</td>
                 <td className="border p-2">{c.adresa}</td>
