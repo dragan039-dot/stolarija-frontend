@@ -3741,7 +3741,15 @@ const copyDemoDataToUser = async (userId: number, username: string) => {
 };
 
 
+const getUploadUrl = (path: string) => {
+  if (!path) return "";
 
+  if (path.startsWith("http")) return path;
+
+  const base = API_URL.replace(/\/api$/, "");
+
+  return `${base}${path}`;
+};
 
 
 
@@ -7509,9 +7517,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
               {getAdValue(`${cfg.key}Image`) && (
                 <div className="mt-2">
                   <img
-                    src={`${API_URL}${getAdValue(
-                      `${cfg.key}Image`
-                    )}`}
+                    src={getUploadUrl(getAdValue(`${cfg.key}Image`))}
                     className="w-[50px] border"
                     alt=""
                   />
