@@ -2236,43 +2236,47 @@ const removeExtraItem = (index: number) => {
 
 
 
-const filteredOffers = offers.filter((o: any) => {
+const filteredOffers = useMemo(() => {
   const q = offerSearch.toLowerCase();
 
-  return (
-    String(o.id || "").includes(q) ||
-    String(o.naziv || "").toLowerCase().includes(q) ||
-    String(o.adresa || "").toLowerCase().includes(q) ||
-    String(o.telefon || "").toLowerCase().includes(q) ||
-    String(o.pib || "").toLowerCase().includes(q)
-  );
-});
+  return offers.filter((o: any) => {
+    return (
+      String(o.id || "").includes(q) ||
+      String(o.naziv || "").toLowerCase().includes(q) ||
+      String(o.adresa || "").toLowerCase().includes(q) ||
+      String(o.telefon || "").toLowerCase().includes(q) ||
+      String(o.pib || "").toLowerCase().includes(q)
+    );
+  });
+}, [offers, offerSearch]);
 
-const filteredWorklistOffers = offers.filter((o: any) => {
+const filteredWorklistOffers = useMemo(() => {
   const q = worklistSearch.toLowerCase();
 
-  return (
-    String(o.id || "").includes(q) ||
-    String(o.naziv || "").toLowerCase().includes(q) ||
-    String(o.adresa || "").toLowerCase().includes(q) ||
-    String(o.telefon || "").toLowerCase().includes(q) ||
-    String(o.pib || "").toLowerCase().includes(q)
-  );
-});
+  return offers.filter((o: any) => {
+    return (
+      String(o.id || "").includes(q) ||
+      String(o.naziv || "").toLowerCase().includes(q) ||
+      String(o.adresa || "").toLowerCase().includes(q) ||
+      String(o.telefon || "").toLowerCase().includes(q) ||
+      String(o.pib || "").toLowerCase().includes(q)
+    );
+  });
+}, [offers, worklistSearch]);
 
-
-
-const filteredProposalOffers = offers.filter((o: any) => {
+const filteredProposalOffers = useMemo(() => {
   const q = proposalSearch.toLowerCase();
 
-  return (
-    String(o.id || "").includes(q) ||
-    String(o.naziv || "").toLowerCase().includes(q) ||
-    String(o.adresa || "").toLowerCase().includes(q) ||
-    String(o.telefon || "").toLowerCase().includes(q) ||
-    String(o.pib || "").toLowerCase().includes(q)
-  );
-});
+  return offers.filter((o: any) => {
+    return (
+      String(o.id || "").includes(q) ||
+      String(o.naziv || "").toLowerCase().includes(q) ||
+      String(o.adresa || "").toLowerCase().includes(q) ||
+      String(o.telefon || "").toLowerCase().includes(q) ||
+      String(o.pib || "").toLowerCase().includes(q)
+    );
+  });
+}, [offers, proposalSearch]);
 
 
 
