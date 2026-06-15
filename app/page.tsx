@@ -568,12 +568,20 @@ useEffect(() => {
   if (loggedUser.role !== "ADMIN") return;
   if (activeTab !== "Administracija") return;
 
-  if (paramTab === "Reklame") {
+  if (
+    paramTab === "Reklame" ||
+    paramTab === "Baneri" ||
+    paramTab === "Oglasi"
+  ) {
     loadAds();
     loadAdStats();
   }
 
-  if (paramTab === "Prevodi") {
+  if (
+    paramTab === "Prevodi" ||
+    paramTab === "Prevodi aplikacije" ||
+    paramTab === "Prevodi sajta"
+  ) {
     loadTranslations();
     loadSiteTranslations();
   }
