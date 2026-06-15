@@ -1603,19 +1603,25 @@ if (isChangingOfferType) {
   // 👉 AKO POSTOJI ID → UPDATE
   if (form.id && !isChangingOfferType) {
 
-    await apiFetch(`${API_URL}/offers/${form.id}`, {
-      method: "PUT",
-      headers: authHeaders(),
-      body: JSON.stringify({
-        ...form,
-        userId: loggedUser.id,
-        username: loggedUser.username,
-        positions,
-        extraItems
-      })
-    });
+    const res = await apiFetch(`${API_URL}/offers/${form.id}`, {
+  method: "PUT",
+  headers: authHeaders(),
+  body: JSON.stringify({
+    ...form,
+    userId: loggedUser.id,
+    username: loggedUser.username,
+    positions,
+    extraItems,
+  }),
+});
 
-    alert(t("Izmenjeno!"));
+if (!res.ok) {
+  const err = await res.json().catch(() => null);
+  alert(err?.message || t("Greška pri izmeni ponude"));
+  return;
+}
+
+alert(t("Izmenjeno!"));
 
   } else {
     // 👉 NOVA PONUDA → CREATE
@@ -1642,15 +1648,17 @@ const formForCreate = {
     alert(t("Sačuvano: ") + (data.brojPonude || data.id));
   }
 
-  loadOffers();   // refresh tabele
-  if (proposalOffer?.id) {
-  await openProposalOffer(proposalOffer.id);
-}
+  await loadOffers();
 
-if (worklistOffer?.id) {
-  await openWorklistOffer(worklistOffer.id);
-}
-  clearForm();    // očisti formu
+  if (proposalOffer?.id) {
+    await openProposalOffer(proposalOffer.id);
+  }
+
+  if (worklistOffer?.id) {
+    await openWorklistOffer(worklistOffer.id);
+  }
+
+  clearForm();
 };
 
 
