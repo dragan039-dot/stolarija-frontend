@@ -2,7 +2,7 @@
 
 import ParamTabs from "./components/ParamTabs";
 import Tabs from "./components/Tabs";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { okovData } from "./data/okov";
 import { ispunaData } from "./data/ispuna";
@@ -1984,22 +1984,60 @@ const [valute, setValute] = useState(
 
 
 
+const profiliMap = useMemo(() => {
+  const map: Record<string, string> = {};
+
+  profili.forEach((p: any) => {
+    map[String(p.id)] = p.naziv;
+    map[String(p.naziv)] = p.naziv;
+  });
+
+  return map;
+}, [profili]);
+
+const ispuneMap = useMemo(() => {
+  const map: Record<string, string> = {};
+
+  ispune.forEach((i: any) => {
+    map[String(i.id)] = i.naziv;
+    map[String(i.naziv)] = i.naziv;
+  });
+
+  return map;
+}, [ispune]);
+
+const okoviMap = useMemo(() => {
+  const map: Record<string, string> = {};
+
+  okovi.forEach((o: any) => {
+    map[String(o.id)] = o.naziv;
+    map[String(o.naziv)] = o.naziv;
+  });
+
+  return map;
+}, [okovi]);
+
+const valuteMap = useMemo(() => {
+  const map: Record<string, string> = {};
+
+  valute.forEach((v: any) => {
+    map[String(v.id)] = v.naziv;
+    map[String(v.naziv)] = v.naziv;
+  });
+
+  return map;
+}, [valute]);
+
 const getProfilName = (id: any) => {
-  const found = profili.find((x: any) => String(x.id) === String(id));
-  return found?.naziv || id || "";
+  return profiliMap[String(id)] || id || "";
 };
 
 const getIspunaName = (id: any) => {
-  const found = ispune.find(
-    (x: any) => String(x.id) === String(id)
-  );
-
-  return found?.naziv || "";
+  return ispuneMap[String(id)] || id || "";
 };
 
 const getOkovName = (id: any) => {
-  const found = okovi.find((x: any) => String(x.id) === String(id));
-  return found?.naziv || id || "";
+  return okoviMap[String(id)] || id || "";
 };
 
 
@@ -4872,8 +4910,7 @@ console.log("SVE VALUTE:", valute);
       const rowsExtra = proposalExtraItems.filter((x) => x.naziv);
 
       const valutaNaziv =
-  valute.find((v: any) => String(v.id) === String(proposalOffer.valuta))?.naziv ||
-  valute.find((v: any) => String(v.naziv) === String(proposalOffer.valuta))?.naziv ||
+  valuteMap[String(proposalOffer.valuta)] ||
   String(proposalOffer.valuta || "");
 
       const positionSubtotal = rowsPositions.reduce((sum, p, index) => {
