@@ -3441,24 +3441,15 @@ const loadRoletne = () => {
       const list = Array.isArray(data) ? data : [];
 
       setRoletne(
-        Array.from({ length: 15 }, (_, index) => {
-          const item = list[index];
-
-          return {
-            id: item?.id ?? undefined,
-            naziv: item?.naziv || `Roletna ${index + 1}`,
-            cena: Number(item?.cena) || 0,
-          };
-        })
+        list.map((item: any, index: number) => ({
+          id: item.id,
+          naziv: item.naziv || `Roletna ${index + 1}`,
+          cena: Number(item.cena) || 0,
+        }))
       );
     })
     .catch(() => {
-      setRoletne(
-        Array.from({ length: 15 }, (_, index) => ({
-          naziv: `Roletna ${index + 1}`,
-          cena: 0,
-        }))
-      );
+      setRoletne([]);
     });
 };
 
@@ -3473,24 +3464,15 @@ const loadKomarnici = () => {
       const list = Array.isArray(data) ? data : [];
 
       setKomarnici(
-        Array.from({ length: 15 }, (_, index) => {
-          const item = list[index];
-
-          return {
-            id: item?.id ?? undefined,
-            naziv: item?.naziv || `Komarnik ${index + 1}`,
-            cena: Number(item?.cena) || 0,
-          };
-        })
+        list.map((item: any, index: number) => ({
+          id: item.id,
+          naziv: item.naziv || `Komarnik ${index + 1}`,
+          cena: Number(item.cena) || 0,
+        }))
       );
     })
     .catch(() => {
-      setKomarnici(
-        Array.from({ length: 15 }, (_, index) => ({
-          naziv: `Komarnik ${index + 1}`,
-          cena: 0,
-        }))
-      );
+      setKomarnici([]);
     });
 };
 
