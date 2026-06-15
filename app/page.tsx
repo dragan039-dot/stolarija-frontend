@@ -2175,31 +2175,42 @@ const openWorklistOffer = async (id: number) => {
   setWorklistPositions(items);
   setWorklistExtraItems(Array.isArray(data.extraItems) ? data.extraItems : []);
 
-  const calculated: Record<number, any[]> = {};
-
-  for (let i = 0; i < items.length; i++) {
-    const p = items[i];
-
-    if (!p.vrsta_prozora) continue;
+const calculatedPairs = await Promise.all(
+  items.map(async (p: any, i: number) => {
+    if (!p.vrsta_prozora) return null;
 
     const missing: string[] = [];
+
     if (!p.vrsta_stolarije) missing.push("vrsta stolarije");
     if (!p.vrsta_prozora) missing.push("vrsta prozora");
     if (!p.profil) missing.push("profil");
+
     const requiredDims = dimensionRules[p.vrsta_prozora] || [];
 
-if (requiredDims.includes("a") && !p.a) missing.push("A");
-if (requiredDims.includes("b") && !p.b) missing.push("B");
-if (requiredDims.includes("c") && !p.c) missing.push("C");
-if (requiredDims.includes("d") && !p.d) missing.push("D");
-if (requiredDims.includes("e") && !p.e) missing.push("E");
+    if (requiredDims.includes("a") && !p.a) missing.push("A");
+    if (requiredDims.includes("b") && !p.b) missing.push("B");
+    if (requiredDims.includes("c") && !p.c) missing.push("C");
+    if (requiredDims.includes("d") && !p.d) missing.push("D");
+    if (requiredDims.includes("e") && !p.e) missing.push("E");
 
-    if (missing.length > 0) continue;
+    if (missing.length > 0) return null;
 
-    calculated[i] = await calculateWorklistPosition(p);
-  }
+    const result = await calculateWorklistPosition(p);
 
-  setWorklistResults(calculated);
+    return [i, result] as const;
+  })
+);
+
+const calculated: Record<number, any[]> = {};
+
+calculatedPairs.forEach((pair) => {
+  if (!pair) return;
+
+  const [i, result] = pair;
+  calculated[i] = result;
+});
+
+setWorklistResults(calculated);
 };
 
 
@@ -2319,20 +2330,29 @@ const openProposalOffer = async (id: number) => {
   setProposalPositions(items);
   setProposalExtraItems(Array.isArray(data.extraItems) ? data.extraItems : []);
 
-  const calculated: Record<number, any[]> = {};
+const calculatedPairs = await Promise.all(
+  items.map(async (p: any, i: number) => {
+    if (!p.vrsta_prozora) return null;
+    if (!p.vrsta_stolarije) return null;
+    if (!p.profil) return null;
+    if (!p.a || !p.b) return null;
 
-  for (let i = 0; i < items.length; i++) {
-    const p = items[i];
+    const result = await calculateWorklistPosition(p);
 
-    if (!p.vrsta_prozora) continue;
-    if (!p.vrsta_stolarije) continue;
-    if (!p.profil) continue;
-    if (!p.a || !p.b) continue;
+    return [i, result] as const;
+  })
+);
 
-    calculated[i] = await calculateWorklistPosition(p);
-  }
+const calculated: Record<number, any[]> = {};
 
-  setProposalResults(calculated);
+calculatedPairs.forEach((pair) => {
+  if (!pair) return;
+
+  const [i, result] = pair;
+  calculated[i] = result;
+});
+
+setProposalResults(calculated);
 };
 
 
