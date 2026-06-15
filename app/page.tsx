@@ -451,64 +451,34 @@ const loadValute = () => {
 
 
 
-useEffect(() => {
-  if (!loggedUser?.id) return;
 
-  loadIspune();
-  loadOkov();
-  loadValute();
-  loadProfili();
-  loadRoletne();
-  loadKomarnici();
-  loadDodatniElementi();
-  loadFirma();
-  loadOffers();
-}, [loggedUser?.id]);
-
-useEffect(() => {
-  if (!loggedUser?.id) return;
-
-  if (paramTab === "Tehnicki") {
-    loadTehnicki();
-  }
-
-  if (paramTab === "Cene") {
-    loadProfilePrices();
-  }
-
-  if (paramTab === "Formula" && loggedUser.role === "ADMIN") {
-    loadTehnicki();
-    loadProfilePrices();
-    loadProfileParams();
-    loadParams();
-  }
-}, [loggedUser?.id, loggedUser?.role, paramTab]);
-
-
-useEffect(() => {
-  if (!loggedUser?.id) return;
-  if (loggedUser.role !== "ADMIN") return;
-  if (activeTab !== "Administracija") return;
-
-  loadAdminUsers();
-  loadLanguages();
-}, [loggedUser?.id, loggedUser?.role, activeTab]);
-
-
-
-useEffect(() => {
-  if (loggedUser?.role === "ADMIN") {
-    loadAdminUsers();
-  }
-}, [loggedUser]);
 
 
 
 useEffect(() => {
   if (loggedUser?.id) {
+    loadIspune();
+    loadValute();
+    loadProfili();
+    loadTehnicki();
+    loadParams();
+    loadOkov();
+    loadProfileParams();
     loadHelpTexts();
+    loadAds();
+    loadAdStats();
+    loadInstruction();
+    loadLanguages();
+    loadTranslations();
+    loadRoletne();
+    loadKomarnici();
+    loadDodatniElementi();
+    loadSiteTranslations();
   }
 }, [loggedUser?.id]);
+
+
+
 
 
 
@@ -522,18 +492,8 @@ useEffect(() => {
 
 
 useEffect(() => {
-  if (!loggedUser?.id) return;
-  if (loggedUser.role !== "ADMIN") return;
-  if (paramTab !== "Formula") return;
-
   loadFormulaByWindowType(formulaVrstaStolarije, formulaVrstaProzora);
-}, [
-  loggedUser?.id,
-  loggedUser?.role,
-  paramTab,
-  formulaVrstaStolarije,
-  formulaVrstaProzora,
-]);
+}, [formulaVrstaStolarije, formulaVrstaProzora]);
 
 
 
@@ -562,34 +522,6 @@ useEffect(() => {
     loadAdminUsers();
   }
 }, [loggedUser]);
-
-useEffect(() => {
-  if (!loggedUser?.id) return;
-  if (loggedUser.role !== "ADMIN") return;
-  if (activeTab !== "Administracija") return;
-
-  if (
-    paramTab === "Reklame" ||
-    paramTab === "Baneri" ||
-    paramTab === "Oglasi"
-  ) {
-    loadAds();
-    loadAdStats();
-  }
-
-  if (
-    paramTab === "Prevodi" ||
-    paramTab === "Prevodi aplikacije" ||
-    paramTab === "Prevodi sajta"
-  ) {
-    loadTranslations();
-    loadSiteTranslations();
-  }
-
-  if (paramTab === "Uputstvo") {
-    loadInstruction();
-  }
-}, [loggedUser?.id, loggedUser?.role, activeTab, paramTab]);
 
 
 
@@ -721,12 +653,29 @@ const loadProfili = () => {
   })
     .then((res) => res.json())
     .then((data) => {
-      setProfili(Array.isArray(data) ? data : []);
+      const list = Array.isArray(data) ? data : [];
+
+      const normalized = Array.from({ length: 15 }, (_, index) => {
+        const item = list[index];
+
+return {
+  id: item?.id ?? index + 1,
+  naziv: item?.naziv || `Profil ${index + 1}`,
+};
+      });
+
+      setProfili(normalized);
     })
     .catch(() => {
-      setProfili([]);
+      setProfili(
+        Array.from({ length: 15 }, (_, i) => ({
+          id: i + 1,
+          naziv: `Profil ${i + 1}`,
+        }))
+      );
     });
 };
+
 
 
 
@@ -1285,6 +1234,22 @@ if (Array.isArray(data) && data.length > 0) {
 
 
 
+useEffect(() => {
+  loadFormulaByWindowType(formulaVrstaStolarije, formulaVrstaProzora);
+}, [formulaVrstaStolarije, formulaVrstaProzora]);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 const getPriceValue = (element: string, profilId: number | string) => {
@@ -1339,27 +1304,35 @@ const loadFirma = () => {
     });
 };
 
- 
+useEffect(() => {
+  if (loggedUser?.id) {
+    loadFirma();
+    loadProfilePrices();
+  }
+}, [loggedUser?.id]);
+
+
+  
+
+
+useEffect(() => {
+  if (loggedUser?.id) {
+    loadOffers();
+  }
+}, [loggedUser]);
 
 
 const loadOffers = async () => {
   if (!loggedUser?.id) return;
 
-  try {
-    const res = await apiFetch(`${API_URL}/offers?userId=${loggedUser.id}`, {
+  const res = await apiFetch(`${API_URL}/offers?userId=${loggedUser.id}`,
+    {
       headers: authHeaders(),
-    });
-
-    if (!res.ok) {
-      setOffers([]);
-      return;
     }
+  );
+  const data = await res.json();
 
-    const data = await res.json();
-    setOffers(Array.isArray(data) ? data : []);
-  } catch {
-    setOffers([]);
-  }
+  setOffers(Array.isArray(data) ? data : []);
 };
 
 
@@ -1459,6 +1432,7 @@ const getValue = (profil: string, parametar: string) => {
     })
   : [emptyPosition()];
 
+setPositions(filled);
 
     setPositions(filled);
 
@@ -1473,6 +1447,7 @@ const getValue = (profil: string, parametar: string) => {
 
 setExtraItems(filledExtra);
 
+setExtraItems(filledExtra);
 
 
 
@@ -1999,6 +1974,23 @@ const [valute, setValute] = useState(
 
 
 
+
+
+
+
+
+const testCena = profilId
+  ? getCena("ŠTOK", profilId, ceneData)
+  : 0;
+
+console.log("Cena štok:", testCena);
+
+
+
+
+
+
+
 const getProfilName = (id: any) => {
   const found = profili.find((x: any) => String(x.id) === String(id));
   return found?.naziv || id || "";
@@ -2033,6 +2025,12 @@ const okovId = p.okovId || p.okov;
   const ceneMap = profilId ? getCeneMapByProfilId(profilId) : {};
 
 const ispunaCena = getIspunaCenaById(ispunaId);
+
+console.log("ISPUNA TEST:", {
+  ispunaId,
+  ispune,
+  ispunaCena,
+});
 
 const okovCena = getOkovCenaById(okovId);
 
@@ -3741,15 +3739,7 @@ const copyDemoDataToUser = async (userId: number, username: string) => {
 };
 
 
-const getUploadUrl = (path: string) => {
-  if (!path) return "";
 
-  if (path.startsWith("http")) return path;
-
-  const base = API_URL.replace(/\/api$/, "");
-
-  return `${base}${path}`;
-};
 
 
 
@@ -7517,7 +7507,9 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
               {getAdValue(`${cfg.key}Image`) && (
                 <div className="mt-2">
                   <img
-                    src={getUploadUrl(getAdValue(`${cfg.key}Image`))}
+                    src={`${API_URL}${getAdValue(
+                      `${cfg.key}Image`
+                    )}`}
                     className="w-[50px] border"
                     alt=""
                   />
