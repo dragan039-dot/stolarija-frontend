@@ -528,7 +528,7 @@ useEffect(() => {
 useEffect(() => {
   if (!loggedUser?.id) return;
   if (loggedUser.role !== "ADMIN") return;
-  if (paramTab !== "Formula") return;
+  if (paramTab !== "Formule") return;
 
   loadFormulaByWindowType(formulaVrstaStolarije, formulaVrstaProzora);
 }, [
