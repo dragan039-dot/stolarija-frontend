@@ -480,7 +480,7 @@ useEffect(() => {
     loadProfilePrices();
   }
 
-  if (paramTab === "Formula" && loggedUser.role === "ADMIN") {
+  if (paramTab === "Formule" && loggedUser.role === "ADMIN") {
     loadTehnicki();
     loadProfilePrices();
     loadProfileParams();
