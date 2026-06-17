@@ -2387,7 +2387,6 @@ const printPdf = (type: "proposal" | "worklist") => {
     "print-worklist"
   );
 
-  // DODATO
   document.body.classList.add("printing-pdf");
 
   let fileName = "Dokument";
@@ -2418,32 +2417,24 @@ const printPdf = (type: "proposal" | "worklist") => {
       }`;
   }
 
-  // zapamti stari naslov
   const oldTitle = document.title;
 
-  // postavi novi naslov
   document.title = fileName;
 
   setTimeout(() => {
     window.print();
+  }, 300);
 
-    // vrati stari naslov
+  setTimeout(() => {
     document.title = oldTitle;
 
     document.body.classList.remove(
       "print-proposal",
-      "print-worklist"
-    );
-
-    // DODATO
-    document.body.classList.remove(
+      "print-worklist",
       "printing-pdf"
     );
-
-  }, 100);
+  }, 3000);
 };
-
-
 
 
 
