@@ -2408,13 +2408,17 @@ const printPdf = (type: "proposal" | "worklist") => {
     document.body.classList.add("print-worklist");
 
     fileName =
-      `Radni nalog ${
-        worklistOffer?.brojPonude ||
-        worklistOffer?.id ||
-        ""
-      } ${
-        worklistOffer?.naziv || ""
-      }`;
+  `Radni nalog ${
+    worklistOffer?.brojPonude ||
+    worklistOffer?.id ||
+    form.brojPonude ||
+    form.id ||
+    ""
+  } ${
+    worklistOffer?.naziv ||
+    form.naziv ||
+    ""
+  }`;
   }
 
   const oldTitle = document.title;
