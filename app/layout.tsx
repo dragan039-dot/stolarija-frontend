@@ -4,12 +4,12 @@ import "./globals.css";
 
 
 export const metadata = {
-  title: "Stolarija App",
-  description: "Aplikacija za ponude i radne liste",
+  title: "PVC Kalkulator App",
+  description: "Aplikacija za Ponude i Radne liste kod ALU i PVC stolarije",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
-    title: "Stolarija",
+    title: "PVC Kalkulator",
     statusBarStyle: "default",
   },
 };
