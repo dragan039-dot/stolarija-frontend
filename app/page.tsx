@@ -3741,7 +3741,7 @@ const saveSiteTranslations = async () => {
     {
       title: "Početak rada",
       text: "Osnovno upoznavanje sa aplikacijom.",
-      videoId: "eN5z1mu6j4M",
+      videoId: "PN1ydahHvLo",
     },
     {
       title: "Kreiranje ponude",
@@ -6413,7 +6413,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
           <th className="border p-2">Kontakt osoba</th>
           <th className="border p-2">Telefon</th>
           <th className="border p-2">Email</th>
-          <th className="border p-2">Broj korisnika</th>
+          <th className="border p-2">Paket</th>
           <th className="border p-2">Poruka</th>
           <th className="border p-2">Status</th>
 <th className="border p-2">Napomena</th>
