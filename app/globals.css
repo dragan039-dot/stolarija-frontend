@@ -30,7 +30,7 @@ body {
 @media print {
   @page {
     size: A4;
-    margin: 10mm;
+    margin: 5mm;
   }
 
   body {
@@ -129,7 +129,7 @@ body {
   .print-worklist {
     width: 100%;
     max-width: 200mm;
-    margin: 40mm;
+    margin: 0 auto;
   }
 
   .no-print,
