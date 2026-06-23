@@ -3746,7 +3746,7 @@ const saveSiteTranslations = async () => {
     {
       title: "Kreiranje ponude",
       text: "Kako se unosi kupac, pozicije i čuva ponuda.",
-      videoId: "YOUTUBE_VIDEO_ID_2",
+      videoId: "g-LHD8NcuzI",
     },
     {
       title: "Radna lista",
