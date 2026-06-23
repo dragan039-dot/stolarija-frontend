@@ -48,8 +48,8 @@ body {
 
   body.print-proposal #proposal-pdf {
     position: absolute !important;
-    left: 50 !important;
-    top: 50 !important;
+    left: 0 !important;
+    top: 30 !important;
     width: 190mm !important;
     background: white !important;
     color: black !important;
