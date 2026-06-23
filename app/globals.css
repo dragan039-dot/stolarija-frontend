@@ -30,7 +30,7 @@ body {
 @media print {
   @page {
     size: A4;
-    margin: 5mm;
+    margin: 5mm 5mm 2mm 5mm;
   }
 
   body {
