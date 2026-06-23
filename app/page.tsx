@@ -5083,7 +5083,7 @@ console.log("SVE VALUTE:", valute);
                             </div>
                           )}
 
-                          <div className="text-xs">
+                          <div className="font-bold text-xs">
                             {getVisibleDimensions(p.vrsta_prozora).includes("a") && <div>A={p.a} mm</div>}
                             {getVisibleDimensions(p.vrsta_prozora).includes("b") && <div>B={p.b} mm</div>}
                             {getVisibleDimensions(p.vrsta_prozora).includes("c") && <div>C={p.c} mm</div>}
