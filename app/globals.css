@@ -129,7 +129,7 @@ body {
   .print-worklist {
     width: 100%;
     max-width: 200mm;
-    margin: 40 auto;
+    margin: 40mm auto;
   }
 
   .no-print,
