@@ -33,6 +33,14 @@ body {
     margin: 5mm 5mm 2mm 5mm;
   }
 
+body.print-proposal #proposal-pdf {
+  transform: translateY(-5mm);
+}
+
+body.print-worklist #worklist-pdf {
+  transform: translateY(-5mm);
+}
+
   body {
     background: white !important;
   }
