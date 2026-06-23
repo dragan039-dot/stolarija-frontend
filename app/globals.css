@@ -85,7 +85,7 @@ body {
     content: "www.pvckalkulator.com <> Aplikacija za Ponude i Radne liste kod ALU i PVC stolarije";
     position: fixed;
     left: 10mm;
-    bottom: -5mm;
+    bottom: 0mm;
     font-size: 9px;
     color: #555;
   }
@@ -115,7 +115,7 @@ body {
   body {
     width: 210mm;
     min-height: 297mm;
-    margin: 0 !important;
+    margin: 40 !important;
     padding: 0 !important;
     background: white !important;
   }
