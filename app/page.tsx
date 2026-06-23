@@ -5092,7 +5092,7 @@ console.log("SVE VALUTE:", valute);
                           </div>
                         </div>
 
-                        <div className="flex-1 text-[5px]">
+                        <div className="flex-1 text-[11px]">
                           <div className="font-bold text-sm">{p.vrsta_prozora}</div>
                           <div>{t("Vrsta stolarije")}: {p.vrsta_stolarije}</div>
                           <div>{t("Profil")}: {getProfilName(p.profil)}</div>
