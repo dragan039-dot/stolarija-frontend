@@ -115,7 +115,7 @@ body {
   body {
     width: 210mm;
     min-height: 297mm;
-    margin: 40 !important;
+    margin: 0 !important;
     padding: 0 !important;
     background: white !important;
   }
@@ -129,7 +129,7 @@ body {
   .print-worklist {
     width: 100%;
     max-width: 200mm;
-    margin: 0 auto;
+    margin: 40 auto;
   }
 
   .no-print,
