@@ -2383,8 +2383,9 @@ const formatCena = (value: number) => {
 
 const cleanPdfFileName = (name: string) =>
   name
-    .replace(/[<>:"/\\|?*]+/g, "")
+    .replace(/[<>:"/\\|?*]+/g, "-")
     .replace(/\s+/g, " ")
+    .replace(/-+/g, "-")
     .trim();
 
 
