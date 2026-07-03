@@ -2382,11 +2382,7 @@ const formatCena = (value: number) => {
 
 
 const printPdf = (type: "proposal" | "worklist") => {
-  document.body.classList.remove(
-    "print-proposal",
-    "print-worklist"
-  );
-
+  document.body.classList.remove("print-proposal", "print-worklist");
   document.body.classList.add("printing-pdf");
 
   let fileName = "Dokument";
@@ -2394,42 +2390,27 @@ const printPdf = (type: "proposal" | "worklist") => {
   if (type === "proposal") {
     document.body.classList.add("print-proposal");
 
-    fileName =
-      `Ponuda ${
-        proposalOffer?.brojPonude ||
-        proposalOffer?.id ||
-        ""
-      } ${
-        proposalOffer?.naziv || ""
-      }`;
+    fileName = `Ponuda ${
+      proposalOffer?.brojPonude || proposalOffer?.id || ""
+    } ${proposalOffer?.naziv || ""}`;
   }
 
   if (type === "worklist") {
     document.body.classList.add("print-worklist");
 
-    fileName =
-  `Radni nalog ${
-    worklistOffer?.brojPonude ||
-    worklistOffer?.id ||
-    form.brojPonude ||
-    form.id ||
-    ""
-  } ${
-    worklistOffer?.naziv ||
-    form.naziv ||
-    ""
-  }`;
+    fileName = `Radni nalog ${
+      worklistOffer?.brojPonude ||
+      worklistOffer?.id ||
+      form.brojPonude ||
+      form.id ||
+      ""
+    } ${worklistOffer?.naziv || form.naziv || ""}`;
   }
 
   const oldTitle = document.title;
+  document.title = fileName.trim();
 
-  document.title = fileName;
-
-  setTimeout(() => {
-    window.print();
-  }, 300);
-
-  setTimeout(() => {
+  const cleanup = () => {
     document.title = oldTitle;
 
     document.body.classList.remove(
@@ -2437,7 +2418,17 @@ const printPdf = (type: "proposal" | "worklist") => {
       "print-worklist",
       "printing-pdf"
     );
-  }, 3000);
+
+    window.removeEventListener("afterprint", cleanup);
+  };
+
+  window.addEventListener("afterprint", cleanup);
+
+  setTimeout(() => {
+    window.print();
+  }, 300);
+
+  setTimeout(cleanup, 10000);
 };
 
 
