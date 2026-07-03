@@ -3909,7 +3909,7 @@ return (
 
 
     
-        <div className="flex justify-end items-center gap-3 mb-2 text-sm">
+        <div className="no-print flex justify-end items-center gap-3 mb-2 text-sm">
           <span>
             {t("Korisnik")}: <strong>{loggedUser.username}</strong> ({loggedUser.role})
           </span>
