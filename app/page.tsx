@@ -3922,7 +3922,7 @@ return (
   setSelectedLanguageId(e.target.value);
   localStorage.setItem("selectedLanguageId", e.target.value);
 }}
-  className="border p-1 rounded"
+  className="no-print border p-1 rounded"
 >
   <option value="">SR</option>
 
@@ -3962,8 +3962,8 @@ return (
 
 
 
-<div className="sticky top-0 z-950 bg-white border-b shadow-sm mb-0">
-  <div className="py-0 flex justify-center">
+<div className="no-print sticky top-0 z-950 bg-white border-b shadow-sm mb-0">
+  <div className="no-print py-0 flex justify-center">
       <Tabs
   active={activeTab}
   setActive={setActiveTab}
