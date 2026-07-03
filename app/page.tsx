@@ -2430,6 +2430,7 @@ setTimeout(() => {
     "printing-pdf"
   );
 }, 60000);
+};
 
 
 
