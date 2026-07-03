@@ -83,6 +83,30 @@ body.print-worklist #worklist-pdf {
   color: black !important;
 }
 
+body.print-worklist #worklist-pdf > div {
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+}
+
+body.print-worklist table,
+body.print-worklist tr,
+body.print-worklist td,
+body.print-worklist th {
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+}
+
+body.print-worklist thead {
+  display: table-header-group !important;
+}
+
+  .worklist-position {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+
+
   button,
   input,
   select,

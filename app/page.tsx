@@ -5057,7 +5057,7 @@ console.log("SVE VALUTE:", valute);
                 const ukupnoRed = cena * kol;
 
                 return (
-                  <tr key={p.id || index} className="border-b border-gray-400">
+                  <tr key={p.id || index} className="worklist-position border-b border-gray-400">
                     <td className="p-2 text-center">{index + 1}</td>
 
                     <td className="p-2">
@@ -5348,7 +5348,7 @@ if (requiredDims.includes("d") && !p.d) missing.push("D");
 if (requiredDims.includes("e") && !p.e) missing.push("E");
 
             return (
-              <div key={p.id || index} className="mb-8 border-t pt-4">
+              <div key={p.id || index} className="worklist-position mb-8 border-t pt-4">
 
                 <h2 className="text-xl font-bold mb-2">
                   {t("Pozicija")} {index + 1}
