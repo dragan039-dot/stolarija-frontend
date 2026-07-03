@@ -74,15 +74,14 @@ body.print-worklist #worklist-pdf {
     visibility: visible !important;
   }
 
-  body.print-worklist #worklist-pdf {
-    position: absolute !important;
-    left: 0 !important;
-    top: 0 !important;
-    width: 190mm !important;
-    transform: translateY(-5mm);
-    background: white !important;
-    color: black !important;
-  }
+body.print-worklist #worklist-pdf {
+  position: static !important;
+  width: 190mm !important;
+  margin: 0 auto !important;
+  transform: none !important;
+  background: white !important;
+  color: black !important;
+}
 
   button,
   input,
