@@ -33,16 +33,18 @@ body {
     margin: 5mm 5mm 2mm 5mm;
   }
 
-body.print-proposal #proposal-pdf {
-  transform: translateY(-5mm);
-}
-
-body.print-worklist #worklist-pdf {
-  transform: translateY(-5mm);
-}
+  html,
+  body {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
 
   body {
-    background: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 
   body.print-proposal * {
@@ -59,6 +61,7 @@ body.print-worklist #worklist-pdf {
     left: 0 !important;
     top: 0 !important;
     width: 190mm !important;
+    transform: translateY(-5mm);
     background: white !important;
     color: black !important;
   }
@@ -77,6 +80,7 @@ body.print-worklist #worklist-pdf {
     left: 0 !important;
     top: 0 !important;
     width: 190mm !important;
+    transform: translateY(-5mm);
     background: white !important;
     color: black !important;
   }
@@ -84,7 +88,9 @@ body.print-worklist #worklist-pdf {
   button,
   input,
   select,
-  textarea {
+  textarea,
+  .offer-search-table,
+  .no-print {
     display: none !important;
   }
 
@@ -98,53 +104,33 @@ body.print-worklist #worklist-pdf {
     color: #555;
   }
 
-@media print {
-  .offer-search-table {
-    display: none !important;
+
+  table {
+    page-break-inside: auto !important;
+    break-inside: auto !important;
   }
 
-  .no-print {
-    display: none !important;
-  }
-}
-
-.printing-pdf .offer-search-table,
-.printing-pdf .no-print {
-  display: none !important;
-}
-
-@page {
-  size: A4;
-  margin: 5mm;
-}
-
-@media print {
-  html,
-  body {
-    width: 210mm;
-    min-height: 297mm;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: white !important;
+  thead {
+    display: table-header-group !important;
   }
 
-  body {
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+  tfoot {
+    display: table-footer-group !important;
   }
 
-  .print-proposal,
-  .print-worklist {
-    width: 100%;
-    max-width: 200mm;
-    margin: 0 auto;
+  tr,
+  td,
+  th {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
 
-  .no-print,
-  .offer-search-table {
-    display: none !important;
+  img {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
   }
-}
+  
+
 }
 
 
