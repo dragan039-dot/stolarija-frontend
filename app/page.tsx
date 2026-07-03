@@ -2414,29 +2414,22 @@ const printPdf = (type: "proposal" | "worklist") => {
     } ${worklistOffer?.naziv || form.naziv || ""}`;
   }
 
-  const oldTitle = document.title;
-  document.title = cleanPdfFileName(fileName);
+const oldTitle = document.title;
+document.title = cleanPdfFileName(fileName);
 
-  const cleanup = () => {
-    document.title = oldTitle;
+setTimeout(() => {
+  window.print();
+}, 1000);
 
-    document.body.classList.remove(
-      "print-proposal",
-      "print-worklist",
-      "printing-pdf"
-    );
+setTimeout(() => {
+  document.title = oldTitle;
 
-    window.removeEventListener("afterprint", cleanup);
-  };
-
-  window.addEventListener("afterprint", cleanup);
-
-  setTimeout(() => {
-    window.print();
-  }, 800);
-
-  setTimeout(cleanup, 10000);
-};
+  document.body.classList.remove(
+    "print-proposal",
+    "print-worklist",
+    "printing-pdf"
+  );
+}, 60000);
 
 
 
