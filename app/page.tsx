@@ -2381,6 +2381,13 @@ const formatCena = (value: number) => {
 };
 
 
+const cleanPdfFileName = (name: string) =>
+  name
+    .replace(/[<>:"/\\|?*]+/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+
 const printPdf = (type: "proposal" | "worklist") => {
   document.body.classList.remove("print-proposal", "print-worklist");
   document.body.classList.add("printing-pdf");
@@ -2408,7 +2415,7 @@ const printPdf = (type: "proposal" | "worklist") => {
   }
 
   const oldTitle = document.title;
-  document.title = fileName.trim();
+  document.title = cleanPdfFileName(fileName);
 
   const cleanup = () => {
     document.title = oldTitle;
@@ -2426,7 +2433,7 @@ const printPdf = (type: "proposal" | "worklist") => {
 
   setTimeout(() => {
     window.print();
-  }, 300);
+  }, 800);
 
   setTimeout(cleanup, 10000);
 };
