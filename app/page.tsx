@@ -3954,7 +3954,7 @@ return (
 
 
         {licenseDaysLeft !== null && licenseDaysLeft <= 15 && licenseDaysLeft >= 0 && (
-  <div className="bg-yellow-100 border border-yellow-400 text-yellow-800 p-3 rounded mb-3 text-sm">
+  <div className="no-print bg-yellow-100 border border-yellow-400 text-yellow-800 p-3 rounded mb-3 text-sm">
     {t("Licenca ističe za")} <strong>{licenseDaysLeft}</strong>{t(" dana. Kontaktirajte administratora za obnovu.")}
   </div>
 )}
@@ -4875,7 +4875,7 @@ return (
 
 {activeTab === "Ponude" && (
   <div>
-    <h1 className="text-3xl font-bold mb-4">{t("PONUDE")}</h1>
+    <h1 className="no-print text-3xl font-bold mb-4">{t("PONUDE")}</h1>
 
     
 
@@ -5190,7 +5190,7 @@ console.log("SVE VALUTE:", valute);
 {activeTab === "Radna lista" && (
   <div>
 
-    <h1 className="text-3xl font-bold mb-4">{t("RADNA LISTA")}</h1>
+    <h1 className="no-print text-3xl font-bold mb-4">{t("RADNA LISTA")}</h1>
 
     
 
