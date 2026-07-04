@@ -5085,7 +5085,7 @@ console.log("SVE VALUTE:", valute);
       )}
     </div>
 
-<div className="bg-gray-100 rounded-md p-2 border border-gray-300">
+<div className="bg-slate-50 rounded-md border border-slate-300 p-2">
 
   <div className="font-bold text-[11px] mb-2">
     {t("Dimenzije")}
