@@ -5038,7 +5038,7 @@ console.log("SVE VALUTE:", valute);
           </div>
 
           {/* TABELA PONUDE */}
-          <table className="w-full text-sm">
+          <table className="w-full text-xs">
             <thead className="bg-gray-100">
               <tr className="border-b border-gray-400">
                 <th className="p-2 w-12">{t("Red. br.")}</th>
@@ -5085,7 +5085,7 @@ console.log("SVE VALUTE:", valute);
                           </div>
                         </div>
 
-                        <div className="flex-1 text-[11px]">
+                        <div className="flex-1 text-[10px]">
                           <div className="font-bold text-sm">{p.vrsta_prozora}</div>
                           <div>{t("Vrsta stolarije")}: {p.vrsta_stolarije}</div>
                           <div>{t("Profil")}: {getProfilName(p.profil)}</div>
@@ -5100,9 +5100,9 @@ console.log("SVE VALUTE:", valute);
                       </div>
                     </td>
 
-                    <td className="p-2 text-center">{kol}</td>
-                    <td className="p-2 text-right">{formatCena(cena)} </td>
-                    <td className="p-2 text-right font-semibold">{formatCena(ukupnoRed)} </td>
+                    <td className="text-[10px] p-2 text-center">{kol}</td>
+                    <td className="text-[10px] p-2 text-right">{formatCena(cena)} </td>
+                    <td className="text-[10px] p-2 text-right font-semibold">{formatCena(ukupnoRed)} </td>
                   </tr>
                 );
               })}
