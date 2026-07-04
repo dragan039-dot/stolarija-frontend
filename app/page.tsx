@@ -5063,7 +5063,6 @@ console.log("SVE VALUTE:", valute);
                     <td className="p-2 text-center">{index + 1}</td>
 
                     <td className="p-2">
-<td className="p-2">
 
   {/* Naziv prozora */}
   <div className="font-bold text-sm mb-2">
@@ -5139,6 +5138,7 @@ console.log("SVE VALUTE:", valute);
   </div>
 
 </td>
+
                     <td className="text-[10px] p-2 text-center">{kol}</td>
                     <td className="text-[10px] p-2 text-right">{formatCena(cena)} </td>
                     <td className="text-[10px] p-2 text-right font-semibold">{formatCena(ukupnoRed)} </td>
