@@ -5063,43 +5063,82 @@ console.log("SVE VALUTE:", valute);
                     <td className="p-2 text-center">{index + 1}</td>
 
                     <td className="p-2">
-                      <div className="flex gap-4">
-                        <div className="w-32">
-                          {getProzorImageId(p.vrsta_prozora) ? (
-                            <img
-                              src={`/prozori/${getProzorImageId(p.vrsta_prozora)}.jpg`}
-                              className="h-24 object-contain mb-2"
-                            />
-                          ) : (
-                            <div className="h-24 flex items-center justify-center text-gray-400">
-                              {t("Slika")}
-                            </div>
-                          )}
+<td className="p-2">
 
-                          <div className="font-bold text-[10px]">
-                            {getVisibleDimensions(p.vrsta_prozora).includes("a") && <div>A={p.a} mm</div>}
-                            {getVisibleDimensions(p.vrsta_prozora).includes("b") && <div>B={p.b} mm</div>}
-                            {getVisibleDimensions(p.vrsta_prozora).includes("c") && <div>C={p.c} mm</div>}
-                            {getVisibleDimensions(p.vrsta_prozora).includes("d") && <div>D={p.d} mm</div>}
-                            {getVisibleDimensions(p.vrsta_prozora).includes("e") && <div>E={p.e} {t("krila / stakala")}</div>}
-                          </div>
-                        </div>
+  {/* Naziv prozora */}
+  <div className="font-bold text-sm mb-2">
+    {p.vrsta_prozora}
+  </div>
 
-                        <div className="flex-1 text-[10px]">
-                          <div className="font-bold text-sm">{p.vrsta_prozora}</div>
-                          <div>{t("Vrsta stolarije")}: {p.vrsta_stolarije}</div>
-                          <div>{t("Profil")}: {getProfilName(p.profil)}</div>
-                          <div>{t("Ispuna")}: {getIspunaName(p.ispuna)}</div>
-                          <div>{t("Okov")}: {getOkovName(p.okov)}</div>
-                          {p.otvaranje && <div>{t("Otvaranje")}: {p.otvaranje}</div>}
-                          {p.roletna && <div>{t("Roletna")}: {p.roletna}</div>}
-                          {p.vrsta_roletne && ( <div>{t("Vrsta roletne")}: {p.vrsta_roletne}</div>)}
-                          {p.komarnik && <div>{t("Komarnik")}: {p.komarnik}</div>}
-                          {p.dod_element && <div>{t("Dod. element")}:{" "}{p.dod_element}</div>}
-                        </div>
-                      </div>
-                    </td>
+  {/* Slika + dimenzije */}
+  <div className="grid grid-cols-2 gap-3 items-start mb-3">
 
+    <div>
+      {getProzorImageId(p.vrsta_prozora) ? (
+        <img
+          src={`/prozori/${getProzorImageId(p.vrsta_prozora)}.jpg`}
+          className="h-24 object-contain"
+        />
+      ) : (
+        <div className="h-24 flex items-center justify-center text-gray-400">
+          {t("Slika")}
+        </div>
+      )}
+    </div>
+
+    <div className="font-bold text-[10px] space-y-1">
+      {getVisibleDimensions(p.vrsta_prozora).includes("a") && (
+        <div>A = {p.a} mm</div>
+      )}
+
+      {getVisibleDimensions(p.vrsta_prozora).includes("b") && (
+        <div>B = {p.b} mm</div>
+      )}
+
+      {getVisibleDimensions(p.vrsta_prozora).includes("c") && (
+        <div>C = {p.c} mm</div>
+      )}
+
+      {getVisibleDimensions(p.vrsta_prozora).includes("d") && (
+        <div>D = {p.d} mm</div>
+      )}
+
+      {getVisibleDimensions(p.vrsta_prozora).includes("e") && (
+        <div>E = {p.e} {t("krila / stakala")}</div>
+      )}
+    </div>
+
+  </div>
+
+  {/* Ostali podaci */}
+  <div className="text-[10px] space-y-1">
+    <div>{t("Vrsta stolarije")}: {p.vrsta_stolarije}</div>
+    <div>{t("Profil")}: {getProfilName(p.profil)}</div>
+    <div>{t("Ispuna")}: {getIspunaName(p.ispuna)}</div>
+    <div>{t("Okov")}: {getOkovName(p.okov)}</div>
+
+    {p.otvaranje && (
+      <div>{t("Otvaranje")}: {p.otvaranje}</div>
+    )}
+
+    {p.roletna && (
+      <div>{t("Roletna")}: {p.roletna}</div>
+    )}
+
+    {p.vrsta_roletne && (
+      <div>{t("Vrsta roletne")}: {p.vrsta_roletne}</div>
+    )}
+
+    {p.komarnik && (
+      <div>{t("Komarnik")}: {p.komarnik}</div>
+    )}
+
+    {p.dod_element && (
+      <div>{t("Dod. element")}: {p.dod_element}</div>
+    )}
+  </div>
+
+</td>
                     <td className="text-[10px] p-2 text-center">{kol}</td>
                     <td className="text-[10px] p-2 text-right">{formatCena(cena)} </td>
                     <td className="text-[10px] p-2 text-right font-semibold">{formatCena(ukupnoRed)} </td>
