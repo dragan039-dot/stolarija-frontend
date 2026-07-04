@@ -5041,13 +5041,13 @@ console.log("SVE VALUTE:", valute);
           <table className="w-full text-xs">
             <thead className="bg-gray-100">
               <tr className="border-b border-gray-400">
-                <th className="p-2 w-12">{t("Red. br.")}</th>
+                <th className="p-2 w-10">{t("Red. br.")}</th>
                 <th className="p-2">{t("Naziv")}</th>
-                <th className="p-2 w-20">{t("Kol.")}</th>
-                <th className="p-2 w-28">{t("Cena")}</th>
-                <th className="p-2 w-32">
+                <th className="p-2 w-10">{t("Kol.")}</th>
+                <th className="p-2 w-18">{t("Cena")}</th>
+                <th className="p-2 w-22">
                   {t("UKUPNO")}<br />
-                  <span className="text-xs">{valutaNaziv}</span>
+                  <span className="text-[10px]">{valutaNaziv}</span>
                 </th>
               </tr>
             </thead>
