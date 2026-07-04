@@ -5085,27 +5085,35 @@ console.log("SVE VALUTE:", valute);
       )}
     </div>
 
-    <div className="font-bold text-[10px] space-y-1">
-      {getVisibleDimensions(p.vrsta_prozora).includes("a") && (
-        <div>A = {p.a} mm</div>
-      )}
+<div className="bg-gray-100 rounded-md p-2 border border-gray-300">
 
-      {getVisibleDimensions(p.vrsta_prozora).includes("b") && (
-        <div>B = {p.b} mm</div>
-      )}
+  <div className="font-bold text-[11px] mb-2">
+    {t("Dimenzije")}
+  </div>
 
-      {getVisibleDimensions(p.vrsta_prozora).includes("c") && (
-        <div>C = {p.c} mm</div>
-      )}
+  <div className="font-semibold text-[10px] space-y-1">
+    {getVisibleDimensions(p.vrsta_prozora).includes("a") && (
+      <div>A = {p.a} mm</div>
+    )}
 
-      {getVisibleDimensions(p.vrsta_prozora).includes("d") && (
-        <div>D = {p.d} mm</div>
-      )}
+    {getVisibleDimensions(p.vrsta_prozora).includes("b") && (
+      <div>B = {p.b} mm</div>
+    )}
 
-      {getVisibleDimensions(p.vrsta_prozora).includes("e") && (
-        <div>E = {p.e} {t("krila / stakala")}</div>
-      )}
-    </div>
+    {getVisibleDimensions(p.vrsta_prozora).includes("c") && (
+      <div>C = {p.c} mm</div>
+    )}
+
+    {getVisibleDimensions(p.vrsta_prozora).includes("d") && (
+      <div>D = {p.d} mm</div>
+    )}
+
+    {getVisibleDimensions(p.vrsta_prozora).includes("e") && (
+      <div>E = {p.e} {t("krila / stakala")}</div>
+    )}
+  </div>
+
+</div>
 
   </div>
 
