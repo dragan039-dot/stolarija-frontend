@@ -5076,7 +5076,7 @@ console.log("SVE VALUTE:", valute);
                             </div>
                           )}
 
-                          <div className="font-bold text-xs">
+                          <div className="font-bold text-[10px]">
                             {getVisibleDimensions(p.vrsta_prozora).includes("a") && <div>A={p.a} mm</div>}
                             {getVisibleDimensions(p.vrsta_prozora).includes("b") && <div>B={p.b} mm</div>}
                             {getVisibleDimensions(p.vrsta_prozora).includes("c") && <div>C={p.c} mm</div>}
@@ -5117,9 +5117,9 @@ console.log("SVE VALUTE:", valute);
                   <tr key={`extra-${i}`} className="border-b border-gray-400">
                     <td className="p-2 text-center">{rowIndex}</td>
                     <td className="p-2 font-semibold">{x.naziv}</td>
-                    <td className="p-2 text-center">{kol}</td>
-                    <td className="p-2 text-right">{formatCena(cena)} </td>
-                    <td className="p-2 text-right font-semibold">{formatCena(ukupnoRed)} </td>
+                    <td className="p-2 text-[10px] text-center">{kol}</td>
+                    <td className="p-2 text-[10px] text-right">{formatCena(cena)} </td>
+                    <td className="p-2 text-[10px] text-right font-semibold">{formatCena(ukupnoRed)} </td>
                   </tr>
                 );
               })}
@@ -5167,7 +5167,7 @@ console.log("SVE VALUTE:", valute);
   <td className="p-2 font-bold text-right">
     {t("Za uplatu")}
   </td>
-  <td className="p-2 text-right font-bold text-lg">
+  <td className="p-2 text-right font-bold text-sm">
     {formatCena(zaUplatu)} 
   </td>
 </tr>
