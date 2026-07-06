@@ -4358,12 +4358,13 @@ return (
   </div>
 
   {/* NAPOMENA PREKO CELE ŠIRINE */}
-      <input
-    placeholder={t("Napomena")}
-    value={form.napomena || ""}
-    onChange={(e) => setForm({ ...form, napomena: e.target.value })}
-    className="border p-2"
-  />
+<textarea
+  placeholder={t("Napomena")}
+  value={form.napomena || ""}
+  onChange={(e) => setForm({ ...form, napomena: e.target.value })}
+  rows={3}
+  className="border p-2 resize-y"
+/>
 
 </div>
 
@@ -5175,9 +5176,10 @@ console.log("SVE VALUTE:", valute);
   {/* NAPOMENA (spojene 3 kolone + 4 reda) */}
   <td className="p-3 align-top" colSpan={3} rowSpan={4}>
     <div className="font-semibold mb-2">{t("Napomena")}:</div>
-    <div className="min-h-[100px]">
+    <div className="min-h-[100px] whitespace-pre-line">
       {proposalOffer.napomena || ""}
     </div>
+    
   </td>
 
   {/* UKUPNO */}
@@ -5371,7 +5373,7 @@ console.log("SVE VALUTE:", valute);
     <strong>{t("Datum ponude")}:</strong> {formatDate(worklistOffer.datum)}
   </div>
 
-  <div>
+  <div className="whitespace-pre-line">
     <strong>{t("Napomena")}:</strong> {worklistOffer.napomena || ""}
   </div>
 </div>
