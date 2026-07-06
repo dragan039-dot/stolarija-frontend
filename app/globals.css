@@ -152,6 +152,10 @@ body.print-worklist thead {
     break-inside: avoid !important;
   }
 
+    .pdf-mobile-scroll {
+    overflow: visible !important;
+    width: auto !important;
+  }
 
 }
 
@@ -168,4 +172,18 @@ button:active {
 }
 
 
+
+@media screen and (max-width: 768px) {
+  .pdf-mobile-scroll {
+    overflow-x: auto;
+    width: 100%;
+  }
+
+  .pdf-mobile-scroll #proposal-pdf,
+  .pdf-mobile-scroll #worklist-pdf {
+    width: 900px !important;
+    min-width: 900px !important;
+    max-width: none !important;
+  }
+}
 

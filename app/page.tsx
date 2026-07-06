@@ -4968,6 +4968,7 @@ console.log("SVE VALUTE:", valute);
       const zaUplatu = ukupno - popustIznos + pdvIznos;
 
       return (
+        <div className="pdf-mobile-scroll overflow-x-auto">
         <div id="proposal-pdf" className="bg-white text-black p-6">
           {/* ZAGLAVLJE */}
           <table className="w-full mb-6 text-sm">
@@ -5225,6 +5226,7 @@ console.log("SVE VALUTE:", valute);
 
           
         </div>
+        </div>
       );
     })()}
   </div>
@@ -5302,6 +5304,7 @@ console.log("SVE VALUTE:", valute);
     )}
 
     {worklistOffer && (
+      <div className="pdf-mobile-scroll overflow-x-auto">
       <div id="worklist-pdf" className="bg-white text-black p-6">
 
         {/* ZAGLAVLJE FIRME */}
@@ -5529,7 +5532,6 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
 
 
-
   
 
 
@@ -5661,8 +5663,10 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
               </tbody>
             </table>
           </div>
+        
         )}
 
+      </div>
       </div>
     )}
   </div>
