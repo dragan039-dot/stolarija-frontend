@@ -103,17 +103,17 @@ const tabs = [
     {
       title: "Početak rada",
       text: "Osnovno upoznavanje sa aplikacijom.",
-      videoId: "eN5z1mu6j4M",
+      videoId: "PN1ydahHvLo",
     },
     {
       title: "Kreiranje ponude",
       text: "Kako se unosi kupac, pozicije i čuva ponuda.",
-      videoId: "YOUTUBE_VIDEO_ID_2",
+      videoId: "g-LHD8NcuzI",
     },
     {
       title: "Radna lista",
       text: "Pregled elemenata i priprema za proizvodnju.",
-      videoId: "YOUTUBE_VIDEO_ID_3",
+      videoId: "v=DZ5Zw-SkH6M",
     },
     {
       title: "Podešavanje parametara",
