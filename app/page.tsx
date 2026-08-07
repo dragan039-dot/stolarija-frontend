@@ -3744,7 +3744,7 @@ const saveSiteTranslations = async () => {
     {
       title: "Radna lista",
       text: "Pregled elemenata i priprema za proizvodnju.",
-      videoId: "YOUTUBE_VIDEO_ID_3",
+      videoId: "v=DZ5Zw-SkH6M",
     },
     {
       title: "Podešavanje parametara",
