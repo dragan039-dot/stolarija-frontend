@@ -120,6 +120,16 @@ const tabs = [
       text: "Profili, cene, tehnički parametri i formule.",
       videoId: "srFLz5oGbaM",
     },
+        {
+      title: "Izmena ponude",
+      text: "Kako se menja postojeća ponuda.",
+      videoId: "z3NttbWEZvw",
+    },
+        {
+      title: "Rad na telefonu",
+      text: "Kako izgleda aplikacija na telefonu.",
+      videoId: "RAQOSeKR64Q",
+    },
   ];
 
 
