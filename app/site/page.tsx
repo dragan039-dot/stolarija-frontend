@@ -293,7 +293,7 @@ const tSite = (key: string) => {
               onClick={() => setActiveTab("Zahtev za ponudu")}
               className="rounded-xl bg-blue-500 px-8 py-4 text-center text-lg font-black shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
             >
-              {tSite("Besplatna proba 20 dana")}
+              {tSite("Besplatna proba 30 dana")}
             </button>
 
             <a
@@ -524,7 +524,7 @@ const tSite = (key: string) => {
           </div>
 
           <h2 className="mb-3 text-4xl font-black">
-            Isprobajte aplikaciju potpuno besplatno 20 dana
+            Isprobajte aplikaciju potpuno besplatno 30 dana
           </h2>
 
           <p className="max-w-3xl text-slate-300">
@@ -852,7 +852,7 @@ const tSite = (key: string) => {
     </h2>
 
     <p className="mx-auto mb-8 max-w-3xl text-slate-300">
-      Dobijate kompletan pristup aplikaciji tokom probnog perioda od 20 dana.
+      Dobijate kompletan pristup aplikaciji tokom probnog perioda od 30 dana.
     </p>
 
     <button
