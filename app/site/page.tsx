@@ -118,7 +118,7 @@ const tabs = [
     {
       title: "Podešavanje parametara",
       text: "Profili, cene, tehnički parametri i formule.",
-      videoId: "YOUTUBE_VIDEO_ID_4",
+      videoId: "srFLz5oGbaM",
     },
   ];
 
