@@ -113,7 +113,7 @@ const tabs = [
     {
       title: "Radna lista",
       text: "Pregled elemenata i priprema za proizvodnju.",
-      videoId: "v=DZ5Zw-SkH6M",
+      videoId: "DZ5Zw-SkH6M",
     },
     {
       title: "Podešavanje parametara",
