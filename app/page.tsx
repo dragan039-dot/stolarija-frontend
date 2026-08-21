@@ -495,8 +495,17 @@ useEffect(() => {
   if (activeTab !== "Administracija") return;
 
   loadAdminUsers();
-  loadLanguages();
+
 }, [loggedUser?.id, loggedUser?.role, activeTab]);
+
+
+
+useEffect(() => {
+  if (!loggedUser?.id) return;
+
+  loadLanguages();
+  loadTranslations();
+}, [loggedUser?.id]);
 
 
 
@@ -567,18 +576,31 @@ useEffect(() => {
   }
 }, [loggedUser]);
 
+
+
+
+// Učitavanje jezika i prevoda za SVE prijavljene korisnike
+useEffect(() => {
+  if (!loggedUser?.id) return;
+
+  loadLanguages();
+  loadTranslations();
+}, [loggedUser?.id]);
+
+
+// Učitavanje podataka samo za administratora
 useEffect(() => {
   if (!loggedUser?.id) return;
 
   if (activeTab === "Administracija" && loggedUser.role === "ADMIN") {
     loadAdminUsers();
-    loadLanguages();
-    loadTranslations();
     loadAdStats();
     loadInstruction();
     loadSiteTranslations();
   }
-}, [loggedUser?.id, activeTab]);
+}, [loggedUser?.id, loggedUser?.role, activeTab]);
+
+
 
 
 const getFirmaValue = (key: string) => {
