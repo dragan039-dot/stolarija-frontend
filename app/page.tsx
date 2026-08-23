@@ -5742,7 +5742,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
               className="w-full flex items-center justify-between p-4 bg-gray-100 hover:bg-gray-200 rounded-t-lg"
             >
               <span className="text-xl font-bold">
-                {t(grupa.naziv)}
+                {grupa.naziv}
               </span>
 
               <span className="text-2xl font-bold">
