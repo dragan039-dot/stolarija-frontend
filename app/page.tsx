@@ -5100,7 +5100,7 @@ console.log("SVE VALUTE:", valute);
 
   {/* Naziv prozora */}
   <div className="font-bold text-sm mb-2">
-    {p.vrsta_prozora}
+    {t(p.vrsta_prozora)}
   </div>
 
   {/* Slika + dimenzije */}
@@ -5448,7 +5448,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
                   <>
                     <div className="mb-3 flex justify-between items-center">
   <div className="text-lg font-bold">
-    {p.vrsta_prozora}
+    {t(p.vrsta_prozora)}
   </div>
 
   <div className="text-lg">
