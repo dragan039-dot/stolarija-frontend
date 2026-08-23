@@ -5628,7 +5628,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 })
           .map((r: any, ri: number) => (
             <tr key={ri}>
-              <td className="border p-1 font-semibold">{r.element}</td>
+              <td className="border p-1 font-semibold">{t(r.element)}</td>
 
               <td className="border p-1 text-center">
                 {Number(r.S) > 0 ? `${Math.round(r.S)} ` : ""}
