@@ -2708,7 +2708,7 @@ if (!loggedUser) {
           onClick={login}
           className="bg-blue-600 text-white w-full py-2 rounded"
         >
-          Prijavi se
+          SIGN IN
         </button>
       </div>
     </main>
