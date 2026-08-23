@@ -2671,18 +2671,18 @@ if (!loggedUser) {
     <main className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white border rounded p-6 w-full max-w-sm shadow">
         <h1 className="text-2xl font-bold mb-4 text-center">
-          Prijava
+          Login
         </h1>
 
         <input
-          placeholder="Korisničko ime"
+          placeholder="Username"
           value={loginUsername}
           onChange={(e) => setLoginUsername(e.target.value)}
           className="border p-2 w-full mb-3"
         />
 
         <input
-  placeholder="Šifra"
+  placeholder="Password"
   type={showPassword ? "text" : "password"}
   value={loginPassword}
   onChange={(e) => setLoginPassword(e.target.value)}
@@ -2695,7 +2695,7 @@ if (!loggedUser) {
     checked={showPassword}
     onChange={(e) => setShowPassword(e.target.checked)}
   />
-  Prikaži šifru
+  Show Password
 </label>
 
         {loginError && (
