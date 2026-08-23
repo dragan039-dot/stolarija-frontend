@@ -5722,7 +5722,65 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
 
 
-{activeTab === "Slike" && ( <div className="max-w-7xl mx-auto p-6"> <h2 className="text-3xl font-bold mb-8"> {t("Slike prozora")} </h2> <div className="space-y-4"> {slikeGrupe.map((grupa) => { const isOpen = !!openSlikeGrupe[grupa.naziv]; return ( <div key={grupa.naziv} className="border rounded-lg bg-white"> <button type="button" onClick={() => toggleSlikeGrupa(grupa.naziv)} className="w-full flex items-center justify-between p-4 bg-gray-100 hover:bg-gray-200 rounded-t-lg" > <span className="text-xl font-bold"> {grupa.naziv} </span> <span className="text-2xl font-bold"> {isOpen ? "−" : "+"} </span> </button> {isOpen && ( <div className="p-4"> <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4"> {grupa.ids .map((id) => prozori.find((p) => p.id === id)) .filter(Boolean) .map((p: any) => ( <div key={p.id} className="border rounded-lg bg-white p-4 shadow-sm hover:shadow-md transition" > <div className="h-40 flex items-center justify-center border rounded mb-3"> <img src={/prozori/${p.id}.jpg} alt={p.naziv} className="max-h-36 object-contain" /> </div> <div className="font-semibold text-center"> {p.naziv} </div> </div> ))} </div> </div> )} </div> ); })} </div> </div> )}
+{activeTab === "Slike" && (
+  <div className="max-w-7xl mx-auto p-6">
+    <h2 className="text-3xl font-bold mb-8">
+      {t("Slike prozora")}
+    </h2>
+
+    <div className="space-y-4">
+      {slikeGrupe.map((grupa) => {
+        const isOpen = !!openSlikeGrupe[grupa.naziv];
+
+        return (
+          <div key={grupa.naziv} className="border rounded-lg bg-white">
+            <button
+              type="button"
+              onClick={() => toggleSlikeGrupa(grupa.naziv)}
+              className="w-full flex items-center justify-between p-4 bg-gray-100 hover:bg-gray-200 rounded-t-lg"
+            >
+              <span className="text-xl font-bold">
+                {t(grupa.naziv)}
+              </span>
+
+              <span className="text-2xl font-bold">
+                {isOpen ? "−" : "+"}
+              </span>
+            </button>
+
+            {isOpen && (
+              <div className="p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+                  {grupa.ids
+                    .map((id) => prozori.find((p) => p.id === id))
+                    .filter(Boolean)
+                    .map((p: any) => (
+                      <div
+                        key={p.id}
+                        className="border rounded-lg bg-white p-4 shadow-sm hover:shadow-md transition"
+                      >
+                        <div className="h-40 flex items-center justify-center border rounded mb-3">
+                          <img
+                            src={`/prozori/${p.id}.jpg`}
+                            alt={t(p.naziv)}
+                            className="max-h-36 object-contain"
+                          />
+                        </div>
+
+                        <div className="font-semibold text-center">
+                          {t(p.naziv)}
+                        </div>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
+  </div>
+)}
 
 
 
