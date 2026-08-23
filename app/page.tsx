@@ -8229,6 +8229,19 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Da li sigurno želite da obrišete backup?",
     ],
   },
+
+{
+    title: "Ostalo",
+    items: [
+      "Nova Ponuda",
+      "Usluge / proizvodi",
+      "Ukupno",
+      "Obriši uslugu/proizvod",
+      "Dodaj uslugu/proizvod",
+      "PDV",
+    ],
+  },
+
   {
     title: "Prevodi",
     items: [
