@@ -5722,10 +5722,11 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
 
 
+
 {activeTab === "Slike" && (
   <div className="max-w-7xl mx-auto p-6">
     <h2 className="text-3xl font-bold mb-8">
-      {t("Slike prozora")}
+      Slike prozora
     </h2>
 
     <div className="space-y-4">
@@ -5740,7 +5741,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
               className="w-full flex items-center justify-between p-4 bg-gray-100 hover:bg-gray-200 rounded-t-lg"
             >
               <span className="text-xl font-bold">
-                {t(grupa.naziv)}
+                {grupa.naziv}
               </span>
 
               <span className="text-2xl font-bold">
@@ -5762,13 +5763,13 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
                         <div className="h-40 flex items-center justify-center border rounded mb-3">
                           <img
                             src={`/prozori/${p.id}.jpg`}
-                            alt={t(p.naziv)}
+                            alt={p.naziv}
                             className="max-h-36 object-contain"
                           />
                         </div>
 
                         <div className="font-semibold text-center">
-                          {t(p.naziv)}
+                          {p.naziv}
                         </div>
                       </div>
                     ))}
@@ -5781,6 +5782,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
     </div>
   </div>
 )}
+
 
 
 
