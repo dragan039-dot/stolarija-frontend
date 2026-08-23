@@ -2672,7 +2672,7 @@ if (!loggedUser) {
       <div className="bg-white border rounded p-6 w-full max-w-sm shadow">
         <h1 className="text-2xl font-bold mb-4 text-center">
           PVC Kalkulator
-          <br/>
+          <br/> <br/>
           Login
         </h1>
 
@@ -5730,14 +5730,15 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
     </h2>
 
     <div className="space-y-4">
-      {slikeGrupe.map((grupa) => {
-        const isOpen = !!openSlikeGrupe[grupa.naziv];
+      {slikeGrupe.map((grupa, index) => {
+  const grupaKey = `${index}-${grupa.naziv}`;
+  const isOpen = !!openSlikeGrupe[grupaKey];
 
         return (
           <div key={grupa.naziv} className="border rounded-lg bg-white">
             <button
               type="button"
-              onClick={() => toggleSlikeGrupa(grupa.naziv)}
+              onClick={() => toggleSlikeGrupa(grupaKey)}
               className="w-full flex items-center justify-between p-4 bg-gray-100 hover:bg-gray-200 rounded-t-lg"
             >
               <span className="text-xl font-bold">
