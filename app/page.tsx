@@ -6662,6 +6662,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
         active={paramTab}
         setActive={setParamTab}
         isAdmin={isAdmin}
+        t={t}
       />
     </div>
 
@@ -7953,6 +7954,17 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Prozor + fiks (nadsvetlo-kip)",
       "Dvokrilni prozor (šloga, nadsvetlo-kip)",
       "Dvokrilni prozor (T-prečka, nadsvetlo-kip)",
+      "Klizni standardni",
+"Preklopno-klizni sistem",
+"Harmonika sistem",
+"Dvokrilni (krilo + fiks)",
+"Dvokrilni (2 krila)",
+"Trokrilni (krilo + 2 fiksa)",
+"Trokrilni (2 krila + fiks)",
+"Trokrilni (3 krila)",
+"Četvorokrilni (4 krila)",
+"Četvorokrilni (2 krila + 2 fiksa)",
+"Šestokrilni",
       "Standardni",
       "Nadsvetlo",
       "Nadsvetlo kip",
@@ -8125,6 +8137,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Izaberi ponudu iz tabele da se prikaže radna lista.",
       "Pozicija nije kompletna. Nedostaje",
       "Logo firme / slika do 2MB",
+      "Logo firme",
       "Sva prava zadržana",
     ],
   },
@@ -8239,6 +8252,9 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Obriši uslugu/proizvod",
       "Dodaj uslugu/proizvod",
       "PDV",
+      "FORMA",
+      "PONUDE",
+      "RADNA LISTA",
     ],
   },
 
