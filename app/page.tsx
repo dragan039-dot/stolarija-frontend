@@ -5732,14 +5732,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
       {slikeGrupe.map((grupa) => {
         const isOpen = !!openSlikeGrupe[grupa.naziv];
 
-        console.log(
-          "GRUPA:",
-          grupa.naziv,
-          "| OPEN:",
-          isOpen,
-          "| IDS:",
-          grupa.ids
-        );
+
 
         return (
           <div
@@ -5749,10 +5742,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
             <button
               type="button"
               onClick={() => {
-                console.log(
-                  "KLIK NA GRUPU:",
-                  grupa.naziv
-                );
+
 
                 toggleSlikeGrupa(grupa.naziv);
               }}
@@ -5777,14 +5767,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
                         (p: any) => p.id === id
                       );
 
-                      console.log(
-                        "GRUPA:",
-                        grupa.naziv,
-                        "| TRAŽIM ID:",
-                        id,
-                        "| PRONAĐEN:",
-                        prozor
-                      );
+
 
                       return prozor;
                     })
