@@ -4970,17 +4970,15 @@ return (
 <input
   type="text"
   inputMode="decimal"
-  className="w-full border p-2"
   value={item.cena || ""}
   onChange={(e) => {
-    const value = sanitizeNumber(e.target.value);
-
     updateExtraItem(
       i,
       "cena",
-      value === "" ? "" : Number(value)
+      sanitizeNumber(e.target.value)
     );
   }}
+  className="w-full border p-2"
 />
           </td>
 
