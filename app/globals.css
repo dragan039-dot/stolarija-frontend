@@ -1,22 +1,41 @@
 @import "tailwindcss";
 
+/* =========================================================
+   OSNOVNE BOJE APLIKACIJE - UVEK SVETLI REŽIM
+   ========================================================= */
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  color-scheme: light only;
 }
 
-html {
-  color-scheme: only light !important;
+html,
+body {
+  color-scheme: light only !important;
   background-color: #ffffff !important;
+  color: #171717 !important;
+
+  /* Sprečava sistem/browser da automatski menja boje */
+  forced-color-adjust: none;
   -webkit-text-size-adjust: 100%;
 }
 
-body {
-  color-scheme: only light !important;
-  background-color: #ffffff !important;
-  color: #171717 !important;
+html {
+  background: #ffffff !important;
 }
 
+body {
+  margin: 0;
+  background: #ffffff !important;
+  color: #171717 !important;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* =========================================================
+   TAILWIND THEME
+   ========================================================= */
 
 @theme inline {
   --color-background: var(--background);
@@ -25,15 +44,122 @@ body {
   --font-mono: var(--font-geist-mono);
 }
 
+/* =========================================================
+   ZAŠTITA OD AUTOMATSKOG DARK MODE-A
+   Eksplicitne boje za klase koje aplikacija često koristi
+   ========================================================= */
 
-
-body {
-  background: #ffffff !important;
-  color: #171717 !important;
-  font-family: Arial, Helvetica, sans-serif;
+.bg-white {
+  background-color: #ffffff !important;
 }
 
+.bg-gray-50 {
+  background-color: #f9fafb !important;
+}
 
+.bg-gray-100 {
+  background-color: #f3f4f6 !important;
+}
+
+.bg-gray-200 {
+  background-color: #e5e7eb !important;
+}
+
+.bg-gray-300 {
+  background-color: #d1d5db !important;
+}
+
+.bg-blue-100 {
+  background-color: #dbeafe !important;
+}
+
+.bg-blue-200 {
+  background-color: #bfdbfe !important;
+}
+
+.bg-black {
+  background-color: #000000 !important;
+}
+
+.text-black {
+  color: #000000 !important;
+}
+
+.text-white {
+  color: #ffffff !important;
+}
+
+.text-gray-400 {
+  color: #9ca3af !important;
+}
+
+.text-gray-500 {
+  color: #6b7280 !important;
+}
+
+.text-gray-600 {
+  color: #4b5563 !important;
+}
+
+.text-gray-700 {
+  color: #374151 !important;
+}
+
+.text-gray-800 {
+  color: #1f2937 !important;
+}
+
+.text-gray-900 {
+  color: #111827 !important;
+}
+
+/* =========================================================
+   INPUT POLJA - UVEK SVETLA
+   ========================================================= */
+
+input,
+select,
+textarea {
+  background-color: #ffffff !important;
+  color: #171717 !important;
+  color-scheme: light !important;
+}
+
+/* Placeholder tekst */
+
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important;
+  opacity: 1;
+}
+
+/* Opcije unutar select menija */
+
+select option {
+  background-color: #ffffff !important;
+  color: #171717 !important;
+}
+
+/* =========================================================
+   TABELE - UVEK DOBAR KONTRAST
+   ========================================================= */
+
+table {
+  color: #171717;
+}
+
+thead {
+  color: #171717;
+}
+
+th,
+td {
+  color: #171717;
+}
+
+/* =========================================================
+   ŠTAMPA / PDF
+   ========================================================= */
 
 @media print {
   @page {
@@ -48,12 +174,15 @@ body {
     margin: 0 !important;
     padding: 0 !important;
     background: white !important;
+    color: black !important;
   }
 
   body {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
+
+  /* PONUDA */
 
   body.print-proposal * {
     visibility: hidden !important;
@@ -64,14 +193,16 @@ body {
     visibility: visible !important;
   }
 
-body.print-proposal #proposal-pdf,
-body.print-worklist #worklist-pdf {
-  position: static !important;
-  width: 190mm !important;
-  margin: 0 auto !important;
-  background: white !important;
-  color: black !important;
-}
+  body.print-proposal #proposal-pdf,
+  body.print-worklist #worklist-pdf {
+    position: static !important;
+    width: 190mm !important;
+    margin: 0 auto !important;
+    background: white !important;
+    color: black !important;
+  }
+
+  /* RADNI NALOG */
 
   body.print-worklist * {
     visibility: hidden !important;
@@ -82,38 +213,38 @@ body.print-worklist #worklist-pdf {
     visibility: visible !important;
   }
 
-body.print-worklist #worklist-pdf {
-  position: static !important;
-  width: 190mm !important;
-  margin: 0 auto !important;
-  transform: none !important;
-  background: white !important;
-  color: black !important;
-}
+  body.print-worklist #worklist-pdf {
+    position: static !important;
+    width: 190mm !important;
+    margin: 0 auto !important;
+    transform: none !important;
+    background: white !important;
+    color: black !important;
+  }
 
-body.print-worklist #worklist-pdf > div {
-  break-inside: avoid !important;
-  page-break-inside: avoid !important;
-}
+  body.print-worklist #worklist-pdf > div {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
 
-body.print-worklist table,
-body.print-worklist tr,
-body.print-worklist td,
-body.print-worklist th {
-  break-inside: avoid !important;
-  page-break-inside: avoid !important;
-}
+  body.print-worklist table,
+  body.print-worklist tr,
+  body.print-worklist td,
+  body.print-worklist th {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
 
-body.print-worklist thead {
-  display: table-header-group !important;
-}
+  body.print-worklist thead {
+    display: table-header-group !important;
+  }
 
   .worklist-position {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
 
-
+  /* Sakrij elemente koji se ne štampaju */
 
   button,
   input,
@@ -123,6 +254,8 @@ body.print-worklist thead {
   .no-print {
     display: none !important;
   }
+
+  /* Donji tekst u PDF-u */
 
   body.print-proposal::after,
   body.print-worklist::after {
@@ -134,6 +267,7 @@ body.print-worklist thead {
     color: #555;
   }
 
+  /* Tabele preko više stranica */
 
   table {
     page-break-inside: auto !important;
@@ -160,17 +294,22 @@ body.print-worklist thead {
     break-inside: avoid !important;
   }
 
-    .pdf-mobile-scroll {
+  .pdf-mobile-scroll {
     overflow: visible !important;
     width: auto !important;
   }
-
 }
 
-
+/* =========================================================
+   EFEKAT PRITISKA NA DUGME
+   ========================================================= */
 
 button {
-  transition: transform 0.12s ease, filter 0.12s ease, background-color 0.12s ease !important;
+  transition:
+    transform 0.12s ease,
+    filter 0.12s ease,
+    background-color 0.12s ease !important;
+
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -179,7 +318,9 @@ button:active {
   filter: brightness(0.75) !important;
 }
 
-
+/* =========================================================
+   MOBILNI PRIKAZ PDF-A
+   ========================================================= */
 
 @media screen and (max-width: 768px) {
   .pdf-mobile-scroll {
@@ -194,4 +335,3 @@ button:active {
     max-width: none !important;
   }
 }
-
