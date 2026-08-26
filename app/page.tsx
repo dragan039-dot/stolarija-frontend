@@ -3854,6 +3854,18 @@ const sanitizeNumber = (value: string) => {
   return result;
 };
 
+const sanitizeInteger = (value: string) => {
+  let result = "";
+
+  for (const char of value) {
+    if (char >= "0" && char <= "9") {
+      result += char;
+    }
+  }
+
+  return result;
+};
+
 
 
 
@@ -4572,10 +4584,10 @@ return (
           <label className="text-xs font-semibold">{t("A - širina")}</label>
 <input
   type="text"
-  inputMode="decimal"
+  inputMode="numeric"
   value={p.a || ""}
   onChange={(e) => {
-    const value = sanitizeNumber(e.target.value);
+    const value = sanitizeInteger(e.target.value);
 
     update(
       i,
@@ -4593,10 +4605,10 @@ return (
           <label className="text-xs font-semibold">{t("B - visina")}</label>
 <input
   type="text"
-  inputMode="decimal"
+  inputMode="numeric"
   value={p.b || ""}
   onChange={(e) => {
-    const value = sanitizeNumber(e.target.value);
+    const value = sanitizeInteger(e.target.value);
 
     update(
       i,
@@ -4614,10 +4626,10 @@ return (
           <label className="text-xs font-semibold">C</label>
 <input
   type="text"
-  inputMode="decimal"
+  inputMode="numeric"
   value={p.c || ""}
   onChange={(e) => {
-    const value = sanitizeNumber(e.target.value);
+    const value = sanitizeInteger(e.target.value);
 
     update(
       i,
@@ -4635,10 +4647,10 @@ return (
           <label className="text-xs font-semibold">D</label>
 <input
   type="text"
-  inputMode="decimal"
+  inputMode="numeric"
   value={p.d || ""}
   onChange={(e) => {
-    const value = sanitizeNumber(e.target.value);
+    const value = sanitizeInteger(e.target.value);
 
     update(
       i,
@@ -4656,10 +4668,10 @@ return (
           <label className="text-xs font-semibold">{t("E - broj krila / fiksa")}</label>
 <input
   type="text"
-  inputMode="decimal"
+  inputMode="numeric"
   value={p.e || ""}
   onChange={(e) => {
-    const value = sanitizeNumber(e.target.value);
+    const value = sanitizeInteger(e.target.value);
 
     update(
       i,
@@ -4873,10 +4885,10 @@ return (
 <input
   placeholder={t("Količina")}
   type="text"
-  inputMode="decimal"
+  inputMode="numeric"
   value={p.kolicina || ""}
   onChange={(e) => {
-    const value = sanitizeNumber(e.target.value);
+    const value = sanitizeInteger(e.target.value);
 
     update(
       i,
@@ -4939,11 +4951,11 @@ return (
           <td className="border p-1">
 <input
   type="text"
-  inputMode="decimal"
+  inputMode="numeric"
   className="w-full border p-2"
   value={item.kolicina || ""}
   onChange={(e) => {
-    const value = sanitizeNumber(e.target.value);
+    const value = sanitizeInteger(e.target.value);
 
     updateExtraItem(
       i,
@@ -7651,11 +7663,11 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
                 ) : (
 <input
   type="text"
-  inputMode="decimal"
+  inputMode="numeric"
   className="w-[120px] p-1 border text-sm text-right"
   value={found?.vrednost ?? ""}
   onChange={(e) => {
-    const value = sanitizeNumber(e.target.value);
+    const value = sanitizeInteger(e.target.value);
 
     setTehnickiData((prev: any[]) => {
       const filtered = Array.isArray(prev)
