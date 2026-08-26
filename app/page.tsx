@@ -3835,7 +3835,24 @@ const getUploadUrl = (path: string) => {
   return `${base}${path}`;
 };
 
+const sanitizeNumber = (value: string) => {
+  let result = "";
+  let hasDecimal = false;
 
+  for (const char of value) {
+    if (char >= "0" && char <= "9") {
+      result += char;
+    } else if (
+      (char === "." || char === ",") &&
+      !hasDecimal
+    ) {
+      result += ".";
+      hasDecimal = true;
+    }
+  }
+
+  return result;
+};
 
 
 
@@ -4382,12 +4399,19 @@ return (
 
 
 
-    <input
-      placeholder={t("Popust %")}
-      value={form.popust || ""}
-      onChange={(e) => setForm({ ...form, popust: e.target.value })}
-      className="border p-2"
-    />
+<input
+  placeholder={t("Popust %")}
+  type="text"
+  inputMode="decimal"
+  value={form.popust || ""}
+  onChange={(e) =>
+    setForm({
+      ...form,
+      popust: sanitizeNumber(e.target.value),
+    })
+  }
+  className="border p-2"
+/>
 
         <input placeholder={t("Telefon")} value={form.telefon || ""}
           onChange={e => setForm({ ...form, telefon: e.target.value })}
@@ -4546,60 +4570,105 @@ return (
       {showField(p.vrsta_prozora, "a") && (
         <div>
           <label className="text-xs font-semibold">{t("A - širina")}</label>
-          <input
-            type="number"
-            value={p.a || ""}
-            onChange={(e) => update(i, "a", Number(e.target.value))}
-            className="border p-1 w-full text-sm"
-          />
+<input
+  type="text"
+  inputMode="decimal"
+  value={p.a || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    update(
+      i,
+      "a",
+      value === "" ? "" : Number(value)
+    );
+  }}
+  className="border p-1 w-full text-sm"
+/>
         </div>
       )}
 
       {showField(p.vrsta_prozora, "b") && (
         <div>
           <label className="text-xs font-semibold">{t("B - visina")}</label>
-          <input
-            type="number"
-            value={p.b || ""}
-            onChange={(e) => update(i, "b", Number(e.target.value))}
-            className="border p-1 w-full text-sm"
-          />
+<input
+  type="text"
+  inputMode="decimal"
+  value={p.b || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    update(
+      i,
+      "b",
+      value === "" ? "" : Number(value)
+    );
+  }}
+  className="border p-1 w-full text-sm"
+/>
         </div>
       )}
 
       {showField(p.vrsta_prozora, "c") && (
         <div>
           <label className="text-xs font-semibold">C</label>
-          <input
-            type="number"
-            value={p.c || ""}
-            onChange={(e) => update(i, "c", Number(e.target.value))}
-            className="border p-1 w-full text-sm"
-          />
+<input
+  type="text"
+  inputMode="decimal"
+  value={p.c || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    update(
+      i,
+      "c",
+      value === "" ? "" : Number(value)
+    );
+  }}
+  className="border p-1 w-full text-sm"
+/>
         </div>
       )}
 
       {showField(p.vrsta_prozora, "d") && (
         <div>
           <label className="text-xs font-semibold">D</label>
-          <input
-            type="number"
-            value={p.d || ""}
-            onChange={(e) => update(i, "d", Number(e.target.value))}
-            className="border p-1 w-full text-sm"
-          />
+<input
+  type="text"
+  inputMode="decimal"
+  value={p.d || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    update(
+      i,
+      "d",
+      value === "" ? "" : Number(value)
+    );
+  }}
+  className="border p-1 w-full text-sm"
+/>
         </div>
       )}
 
       {showField(p.vrsta_prozora, "e") && (
         <div>
           <label className="text-xs font-semibold">{t("E - broj krila / fiksa")}</label>
-          <input
-            type="number"
-            value={p.e || ""}
-            onChange={(e) => update(i, "e", Number(e.target.value))}
-            className="border p-1 w-full text-sm"
-          />
+<input
+  type="text"
+  inputMode="decimal"
+  value={p.e || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    update(
+      i,
+      "e",
+      value === "" ? "" : Number(value)
+    );
+  }}
+  className="border p-1 w-full text-sm"
+/>
         </div>
       )}
 
@@ -4801,13 +4870,22 @@ return (
 
 
 
-      <input
-        placeholder={t("Količina")}
-        type="number"
-        value={p.kolicina || ""}
-        onChange={(e) => update(i, "kolicina", Number(e.target.value))}
-        className="border p-2"
-      />
+<input
+  placeholder={t("Količina")}
+  type="text"
+  inputMode="decimal"
+  value={p.kolicina || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    update(
+      i,
+      "kolicina",
+      value === "" ? "" : Number(value)
+    );
+  }}
+  className="border p-2"
+/>
     </div>
   </div>
 </div>
@@ -4859,25 +4937,39 @@ return (
           </td>
 
           <td className="border p-1">
-            <input
-              type="number"
-              className="w-full border p-2"
-              value={item.kolicina || ""}
-              onChange={(e) =>
-                updateExtraItem(i, "kolicina", Number(e.target.value))
-              }
-            />
+<input
+  type="text"
+  inputMode="decimal"
+  className="w-full border p-2"
+  value={item.kolicina || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    updateExtraItem(
+      i,
+      "kolicina",
+      value === "" ? "" : Number(value)
+    );
+  }}
+/>
           </td>
 
           <td className="border p-1">
-            <input
-              type="number"
-              className="w-full border p-2"
-              value={item.cena || ""}
-              onChange={(e) =>
-                updateExtraItem(i, "cena", Number(e.target.value))
-              }
-            />
+<input
+  type="text"
+  inputMode="decimal"
+  className="w-full border p-2"
+  value={item.cena || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    updateExtraItem(
+      i,
+      "cena",
+      value === "" ? "" : Number(value)
+    );
+  }}
+/>
           </td>
 
           <td className="border p-2 text-right font-semibold bg-gray-50">
@@ -6855,22 +6947,36 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
           <div className="mb-1 text-xs text-gray-500">
             {t("Zarada %")}
           </div>
-          <input
-            value={firma.zarada || ""}
-            onChange={e => setFirma({ ...firma, zarada: e.target.value })}
-            className="border p-2 w-full rounded"
-          />
+<input
+  type="text"
+  inputMode="decimal"
+  value={firma.zarada || ""}
+  onChange={(e) =>
+    setFirma({
+      ...firma,
+      zarada: sanitizeNumber(e.target.value),
+    })
+  }
+  className="border p-2 w-full rounded"
+/>
         </div>
 
         <div>
           <div className="mb-1 text-xs text-gray-500">
             {t("PDV %")}
           </div>
-          <input
-            value={firma.pdv || ""}
-            onChange={e => setFirma({ ...firma, pdv: e.target.value })}
-            className="border p-2 w-full rounded"
-          />
+<input
+  type="text"
+  inputMode="decimal"
+  value={firma.pdv || ""}
+  onChange={(e) =>
+    setFirma({
+      ...firma,
+      pdv: sanitizeNumber(e.target.value),
+    })
+  }
+  className="border p-2 w-full rounded"
+/>
         </div>
 
         <div>
@@ -6897,33 +7003,54 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
           <div className="mb-1 text-xs text-gray-500">
             {t("Otpad %")}
           </div>
-          <input
-            value={firma.otpad || ""}
-            onChange={e => setFirma({ ...firma, otpad: e.target.value })}
-            className="border p-2 w-full rounded"
-          />
+<input
+  type="text"
+  inputMode="decimal"
+  value={firma.otpad || ""}
+  onChange={(e) =>
+    setFirma({
+      ...firma,
+      otpad: sanitizeNumber(e.target.value),
+    })
+  }
+  className="border p-2 w-full rounded"
+/>
         </div>
 
         <div>
           <div className="mb-1 text-xs text-gray-500">
             {t("Roletna %")}
           </div>
-          <input
-            value={firma.roletna || ""}
-            onChange={e => setFirma({ ...firma, roletna: e.target.value })}
-            className="border p-2 w-full rounded"
-          />
+<input
+  type="text"
+  inputMode="decimal"
+  value={firma.roletna || ""}
+  onChange={(e) =>
+    setFirma({
+      ...firma,
+      roletna: sanitizeNumber(e.target.value),
+    })
+  }
+  className="border p-2 w-full rounded"
+/>
         </div>
 
         <div>
           <div className="mb-1 text-xs text-gray-500">
             {t("Komarnik %")}
           </div>
-          <input
-            value={firma.komarnik || ""}
-            onChange={e => setFirma({ ...firma, komarnik: e.target.value })}
-            className="border p-2 w-full rounded"
-          />
+<input
+  type="text"
+  inputMode="decimal"
+  value={firma.komarnik || ""}
+  onChange={(e) =>
+    setFirma({
+      ...firma,
+      komarnik: sanitizeNumber(e.target.value),
+    })
+  }
+  className="border p-2 w-full rounded"
+/>
         </div>
 
       </div>
@@ -7083,19 +7210,24 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
               </td>
 
               <td className="border p-2">
-                <input
-                  type="number"
-                  value={item.cena || ""}
-                  onChange={e => {
-                    const copy = [...ispune];
-                    copy[i] = {
-                      ...item,
-                      cena: e.target.value === "" ? "" : Number(e.target.value)
-                    };
-                    setIspune(copy);
-                  }}
-                  className="w-full border p-1"
-                />
+<input
+  type="text"
+  inputMode="decimal"
+  value={item.cena || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    const copy = [...ispune];
+
+    copy[i] = {
+      ...item,
+      cena: value === "" ? "" : Number(value),
+    };
+
+    setIspune(copy);
+  }}
+  className="w-full border p-1"
+/>
               </td>
             </tr>
           );
@@ -7150,19 +7282,24 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
               </td>
 
               <td className="border p-2">
-                <input
-                  type="number"
-                  className="border w-full p-1"
-                  value={item.cena || ""}
-                  onChange={(e) => {
-                    const copy = [...okovi];
-                    copy[i] = {
-                      ...item,
-                      cena: e.target.value === "" ? "" : Number(e.target.value)
-                    };
-                    setOkovi(copy);
-                  }}
-                />
+<input
+  type="text"
+  inputMode="decimal"
+  className="border w-full p-1"
+  value={item.cena || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    const copy = [...okovi];
+
+    copy[i] = {
+      ...item,
+      cena: value === "" ? "" : Number(value),
+    };
+
+    setOkovi(copy);
+  }}
+/>
               </td>
             </tr>
           );
@@ -7217,22 +7354,24 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
               </td>
 
               <td className="border p-2">
-                <input
-                  type="number"
-                  className="border w-full p-1 text-right"
-                  value={item.cena || ""}
-                  onChange={(e) => {
-                    const copy = [...roletne];
-                    copy[i] = {
-                      ...item,
-                      cena:
-                        e.target.value === ""
-                          ? ""
-                          : Number(e.target.value),
-                    };
-                    setRoletne(copy);
-                  }}
-                />
+<input
+  type="text"
+  inputMode="decimal"
+  className="border w-full p-1 text-right"
+  value={item.cena || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    const copy = [...roletne];
+
+    copy[i] = {
+      ...item,
+      cena: value === "" ? "" : Number(value),
+    };
+
+    setRoletne(copy);
+  }}
+/>
               </td>
             </tr>
           );
@@ -7277,22 +7416,24 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
               </td>
 
               <td className="border p-2">
-                <input
-                  type="number"
-                  className="border w-full p-1 text-right"
-                  value={item.cena || ""}
-                  onChange={(e) => {
-                    const copy = [...komarnici];
-                    copy[i] = {
-                      ...item,
-                      cena:
-                        e.target.value === ""
-                          ? ""
-                          : Number(e.target.value),
-                    };
-                    setKomarnici(copy);
-                  }}
-                />
+<input
+  type="text"
+  inputMode="decimal"
+  className="border w-full p-1 text-right"
+  value={item.cena || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    const copy = [...komarnici];
+
+    copy[i] = {
+      ...item,
+      cena: value === "" ? "" : Number(value),
+    };
+
+    setKomarnici(copy);
+  }}
+/>
               </td>
             </tr>
           );
@@ -7344,22 +7485,24 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
               </td>
 
               <td className="border p-2">
-                <input
-                  type="number"
-                  className="border w-full p-1 text-right"
-                  value={item.cena || ""}
-                  onChange={(e) => {
-                    const copy = [...dodatniElementi];
-                    copy[i] = {
-                      ...item,
-                      cena:
-                        e.target.value === ""
-                          ? ""
-                          : Number(e.target.value),
-                    };
-                    setDodatniElementi(copy);
-                  }}
-                />
+<input
+  type="text"
+  inputMode="decimal"
+  className="border w-full p-1 text-right"
+  value={item.cena || ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
+    const copy = [...dodatniElementi];
+
+    copy[i] = {
+      ...item,
+      cena: value === "" ? "" : Number(value),
+    };
+
+    setDodatniElementi(copy);
+  }}
+/>
               </td>
             </tr>
           );
@@ -7506,35 +7649,36 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
                     {izracunajTehnicki(el, selectedProfilId)}
                   </div>
                 ) : (
-                  <input
-                    type="number"
-                    className="w-[120px] p-1 border text-sm text-right"
-                    value={found?.vrednost ?? ""}
-                    onChange={(e) => {
-                      const value = e.target.value;
+<input
+  type="text"
+  inputMode="decimal"
+  className="w-[120px] p-1 border text-sm text-right"
+  value={found?.vrednost ?? ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
 
-                      setTehnickiData((prev: any[]) => {
-                        const filtered = Array.isArray(prev)
-                          ? prev.filter(
-                              (t) =>
-                                !(
-                                  t.element === el &&
-                                  String(t.profil) === String(selectedProfilId)
-                                )
-                            )
-                          : [];
+    setTehnickiData((prev: any[]) => {
+      const filtered = Array.isArray(prev)
+        ? prev.filter(
+            (t) =>
+              !(
+                t.element === el &&
+                String(t.profil) === String(selectedProfilId)
+              )
+          )
+        : [];
 
-                        return [
-                          ...filtered,
-                          {
-                            element: el,
-                            profil: String(selectedProfilId),
-                            vrednost: value,
-                          },
-                        ];
-                      });
-                    }}
-                  />
+      return [
+        ...filtered,
+        {
+          element: el,
+          profil: String(selectedProfilId),
+          vrednost: value,
+        },
+      ];
+    });
+  }}
+/>
                 )}
               </td>
             </tr>
@@ -7604,35 +7748,36 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
               </td>
 
               <td className="border p-2">
-                <input
-                  type="number"
-                  className="w-[120px] p-1 border text-sm text-right"
-                  value={found?.cena ?? ""}
-                  onChange={(e) => {
-                    const value = e.target.value;
+<input
+  type="text"
+  inputMode="decimal"
+  className="w-[120px] p-1 border text-sm text-right"
+  value={found?.cena ?? ""}
+  onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
 
-                    setProfilePrices((prev: any[]) => {
-                      const filtered = Array.isArray(prev)
-                        ? prev.filter(
-                            (p) =>
-                              !(
-                                p.element === el &&
-                                String(p.profil) === String(selectedProfilId)
-                              )
-                          )
-                        : [];
+    setProfilePrices((prev: any[]) => {
+      const filtered = Array.isArray(prev)
+        ? prev.filter(
+            (p) =>
+              !(
+                p.element === el &&
+                String(p.profil) === String(selectedProfilId)
+              )
+          )
+        : [];
 
-                      return [
-                        ...filtered,
-                        {
-                          element: el,
-                          profil: String(selectedProfilId),
-                          cena: value,
-                        },
-                      ];
-                    });
-                  }}
-                />
+      return [
+        ...filtered,
+        {
+          element: el,
+          profil: String(selectedProfilId),
+          cena: value,
+        },
+      ];
+    });
+  }}
+/>
               </td>
             </tr>
           );
