@@ -2420,7 +2420,7 @@ const printPdf = (type: "proposal" | "worklist") => {
   if (type === "proposal") {
     document.body.classList.add("print-proposal");
 
-    fileName = `Ponuda ${
+    fileName = `${t("Ponuda")} ${
       proposalOffer?.brojPonude || proposalOffer?.id || ""
     } ${proposalOffer?.naziv || ""}`;
   }
@@ -2428,7 +2428,7 @@ const printPdf = (type: "proposal" | "worklist") => {
   if (type === "worklist") {
     document.body.classList.add("print-worklist");
 
-    fileName = `Radni nalog ${
+    fileName = `${t("Radni nalog")} ${
       worklistOffer?.brojPonude ||
       worklistOffer?.id ||
       form.brojPonude ||
