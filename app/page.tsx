@@ -5385,7 +5385,7 @@ console.log("SVE VALUTE:", valute);
             <tr>
               <td>{t("Email")}: {firma.email || ""}</td>
               <td rowSpan={2} className="text-center text-xl font-bold">
-                Br. {worklistOffer.brojPonude || worklistOffer.id}
+                {t("Br.")} {worklistOffer.brojPonude || worklistOffer.id}
               </td>
             </tr>
 
@@ -7899,6 +7899,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Obriši formu",
       "Pretraga ponuda...",
       "Red. br.",
+      "Br.",
       "Kol.",
       "UKUPNO",
       "Za uplatu",
