@@ -3170,7 +3170,15 @@ const saveHelpTexts = async () => {
 
 const getHelpText = (fieldName: string) => {
   const found = helpTexts.find(
-    (h: any) => h.fieldName === fieldName
+    (h: any) =>
+      h.fieldName === fieldName &&
+      (
+        selectedLanguageId === ""
+          ? h.languageId === null ||
+            h.languageId === undefined ||
+            h.languageId === ""
+          : Number(h.languageId) === Number(selectedLanguageId)
+      )
   );
 
   return found?.text || t("Uputstvo nije definisano");
@@ -5877,16 +5885,48 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
     <div className="flex justify-between mb-4">
       <h2 className="text-2xl font-bold">
-        Uputstva
+        {t("Uputstva")}
       </h2>
 
       <button
         onClick={saveHelpTexts}
         className="bg-green-900 text-white px-2 py-1 rounded"
       >
-        Sačuvaj
+        {t("Sačuvaj")}
       </button>
     </div>
+
+    <div className="mb-4">
+      <label className="block font-semibold mb-1">
+        {t("Jezik")}
+      </label>
+
+      <select
+        value={selectedLanguageId}
+        onChange={(e) => {
+          setSelectedLanguageId(e.target.value);
+          localStorage.setItem(
+            "selectedLanguageId",
+            e.target.value
+          );
+        }}
+        className="border p-2 rounded"
+      >
+        <option value="">
+          SR
+        </option>
+
+        {languages
+          .filter((l: any) => l.enabled)
+          .map((l: any) => (
+            <option key={l.id} value={l.id}>
+              {l.name}
+            </option>
+          ))}
+      </select>
+    </div>
+
+    {/* ostatak tabele */}
 
     <table className="border w-full text-sm">
       <thead className="bg-gray-200">
@@ -5918,43 +5958,65 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
     label: x,
   })),
 ].map((item, index) => {
-            const found = helpTexts.find(
-              (h: any) => h.fieldName === item.fieldName
-            );
+  const found = helpTexts.find(
+    (h: any) =>
+      h.fieldName === item.fieldName &&
+      (
+        selectedLanguageId === ""
+          ? h.languageId === null ||
+            h.languageId === undefined ||
+            h.languageId === ""
+          : Number(h.languageId) === Number(selectedLanguageId)
+      )
+  );
 
-            return (
-              <tr key={index}>
-                <td className="border p-2 font-semibold">
-                  {item.label}
-                </td>
+  return (
+    <tr key={index}>
+      <td className="border p-2 font-semibold">
+        {t(item.label)}
+      </td>
 
-                <td className="border p-2">
-                  <textarea
-                    className="w-full border p-2 min-h-[70px]"
-                    value={found?.text || ""}
-                    onChange={(e) => {
-                      const value = e.target.value;
+      <td className="border p-2">
+        <textarea
+          className="w-full border p-2 min-h-[70px]"
+          value={found?.text || ""}
+          onChange={(e) => {
+            const value = e.target.value;
 
-                      setHelpTexts((prev: any[]) => {
-                        const filtered = prev.filter(
-                          (x) =>
-                            x.fieldName !== item.fieldName
-                        );
+            setHelpTexts((prev: any[]) => {
+              const filtered = prev.filter(
+                (x: any) =>
+                  !(
+                    x.fieldName === item.fieldName &&
+                    (
+                      selectedLanguageId === ""
+                        ? x.languageId === null ||
+                          x.languageId === undefined ||
+                          x.languageId === ""
+                        : Number(x.languageId) ===
+                          Number(selectedLanguageId)
+                    )
+                  )
+              );
 
-                        return [
-                          ...filtered,
-                          {
-                            fieldName: item.fieldName,
-                            text: value,
-                          },
-                        ];
-                      });
-                    }}
-                  />
-                </td>
-              </tr>
-            );
-          })}
+              return [
+                ...filtered,
+                {
+                  fieldName: item.fieldName,
+                  text: value,
+                  languageId:
+                    selectedLanguageId === ""
+                      ? null
+                      : Number(selectedLanguageId),
+                },
+              ];
+            });
+          }}
+        />
+      </td>
+    </tr>
+  );
+})}
       </tbody>
     </table>
   </div>
