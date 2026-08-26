@@ -1737,11 +1737,43 @@ const saveTehnicki = async () => {
   
 
   // ---------------- UPDATE ----------------
-  const update = (i: number, field: string, value: any) => {
-    const copy = [...positions];
-    (copy[i] as any)[field] = value;
-    setPositions(copy);
-  };
+const update = (i: number, field: string, value: any) => {
+
+  const copy = [...positions];
+
+  (copy[i] as any)[field] = value;
+
+  // Ako se menja Otvaranje
+  if (field === "otvaranje") {
+
+    const trenutnaSlika = copy[i].slika;
+
+    if (trenutnaSlika) {
+
+      // DESNO → dodaj "a"
+      if (
+        value === "DESNO" ||
+        value === "Desno"
+      ) {
+        const osnovniBroj = String(trenutnaSlika).replace(/a$/, "");
+
+        copy[i].slika = `${osnovniBroj}a`;
+      }
+
+      // LEVO → vrati osnovnu sliku
+      else if (
+        value === "LEVO" ||
+        value === "Levo"
+      ) {
+        const osnovniBroj = String(trenutnaSlika).replace(/a$/, "");
+
+        copy[i].slika = osnovniBroj;
+      }
+    }
+  }
+
+  setPositions(copy);
+};
 
   const selectProzor = (i: number, naziv: string) => {
     const p = prozori.find(x => x.naziv === naziv);
