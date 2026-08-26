@@ -1738,42 +1738,13 @@ const saveTehnicki = async () => {
 
   // ---------------- UPDATE ----------------
 const update = (i: number, field: string, value: any) => {
-
   const copy = [...positions];
 
   (copy[i] as any)[field] = value;
 
-  // Ako se menja Otvaranje
-  if (field === "otvaranje") {
-
-    const trenutnaSlika = copy[i].slika;
-
-    if (trenutnaSlika) {
-
-      // DESNO → dodaj "a"
-      if (
-        value === "DESNO" ||
-        value === "Desno"
-      ) {
-        const osnovniBroj = String(trenutnaSlika).replace(/a$/, "");
-
-        copy[i].slika = `${osnovniBroj}a`;
-      }
-
-      // LEVO → vrati osnovnu sliku
-      else if (
-        value === "LEVO" ||
-        value === "Levo"
-      ) {
-        const osnovniBroj = String(trenutnaSlika).replace(/a$/, "");
-
-        copy[i].slika = osnovniBroj;
-      }
-    }
-  }
-
   setPositions(copy);
 };
+
 
   const selectProzor = (i: number, naziv: string) => {
     const p = prozori.find(x => x.naziv === naziv);
@@ -1782,6 +1753,19 @@ const update = (i: number, field: string, value: any) => {
     copy[i].slika = p ? p.id : null;
     setPositions(copy);
   };
+
+const getWindowImage = (p: any): string => {
+  if (!p.slika) return "";
+
+  if (
+    p.otvaranje === "DESNO" ||
+    p.otvaranje === "Desno"
+  ) {
+    return `/prozori/${p.slika}a.jpg`;
+  }
+
+  return `/prozori/${p.slika}.jpg`;
+};
 
 
 const getParam = (naziv: string) => {
@@ -4724,7 +4708,7 @@ return (
   <div className="w-full overflow-hidden">
   {p.slika ? (
     <img
-      src={`/prozori/${p.slika}.jpg`}
+      src={getWindowImage(p)}
       alt=""
       className="window-image mx-auto object-contain w-[180px] sm:w-[180px] lg:w-[220px] h-auto"
     />
