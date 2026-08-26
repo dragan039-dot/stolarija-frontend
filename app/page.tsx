@@ -8146,6 +8146,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     title: "Ponude / Radna lista",
     items: [
       "PONUDA",
+      "RADNI NALOG",
       "Radni nalog",
       "Ponuda",
       "Dokument",
