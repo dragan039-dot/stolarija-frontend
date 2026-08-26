@@ -7988,6 +7988,8 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Standardni",
       "Nadsvetlo",
       "Nadsvetlo kip",
+      "Podizno-klizni sistem",
+      "Klizni sistem",
     ],
   },
   {
