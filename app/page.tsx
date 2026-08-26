@@ -3836,22 +3836,20 @@ const getUploadUrl = (path: string) => {
 };
 
 const sanitizeNumber = (value: string) => {
-  let result = "";
-  let hasDecimal = false;
+  // Zarez pretvori u tačku
+  value = value.replace(/,/g, ".");
 
-  for (const char of value) {
-    if (char >= "0" && char <= "9") {
-      result += char;
-    } else if (
-      (char === "." || char === ",") &&
-      !hasDecimal
-    ) {
-      result += ".";
-      hasDecimal = true;
-    }
+  // Ukloni sve osim cifara i tačke
+  value = value.replace(/[^0-9.]/g, "");
+
+  // Dozvoli samo jednu tačku
+  const parts = value.split(".");
+
+  if (parts.length > 2) {
+    value = parts[0] + "." + parts.slice(1).join("");
   }
 
-  return result;
+  return value;
 };
 
 const sanitizeInteger = (value: string) => {
@@ -4970,12 +4968,14 @@ return (
 <input
   type="text"
   inputMode="decimal"
-  value={item.cena || ""}
+  value={item.cena ?? ""}
   onChange={(e) => {
+    const value = sanitizeNumber(e.target.value);
+
     updateExtraItem(
       i,
       "cena",
-      sanitizeNumber(e.target.value)
+      value
     );
   }}
   className="w-full border p-2"
