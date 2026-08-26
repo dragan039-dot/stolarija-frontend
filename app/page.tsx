@@ -4224,51 +4224,79 @@ return (
   placeholder={t("Pretraga ponuda...")}
   value={offerSearch}
   onChange={(e) => setOfferSearch(e.target.value)}
-  className="border p-2 w-full mb-3"
+  className="border border-gray-400 bg-white text-black placeholder:text-gray-500 p-2 w-full mb-3"
 />
 
+{/* TABELA */}
+<div className="border border-gray-400 bg-white mb-6">
+  <div style={{ maxHeight: "220px", overflowY: "auto" }}>
+    <table className="w-full min-w-[860px] border-collapse text-sm table-fixed bg-white text-black">
+      <thead className="bg-gray-200 text-black sticky top-0">
+        <tr>
+          <th className="border border-gray-400 p-2 w-[90px]">
+            {t("Br")}
+          </th>
+          <th className="border border-gray-400 p-2 min-w-[220px]">
+            {t("Naziv")}
+          </th>
+          <th className="border border-gray-400 p-2 min-w-[160px]">
+            {t("Adresa")}
+          </th>
+          <th className="border border-gray-400 p-2 w-[160px]">
+            {t("Telefon")}
+          </th>
+          <th className="border border-gray-400 p-2 w-[120px]">
+            {t("PIB")}
+          </th>
+          <th className="border border-gray-400 p-2 w-[110px]">
+            {t("Datum")}
+          </th>
+        </tr>
+      </thead>
 
+      <tbody className="bg-white text-black">
+        {filteredOffers.map(c => (
+          <tr
+            key={c.id}
+            className={`cursor-pointer text-black transition ${
+              selectedFormOfferId === c.id
+                ? "bg-blue-200 text-black shadow-inner"
+                : "bg-white hover:bg-gray-100"
+            }`}
+            onClick={() => {
+              setSelectedFormOfferId(c.id);
+              openFromTable(c.id);
+            }}
+          >
+            <td className="border border-gray-300 p-2 text-black">
+              {c.brojPonude || c.id}
+            </td>
 
-      {/* TABELA */}
-      <div className="border mb-6">
-        <div style={{ maxHeight: "220px", overflowY: "auto" }}>
-          <table className="w-full min-w-[860px] border-collapse text-sm table-fixed">
-            <thead className="bg-gray-200 sticky top-0">
-              <tr>
-<th className="border p-2 w-[90px]">{t("Br")}</th>
-<th className="border p-2 min-w-[220px]">{t("Naziv")}</th>
-<th className="border p-2 min-w-[160px]">{t("Adresa")}</th>
-<th className="border p-2 w-[160px]">{t("Telefon")}</th>
-<th className="border p-2 w-[120px]">{t("PIB")}</th>
-<th className="border p-2 w-[110px]">{t("Datum")}</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredOffers.map(c => (
-                <tr
-  key={c.id}
-  className={`cursor-pointer transition ${
-  selectedFormOfferId === c.id
-    ? "bg-blue-100 shadow-inner"
-    : "hover:bg-gray-100"
-}`}
-  onClick={() => {
-    setSelectedFormOfferId(c.id);
-    openFromTable(c.id);
-  }}
->
-                  <td className="border p-2">{c.brojPonude || c.id}</td>
-                  <td className="border p-2">{c.naziv}</td>
-                  <td className="border p-2">{c.adresa}</td>
-                  <td className="border p-2">{c.telefon}</td>
-                  <td className="border p-2">{c.pib}</td>
-                  <td className="border p-2">{formatDate(c.datum)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+            <td className="border border-gray-300 p-2 text-black">
+              {c.naziv}
+            </td>
+
+            <td className="border border-gray-300 p-2 text-black">
+              {c.adresa}
+            </td>
+
+            <td className="border border-gray-300 p-2 text-black">
+              {c.telefon}
+            </td>
+
+            <td className="border border-gray-300 p-2 text-black">
+              {c.pib}
+            </td>
+
+            <td className="border border-gray-300 p-2 text-black">
+              {formatDate(c.datum)}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
 
       {/* FORMA */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
