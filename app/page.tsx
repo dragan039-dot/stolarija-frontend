@@ -7223,7 +7223,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 <input
   type="text"
   inputMode="decimal"
-  value={item.cena || ""}
+  value={item.cena ?? ""}
   onChange={(e) => {
     const value = sanitizeNumber(e.target.value);
 
@@ -7231,7 +7231,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
     copy[i] = {
       ...item,
-      cena: value === "" ? "" : Number(value),
+      cena: value,
     };
 
     setIspune(copy);
@@ -7296,7 +7296,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
   type="text"
   inputMode="decimal"
   className="border w-full p-1"
-  value={item.cena || ""}
+  value={item.cena ?? ""}
   onChange={(e) => {
     const value = sanitizeNumber(e.target.value);
 
@@ -7304,7 +7304,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
     copy[i] = {
       ...item,
-      cena: value === "" ? "" : Number(value),
+      cena: value,
     };
 
     setOkovi(copy);
@@ -7376,7 +7376,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
     copy[i] = {
       ...item,
-      cena: value === "" ? "" : Number(value),
+      cena: value,
     };
 
     setRoletne(copy);
@@ -7438,7 +7438,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
     copy[i] = {
       ...item,
-      cena: value === "" ? "" : Number(value),
+      cena: value,
     };
 
     setKomarnici(copy);
@@ -7507,7 +7507,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
     copy[i] = {
       ...item,
-      cena: value === "" ? "" : Number(value),
+      cena: value,
     };
 
     setDodatniElementi(copy);
