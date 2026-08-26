@@ -8161,6 +8161,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Logo firme / slika do 2MB",
       "Logo firme",
       "Sva prava zadržana",
+      "Elementi prozora",
     ],
   },
   {
