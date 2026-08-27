@@ -5100,16 +5100,29 @@ return (
 
           <tbody>
             {filteredProposalOffers.map((c: any) => (
-              <tr
+<tr
   key={c.id}
-  className={`cursor-pointer transition ${
-  selectedProposalOfferId === c.id
-    ? "bg-blue-100 shadow-inner"
-    : "hover:bg-gray-100"
-}`}
+  className="cursor-pointer transition"
+  style={{
+    backgroundColor:
+      selectedFormOfferId === c.id
+        ? "#bfdbfe"
+        : "#ffffff",
+    color: "#111827",
+  }}
+  onMouseEnter={(e) => {
+    if (selectedFormOfferId !== c.id) {
+      e.currentTarget.style.backgroundColor = "#f3f4f6";
+    }
+  }}
+  onMouseLeave={(e) => {
+    if (selectedFormOfferId !== c.id) {
+      e.currentTarget.style.backgroundColor = "#ffffff";
+    }
+  }}
   onClick={() => {
-    setSelectedProposalOfferId(c.id);
-    openProposalOffer(c.id);
+    setSelectedFormOfferId(c.id);
+    openFromTable(c.id);
   }}
 >
                 <td className="border p-2">{c.brojPonude || c.id}</td>
