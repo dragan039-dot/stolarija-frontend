@@ -4231,7 +4231,13 @@ return (
 <div className="border border-gray-400 bg-white mb-6">
   <div style={{ maxHeight: "220px", overflowY: "auto" }}>
     <table className="w-full min-w-[860px] border-collapse text-sm table-fixed bg-white text-black">
-      <thead className="bg-gray-200 text-black sticky top-0">
+      <thead
+  className="sticky top-0"
+  style={{
+    backgroundColor: "#d1d5db",
+    color: "#111827",
+  }}
+>
         <tr>
           <th className="border border-gray-400 p-2 w-[90px]">
             {t("Br")}

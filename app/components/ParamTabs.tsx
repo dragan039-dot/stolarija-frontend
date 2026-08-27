@@ -53,7 +53,7 @@ export default function ParamTabs({
             className={`px-5 py-2 rounded whitespace-nowrap text-sm ${
               active === tab
                 ? "bg-blue-600 text-white"
-                : "bg-gray-200"
+                : "bg-white text-black border border-gray-300"
             }`}
           >
             {t(tab)}

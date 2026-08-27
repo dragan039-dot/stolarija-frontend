@@ -38,7 +38,7 @@ export default function Tabs({
             className={`px-2 py-3 rounded font-semibold transition text-sm ${
               active === t
                 ? "bg-blue-600 text-white"
-                : "bg-gray-200 hover:bg-gray-300"
+                : "bg-white text-black border border-gray-300"
             }`}
           >
             {translate ? translate(t) : t}
