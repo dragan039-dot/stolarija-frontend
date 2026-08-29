@@ -2641,12 +2641,12 @@ const login = async () => {
     const data = await res.json();
 
     if (!res.ok) {
-      setLoginError(data.message || t("Greška pri prijavi"));
+      setLoginError(data.message || t("Login error"));
       return;
     }
 
     if (!data.token || !data.user) {
-      setLoginError(t("Login odgovor nije ispravan"));
+      setLoginError(t("Invalid username or password"));
       console.log("LOGIN DATA:", data);
       return;
     }
@@ -2665,7 +2665,7 @@ const login = async () => {
     setLoggedUser(data.user);
   } catch (err) {
     console.error("LOGIN ERROR:", err);
-    setLoginError(t("Backend nije dostupan"));
+    setLoginError(t("Connection error. Please check your internet or try again."));
   }
 };
 
@@ -4437,27 +4437,12 @@ return (
 
     <div className="grid grid-cols-2 gap-4">
 
-<div className="relative">
-  <input
-    type="date"
-    value={form.datum || ""}
-    onChange={(e) =>
-      setForm({
-        ...form,
-        datum: e.target.value,
-      })
-    }
-    className="border p-2 w-full"
-  />
-
-  {!form.datum && (
-    <span
-      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"
-    >
-      dd/mm/yyyy
-    </span>
-  )}
-</div>
+      <input
+        type="date"
+        value={form.datum || ""}
+        onChange={(e) => setForm({ ...form, datum: e.target.value })}
+        className="border p-2"
+      />
 
       <select
         value={form.valuta || ""}
@@ -8210,7 +8195,6 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Odjavi se",
       "Prikaži šifru",
       "Instaliraj App",
-      "Pogrešno korisničko ime ili šifra",
       "Backend nije dostupan",
       "Sesija je istekla. Prijavite se ponovo.",
       "Licenca ističe za",
