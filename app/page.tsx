@@ -4437,27 +4437,13 @@ return (
 
     <div className="grid grid-cols-2 gap-4">
 
-
-  <input
-    type="date"
-    value={form.datum || ""}
-    onChange={(e) =>
-      setForm({
-        ...form,
-        datum: e.target.value,
-      })
-    }
-    className="border p-2 w-full"
-  />
-
-  {!form.datum && (
-    <span
-      className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none"
-    >
-      dd/mm/yyyy
-    </span>
-  )}
-
+      <input
+        type="date"
+        value={form.datum || ""}
+        onChange={(e) => setForm({ ...form, datum: e.target.value })}
+        className="border p-2"
+        placeholder="dd/mm/yyyy"
+      />
 
       <select
         value={form.valuta || ""}
