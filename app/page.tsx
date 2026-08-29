@@ -2686,11 +2686,21 @@ if (!loggedUser) {
   return (
     <main className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white border rounded p-6 w-full max-w-sm shadow">
-        <h1 className="text-2xl font-bold mb-4 text-center">
-          PVC Kalkulator
-          <br/> <br/>
-          Login
-        </h1>
+        
+
+        
+<h1 className="text-2xl font-bold mb-4 text-center">
+
+  <img
+    src="/logo.pvckalkulator.jpg"
+    alt="PVC Kalkulator"
+    className="w-32 mx-auto mb-4"
+  />
+
+
+  Login
+
+</h1>
 
         <input
           placeholder="Username"
