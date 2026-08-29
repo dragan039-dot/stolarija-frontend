@@ -2684,23 +2684,21 @@ const logout = () => {
 
 if (!loggedUser) {
   return (
-    <main className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white border rounded p-6 w-full max-w-sm shadow">
-        
+<main className="min-h-screen flex items-center justify-center bg-gray-100">
+  <div className="bg-white border rounded p-6 w-full max-w-sm shadow">
 
-        
-<h1 className="text-2xl font-bold mb-4 text-center">
+    <div className="text-center mb-4">
+      <img
+        src="/logo.png"
+        alt="PVC Kalkulator"
+        className="w-40 mx-auto"
+      />
+    </div>
 
-  <img
-    src="/logo.pvckalkulator.jpg"
-    alt="PVC Kalkulator"
-    className="w-32 mx-auto mb-4"
-  />
+    <h1 className="text-2xl font-bold mb-4 text-center">
 
-
-  Login
-
-</h1>
+      Login
+    </h1>
 
         <input
           placeholder="Username"
