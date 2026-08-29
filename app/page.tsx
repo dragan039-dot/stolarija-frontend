@@ -4437,6 +4437,7 @@ return (
 
     <div className="grid grid-cols-2 gap-4">
 
+<div className="relative">
   <input
     type="date"
     value={form.datum || ""}
@@ -4456,6 +4457,7 @@ return (
       dd/mm/yyyy
     </span>
   )}
+</div>
 
       <select
         value={form.valuta || ""}
