@@ -4339,7 +4339,7 @@ return (
       value={form.brojPonude || ""}
       readOnly
       placeholder={t("Broj ponude")}
-      className="border p-2 bg-gray-100"
+      className="border p-2 bg-white text-black"
     />
 
 
@@ -4351,7 +4351,7 @@ return (
       vrsta_ponude: e.target.value,
     })
   }
-  className="border p-2 bg-yellow-50 border-yellow-400"
+  className="border p-2 bg-white text-black"
 >
   <option value="">
     {t("Vrsta ponude")}
@@ -4451,7 +4451,7 @@ return (
         placeholder={t("PIB")}
         value={form.pib || ""}
         onChange={(e) => handlePibChange(e.target.value)}
-        className="border p-2 bg-yellow-50 border-yellow-400"
+        className="border p-2 bg-white text-black"
       />
 
       <input
@@ -5040,7 +5040,7 @@ return (
 />
           </td>
 
-          <td className="border p-2 text-right font-semibold bg-gray-50">
+          <td className="border p-2 bg-white text-black">
             {((Number(item.kolicina) || 0) * (Number(item.cena) || 0)).toFixed(2)}
           </td>
           <td className="border p-1 text-center">
@@ -5095,7 +5095,13 @@ return (
       <div className="no-print border mb-6">
         <div style={{ maxHeight: "220px", overflowY: "auto"  }}>
           <table className="w-full min-w-[860px] border-collapse text-sm table-fixed">
-            <thead className="bg-gray-200 sticky top-0">
+            <thead
+  className="sticky top-0"
+  style={{
+    backgroundColor: "#d1d5db",
+    color: "#111827",
+  }}
+>
               <tr>
 <th className="border p-2 w-[90px]">{t("Br")}</th>
 <th className="border p-2 min-w-[220px]">{t("Naziv")}</th>
@@ -5474,7 +5480,13 @@ console.log("SVE VALUTE:", valute);
       <div className="no-print border mb-6">
         <div style={{ maxHeight: "220px", overflowY: "auto" }}>
           <table className="w-full min-w-[860px] border-collapse text-sm table-fixed">
-            <thead className="bg-gray-200 sticky top-0">
+            <thead
+  className="sticky top-0"
+  style={{
+    backgroundColor: "#d1d5db",
+    color: "#111827",
+  }}
+>
               <tr>
 <th className="border p-2 w-[90px]">{t("Br")}</th>
 <th className="border p-2 min-w-[220px]">{t("Naziv")}</th>
@@ -5489,14 +5501,27 @@ console.log("SVE VALUTE:", valute);
             {filteredWorklistOffers.map((c) => (
               <tr
   key={c.id}
-  className={`cursor-pointer transition ${
-  selectedWorklistOfferId === c.id
-    ? "bg-blue-100 shadow-inner"
-    : "hover:bg-gray-100"
-}`}
+  className="cursor-pointer transition"
+  style={{
+    backgroundColor:
+      selectedFormOfferId === c.id
+        ? "#bfdbfe"
+        : "#ffffff",
+    color: "#111827",
+  }}
+  onMouseEnter={(e) => {
+    if (selectedFormOfferId !== c.id) {
+      e.currentTarget.style.backgroundColor = "#f3f4f6";
+    }
+  }}
+  onMouseLeave={(e) => {
+    if (selectedFormOfferId !== c.id) {
+      e.currentTarget.style.backgroundColor = "#ffffff";
+    }
+  }}
   onClick={() => {
-    setSelectedWorklistOfferId(c.id);
-    openWorklistOffer(c.id);
+    setSelectedFormOfferId(c.id);
+    openFromTable(c.id);
   }}
 >
                 <td className="border p-2">{c.brojPonude || c.id}</td>
