@@ -2691,7 +2691,7 @@ if (!loggedUser) {
       <img
         src="/logo.pvckalkulator.jpg"
         alt="PVC Kalkulator"
-        className="w-40 mx-auto"
+        className="w-50 mx-auto"
       />
     </div>
 
