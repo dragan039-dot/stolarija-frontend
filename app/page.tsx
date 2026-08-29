@@ -2689,7 +2689,7 @@ if (!loggedUser) {
 
     <div className="text-center mb-4">
       <img
-        src="/logo.png"
+        src="/logo.pvckalkulator.jpg"
         alt="PVC Kalkulator"
         className="w-40 mx-auto"
       />
