@@ -2821,7 +2821,7 @@ const adminChangeUserPassword = async (userId: number) => {
   const password = adminPasswords[userId];
 
   if (!password) {
-    alert("Unesite novu šifru");
+  alert(t("Unesite novu šifru"));
     return;
   }
 
@@ -2831,7 +2831,7 @@ const adminChangeUserPassword = async (userId: number) => {
     body: JSON.stringify({ userId, password }),
   });
 
-  alert("Šifra je promenjena");
+  alert(t("Šifra je promenjena"));
   setAdminPasswords({ ...adminPasswords, [userId]: "" });
 };
 
@@ -2844,7 +2844,7 @@ const deleteAdminUser = async (id: number) => {
     body: JSON.stringify({ id }),
   });
 
-  alert("Korisnik je obrisan");
+  alert(t("Korisnik je obrisan"));
   loadAdminUsers();
 };
 
