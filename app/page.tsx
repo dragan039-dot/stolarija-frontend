@@ -3193,19 +3193,36 @@ const saveHelpTexts = async () => {
 
 
 const getHelpText = (fieldName: string) => {
-  const found = helpTexts.find(
+  // 1. Ako je izabran neki dodatni jezik,
+  // prvo pokušavamo da pronađemo njegovo uputstvo
+  if (selectedLanguageId !== "") {
+    const translated = helpTexts.find(
+      (h: any) =>
+        h.fieldName === fieldName &&
+        h.languageId !== null &&
+        h.languageId !== undefined &&
+        h.languageId !== "" &&
+        Number(h.languageId) === Number(selectedLanguageId)
+    );
+
+    if (translated?.text) {
+      return translated.text;
+    }
+  }
+
+  // 2. Ako je srpski ili prevod ne postoji,
+  // koristimo osnovno srpsko uputstvo (languageId = NULL)
+  const serbian = helpTexts.find(
     (h: any) =>
       h.fieldName === fieldName &&
       (
-        selectedLanguageId === ""
-          ? h.languageId === null ||
-            h.languageId === undefined ||
-            h.languageId === ""
-          : Number(h.languageId) === Number(selectedLanguageId)
+        h.languageId === null ||
+        h.languageId === undefined ||
+        h.languageId === ""
       )
   );
 
-  return found?.text || t("Uputstvo nije definisano");
+  return serbian?.text || t("Uputstvo nije definisano");
 };
 
 
