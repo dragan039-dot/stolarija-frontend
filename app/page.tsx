@@ -4271,17 +4271,30 @@ return (
       <tbody className="bg-white text-black">
         {filteredOffers.map(c => (
           <tr
-            key={c.id}
-            className={`cursor-pointer text-black transition ${
-              selectedFormOfferId === c.id
-                ? "bg-blue-200 text-black shadow-inner"
-                : "bg-white hover:bg-gray-100"
-            }`}
-            onClick={() => {
-              setSelectedFormOfferId(c.id);
-              openFromTable(c.id);
-            }}
-          >
+  key={c.id}
+  className="cursor-pointer transition"
+  style={{
+    backgroundColor:
+      selectedFormOfferId === c.id
+        ? "#bfdbfe"
+        : "#ffffff",
+    color: "#111827",
+  }}
+  onMouseEnter={(e) => {
+    if (selectedFormOfferId !== c.id) {
+      e.currentTarget.style.backgroundColor = "#f3f4f6";
+    }
+  }}
+  onMouseLeave={(e) => {
+    if (selectedFormOfferId !== c.id) {
+      e.currentTarget.style.backgroundColor = "#ffffff";
+    }
+  }}
+  onClick={() => {
+    setSelectedFormOfferId(c.id);
+    openFromTable(c.id);
+  }}
+>
             <td className="border border-gray-300 p-2 text-black">
               {c.brojPonude || c.id}
             </td>
@@ -5119,24 +5132,24 @@ return (
   className="cursor-pointer transition"
   style={{
     backgroundColor:
-      selectedFormOfferId === c.id
+      selectedProposalOfferId === c.id
         ? "#bfdbfe"
         : "#ffffff",
     color: "#111827",
   }}
   onMouseEnter={(e) => {
-    if (selectedFormOfferId !== c.id) {
+    if (selectedProposalOfferId !== c.id) {
       e.currentTarget.style.backgroundColor = "#f3f4f6";
     }
   }}
   onMouseLeave={(e) => {
-    if (selectedFormOfferId !== c.id) {
+    if (selectedProposalOfferId !== c.id) {
       e.currentTarget.style.backgroundColor = "#ffffff";
     }
   }}
   onClick={() => {
-    setSelectedFormOfferId(c.id);
-    openFromTable(c.id);
+    setSelectedProposalOfferId(c.id);
+    openProposalOffer(c.id);
   }}
 >
                 <td className="border p-2">{c.brojPonude || c.id}</td>
@@ -5504,24 +5517,24 @@ console.log("SVE VALUTE:", valute);
   className="cursor-pointer transition"
   style={{
     backgroundColor:
-      selectedFormOfferId === c.id
+      selectedWorklistOfferId === c.id
         ? "#bfdbfe"
         : "#ffffff",
     color: "#111827",
   }}
   onMouseEnter={(e) => {
-    if (selectedFormOfferId !== c.id) {
+    if (selectedWorklistOfferId !== c.id) {
       e.currentTarget.style.backgroundColor = "#f3f4f6";
     }
   }}
   onMouseLeave={(e) => {
-    if (selectedFormOfferId !== c.id) {
+    if (selectedWorklistOfferId !== c.id) {
       e.currentTarget.style.backgroundColor = "#ffffff";
     }
   }}
   onClick={() => {
-    setSelectedFormOfferId(c.id);
-    openFromTable(c.id);
+    setSelectedWorklistOfferId(c.id);
+    openWorklistOffer(c.id);
   }}
 >
                 <td className="border p-2">{c.brojPonude || c.id}</td>
