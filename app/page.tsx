@@ -8147,14 +8147,19 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       </button>
     </div>
 
-    <div className="overflow-x-auto border">
+    <div className="overflow-auto border max-h-[70vh]">
       <table className="border-collapse text-sm min-w-[900px]">
         <thead className="bg-gray-200">
-          <tr>
-            <th className="border p-2 min-w-[220px]">Tekst na sajtu</th>
+  <tr>
+    <th className="border p-2 min-w-[220px] sticky top-0 left-0 z-30 bg-gray-200">
+      Tekst na sajtu
+    </th>
 
             {languages.map((lang, index) => (
-              <th key={index} className="border p-2 min-w-[180px]">
+              <th
+  key={index}
+  className="border p-2 min-w-[180px] sticky top-0 z-20 bg-gray-200"
+>
                 <input
                   className="border p-1 w-full mb-1"
                   value={lang.name || ""}
@@ -8657,7 +8662,8 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
 
       {group.items.map((key) => (
         <tr key={key}>
-          <td className="border p-2 font-semibold bg-gray-50">
+          <td className="border p-2 font-semibold bg-gray-50 sticky left-0 z-10">
+
             {key}
           </td>
 
