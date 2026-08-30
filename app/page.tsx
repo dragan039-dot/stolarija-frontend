@@ -6274,18 +6274,34 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
           className="border border-gray-300 rounded-lg overflow-hidden bg-white text-black"
         >
           <button
-            type="button"
-            onClick={() =>
-              toggleFormulaUputstvoGrupa(grupa.naziv)
-            }
-            className="w-full flex items-center justify-between p-3 font-bold text-left bg-gray-200 text-black"
-          >
-            <span>{t(grupa.naziv)}</span>
+  type="button"
+  onClick={() =>
+    toggleFormulaUputstvoGrupa(grupa.naziv)
+  }
+  className="
+    w-full
+    flex
+    items-center
+    justify-between
+    px-4
+    py-3
+    text-left
+    bg-slate-800
+    text-white
+    font-bold
+    text-lg
+    hover:bg-slate-700
+    transition
+  "
+>
+  <span>
+    {t(grupa.naziv)}
+  </span>
 
-            <span>
-              {grupaOtvorena ? "▲" : "▼"}
-            </span>
-          </button>
+  <span className="text-sm">
+    {grupaOtvorena ? "▲" : "▼"}
+  </span>
+</button>
 
           {grupaOtvorena && (
             <div className="p-3 space-y-3">
@@ -6299,14 +6315,28 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
                     className="border border-gray-300 rounded overflow-hidden"
                   >
                     <button
-                      type="button"
-                      onClick={() =>
-                        toggleFormulaUputstvoProzor(
-                          prozor.naziv
-                        )
-                      }
-                      className="w-full flex items-center justify-between p-3 font-semibold text-left bg-gray-100 text-black"
-                    >
+  type="button"
+  onClick={() =>
+    toggleFormulaUputstvoProzor(
+      prozor.naziv
+    )
+  }
+  className="
+    w-full
+    flex
+    items-center
+    justify-between
+    px-3
+    py-2
+    text-left
+    bg-gray-100
+    text-gray-800
+    font-medium
+    text-sm
+    hover:bg-gray-200
+    transition
+  "
+>
                       <span>{t(prozor.naziv)}</span>
 
                       <span>
@@ -6316,7 +6346,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
                     {prozorOtvoren && (
                       <div className="overflow-x-auto">
-                        <table className="w-full border-collapse text-sm min-w-[420px] bg-white text-black">
+                        <table className="w-full min-w-[420px] border-collapse text-xs bg-white text-black">
                           <thead
                             style={{
                               backgroundColor: "#d1d5db",
@@ -6324,15 +6354,15 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
                             }}
                           >
                             <tr>
-                              <th className="border border-gray-400 p-2 text-left">
+                              <th className="border border-gray-400 p-1 text-left">
                                 {t("Element")}
                               </th>
 
-                              <th className="border border-gray-400 p-2 text-center w-[90px]">
+                              <th className="border border-gray-400 p-1 text-center w-[90px]">
                                 ALU
                               </th>
 
-                              <th className="border border-gray-400 p-2 text-center w-[90px]">
+                              <th className="border border-gray-400 p-1 text-center w-[90px]">
                                 PVC
                               </th>
                             </tr>
@@ -6361,15 +6391,15 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
                                 return (
                                   <tr key={element}>
-                                    <td className="border border-gray-300 p-2">
+                                    <td className="border border-gray-300 p-1">
                                       {t(element)}
                                     </td>
 
-                                    <td className="border border-gray-300 p-2 text-center font-bold">
+                                    <td className="border border-gray-300 p-1 text-center font-bold">
                                       {alu ? "X" : ""}
                                     </td>
 
-                                    <td className="border border-gray-300 p-2 text-center font-bold">
+                                    <td className="border border-gray-300 p-1 text-center font-bold">
                                       {pvc ? "X" : ""}
                                     </td>
                                   </tr>
