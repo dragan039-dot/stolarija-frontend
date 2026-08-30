@@ -8903,6 +8903,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Elementi po vrstama prozora",
       "U tabelama su prikazani elementi koji se koriste za obračun pojedinih vrsta prozora.",
       "Početak rada",
+      "Video uputstva",
 "Osnovno upoznavanje sa aplikacijom.",
 "Kreiranje ponude",
 "Kako se unosi kupac, pozicije i čuva ponuda.",
