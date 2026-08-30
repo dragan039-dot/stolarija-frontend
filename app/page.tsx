@@ -113,6 +113,9 @@ const [openFormulaUputstvoGrupe, setOpenFormulaUputstvoGrupe] =
 const [openFormulaUputstvoProzori, setOpenFormulaUputstvoProzori] =
   useState<Record<string, boolean>>({});
 
+  const [uputstvoTab, setUputstvoTab] = useState<"video" | "elementi">("video");
+
+
   const [loading, setLoading] = useState(false);
   const [priceValues, setPriceValues] = useState({});
   const [tehnickiValues, setTehnickiValues] = useState({});
@@ -6144,9 +6147,41 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
 
 {activeTab === "Uputstvo" && (
- <div className="mt-10">
+  <div className="mt-10">
 
-  <div className="mb-8 text-center">
+    {/* PODTABOVI */}
+    <div className="grid grid-cols-2 mb-8 border border-gray-300 rounded-lg overflow-hidden bg-white">
+      <button
+        type="button"
+        onClick={() => setUputstvoTab("video")}
+        className={`px-4 py-3 font-semibold transition ${
+          uputstvoTab === "video"
+            ? "bg-blue-900 text-white"
+            : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+        }`}
+      >
+        {t("Video uputstva")}
+      </button>
+
+      <button
+        type="button"
+        onClick={() => setUputstvoTab("elementi")}
+        className={`px-4 py-3 font-semibold transition ${
+          uputstvoTab === "elementi"
+            ? "bg-blue-900 text-white"
+            : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+        }`}
+      >
+        {t("Elementi prozora")}
+      </button>
+    </div>
+
+
+    {uputstvoTab === "video" && (
+      <>
+        <div className="mb-8 text-center">
+
+
     <h3 className="text-3xl font-bold text-slate-900 dark:text-white">
       Video uputstva
     </h3>
@@ -6202,9 +6237,18 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
   </div>
 
 
+      </>
+    )}
 
 
-<div className="mt-8">
+  {/* ========================= */}
+  {/* ELEMENTI PO VRSTAMA PROZORA */}
+  {/* ========================= */}
+
+  {uputstvoTab === "elementi" && (
+    <div>
+
+
   <h2 className="text-2xl font-bold mb-4">
     {t("Elementi po vrstama prozora")}
   </h2>
@@ -6347,6 +6391,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
   </div>
 </div>
 
+  )}
 
 
 
