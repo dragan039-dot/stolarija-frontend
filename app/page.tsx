@@ -99,6 +99,20 @@ const [preview, setPreview] = useState<any[]>([]);
   const [formule, setFormule] = useState<any[]>([]);
   const [formulaVrstaStolarije, setFormulaVrstaStolarije] = useState("PVC");
 const [formulaVrstaProzora, setFormulaVrstaProzora] = useState("");
+const [formulaOverview, setFormulaOverview] = useState<any[]>([]);
+
+const [openFormulaUputstvoGrupe, setOpenFormulaUputstvoGrupe] =
+  useState<Record<string, boolean>>({
+    Standardni: true,
+    Nadsvetlo: false,
+    "Nadsvetlo kip": false,
+    "Klizni sistem": false,
+    "Podizno-klizni sistem": false,
+  });
+
+const [openFormulaUputstvoProzori, setOpenFormulaUputstvoProzori] =
+  useState<Record<string, boolean>>({});
+
   const [loading, setLoading] = useState(false);
   const [priceValues, setPriceValues] = useState({});
   const [tehnickiValues, setTehnickiValues] = useState({});
@@ -599,6 +613,15 @@ useEffect(() => {
     loadSiteTranslations();
   }
 }, [loggedUser?.id, loggedUser?.role, activeTab]);
+
+
+
+useEffect(() => {
+  if (!loggedUser?.id) return;
+  if (activeTab !== "Uputstvo") return;
+
+  loadFormulaOverview();
+}, [loggedUser?.id, activeTab]);
 
 
 
@@ -1293,6 +1316,62 @@ if (Array.isArray(data) && data.length > 0) {
 };
 
 
+const loadFormulaOverview = async () => {
+  try {
+    const res = await apiFetch(`${API_URL}/profile/formula-overview`, {
+      headers: authHeaders(),
+    });
+
+    if (!res.ok) {
+      throw new Error("Neuspešno učitavanje pregleda formula");
+    }
+
+    const data = await res.json();
+
+    setFormulaOverview(Array.isArray(data) ? data : []);
+  } catch (err) {
+    console.error("Greška pri učitavanju pregleda formula:", err);
+    setFormulaOverview([]);
+  }
+};
+
+
+const formulaElementIsUsed = (
+  vrstaProzora: string,
+  vrstaStolarije: string,
+  element: string
+) => {
+  const formula = formulaOverview.find(
+    (f: any) =>
+      f.vrstaProzora === vrstaProzora &&
+      f.vrstaStolarije === vrstaStolarije &&
+      f.element === element
+  );
+
+  if (!formula) return false;
+
+  return (
+    Boolean(String(formula.s || "").trim()) ||
+    Boolean(String(formula.v || "").trim()) ||
+    Boolean(String(formula.cena || "").trim())
+  );
+};
+
+
+const toggleFormulaUputstvoGrupa = (naziv: string) => {
+  setOpenFormulaUputstvoGrupe((prev) => ({
+    ...prev,
+    [naziv]: !prev[naziv],
+  }));
+};
+
+
+const toggleFormulaUputstvoProzor = (naziv: string) => {
+  setOpenFormulaUputstvoProzori((prev) => ({
+    ...prev,
+    [naziv]: !prev[naziv],
+  }));
+};
 
 
 
@@ -1993,6 +2072,8 @@ imaTprecka,
   const data = await res.json();
 setPreview(Array.isArray(data) ? data : []);
 };
+
+
 
 
 
@@ -3903,6 +3984,29 @@ const sanitizeInteger = (value: string) => {
 
   return result;
 };
+
+const formulaUputstvoGrupe = [
+  {
+    naziv: "Standardni",
+    prozori: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+  },
+  {
+    naziv: "Nadsvetlo",
+    prozori: [14, 15, 16, 17],
+  },
+  {
+    naziv: "Nadsvetlo kip",
+    prozori: [18, 19, 20, 21],
+  },
+  {
+    naziv: "Klizni sistem",
+    prozori: [22, 23, 24],
+  },
+  {
+    naziv: "Podizno-klizni sistem",
+    prozori: [25, 26, 27, 28, 29, 30, 31, 32],
+  },
+];
 
 
 
@@ -6097,8 +6201,164 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
   </div>
 
+
+
+
+<div className="mt-8">
+  <h2 className="text-2xl font-bold mb-4">
+    {t("Elementi po vrstama prozora")}
+  </h2>
+
+  <p className="mb-4 text-sm">
+    {t(
+      "U tabelama su prikazani elementi koji se koriste za obračun pojedinih vrsta prozora."
+    )}
+  </p>
+
+  <div className="space-y-3">
+    {formulaUputstvoGrupe.map((grupa) => {
+      const grupaOtvorena =
+        !!openFormulaUputstvoGrupe[grupa.naziv];
+
+      const prozoriUGRupi = prozori.filter((p) =>
+        grupa.prozori.includes(p.id)
+      );
+
+      return (
+        <div
+          key={grupa.naziv}
+          className="border border-gray-300 rounded-lg overflow-hidden bg-white text-black"
+        >
+          <button
+            type="button"
+            onClick={() =>
+              toggleFormulaUputstvoGrupa(grupa.naziv)
+            }
+            className="w-full flex items-center justify-between p-3 font-bold text-left bg-gray-200 text-black"
+          >
+            <span>{t(grupa.naziv)}</span>
+
+            <span>
+              {grupaOtvorena ? "▲" : "▼"}
+            </span>
+          </button>
+
+          {grupaOtvorena && (
+            <div className="p-3 space-y-3">
+              {prozoriUGRupi.map((prozor) => {
+                const prozorOtvoren =
+                  !!openFormulaUputstvoProzori[prozor.naziv];
+
+                return (
+                  <div
+                    key={prozor.id}
+                    className="border border-gray-300 rounded overflow-hidden"
+                  >
+                    <button
+                      type="button"
+                      onClick={() =>
+                        toggleFormulaUputstvoProzor(
+                          prozor.naziv
+                        )
+                      }
+                      className="w-full flex items-center justify-between p-3 font-semibold text-left bg-gray-100 text-black"
+                    >
+                      <span>{t(prozor.naziv)}</span>
+
+                      <span>
+                        {prozorOtvoren ? "▲" : "▼"}
+                      </span>
+                    </button>
+
+                    {prozorOtvoren && (
+                      <div className="overflow-x-auto">
+                        <table className="w-full border-collapse text-sm min-w-[420px] bg-white text-black">
+                          <thead
+                            style={{
+                              backgroundColor: "#d1d5db",
+                              color: "#111827",
+                            }}
+                          >
+                            <tr>
+                              <th className="border border-gray-400 p-2 text-left">
+                                {t("Element")}
+                              </th>
+
+                              <th className="border border-gray-400 p-2 text-center w-[90px]">
+                                ALU
+                              </th>
+
+                              <th className="border border-gray-400 p-2 text-center w-[90px]">
+                                PVC
+                              </th>
+                            </tr>
+                          </thead>
+
+                          <tbody>
+                            {sviFormulaElementi.map(
+                              (element) => {
+                                const alu =
+                                  formulaElementIsUsed(
+                                    prozor.naziv,
+                                    "ALU",
+                                    element
+                                  );
+
+                                const pvc =
+                                  formulaElementIsUsed(
+                                    prozor.naziv,
+                                    "PVC",
+                                    element
+                                  );
+
+                                if (!alu && !pvc) {
+                                  return null;
+                                }
+
+                                return (
+                                  <tr key={element}>
+                                    <td className="border border-gray-300 p-2">
+                                      {t(element)}
+                                    </td>
+
+                                    <td className="border border-gray-300 p-2 text-center font-bold">
+                                      {alu ? "X" : ""}
+                                    </td>
+
+                                    <td className="border border-gray-300 p-2 text-center font-bold">
+                                      {pvc ? "X" : ""}
+                                    </td>
+                                  </tr>
+                                );
+                              }
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      );
+    })}
+  </div>
+</div>
+
+
+
+
+
 </div>
 )}
+
+
+
+
+
+
 
 
 
