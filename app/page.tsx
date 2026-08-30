@@ -6183,11 +6183,11 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
 
     <h3 className="text-3xl font-bold text-slate-900 dark:text-white">
-      Video uputstva
+      {t("Video uputstva")}
     </h3>
 
     <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-      Pogledajte kratka video uputstva za rad u aplikaciji.
+      {t("Pogledajte kratka video uputstva za rad u aplikaciji.")}
     </p>
   </div>
 
@@ -6213,11 +6213,11 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
         <div className="border-b border-slate-200 p-4 dark:border-slate-700">
 
           <h4 className="text-lg font-semibold text-slate-900 dark:text-white">
-            {video.title}
+            {t(video.title)}
           </h4>
 
           <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-            {video.text}
+            {t(video.text)}
           </p>
 
         </div>
@@ -6226,7 +6226,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
           <iframe
             className="h-full w-full"
             src={`https://www.youtube.com/embed/${video.videoId}`}
-            title={video.title}
+            title={t(video.title)}
             allowFullScreen
           />
         </div>
@@ -8899,6 +8899,22 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "YouTube",
       "Unesi YouTube link",
       "Neispravan YouTube link",
+      "Pogledajte kratka video uputstva za rad u aplikaciji.",
+      "Elementi po vrstama prozora",
+      "U tabelama su prikazani elementi koji se koriste za obračun pojedinih vrsta prozora.",
+      "Početak rada",
+"Osnovno upoznavanje sa aplikacijom.",
+"Kreiranje ponude",
+"Kako se unosi kupac, pozicije i čuva ponuda.",
+"Radna lista",
+"Pregled elemenata i priprema za proizvodnju.",
+"Podešavanje parametara",
+"Profili, cene, tehnički parametri i formule.",
+"Izmena ponude",
+"Kako se menja postojeća ponuda.",
+"Rad na telefonu",
+"Kako izgleda aplikacija na telefonu.",
+"Pogledajte kratka video uputstva za rad u aplikaciji."
     ],
   },
   {
