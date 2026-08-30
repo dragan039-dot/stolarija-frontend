@@ -2287,10 +2287,9 @@ const addPosition = () => {
 
 
 
-
 const removePosition = (index: number) => {
   if (positions.length === 1) {
-    alert("Mora postojati bar jedna pozicija");
+    alert(t("Mora postojati barem jedna pozicija"));
     return;
   }
 
@@ -2299,7 +2298,7 @@ const removePosition = (index: number) => {
 
 const removeExtraItem = (index: number) => {
   if (extraItems.length === 1) {
-    alert("Mora postojati bar jedan red dodatnih usluga/proizvoda");
+    alert(t("Mora postojati barem jedan red dodatnih usluga/proizvoda"));
     return;
   }
 
@@ -8250,6 +8249,8 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Kol.",
       "UKUPNO",
       "Za uplatu",
+      "Dod. element",
+      "Sačuvaj dod. elemente",
     ],
   },
   {
@@ -8277,7 +8278,8 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Količina",
       "Ukupna cena",
       "Maksimalan broj pozicija je 50",
-      "Mora postojati bar jedna pozicija",
+      "Mora postojati barem jedna pozicija",
+      "Mora postojati barem jedan red dodatnih usluga/proizvoda",
       "Nema izračunatih elemenata. Proveri da li su formule sačuvane za ovu vrstu stolarije i prozora.",
     ],
   },
@@ -8440,6 +8442,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "ČELIK",
       "LAJSNA",
       "PLASTIKA",
+      "Plastika",
       "ROLETNA",
       "KOMARNIK",
       "ALU Spojnica Štok 1",
