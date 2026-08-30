@@ -7767,7 +7767,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
           return (
             <tr key={el}>
               <td className="border p-2 font-semibold relative break-words pr-7">
-                {el}
+                {t(el)}
 
                 <button
                   type="button"
@@ -7871,7 +7871,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
           return (
             <tr key={el}>
               <td className="border p-2 font-semibold relative pr-7">
-                {el}
+                {t(el)}
 
                 <button
                   type="button"
