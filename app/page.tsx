@@ -5254,7 +5254,7 @@ console.log("SVE VALUTE:", valute);
               <tr>
                 <td>{t("Matični broj")}: {firma.maticni || ""}</td>
                 <td rowSpan={2} className="text-center text-2xl font-bold">
-                  {proposalOffer.vrsta_ponude || "PONUDA"}
+                  {t(proposalOffer.vrsta_ponude || "PONUDA")}
                 </td>
               </tr>
 
