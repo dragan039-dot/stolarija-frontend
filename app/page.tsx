@@ -5378,11 +5378,11 @@ console.log("SVE VALUTE:", valute);
     <div>{t("Okov")}: {getOkovName(p.okov)}</div>
 
     {p.otvaranje && (
-      <div>{t("Otvaranje")}: {p.otvaranje}</div>
+      <div>{t("Otvaranje")}: {t(p.otvaranje)}</div>
     )}
 
     {p.roletna && (
-      <div>{t("Roletna")}: {p.roletna}</div>
+      <div>{t("Roletna")}: {t(p.roletna)}</div>
     )}
 
     {p.vrsta_roletne && (
@@ -5766,7 +5766,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
         </div>
 
         <div>
-          {t("Otvaranje")}: <strong>{p.otvaranje || ""}</strong>
+          {t("Otvaranje")}: <strong>{t(p.otvaranje || "")}</strong>
         </div>
 
         <div>
@@ -5778,7 +5778,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
         </div>
 
         <div>
-          {t("Roletna")}: <strong>{p.roletna || ""}</strong>
+          {t("Roletna")}: <strong>{t(p.roletna || "")}</strong>
         </div>
 
         {p.vrsta_roletne && (
