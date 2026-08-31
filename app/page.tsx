@@ -742,6 +742,26 @@ const [positions, setPositions] = useState<Position[]>([
 const [auditLogs, setAuditLogs] = useState<any[]>([]);
 
 
+const [fieldIssues, setFieldIssues] = useState<
+  Record<string, "error" | "warning">
+>({});
+
+const [optionalWarningOpen, setOptionalWarningOpen] = useState(false);
+const [optionalWarningText, setOptionalWarningText] = useState("");
+
+const [pendingWarningFields, setPendingWarningFields] = useState<
+  Record<string, "warning">
+>({});
+
+
+
+
+
+
+
+
+
+
 
 const getDefaultProfili = () =>
   Array.from({ length: 15 }, (_, i) => ({
@@ -1682,23 +1702,152 @@ const saveProfili = async () => {
 };
   
   
-  
-  const saveOffer = async () => {
 
 
-    if (!form.naziv || !form.naziv.trim()) {
-  alert("Morate uneti naziv kupca.");
-  return;
+
+const validatePositionsBeforeSave = () => {
+  const errors: string[] = [];
+  const warnings: string[] = [];
+
+  const errorFields: Record<string, "error"> = {};
+  const warningFields: Record<string, "warning"> = {};
+
+  positions.forEach((p, i) => {
+    const positionName = `${t("Pozicija")} ${i + 1}`;
+
+    const positionErrors: string[] = [];
+    const positionWarnings: string[] = [];
+
+    // =========================
+    // OBAVEZNA POLJA
+    // =========================
+
+    if (!p.vrsta_stolarije) {
+      positionErrors.push(t("Vrsta stolarije"));
+      errorFields[fieldKey(i, "vrsta_stolarije")] = "error";
+    }
+
+    if (!p.vrsta_prozora) {
+      positionErrors.push(t("Vrsta prozora"));
+      errorFields[fieldKey(i, "vrsta_prozora")] = "error";
+    }
+
+    // DIMENZIJE
+    if (
+      p.vrsta_prozora &&
+      showField(p.vrsta_prozora, "a") &&
+      Number(p.a) <= 0
+    ) {
+      positionErrors.push(t("A - širina"));
+      errorFields[fieldKey(i, "a")] = "error";
+    }
+
+    if (
+      p.vrsta_prozora &&
+      showField(p.vrsta_prozora, "b") &&
+      Number(p.b) <= 0
+    ) {
+      positionErrors.push(t("B - visina"));
+      errorFields[fieldKey(i, "b")] = "error";
+    }
+
+    if (
+      p.vrsta_prozora &&
+      showField(p.vrsta_prozora, "c") &&
+      Number(p.c) <= 0
+    ) {
+      positionErrors.push("C");
+      errorFields[fieldKey(i, "c")] = "error";
+    }
+
+    if (
+      p.vrsta_prozora &&
+      showField(p.vrsta_prozora, "d") &&
+      Number(p.d) <= 0
+    ) {
+      positionErrors.push("D");
+      errorFields[fieldKey(i, "d")] = "error";
+    }
+
+    if (
+      p.vrsta_prozora &&
+      showField(p.vrsta_prozora, "e") &&
+      Number(p.e) <= 0
+    ) {
+      positionErrors.push(t("E - broj krila / fiksa"));
+      errorFields[fieldKey(i, "e")] = "error";
+    }
+
+    if (!p.profilId || Number(p.profilId) <= 0) {
+      positionErrors.push(t("Profil"));
+      errorFields[fieldKey(i, "profilId")] = "error";
+    }
+
+    // KOLIČINA MORA BITI 1 ILI VIŠE
+    if (!p.kolicina || Number(p.kolicina) < 1) {
+      positionErrors.push(t("Količina"));
+      errorFields[fieldKey(i, "kolicina")] = "error";
+    }
+
+    // VRSTA ROLETNE JE OBAVEZNA SAMO AKO JE ROLETNA = DA
+if (p.roletna && !p.vrsta_roletne) {
+  positionErrors.push(t("Vrsta roletne"));
+  errorFields[fieldKey(i, "vrsta_roletne")] = "error";
 }
 
+    // =========================
+    // NEOBAVEZNA POLJA
+    // =========================
 
-if (!form.vrsta_ponude || !String(form.vrsta_ponude).trim()) {
-  alert(t("Morate izabrati vrstu ponude."));
-  return;
-}
+    if (!p.ispunaId) {
+      positionWarnings.push(t("Ispuna"));
+      warningFields[fieldKey(i, "ispunaId")] = "warning";
+    }
+
+    if (!p.okovId) {
+      positionWarnings.push(t("Okov"));
+      warningFields[fieldKey(i, "okovId")] = "warning";
+    }
+
+    if (!p.otvaranje) {
+      positionWarnings.push(t("Otvaranje"));
+      warningFields[fieldKey(i, "otvaranje")] = "warning";
+    }
+
+    if (!p.roletna) {
+      positionWarnings.push(t("Roletna"));
+      warningFields[fieldKey(i, "roletna")] = "warning";
+    }
+
+    if (!p.komarnik) {
+      positionWarnings.push(t("Komarnik"));
+      warningFields[fieldKey(i, "komarnik")] = "warning";
+    }
+
+    if (positionErrors.length > 0) {
+      errors.push(
+        `${positionName}:\n- ${positionErrors.join("\n- ")}`
+      );
+    }
+
+    if (positionWarnings.length > 0) {
+      warnings.push(
+        `${positionName}:\n- ${positionWarnings.join("\n- ")}`
+      );
+    }
+  });
+
+  return {
+    errors,
+    warnings,
+    errorFields,
+    warningFields,
+  };
+};
 
 
 
+const performSaveOffer = async () => {
 
 const isChangingOfferType =
   form.id &&
@@ -1768,7 +1917,63 @@ const formForCreate = {
   }
 
   clearForm();
+
+  setFieldIssues({});
+setPendingWarningFields({});
+setOptionalWarningOpen(false);
+
 };
+
+
+
+
+
+  const saveOffer = async () => {
+  if (!form.naziv || !form.naziv.trim()) {
+    alert(t("Morate uneti naziv kupca."));
+    return;
+  }
+
+  if (!form.vrsta_ponude || !String(form.vrsta_ponude).trim()) {
+    alert(t("Morate izabrati vrstu ponude."));
+    return;
+  }
+
+  const validation = validatePositionsBeforeSave();
+
+  // OBAVEZNA POLJA
+  if (validation.errors.length > 0) {
+    setFieldIssues(validation.errorFields);
+
+    alert(
+      `${t("Ponuda nije sačuvana.")}\n\n` +
+      `${t("Popunite obavezna polja:")}\n\n` +
+      validation.errors.join("\n\n")
+    );
+
+    return;
+  }
+
+  // NEOBAVEZNA POLJA
+  if (validation.warnings.length > 0) {
+    setOptionalWarningText(
+      `${t("Neka polja nisu popunjena:")}\n\n` +
+      validation.warnings.join("\n\n")
+    );
+
+    setPendingWarningFields(validation.warningFields);
+    setOptionalWarningOpen(true);
+
+    return;
+  }
+
+  setFieldIssues({});
+  setPendingWarningFields({});
+
+  await performSaveOffer();
+};
+
+
 
 
 
@@ -1820,6 +2025,9 @@ const saveTehnicki = async () => {
 
   // ---------------- UPDATE ----------------
 const update = (i: number, field: string, value: any) => {
+
+clearFieldIssue(i, field);
+
   const copy = [...positions];
 
   (copy[i] as any)[field] = value;
@@ -4012,6 +4220,80 @@ const formulaUputstvoGrupe = [
 ];
 
 
+const fieldKey = (positionIndex: number, field: string) =>
+  `${positionIndex}-${field}`;
+
+const fieldBorderClass = (positionIndex: number, field: string) => {
+  const issue = fieldIssues[fieldKey(positionIndex, field)];
+
+  if (issue === "error") {
+    return "border-2 border-red-500";
+  }
+
+  if (issue === "warning") {
+    return "border-2 border-orange-400";
+  }
+
+  return "border";
+};
+
+const clearFieldIssue = (positionIndex: number, field: string) => {
+  const key = fieldKey(positionIndex, field);
+
+  setFieldIssues((prev) => {
+    if (!prev[key]) return prev;
+
+    const next = { ...prev };
+    delete next[key];
+    return next;
+  });
+};
+
+
+
+{optionalWarningOpen && (
+  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4">
+    <div className="w-full max-w-lg rounded-lg bg-white p-5 shadow-xl">
+      <div className="mb-4 text-lg font-bold text-gray-900">
+        {t("Nepopunjena polja")}
+      </div>
+
+      <div className="max-h-[60vh] overflow-y-auto whitespace-pre-line text-sm text-gray-700">
+        {optionalWarningText}
+      </div>
+
+      <div className="mt-6 flex justify-between gap-3">
+        <button
+          type="button"
+          onClick={() => {
+            setFieldIssues(pendingWarningFields);
+            setOptionalWarningOpen(false);
+          }}
+          className="rounded bg-gray-600 px-4 py-2 text-white"
+        >
+          {t("Nazad")}
+        </button>
+
+        <button
+          type="button"
+          onClick={async () => {
+            setOptionalWarningOpen(false);
+            setFieldIssues({});
+            setPendingWarningFields({});
+            await performSaveOffer();
+          }}
+          className="rounded bg-blue-900 px-4 py-2 text-white"
+        >
+          {t("Sačuvaj")}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
+
+
 
 
 
@@ -4667,7 +4949,7 @@ return (
       e.target.value
     )
   }
-  className="border p-2"
+  className={`${fieldBorderClass(i, "vrsta_stolarije")} p-2`}
 >
   <option value="">
     {t("Vrsta stolarije")}
@@ -4683,7 +4965,7 @@ return (
 <select
   value={p.vrsta_prozora || ""}
   onChange={(e) => selectProzor(i, e.target.value)}
-  className="border p-2"
+  className={`${fieldBorderClass(i, "vrsta_prozora")} p-2`}
 >
   <option value="">
     {t("Vrsta prozora")}
@@ -4787,7 +5069,7 @@ return (
       value === "" ? "" : Number(value)
     );
   }}
-  className="border p-1 w-full text-sm"
+  className={`${fieldBorderClass(i, "a")} p-1 w-full text-sm`}
 />
         </div>
       )}
@@ -4808,7 +5090,7 @@ return (
       value === "" ? "" : Number(value)
     );
   }}
-  className="border p-1 w-full text-sm"
+  className={`${fieldBorderClass(i, "b")} p-1 w-full text-sm`}
 />
         </div>
       )}
@@ -4829,7 +5111,7 @@ return (
       value === "" ? "" : Number(value)
     );
   }}
-  className="border p-1 w-full text-sm"
+  className={`${fieldBorderClass(i, "c")} p-1 w-full text-sm`}
 />
         </div>
       )}
@@ -4850,7 +5132,7 @@ return (
       value === "" ? "" : Number(value)
     );
   }}
-  className="border p-1 w-full text-sm"
+  className={`${fieldBorderClass(i, "d")} p-1 w-full text-sm`}
 />
         </div>
       )}
@@ -4871,7 +5153,7 @@ return (
       value === "" ? "" : Number(value)
     );
   }}
-  className="border p-1 w-full text-sm"
+  className={`${fieldBorderClass(i, "e")} p-1 w-full text-sm`}
 />
         </div>
       )}
@@ -4908,7 +5190,7 @@ return (
       <select
         value={p.profilId || ""}
         onChange={(e) => update(i, "profilId", Number(e.target.value))}
-        className="border p-2"
+        className={`${fieldBorderClass(i, "profilId")} p-2`}
       >
         <option value="">{t("Izaberi profil")}</option>
         {profili.map((x) => (
@@ -4921,7 +5203,7 @@ return (
       <select
         value={p.ispunaId || ""}
         onChange={(e) => update(i, "ispunaId", Number(e.target.value))}
-        className="border p-2"
+        className={`${fieldBorderClass(i, "ispunaId")} p-2`}
       >
         <option value="">{t("Izaberi ispunu")}</option>
         {ispune.map((x) => (
@@ -4934,7 +5216,7 @@ return (
       <select
         value={p.okovId || ""}
         onChange={(e) => update(i, "okovId", Number(e.target.value))}
-        className="border p-2"
+        className={`${fieldBorderClass(i, "okovId")} p-2`}
       >
         <option value="">{t("Izaberi okov")}</option>
         {okovi.map((x) => (
@@ -4953,7 +5235,7 @@ return (
       e.target.value
     )
   }
-  className="border p-2"
+  className={`${fieldBorderClass(i, "otvaranje")} p-2`}
 >
   <option value="">
     {t("Otvaranje")}
@@ -4975,7 +5257,7 @@ return (
       e.target.value
     )
   }
-  className="border p-2"
+  className={`${fieldBorderClass(i, "roletna")} p-2`}
 >
   <option value="">
     {t("Roletna")}
@@ -4998,7 +5280,7 @@ return (
         e.target.value
       )
     }
-    className="border p-2"
+    className={`${fieldBorderClass(i, "vrsta_roletne")} p-2`}
   >
     <option value="">
       {t("Vrsta roletne")}
@@ -5026,7 +5308,7 @@ return (
       e.target.value
     )
   }
-  className="border p-2"
+  className={`${fieldBorderClass(i, "komarnik")} p-2`}
 >
   <option value="">
     {t("Komarnik")}
@@ -5088,7 +5370,7 @@ return (
       value === "" ? "" : Number(value)
     );
   }}
-  className="border p-2"
+  className={`${fieldBorderClass(i, "kolicina")} p-2`}
 />
     </div>
   </div>
