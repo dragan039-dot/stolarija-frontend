@@ -6346,7 +6346,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
                     {prozorOtvoren && (
                       <div className="overflow-x-auto">
-                        <table className="w-full min-w-[420px] border-collapse text-xs bg-white text-black">
+                        <table className="w-full table-fixed border-collapse text-xs bg-white text-black">
                           <thead
                             style={{
                               backgroundColor: "#d1d5db",
