@@ -5921,9 +5921,8 @@ console.log("SVE VALUTE:", valute);
 
 
 console.log(
-  "REKAPITULACIJA TEST",
-  index + 1,
-  proposalResults[index]
+  "REKAPITULACIJA FULL",
+  JSON.stringify(proposalResults[index], null, 2)
 );
 
 
