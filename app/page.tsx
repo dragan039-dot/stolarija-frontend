@@ -753,7 +753,9 @@ const [pendingWarningFields, setPendingWarningFields] = useState<
   Record<string, "warning">
 >({});
 
-
+const [proposalSubTab, setProposalSubTab] = useState<
+  "Ponuda" | "Rekapitulacija"
+>("Ponuda");
 
 
 
@@ -5694,6 +5696,34 @@ return (
     <h1 className="no-print text-3xl font-bold mb-4">{t("PONUDE")}</h1>
 
     
+{/* PODTABOVI PONUDE */}
+<div className="no-print flex gap-2 mb-4">
+  <button
+    type="button"
+    onClick={() => setProposalSubTab("Ponuda")}
+    className={`px-4 py-2 rounded font-semibold ${
+      proposalSubTab === "Ponuda"
+        ? "bg-blue-900 text-white"
+        : "bg-gray-200 text-gray-800"
+    }`}
+  >
+    {t("Ponuda")}
+  </button>
+
+  <button
+    type="button"
+    onClick={() => setProposalSubTab("Rekapitulacija")}
+    className={`px-4 py-2 rounded font-semibold ${
+      proposalSubTab === "Rekapitulacija"
+        ? "bg-blue-900 text-white"
+        : "bg-gray-200 text-gray-800"
+    }`}
+  >
+    {t("Rekapitulacija")}
+  </button>
+</div>
+
+
 
     <input
       placeholder={t("Pretraga ponuda...")}
@@ -5769,7 +5799,7 @@ return (
       </div>
     )}
 
-    {proposalOffer && (() => {
+    {proposalSubTab === "Ponuda" && proposalOffer && (() => {
 
 console.log("VALUTA IZ PONUDE:", proposalOffer.valuta);
 console.log("SVE VALUTE:", valute);
@@ -6061,6 +6091,23 @@ console.log("SVE VALUTE:", valute);
         </div>
       );
     })()}
+
+
+
+{proposalSubTab === "Rekapitulacija" && proposalOffer && (
+  <div className="bg-white text-black p-6">
+    <h2 className="text-2xl font-bold mb-4">
+      {t("Rekapitulacija")}
+    </h2>
+
+    <div className="text-gray-500">
+      {t("Rekapitulacija ponude")}
+    </div>
+  </div>
+)}
+
+
+
   </div>
 )}
 
