@@ -4251,45 +4251,6 @@ const clearFieldIssue = (positionIndex: number, field: string) => {
 
 
 
-{optionalWarningOpen && (
-  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4">
-    <div className="w-full max-w-lg rounded-lg bg-white p-5 shadow-xl">
-      <div className="mb-4 text-lg font-bold text-gray-900">
-        {t("Nepopunjena polja")}
-      </div>
-
-      <div className="max-h-[60vh] overflow-y-auto whitespace-pre-line text-sm text-gray-700">
-        {optionalWarningText}
-      </div>
-
-      <div className="mt-6 flex justify-between gap-3">
-        <button
-          type="button"
-          onClick={() => {
-            setFieldIssues(pendingWarningFields);
-            setOptionalWarningOpen(false);
-          }}
-          className="rounded bg-gray-600 px-4 py-2 text-white"
-        >
-          {t("Nazad")}
-        </button>
-
-        <button
-          type="button"
-          onClick={async () => {
-            setOptionalWarningOpen(false);
-            setFieldIssues({});
-            setPendingWarningFields({});
-            await performSaveOffer();
-          }}
-          className="rounded bg-blue-900 px-4 py-2 text-white"
-        >
-          {t("Sačuvaj")}
-        </button>
-      </div>
-    </div>
-  </div>
-)}
 
 
 
@@ -4352,6 +4313,52 @@ console.log("PROFILI STATE:", profili);
 
 return (
   <div className="w-full">
+
+
+
+
+{optionalWarningOpen && (
+  <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 p-4">
+    <div className="w-full max-w-lg rounded-lg bg-white p-5 shadow-xl">
+      <div className="mb-4 text-lg font-bold text-gray-900">
+        {t("Nepopunjena polja")}
+      </div>
+
+      <div className="max-h-[60vh] overflow-y-auto whitespace-pre-line text-sm text-gray-700">
+        {optionalWarningText}
+      </div>
+
+      <div className="mt-6 flex justify-between gap-3">
+        <button
+          type="button"
+          onClick={() => {
+            setFieldIssues(pendingWarningFields);
+            setOptionalWarningOpen(false);
+          }}
+          className="rounded bg-gray-600 px-4 py-2 text-white"
+        >
+          {t("Nazad")}
+        </button>
+
+        <button
+          type="button"
+          onClick={async () => {
+            setOptionalWarningOpen(false);
+            setFieldIssues({});
+            setPendingWarningFields({});
+            await performSaveOffer();
+          }}
+          className="rounded bg-blue-900 px-4 py-2 text-white"
+        >
+          {t("Sačuvaj")}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
+
+
 
     <div className="xl:grid xl:grid-cols-[180px_minmax(0,1fr)_180px] xl:gap-4 xl:px-4">
 
