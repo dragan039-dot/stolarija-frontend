@@ -4251,6 +4251,192 @@ const clearFieldIssue = (positionIndex: number, field: string) => {
 
 
 
+const getWorklistMaterial = () => {
+  const pvc: Record<string, any> = {};
+  const alu: Record<string, any> = {};
+
+  const squareMeterElements = [
+    "Ispuna",
+    "Roletna",
+    "Komarnik",
+  ];
+
+  const pieceElements = [
+    "Okov",
+    "Čepovi šloge",
+    "Plastika",
+    "Dod. element",
+  ];
+
+  const isPieceElement = (element: string) => {
+    return (
+      pieceElements.includes(element) ||
+      element.includes("Spojnica") ||
+      element.includes("(kom)")
+    );
+  };
+
+  worklistPositions.forEach((p, index) => {
+    if (!p.vrsta_prozora) return;
+
+    const results = worklistResults[index] || [];
+    const positionQty = Number(p.kolicina) || 1;
+
+    const vrstaStolarije =
+      String(p.vrsta_stolarije || "").toUpperCase();
+
+    const target =
+      vrstaStolarije === "ALU"
+        ? alu
+        : pvc;
+
+    results.forEach((r: any) => {
+      if (
+        r.element === "Ukupna cena" ||
+        r.element === "Cena"
+      ) {
+        return;
+      }
+
+      if (r.element === "Roletna" && !p.roletna) return;
+      if (r.element === "Komarnik" && !p.komarnik) return;
+      if (r.element === "Okov" && !p.okov) return;
+
+      const s = Number(r.S) || 0;
+      const v = Number(r.V) || 0;
+      const kom = Number(r.kom) || 0;
+
+      let naziv = "";
+
+      // Profilni elementi
+      if (
+        !squareMeterElements.includes(r.element) &&
+        !isPieceElement(r.element)
+      ) {
+        naziv = getProfilName(p.profil) || "";
+      }
+
+      // Ispuna
+      if (r.element === "Ispuna") {
+        naziv = getIspunaName(p.ispuna) || "";
+      }
+
+      // Okov
+      if (r.element === "Okov") {
+        naziv = getOkovName(p.okov) || "";
+      }
+
+      // Roletna
+      if (r.element === "Roletna") {
+        naziv = p.vrsta_roletne || p.roletna || "";
+      }
+
+      // Komarnik
+      if (r.element === "Komarnik") {
+        naziv = p.komarnik || "";
+      }
+
+      // Dodatni element
+      if (r.element === "Dod. element") {
+        naziv = p.dod_element || "";
+      }
+
+      const key = `${r.element}|${naziv}`;
+
+      if (!target[key]) {
+        target[key] = {
+          element: r.element,
+          naziv,
+          kolicina: 0,
+          jedinica: "",
+        };
+      }
+
+      // =========================
+      // m²
+      // =========================
+      if (squareMeterElements.includes(r.element)) {
+        const m2 =
+          (s * v * Math.max(kom, 1) * positionQty) /
+          1_000_000;
+
+        target[key].kolicina += m2;
+        target[key].jedinica = "m²";
+
+        return;
+      }
+
+      // =========================
+      // KOMADI
+      // =========================
+      if (isPieceElement(r.element)) {
+        target[key].kolicina +=
+          Math.max(kom, 1) * positionQty;
+
+        target[key].jedinica = "kom";
+
+        return;
+      }
+
+      // =========================
+      // METRI
+      // =========================
+      const metri =
+        ((s + v) * Math.max(kom, 1) * positionQty) /
+        1000;
+
+      target[key].kolicina += metri;
+      target[key].jedinica = "m";
+    })
+    
+    
+    const plastikaKey = `Plastika|${getProfilName(p.profil) || ""}`;
+
+if (!target[plastikaKey]) {
+  target[plastikaKey] = {
+    element: "Plastika",
+    naziv: getProfilName(p.profil) || "",
+    kolicina: 0,
+    jedinica: "kom",
+  };
+}
+
+target[plastikaKey].kolicina += positionQty;
+
+
+// DODATNI ELEMENT
+if (p.dod_element) {
+  const dodElementKey = `Dod. element|${p.dod_element}`;
+
+  if (!target[dodElementKey]) {
+    target[dodElementKey] = {
+      element: "Dod. element",
+      naziv: p.dod_element,
+      kolicina: 0,
+      jedinica: "kom",
+    };
+  }
+
+  target[dodElementKey].kolicina += positionQty;
+}
+    
+    
+    ;
+  });
+
+  return {
+    pvc: Object.values(pvc),
+    alu: Object.values(alu),
+  };
+};
+
+
+const worklistMaterial = getWorklistMaterial();
+
+
+
+
+
 
 
 
@@ -6330,6 +6516,143 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
           </div>
         
         )}
+
+
+        {/* MATERIJAL */}
+{(worklistMaterial.pvc.length > 0 ||
+  worklistMaterial.alu.length > 0) && (
+  <div className="mt-8">
+
+    <h2 className="text-xl font-bold mb-3">
+      {t("Materijal")}
+    </h2>
+
+    <div
+      className={`grid gap-4 ${
+        worklistMaterial.pvc.length > 0 &&
+        worklistMaterial.alu.length > 0
+          ? "grid-cols-2"
+          : "grid-cols-1"
+      }`}
+    >
+
+      {/* PVC */}
+      {worklistMaterial.pvc.length > 0 && (
+        <div>
+          <div className="font-bold text-center mb-2">
+            PVC
+          </div>
+
+          <table className="w-full border text-xs">
+            <thead className="bg-gray-200">
+              <tr>
+                <th className="border p-1 w-[35px]">
+                  {t("Br")}
+                </th>
+
+                <th className="border p-1">
+                  {t("Element")}
+                </th>
+
+                <th className="border p-1">
+                  {t("Naziv")}
+                </th>
+
+                <th className="border p-1 w-[85px]">
+                  {t("Ukupno")}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {worklistMaterial.pvc.map(
+                (r: any, i: number) => (
+                  <tr key={`${r.element}-${r.naziv}-${i}`}>
+                    <td className="border p-1 text-center">
+                      {i + 1}
+                    </td>
+
+                    <td className="border p-1 font-semibold">
+                      {t(r.element)}
+                    </td>
+
+                    <td className="border p-1">
+                      {r.naziv || ""}
+                    </td>
+
+                    <td className="border p-1 text-right whitespace-nowrap">
+                      {r.jedinica === "kom"
+                        ? `${Math.round(r.kolicina)} ${t("kom")}`
+                        : `${r.kolicina.toFixed(2)} ${r.jedinica}`}
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* ALU */}
+      {worklistMaterial.alu.length > 0 && (
+        <div>
+          <div className="font-bold text-center mb-2">
+            ALU
+          </div>
+
+          <table className="w-full border text-xs">
+            <thead className="bg-gray-200">
+              <tr>
+                <th className="border p-1 w-[35px]">
+                  {t("Br")}
+                </th>
+
+                <th className="border p-1">
+                  {t("Element")}
+                </th>
+
+                <th className="border p-1">
+                  {t("Naziv")}
+                </th>
+
+                <th className="border p-1 w-[85px]">
+                  {t("Ukupno")}
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              {worklistMaterial.alu.map(
+                (r: any, i: number) => (
+                  <tr key={`${r.element}-${r.naziv}-${i}`}>
+                    <td className="border p-1 text-center">
+                      {i + 1}
+                    </td>
+
+                    <td className="border p-1 font-semibold">
+                      {t(r.element)}
+                    </td>
+
+                    <td className="border p-1">
+                      {r.naziv || ""}
+                    </td>
+
+                    <td className="border p-1 text-right whitespace-nowrap">
+                      {r.jedinica === "kom"
+                        ? `${Math.round(r.kolicina)} ${t("kom")}`
+                        : `${r.kolicina.toFixed(2)} ${r.jedinica}`}
+                    </td>
+                  </tr>
+                )
+              )}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+    </div>
+  </div>
+)}
 
       </div>
       </div>
