@@ -5918,6 +5918,15 @@ console.log("SVE VALUTE:", valute);
 
             <tbody>
               {rowsPositions.map((p, index) => {
+
+
+console.log(
+  "REKAPITULACIJA TEST",
+  index + 1,
+  proposalResults[index]
+);
+
+
                 const cena = getPositionPrice(proposalResults[index] || []);
                 const kol = Number(p.kolicina) || 1;
                 const ukupnoRed = cena * kol;
