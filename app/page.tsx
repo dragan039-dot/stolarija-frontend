@@ -6108,17 +6108,467 @@ console.log(
 
 
 
-{proposalSubTab === "Rekapitulacija" && proposalOffer && (
-  <div className="bg-white text-black p-6">
-    <h2 className="text-2xl font-bold mb-4">
-      {t("Rekapitulacija")}
-    </h2>
+{proposalSubTab === "Rekapitulacija" && proposalOffer && (() => {
+  const positions = proposalPositions
+    .map((p: any, originalIndex: number) => ({
+      p,
+      originalIndex,
+    }))
+    .filter(({ p }: any) => p.vrsta_prozora);
 
-    <div className="text-gray-500">
-      {t("Rekapitulacija ponude")}
+  const valutaNaziv =
+    valuteMap[String(proposalOffer.valuta)] ||
+    proposalOffer.valuta ||
+    "";
+
+  const formatMoney = (value: number) =>
+    Number(value || 0).toLocaleString("sr-RS", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+
+  // -----------------------------
+  // UKUPNO ZA SVE POZICIJE
+  // -----------------------------
+
+  let ukupnaNabavna = 0;
+  let ukupnaProdajnaPrePopusta = 0;
+
+  positions.forEach(({ p, originalIndex }: any) => {
+    const results = proposalResults[originalIndex] || [];
+
+    const total = results.find(
+      (x: any) => x.element === "Ukupna cena"
+    );
+
+    const kol = Number(p.kolicina) || 1;
+
+    ukupnaNabavna +=
+      (Number(total?.ukupnaNabavna) || 0) * kol;
+
+    ukupnaProdajnaPrePopusta +=
+      (Number(total?.ukupnaProdajna) ||
+        Number(total?.cena) ||
+        0) * kol;
+  });
+
+  const popustProc = Number(proposalOffer.popust) || 0;
+
+  const popustIznos =
+    ukupnaProdajnaPrePopusta * (popustProc / 100);
+
+  const ukupnaProdajnaPoslePopusta =
+    ukupnaProdajnaPrePopusta - popustIznos;
+
+  const ukupnaZarada =
+    ukupnaProdajnaPoslePopusta - ukupnaNabavna;
+
+  const marza =
+    ukupnaProdajnaPoslePopusta > 0
+      ? (ukupnaZarada / ukupnaProdajnaPoslePopusta) * 100
+      : 0;
+
+  return (
+    <div className="bg-white text-black p-4 md:p-6">
+
+      <h2 className="text-2xl font-bold mb-6">
+        {t("Rekapitulacija")}
+      </h2>
+
+      {/* =========================
+          UKUPNA REKAPITULACIJA
+         ========================= */}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
+
+        <div className="border rounded-lg p-4 bg-gray-50">
+          <div className="text-sm text-gray-600">
+            {t("Nabavna vrednost")}
+          </div>
+
+          <div className="text-xl font-bold">
+            {formatMoney(ukupnaNabavna)} {valutaNaziv}
+          </div>
+        </div>
+
+        <div className="border rounded-lg p-4 bg-gray-50">
+          <div className="text-sm text-gray-600">
+            {t("Prodajna vrednost pre popusta")}
+          </div>
+
+          <div className="text-xl font-bold">
+            {formatMoney(ukupnaProdajnaPrePopusta)} {valutaNaziv}
+          </div>
+        </div>
+
+        <div className="border rounded-lg p-4 bg-gray-50">
+          <div className="text-sm text-gray-600">
+            {t("Popust")}
+          </div>
+
+          <div className="text-xl font-bold">
+            {formatMoney(popustIznos)} {valutaNaziv}
+            {popustProc > 0 && (
+              <span className="text-sm font-normal ml-2">
+                ({popustProc}%)
+              </span>
+            )}
+          </div>
+        </div>
+
+        <div className="border rounded-lg p-4 bg-gray-50">
+          <div className="text-sm text-gray-600">
+            {t("Prodajna vrednost nakon popusta")}
+          </div>
+
+          <div className="text-xl font-bold">
+            {formatMoney(ukupnaProdajnaPoslePopusta)} {valutaNaziv}
+          </div>
+        </div>
+
+        <div
+          className={`border rounded-lg p-4 ${
+            ukupnaZarada < 0
+              ? "bg-red-100 border-red-400"
+              : "bg-green-50 border-green-300"
+          }`}
+        >
+          <div className="text-sm text-gray-600">
+            {t("Očekivana zarada")}
+          </div>
+
+          <div
+            className={`text-xl font-bold ${
+              ukupnaZarada < 0
+                ? "text-red-700"
+                : "text-green-700"
+            }`}
+          >
+            {formatMoney(ukupnaZarada)} {valutaNaziv}
+          </div>
+        </div>
+
+        <div
+          className={`border rounded-lg p-4 ${
+            marza < 0
+              ? "bg-red-100 border-red-400"
+              : marza < 10
+              ? "bg-yellow-50 border-yellow-300"
+              : "bg-green-50 border-green-300"
+          }`}
+        >
+          <div className="text-sm text-gray-600">
+            {t("Marža")}
+          </div>
+
+          <div className="text-xl font-bold">
+            {marza.toFixed(2)}%
+          </div>
+        </div>
+
+      </div>
+
+      {/* UPOZORENJE */}
+
+      {ukupnaZarada < 0 && (
+        <div className="mb-6 rounded-lg border border-red-400 bg-red-100 p-4 text-red-800 font-semibold">
+          ⚠ {t("Ponuda je ispod nabavne vrednosti")}
+        </div>
+      )}
+
+      {ukupnaZarada >= 0 && marza < 10 && (
+        <div className="mb-6 rounded-lg border border-yellow-400 bg-yellow-50 p-4 text-yellow-800 font-semibold">
+          ⚠ {t("Niska zarada na ponudi")}
+        </div>
+      )}
+
+      {/* =========================
+          POZICIJE
+         ========================= */}
+
+      <div className="space-y-8">
+
+        {positions.map(
+          ({ p, originalIndex }: any, positionIndex: number) => {
+
+            const results =
+              proposalResults[originalIndex] || [];
+
+            const total = results.find(
+              (x: any) => x.element === "Ukupna cena"
+            );
+
+            const elements = results.filter(
+              (x: any) => x.element !== "Ukupna cena"
+            );
+
+            const kolPozicije =
+              Number(p.kolicina) || 1;
+
+            const nabavnaPozicije =
+              (Number(total?.ukupnaNabavna) || 0) *
+              kolPozicije;
+
+            const prodajnaPozicije =
+              (Number(total?.ukupnaProdajna) ||
+                Number(total?.cena) ||
+                0) * kolPozicije;
+
+            const zaradaPozicije =
+              prodajnaPozicije - nabavnaPozicije;
+
+            const marzaPozicije =
+              prodajnaPozicije > 0
+                ? (zaradaPozicije / prodajnaPozicije) *
+                  100
+                : 0;
+
+            return (
+              <div
+                key={originalIndex}
+                className="border rounded-xl overflow-hidden"
+              >
+
+                {/* NASLOV POZICIJE */}
+
+                <div className="bg-gray-100 px-4 py-3 font-bold flex flex-wrap justify-between gap-2">
+
+                  <span>
+                    {t("Pozicija")} {positionIndex + 1}
+                    {" — "}
+                    {t(p.vrsta_prozora)}
+                  </span>
+
+                  <span>
+                    {t("Količina")}: {kolPozicije}
+                  </span>
+
+                </div>
+
+                {/* OSNOVNI PODACI */}
+
+                <div className="p-4 border-b text-sm flex flex-wrap gap-x-6 gap-y-2">
+
+                  <span>
+                    <strong>{t("Profil")}:</strong>{" "}
+                    {getProfilName(p.profil)}
+                  </span>
+
+                  {p.a && (
+                    <span>
+                      <strong>A:</strong> {p.a} mm
+                    </span>
+                  )}
+
+                  {p.b && (
+                    <span>
+                      <strong>B:</strong> {p.b} mm
+                    </span>
+                  )}
+
+                  {p.c && (
+                    <span>
+                      <strong>C:</strong> {p.c} mm
+                    </span>
+                  )}
+
+                  {p.d && (
+                    <span>
+                      <strong>D:</strong> {p.d} mm
+                    </span>
+                  )}
+
+                  {p.e && (
+                    <span>
+                      <strong>E:</strong> {p.e} mm
+                    </span>
+                  )}
+
+                </div>
+
+                {/* TABELA ELEMENATA */}
+
+                <div className="overflow-x-auto">
+
+                  <table className="w-full text-sm border-collapse">
+
+                    <thead className="bg-gray-50">
+
+                      <tr>
+                        <th className="border p-2 text-center">
+                          {t("R.br.")}
+                        </th>
+
+                        <th className="border p-2 text-left">
+                          {t("Element")}
+                        </th>
+
+                        <th className="border p-2 text-center">
+                          {t("Kom.")}
+                        </th>
+
+                        <th className="border p-2 text-right">
+                          {t("Nabavna")}
+                        </th>
+
+                        <th className="border p-2 text-right">
+                          {t("Prodajna")}
+                        </th>
+
+                        <th className="border p-2 text-right">
+                          {t("Zarada")}
+                        </th>
+                      </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                      {elements.map(
+                        (r: any, rowIndex: number) => {
+
+                          const nabavna =
+                            Number(r.nabavnaCena) || 0;
+
+                          let prodajna = nabavna;
+
+                          if (r.element === "Roletna") {
+                            prodajna =
+                              Number(r.cena) || 0;
+                          } else if (
+                            r.element === "Komarnik"
+                          ) {
+                            prodajna =
+                              Number(r.cena) || 0;
+                          } else {
+                            const otpad =
+                              Number(firma.otpad) || 0;
+
+                            const zarada =
+                              Number(firma.zarada) || 0;
+
+                            prodajna =
+                              nabavna *
+                              (1 + otpad / 100) *
+                              (1 + zarada / 100);
+                          }
+
+                          const zaradaRed =
+                            prodajna - nabavna;
+
+                          return (
+                            <tr key={rowIndex}>
+
+                              <td className="border p-2 text-center">
+                                {rowIndex + 1}
+                              </td>
+
+                              <td className="border p-2">
+                                {t(r.element)}
+                              </td>
+
+                              <td className="border p-2 text-center">
+                                {r.kom}
+                              </td>
+
+                              <td className="border p-2 text-right">
+                                {formatMoney(
+                                  nabavna * kolPozicije
+                                )}
+                              </td>
+
+                              <td className="border p-2 text-right">
+                                {formatMoney(
+                                  prodajna * kolPozicije
+                                )}
+                              </td>
+
+                              <td className="border p-2 text-right">
+                                {formatMoney(
+                                  zaradaRed * kolPozicije
+                                )}
+                              </td>
+
+                            </tr>
+                          );
+                        }
+                      )}
+
+                    </tbody>
+
+                  </table>
+
+                </div>
+
+                {/* UKUPNO POZICIJA */}
+
+                <div className="bg-gray-50 p-4">
+
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-3 text-sm">
+
+                    <div>
+                      <div className="text-gray-500">
+                        {t("Nabavna vrednost")}
+                      </div>
+
+                      <div className="font-bold">
+                        {formatMoney(nabavnaPozicije)}{" "}
+                        {valutaNaziv}
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="text-gray-500">
+                        {t("Prodajna vrednost")}
+                      </div>
+
+                      <div className="font-bold">
+                        {formatMoney(prodajnaPozicije)}{" "}
+                        {valutaNaziv}
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="text-gray-500">
+                        {t("Zarada")}
+                      </div>
+
+                      <div
+                        className={`font-bold ${
+                          zaradaPozicije < 0
+                            ? "text-red-700"
+                            : "text-green-700"
+                        }`}
+                      >
+                        {formatMoney(zaradaPozicije)}{" "}
+                        {valutaNaziv}
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="text-gray-500">
+                        {t("Marža")}
+                      </div>
+
+                      <div className="font-bold">
+                        {marzaPozicije.toFixed(2)}%
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </div>
+            );
+          }
+        )}
+
+      </div>
+
     </div>
-  </div>
-)}
+  );
+})()}
 
 
 
