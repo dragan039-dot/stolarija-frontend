@@ -7908,6 +7908,9 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
         {t("Uputstva")}
       </h2>
 
+<div className="sticky top-0 z-30 bg-white border-b shadow-sm py-3 mb-4">
+  <div className="flex flex-wrap items-center gap-3"></div>
+
       <button
         onClick={saveHelpTexts}
         className="bg-green-900 text-white px-2 py-1 rounded"
@@ -7945,6 +7948,9 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
           ))}
       </select>
     </div>
+
+      </div>
+</div>
 
     {/* ostatak tabele */}
 
