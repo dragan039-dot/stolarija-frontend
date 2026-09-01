@@ -2533,6 +2533,11 @@ const proposalItems = items.map((item: any) => {
   };
 });
 
+
+console.log("PROPOSAL ITEMS:", proposalItems);
+console.log("PROZORI:", prozori);
+
+
 setProposalOffer(data.offer);
 setProposalPositions(proposalItems);
 setProposalExtraItems(
