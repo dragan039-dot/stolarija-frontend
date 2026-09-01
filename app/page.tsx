@@ -6229,9 +6229,14 @@ console.log(
               (x: any) => x.element === "Ukupna cena"
             );
 
-            const elements = results.filter(
-              (x: any) => x.element !== "Ukupna cena"
-            );
+const elements = results.filter(
+  (x: any) =>
+    x.element !== "Ukupna cena" &&
+    (
+      Number(x.cena) > 0 ||
+      Number(x.nabavnaCena) > 0
+    )
+);
 
             const kolPozicije =
               Number(p.kolicina) || 1;
@@ -6289,35 +6294,35 @@ console.log(
                     {getProfilName(p.profil)}
                   </span>
 
-                  {p.a && (
-                    <span>
-                      <strong>A:</strong> {p.a} mm
-                    </span>
-                  )}
+{Number(p.a) > 0 && (
+  <span>
+    <strong>A:</strong> {p.a} mm
+  </span>
+)}
 
-                  {p.b && (
-                    <span>
-                      <strong>B:</strong> {p.b} mm
-                    </span>
-                  )}
+{Number(p.b) > 0 && (
+  <span>
+    <strong>B:</strong> {p.b} mm
+  </span>
+)}
 
-                  {p.c && (
-                    <span>
-                      <strong>C:</strong> {p.c} mm
-                    </span>
-                  )}
+{Number(p.c) > 0 && (
+  <span>
+    <strong>C:</strong> {p.c} mm
+  </span>
+)}
 
-                  {p.d && (
-                    <span>
-                      <strong>D:</strong> {p.d} mm
-                    </span>
-                  )}
+{Number(p.d) > 0 && (
+  <span>
+    <strong>D:</strong> {p.d} mm
+  </span>
+)}
 
-                  {p.e && (
-                    <span>
-                      <strong>E:</strong> {p.e} mm
-                    </span>
-                  )}
+{Number(p.e) > 0 && (
+  <span>
+    <strong>E:</strong> {p.e} mm
+  </span>
+)}
 
                 </div>
 
@@ -6657,18 +6662,16 @@ console.log(
               </strong>
             </div>
 
-            {popustProc > 0 && (
-              <div className="flex justify-between gap-4 border-b pb-2">
-                <span>
-                  {t("Popust")} ({popustProc}%)
-                </span>
+<div className="flex justify-between gap-4 border-b pb-2">
+  <span>
+    {t("Popust")} ({popustProc}%)
+  </span>
 
-                <strong>
-                  - {formatMoney(popustIznos)}{" "}
-                  {valutaNaziv}
-                </strong>
-              </div>
-            )}
+  <strong>
+    - {formatMoney(popustIznos)}{" "}
+    {valutaNaziv}
+  </strong>
+</div>
 
             <div className="flex justify-between gap-4 border-b pb-2">
               <span>
