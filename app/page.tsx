@@ -6286,157 +6286,271 @@ const elements = results.filter(
                 </div>
 
                 {/* OSNOVNI PODACI */}
+{/* SADRŽAJ POZICIJE: LEVO PODACI / DESNO TABELA */}
 
-                <div className="p-4 border-b text-sm flex flex-wrap gap-x-6 gap-y-2">
+<div className="grid grid-cols-1 md:grid-cols-[28%_72%] border-b">
 
-                  <span>
-                    <strong>{t("Profil")}:</strong>{" "}
-                    {getProfilName(p.profil)}
-                  </span>
+  {/* =========================
+      LEVI DEO
+     ========================= */}
 
-{Number(p.a) > 0 && (
-  <span>
-    <strong>A:</strong> {p.a} mm
-  </span>
-)}
+  <div className="p-4 md:border-r">
 
-{Number(p.b) > 0 && (
-  <span>
-    <strong>B:</strong> {p.b} mm
-  </span>
-)}
+    {/* SLIKA PROZORA */}
 
-{Number(p.c) > 0 && (
-  <span>
-    <strong>C:</strong> {p.c} mm
-  </span>
-)}
+    {getWindowImage(p) && (
+      <div className="flex justify-center mb-4">
+        <img
+          src={getWindowImage(p)}
+          alt={t(p.vrsta_prozora)}
+          className="max-w-full max-h-[220px] object-contain"
+        />
+      </div>
+    )}
 
-{Number(p.d) > 0 && (
-  <span>
-    <strong>D:</strong> {p.d} mm
-  </span>
-)}
+    {/* DIMENZIJE */}
 
-{Number(p.e) > 0 && (
-  <span>
-    <strong>E:</strong> {p.e} mm
-  </span>
-)}
+    <div className="mb-5">
 
-                </div>
+      <div className="font-bold text-sm mb-2">
+        {t("Dimenzije")}
+      </div>
 
-                {/* TABELA ELEMENATA */}
+      <div className="text-xs space-y-1">
 
-                <div className="overflow-x-auto">
+        {Number(p.a) > 0 && (
+          <div>
+            <strong>A:</strong> {p.a} mm
+          </div>
+        )}
 
-                  <table className="w-full text-sm border-collapse">
+        {Number(p.b) > 0 && (
+          <div>
+            <strong>B:</strong> {p.b} mm
+          </div>
+        )}
 
-                    <thead className="bg-gray-50">
-                      <tr>
+        {Number(p.c) > 0 && (
+          <div>
+            <strong>C:</strong> {p.c} mm
+          </div>
+        )}
 
-                        <th className="border p-2 text-center">
-                          {t("R.br.")}
-                        </th>
+        {Number(p.d) > 0 && (
+          <div>
+            <strong>D:</strong> {p.d} mm
+          </div>
+        )}
 
-                        <th className="border p-2 text-left">
-                          {t("Element")}
-                        </th>
+        {Number(p.e) > 0 && (
+          <div>
+            <strong>E:</strong> {p.e}
+          </div>
+        )}
 
-                        <th className="border p-2 text-center">
-                          {t("Kom.")}
-                        </th>
+      </div>
 
-                        <th className="border p-2 text-right">
-                          {t("Nabavna")}
-                        </th>
+    </div>
 
-                        <th className="border p-2 text-right">
-                          {t("Prodajna")}
-                        </th>
 
-                        <th className="border p-2 text-right">
-                          {t("Zarada")}
-                        </th>
+    {/* PODACI */}
 
-                      </tr>
-                    </thead>
+    <div>
 
-                    <tbody>
+      <div className="font-bold text-sm mb-2">
+        {t("Podaci")}
+      </div>
 
-                      {elements.map(
-                        (r: any, rowIndex: number) => {
+      <div className="text-xs space-y-1">
 
-                          const nabavna =
-                            Number(r.nabavnaCena) || 0;
+        {p.profil && (
+          <div>
+            <strong>{t("Profil")}:</strong>{" "}
+            {getProfilName(p.profil)}
+          </div>
+        )}
 
-                          let prodajna = nabavna;
+        {p.vrsta_stolarije && (
+          <div>
+            <strong>{t("Vrsta stolarije")}:</strong>{" "}
+            {t(p.vrsta_stolarije)}
+          </div>
+        )}
 
-                          if (
-                            r.element === "Roletna" ||
-                            r.element === "Komarnik"
-                          ) {
-                            prodajna =
-                              Number(r.cena) || 0;
-                          } else {
-                            const otpad =
-                              Number(firma.otpad) || 0;
+        {p.otvaranje && (
+          <div>
+            <strong>{t("Otvaranje")}:</strong>{" "}
+            {t(p.otvaranje)}
+          </div>
+        )}
 
-                            const zarada =
-                              Number(firma.zarada) || 0;
+        {p.ispuna && (
+          <div>
+            <strong>{t("Ispuna")}:</strong>{" "}
+            {getIspunaName(p.ispuna)}
+          </div>
+        )}
 
-                            prodajna =
-                              nabavna *
-                              (1 + otpad / 100) *
-                              (1 + zarada / 100);
-                          }
+        {p.okov && (
+          <div>
+            <strong>{t("Okov")}:</strong>{" "}
+            {getOkovName(p.okov)}
+          </div>
+        )}
 
-                          const zaradaRed =
-                            prodajna - nabavna;
+        {p.roletna && (
+          <div>
+            <strong>{t("Roletna")}:</strong>{" "}
+            {t(p.roletna)}
+          </div>
+        )}
 
-                          return (
-                            <tr key={rowIndex}>
+        {p.vrsta_roletne && (
+          <div>
+            <strong>{t("Vrsta roletne")}:</strong>{" "}
+            {t(p.vrsta_roletne)}
+          </div>
+        )}
 
-                              <td className="border p-2 text-center">
-                                {rowIndex + 1}
-                              </td>
+        {p.komarnik && (
+          <div>
+            <strong>{t("Komarnik")}:</strong>{" "}
+            {t(p.komarnik)}
+          </div>
+        )}
 
-                              <td className="border p-2">
-                                {t(r.element)}
-                              </td>
+        {p.dod_element && (
+          <div>
+            <strong>{t("Dod. element")}:</strong>{" "}
+            {t(p.dod_element)}
+          </div>
+        )}
 
-                              <td className="border p-2 text-center">
-                                {r.kom}
-                              </td>
+      </div>
 
-                              <td className="border p-2 text-right">
-                                {formatMoney(
-                                  nabavna * kolPozicije
-                                )}
-                              </td>
+    </div>
 
-                              <td className="border p-2 text-right">
-                                {formatMoney(
-                                  prodajna * kolPozicije
-                                )}
-                              </td>
+  </div>
 
-                              <td className="border p-2 text-right">
-                                {formatMoney(
-                                  zaradaRed * kolPozicije
-                                )}
-                              </td>
 
-                            </tr>
-                          );
-                        }
-                      )}
+  {/* =========================
+      DESNI DEO - TABELA
+     ========================= */}
 
-                    </tbody>
+  <div className="min-w-0 overflow-x-auto">
 
-                  </table>
+    <table className="w-full text-[11px] md:text-xs border-collapse">
 
-                </div>
+      <thead className="bg-gray-50">
+
+        <tr>
+
+          <th className="border p-1.5 text-center whitespace-nowrap">
+            {t("R.br.")}
+          </th>
+
+          <th className="border p-1.5 text-left">
+            {t("Element")}
+          </th>
+
+          <th className="border p-1.5 text-center whitespace-nowrap">
+            {t("Kom.")}
+          </th>
+
+          <th className="border p-1.5 text-right whitespace-nowrap">
+            {t("Nabavna")}
+          </th>
+
+          <th className="border p-1.5 text-right whitespace-nowrap">
+            {t("Prodajna")}
+          </th>
+
+          <th className="border p-1.5 text-right whitespace-nowrap">
+            {t("Zarada")}
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        {elements.map(
+          (r: any, rowIndex: number) => {
+
+            const nabavna =
+              Number(r.nabavnaCena) || 0;
+
+            let prodajna = nabavna;
+
+            if (
+              r.element === "Roletna" ||
+              r.element === "Komarnik"
+            ) {
+              prodajna =
+                Number(r.cena) || 0;
+            } else {
+
+              const otpad =
+                Number(firma.otpad) || 0;
+
+              const zarada =
+                Number(firma.zarada) || 0;
+
+              prodajna =
+                nabavna *
+                (1 + otpad / 100) *
+                (1 + zarada / 100);
+            }
+
+            const zaradaRed =
+              prodajna - nabavna;
+
+            return (
+              <tr key={rowIndex}>
+
+                <td className="border p-1.5 text-center whitespace-nowrap">
+                  {rowIndex + 1}
+                </td>
+
+                <td className="border p-1.5">
+                  {t(r.element)}
+                </td>
+
+                <td className="border p-1.5 text-center whitespace-nowrap">
+                  {r.kom}
+                </td>
+
+                <td className="border p-1.5 text-right whitespace-nowrap">
+                  {formatMoney(
+                    nabavna * kolPozicije
+                  )}
+                </td>
+
+                <td className="border p-1.5 text-right whitespace-nowrap">
+                  {formatMoney(
+                    prodajna * kolPozicije
+                  )}
+                </td>
+
+                <td className="border p-1.5 text-right whitespace-nowrap">
+                  {formatMoney(
+                    zaradaRed * kolPozicije
+                  )}
+                </td>
+
+              </tr>
+            );
+          }
+        )}
+
+      </tbody>
+
+    </table>
+
+  </div>
+
+</div>
 
                 {/* UKUPNO POZICIJA */}
 
