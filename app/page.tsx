@@ -6288,7 +6288,7 @@ const elements = results.filter(
                 {/* OSNOVNI PODACI */}
 {/* SADRŽAJ POZICIJE: LEVO PODACI / DESNO TABELA */}
 
-<div className="grid grid-cols-1 md:grid-cols-[28%_72%] border-b">
+<div className="grid grid-cols-1 md:grid-cols-[35%_65%] border-b">
 
   {/* =========================
       LEVI DEO
@@ -6298,15 +6298,19 @@ const elements = results.filter(
 
     {/* SLIKA PROZORA */}
 
-    {getWindowImage(p) && (
-      <div className="flex justify-center mb-4">
-        <img
-          src={getWindowImage(p)}
-          alt={t(p.vrsta_prozora)}
-          className="max-w-full max-h-[220px] object-contain"
-        />
-      </div>
-    )}
+{p.slika ? (
+  <div className="flex justify-center mb-4">
+    <img
+      src={getWindowImage(p)}
+      alt=""
+      className="window-image mx-auto object-contain w-[160px] sm:w-[180px] lg:w-[200px] h-auto"
+    />
+  </div>
+) : (
+  <div className="text-center text-gray-400 text-xs mb-4">
+    {t("Slika prozora")}
+  </div>
+)}
 
     {/* DIMENZIJE */}
 
@@ -6439,33 +6443,33 @@ const elements = results.filter(
 
   <div className="min-w-0 overflow-x-auto">
 
-    <table className="w-full text-[11px] md:text-xs border-collapse">
+    <table className="w-full text-[9px] md:text-[10px] border-collapse">
 
       <thead className="bg-gray-50">
 
         <tr>
 
-          <th className="border p-1.5 text-center whitespace-nowrap">
+          <th className="border p-1 text-center whitespace-nowrap">
             {t("R.br.")}
           </th>
 
-          <th className="border p-1.5 text-left">
+          <th className="border p-1 text-left">
             {t("Element")}
           </th>
 
-          <th className="border p-1.5 text-center whitespace-nowrap">
+          <th className="border p-1 text-center whitespace-nowrap">
             {t("Kom.")}
           </th>
 
-          <th className="border p-1.5 text-right whitespace-nowrap">
+          <th className="border p-1 text-right whitespace-nowrap">
             {t("Nabavna")}
           </th>
 
-          <th className="border p-1.5 text-right whitespace-nowrap">
+          <th className="border p-1 text-right whitespace-nowrap">
             {t("Prodajna")}
           </th>
 
-          <th className="border p-1.5 text-right whitespace-nowrap">
+          <th className="border p-1 text-right whitespace-nowrap">
             {t("Zarada")}
           </th>
 
@@ -6509,31 +6513,31 @@ const elements = results.filter(
             return (
               <tr key={rowIndex}>
 
-                <td className="border p-1.5 text-center whitespace-nowrap">
+                <td className="border p-1 text-center whitespace-nowrap">
                   {rowIndex + 1}
                 </td>
 
-                <td className="border p-1.5">
+                <td className="border p-1 min-w-[90px]">
                   {t(r.element)}
                 </td>
 
-                <td className="border p-1.5 text-center whitespace-nowrap">
+                <td className="border p-1 text-center whitespace-nowrap">
                   {r.kom}
                 </td>
 
-                <td className="border p-1.5 text-right whitespace-nowrap">
+                <td className="border p-1 text-right whitespace-nowrap">
                   {formatMoney(
                     nabavna * kolPozicije
                   )}
                 </td>
 
-                <td className="border p-1.5 text-right whitespace-nowrap">
+                <td className="border p-1 text-right whitespace-nowrap">
                   {formatMoney(
                     prodajna * kolPozicije
                   )}
                 </td>
 
-                <td className="border p-1.5 text-right whitespace-nowrap">
+                <td className="border p-1 text-right whitespace-nowrap">
                   {formatMoney(
                     zaradaRed * kolPozicije
                   )}
