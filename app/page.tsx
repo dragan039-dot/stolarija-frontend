@@ -2535,9 +2535,9 @@ const openWorklistOffer = async (id: number) => {
 
       const missing: string[] = [];
 
-      if (!p.vrsta_stolarije) missing.push("vrsta stolarije");
-      if (!p.vrsta_prozora) missing.push("vrsta prozora");
-      if (!p.profil) missing.push("profil");
+      if (!p.vrsta_stolarije) missing.push("Vrsta stolarije");
+      if (!p.vrsta_prozora) missing.push("Vrsta prozora");
+      if (!p.profil) missing.push("Profil");
 
       const requiredDims = dimensionRules[p.vrsta_prozora] || [];
 
@@ -7085,11 +7085,11 @@ const elements = results.filter(
           .map((p, index) => {
             const missing: string[] = [];
 
-            if (!p.vrsta_stolarije) missing.push("vrsta stolarije");
-            if (!p.vrsta_prozora) missing.push("vrsta prozora");
-            if (!p.profil) missing.push("profil");
-            if (!p.ispuna) missing.push("ispuna");
-            if (!p.okov) missing.push("okov");
+            if (!p.vrsta_stolarije) missing.push("Vrsta stolarije");
+            if (!p.vrsta_prozora) missing.push("Vrsta prozora");
+            if (!p.profil) missing.push("Profil");
+            if (!p.ispuna) missing.push("Ispuna");
+            if (!p.okov) missing.push("Okov");
             const requiredDims = dimensionRules[p.vrsta_prozora] || [];
 
 if (requiredDims.includes("a") && !p.a) missing.push("A");
