@@ -7908,7 +7908,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
     </h2>
 
     {/* STICKY TRAKA - JEZIK + SAČUVAJ */}
-    <div className="sticky top-0 z-30 bg-white border-b shadow-sm py-3 mb-4">
+    <div className="sticky top-[60px] z-30 bg-white border-b shadow-sm py-3 mb-4">
       <div className="flex flex-wrap items-end justify-between gap-3">
 
         {/* IZBOR JEZIKA */}
