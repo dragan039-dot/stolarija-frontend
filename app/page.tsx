@@ -7899,58 +7899,61 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
 
 
-
 {activeTab === "Uputstva" && loggedUser?.role === "ADMIN" && (
   <div className="p-4">
 
-    <div className="flex justify-between mb-4">
-      <h2 className="text-2xl font-bold">
-        {t("Uputstva")}
-      </h2>
+    {/* NASLOV */}
+    <h2 className="text-2xl font-bold mb-4">
+      {t("Uputstva")}
+    </h2>
 
-<div className="sticky top-0 z-30 bg-white border-b shadow-sm py-3 mb-4">
-  <div className="flex flex-wrap items-center gap-3"></div>
+    {/* STICKY TRAKA - JEZIK + SAČUVAJ */}
+    <div className="sticky top-0 z-30 bg-white border-b shadow-sm py-3 mb-4">
+      <div className="flex flex-wrap items-end justify-between gap-3">
 
-      <button
-        onClick={saveHelpTexts}
-        className="bg-green-900 text-white px-2 py-1 rounded"
-      >
-        {t("Sačuvaj")}
-      </button>
-    </div>
+        {/* IZBOR JEZIKA */}
+        <div>
+          <label className="block font-semibold mb-1">
+            {t("Jezik")}
+          </label>
 
-    <div className="mb-4">
-      <label className="block font-semibold mb-1">
-        {t("Jezik")}
-      </label>
-
-      <select
-        value={selectedLanguageId}
-        onChange={(e) => {
-          setSelectedLanguageId(e.target.value);
-          localStorage.setItem(
-            "selectedLanguageId",
-            e.target.value
-          );
-        }}
-        className="border p-2 rounded"
-      >
-        <option value="">
-          SR
-        </option>
-
-        {languages
-          .filter((l: any) => l.enabled)
-          .map((l: any) => (
-            <option key={l.id} value={l.id}>
-              {l.name}
+          <select
+            value={selectedLanguageId}
+            onChange={(e) => {
+              setSelectedLanguageId(e.target.value);
+              localStorage.setItem(
+                "selectedLanguageId",
+                e.target.value
+              );
+            }}
+            className="border p-2 rounded bg-white"
+          >
+            <option value="">
+              SR
             </option>
-          ))}
-      </select>
-    </div>
+
+            {languages
+              .filter((l: any) => l.enabled)
+              .map((l: any) => (
+                <option key={l.id} value={l.id}>
+                  {l.name}
+                </option>
+              ))}
+          </select>
+        </div>
+
+        {/* SAČUVAJ */}
+        <button
+          onClick={saveHelpTexts}
+          className="bg-green-900 text-white px-4 py-2 rounded"
+        >
+          {t("Sačuvaj")}
+        </button>
 
       </div>
-</div>
+    </div>
+
+    {/* OVDE NASTAVLJA POSTOJEĆI SADRŽAJ UPUTSTAVA */}
 
     {/* ostatak tabele */}
 
