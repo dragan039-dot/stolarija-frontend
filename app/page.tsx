@@ -10333,6 +10333,10 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Nabavna",
       "Prodajna",
       "Zarada",
+"Nepopunjena polja",
+"Neka polja nisu popunjena:",
+"Ponuda nije sačuvana.",
+"Popunite obavezna polja:",
     ],
   },
   {
