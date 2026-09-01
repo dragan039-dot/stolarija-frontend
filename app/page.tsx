@@ -6315,7 +6315,7 @@ const elements = results.filter(
                 {/* OSNOVNI PODACI */}
 {/* SADRŽAJ POZICIJE: LEVO PODACI / DESNO TABELA */}
 
-<div className="grid grid-cols-1 md:grid-cols-[35%_65%] border-b">
+<div className="grid grid-cols-1 md:grid-cols-[41%_59%] border-b">
 
   {/* =========================
       LEVI DEO
@@ -6343,11 +6343,11 @@ const elements = results.filter(
 
     <div className="mb-5">
 
-      <div className="font-bold text-sm mb-2">
+      <div className="font-bold text-xs mb-2">
         {t("Dimenzije")}
       </div>
 
-      <div className="text-xs space-y-1">
+      <div className="text-[10px] space-y-1">
 
         {Number(p.a) > 0 && (
           <div>
@@ -6388,11 +6388,11 @@ const elements = results.filter(
 
     <div>
 
-      <div className="font-bold text-sm mb-2">
+      <div className="font-bold text-xs mb-2">
         {t("Podaci")}
       </div>
 
-      <div className="text-xs space-y-1">
+      <div className="text-[10px] space-y-1">
 
         {p.profil && (
           <div>
@@ -6470,7 +6470,7 @@ const elements = results.filter(
 
   <div className="min-w-0 overflow-x-auto">
 
-    <table className="w-full text-[9px] md:text-[10px] border-collapse">
+    <table className="w-full text-[10px] md:text-[11px] border-collapse">
 
       <thead className="bg-gray-50">
 
