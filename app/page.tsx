@@ -6485,7 +6485,7 @@ const elements = results.filter(
           </th>
 
           <th className="border p-1 text-center whitespace-nowrap">
-            {t("Kom.")}
+            {t("Kom")}
           </th>
 
           <th className="border p-1 text-right whitespace-nowrap">
@@ -6658,7 +6658,7 @@ const elements = results.filter(
         <div className="mt-10">
 
           <h3 className="text-xl font-bold mb-3">
-            {t("Dodatne usluge i proizvodi")}
+            {t("Dodatne usluge / proizvodi")}
           </h3>
 
           <div className="overflow-x-auto">
@@ -6787,7 +6787,7 @@ const elements = results.filter(
 
             <div className="flex justify-between gap-4 border-b pb-2">
               <span>
-                {t("Dodatne usluge i proizvodi")}
+                {t("Dodatne usluge / proizvodi")}
               </span>
 
               <strong>
@@ -10320,10 +10320,15 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     title: "Dodatne stavke",
     items: [
       "Dodatne usluge / proizvodi",
+      "Ukupno dodatne usluge i proizvodi",
+      "Ukupna rekapitulacija ponude",
+      "Prodajna vrednost stolarije",
+      "Zarada na stolariji",
       "Dodaj stavku",
       "Maksimalan broj dodatnih usluga/proizvoda je 30",
       "Rekapitulacija",
       "Nabavna vrednost",
+      "Prodajna vrednost",
       "Prodajna vrednost pre popusta",
       "Prodajna vrednost nakon popusta",
       "Očekivana zarada",
