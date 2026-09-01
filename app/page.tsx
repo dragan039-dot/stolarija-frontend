@@ -1905,7 +1905,7 @@ const formForCreate = {
     });
 
     const data = await res.json();
-    alert(t("Sačuvano: ") + (data.brojPonude || data.id));
+    alert(t("Sačuvano:") + (data.brojPonude || data.id));
   }
 
   await loadOffers();
@@ -10315,6 +10315,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Sva prava zadržana",
       "Elementi prozora",
       "Materijal",
+      "Nazad",
     ],
   },
   {
