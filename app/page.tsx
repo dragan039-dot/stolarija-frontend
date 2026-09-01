@@ -7107,7 +7107,7 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
                 {missing.length > 0 ? (
                   <div className="bg-yellow-100 border border-yellow-400 p-3 mb-4">
-                    {t("Pozicija nije kompletna. Nedostaje")}: {missing.join(", ")}.
+                    {t("Pozicija nije kompletna. Nedostaje")}: {missing.map((x) => t(x)).join(", ")}.
                   </div>
                 ) : (
                   <>
