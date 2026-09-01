@@ -2486,8 +2486,14 @@ imaTprecka,
     }),
   });
 
-  const data = await res.json();
-  return Array.isArray(data) ? data : [];
+const data = await res.json();
+
+console.log(
+  "OBRACUN SA NABAVNOM CENOM",
+  JSON.stringify(data, null, 2)
+);
+
+return Array.isArray(data) ? data : [];
 };
 
 
