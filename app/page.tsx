@@ -6116,6 +6116,10 @@ console.log(
     }))
     .filter(({ p }: any) => p.vrsta_prozora);
 
+  const rowsExtra = proposalExtraItems.filter(
+    (x: any) => x.naziv
+  );
+
   const valutaNaziv =
     valuteMap[String(proposalOffer.valuta)] ||
     proposalOffer.valuta ||
@@ -6127,12 +6131,12 @@ console.log(
       maximumFractionDigits: 2,
     });
 
-  // -----------------------------
-  // UKUPNO ZA SVE POZICIJE
-  // -----------------------------
+  // =========================
+  // UKUPNO PROZORI
+  // =========================
 
-  let ukupnaNabavna = 0;
-  let ukupnaProdajnaPrePopusta = 0;
+  let ukupnaNabavnaProzori = 0;
+  let ukupnaProdajnaProzori = 0;
 
   positions.forEach(({ p, originalIndex }: any) => {
     const results = proposalResults[originalIndex] || [];
@@ -6143,29 +6147,63 @@ console.log(
 
     const kol = Number(p.kolicina) || 1;
 
-    ukupnaNabavna +=
+    ukupnaNabavnaProzori +=
       (Number(total?.ukupnaNabavna) || 0) * kol;
 
-    ukupnaProdajnaPrePopusta +=
-      (Number(total?.ukupnaProdajna) ||
+    ukupnaProdajnaProzori +=
+      (
+        Number(total?.ukupnaProdajna) ||
         Number(total?.cena) ||
-        0) * kol;
+        0
+      ) * kol;
   });
 
-  const popustProc = Number(proposalOffer.popust) || 0;
+  // =========================
+  // DODATNE USLUGE I PROIZVODI
+  // =========================
+
+  const ukupnoDodatno = rowsExtra.reduce(
+    (sum: number, x: any) => {
+      const kol = Number(x.kolicina) || 1;
+      const cena = Number(x.cena) || 0;
+
+      return sum + kol * cena;
+    },
+    0
+  );
+
+  // =========================
+  // ZAVRŠNI OBRAČUN
+  // =========================
+
+  const ukupnoPrePopusta =
+    ukupnaProdajnaProzori + ukupnoDodatno;
+
+  const popustProc =
+    Number(proposalOffer.popust) || 0;
 
   const popustIznos =
-    ukupnaProdajnaPrePopusta * (popustProc / 100);
+    ukupnoPrePopusta * (popustProc / 100);
 
-  const ukupnaProdajnaPoslePopusta =
-    ukupnaProdajnaPrePopusta - popustIznos;
+  const ukupnoPoslePopusta =
+    ukupnoPrePopusta - popustIznos;
 
-  const ukupnaZarada =
-    ukupnaProdajnaPoslePopusta - ukupnaNabavna;
+  const pdvProc =
+    Number(firma.pdv) || 0;
 
-  const marza =
-    ukupnaProdajnaPoslePopusta > 0
-      ? (ukupnaZarada / ukupnaProdajnaPoslePopusta) * 100
+  const pdvIznos =
+    ukupnoPoslePopusta * (pdvProc / 100);
+
+  const zaUplatu =
+    ukupnoPoslePopusta + pdvIznos;
+
+  // Zarada trenutno samo na stolariji
+  const zaradaProzori =
+    ukupnaProdajnaProzori - ukupnaNabavnaProzori;
+
+  const marzaProzori =
+    ukupnaProdajnaProzori > 0
+      ? (zaradaProzori / ukupnaProdajnaProzori) * 100
       : 0;
 
   return (
@@ -6174,113 +6212,6 @@ console.log(
       <h2 className="text-2xl font-bold mb-6">
         {t("Rekapitulacija")}
       </h2>
-
-      {/* =========================
-          UKUPNA REKAPITULACIJA
-         ========================= */}
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-6">
-
-        <div className="border rounded-lg p-4 bg-gray-50">
-          <div className="text-sm text-gray-600">
-            {t("Nabavna vrednost")}
-          </div>
-
-          <div className="text-xl font-bold">
-            {formatMoney(ukupnaNabavna)} {valutaNaziv}
-          </div>
-        </div>
-
-        <div className="border rounded-lg p-4 bg-gray-50">
-          <div className="text-sm text-gray-600">
-            {t("Prodajna vrednost pre popusta")}
-          </div>
-
-          <div className="text-xl font-bold">
-            {formatMoney(ukupnaProdajnaPrePopusta)} {valutaNaziv}
-          </div>
-        </div>
-
-        <div className="border rounded-lg p-4 bg-gray-50">
-          <div className="text-sm text-gray-600">
-            {t("Popust")}
-          </div>
-
-          <div className="text-xl font-bold">
-            {formatMoney(popustIznos)} {valutaNaziv}
-            {popustProc > 0 && (
-              <span className="text-sm font-normal ml-2">
-                ({popustProc}%)
-              </span>
-            )}
-          </div>
-        </div>
-
-        <div className="border rounded-lg p-4 bg-gray-50">
-          <div className="text-sm text-gray-600">
-            {t("Prodajna vrednost nakon popusta")}
-          </div>
-
-          <div className="text-xl font-bold">
-            {formatMoney(ukupnaProdajnaPoslePopusta)} {valutaNaziv}
-          </div>
-        </div>
-
-        <div
-          className={`border rounded-lg p-4 ${
-            ukupnaZarada < 0
-              ? "bg-red-100 border-red-400"
-              : "bg-green-50 border-green-300"
-          }`}
-        >
-          <div className="text-sm text-gray-600">
-            {t("Očekivana zarada")}
-          </div>
-
-          <div
-            className={`text-xl font-bold ${
-              ukupnaZarada < 0
-                ? "text-red-700"
-                : "text-green-700"
-            }`}
-          >
-            {formatMoney(ukupnaZarada)} {valutaNaziv}
-          </div>
-        </div>
-
-        <div
-          className={`border rounded-lg p-4 ${
-            marza < 0
-              ? "bg-red-100 border-red-400"
-              : marza < 10
-              ? "bg-yellow-50 border-yellow-300"
-              : "bg-green-50 border-green-300"
-          }`}
-        >
-          <div className="text-sm text-gray-600">
-            {t("Marža")}
-          </div>
-
-          <div className="text-xl font-bold">
-            {marza.toFixed(2)}%
-          </div>
-        </div>
-
-      </div>
-
-      {/* UPOZORENJE */}
-
-      {ukupnaZarada < 0 && (
-        <div className="mb-6 rounded-lg border border-red-400 bg-red-100 p-4 text-red-800 font-semibold">
-          ⚠ {t("Ponuda je ispod nabavne vrednosti")}
-        </div>
-      )}
-
-      {ukupnaZarada >= 0 && marza < 10 && (
-        <div className="mb-6 rounded-lg border border-yellow-400 bg-yellow-50 p-4 text-yellow-800 font-semibold">
-          ⚠ {t("Niska zarada na ponudi")}
-        </div>
-      )}
 
       {/* =========================
           POZICIJE
@@ -6310,17 +6241,21 @@ console.log(
               kolPozicije;
 
             const prodajnaPozicije =
-              (Number(total?.ukupnaProdajna) ||
+              (
+                Number(total?.ukupnaProdajna) ||
                 Number(total?.cena) ||
-                0) * kolPozicije;
+                0
+              ) * kolPozicije;
 
             const zaradaPozicije =
               prodajnaPozicije - nabavnaPozicije;
 
             const marzaPozicije =
               prodajnaPozicije > 0
-                ? (zaradaPozicije / prodajnaPozicije) *
-                  100
+                ? (
+                    zaradaPozicije /
+                    prodajnaPozicije
+                  ) * 100
                 : 0;
 
             return (
@@ -6393,8 +6328,8 @@ console.log(
                   <table className="w-full text-sm border-collapse">
 
                     <thead className="bg-gray-50">
-
                       <tr>
+
                         <th className="border p-2 text-center">
                           {t("R.br.")}
                         </th>
@@ -6418,8 +6353,8 @@ console.log(
                         <th className="border p-2 text-right">
                           {t("Zarada")}
                         </th>
-                      </tr>
 
+                      </tr>
                     </thead>
 
                     <tbody>
@@ -6432,10 +6367,8 @@ console.log(
 
                           let prodajna = nabavna;
 
-                          if (r.element === "Roletna") {
-                            prodajna =
-                              Number(r.cena) || 0;
-                          } else if (
+                          if (
+                            r.element === "Roletna" ||
                             r.element === "Komarnik"
                           ) {
                             prodajna =
@@ -6563,6 +6496,260 @@ console.log(
             );
           }
         )}
+
+      </div>
+
+
+      {/* =========================
+          DODATNE USLUGE I PROIZVODI
+         ========================= */}
+
+      {rowsExtra.length > 0 && (
+        <div className="mt-10">
+
+          <h3 className="text-xl font-bold mb-3">
+            {t("Dodatne usluge i proizvodi")}
+          </h3>
+
+          <div className="overflow-x-auto">
+
+            <table className="w-full text-sm border-collapse">
+
+              <thead className="bg-gray-100">
+                <tr>
+
+                  <th className="border p-2 text-center">
+                    {t("R.br.")}
+                  </th>
+
+                  <th className="border p-2 text-left">
+                    {t("Naziv")}
+                  </th>
+
+                  <th className="border p-2 text-center">
+                    {t("Količina")}
+                  </th>
+
+                  <th className="border p-2 text-right">
+                    {t("Cena")}
+                  </th>
+
+                  <th className="border p-2 text-right">
+                    {t("Ukupno")}
+                  </th>
+
+                </tr>
+              </thead>
+
+              <tbody>
+
+                {rowsExtra.map((x: any, i: number) => {
+
+                  const kol =
+                    Number(x.kolicina) || 1;
+
+                  const cena =
+                    Number(x.cena) || 0;
+
+                  const ukupno =
+                    kol * cena;
+
+                  return (
+                    <tr key={i}>
+
+                      <td className="border p-2 text-center">
+                        {i + 1}
+                      </td>
+
+                      <td className="border p-2">
+                        {x.naziv}
+                      </td>
+
+                      <td className="border p-2 text-center">
+                        {kol}
+                      </td>
+
+                      <td className="border p-2 text-right">
+                        {formatMoney(cena)}
+                      </td>
+
+                      <td className="border p-2 text-right font-semibold">
+                        {formatMoney(ukupno)} {valutaNaziv}
+                      </td>
+
+                    </tr>
+                  );
+                })}
+
+              </tbody>
+
+              <tfoot className="bg-gray-50 font-bold">
+                <tr>
+
+                  <td
+                    colSpan={4}
+                    className="border p-2 text-right"
+                  >
+                    {t("Ukupno dodatne usluge i proizvodi")}
+                  </td>
+
+                  <td className="border p-2 text-right">
+                    {formatMoney(ukupnoDodatno)} {valutaNaziv}
+                  </td>
+
+                </tr>
+              </tfoot>
+
+            </table>
+
+          </div>
+
+        </div>
+      )}
+
+
+      {/* =========================
+          UKUPNA REKAPITULACIJA PONUDE
+         ========================= */}
+
+      <div className="mt-10 border rounded-xl overflow-hidden">
+
+        <div className="bg-gray-100 px-4 py-3">
+          <h3 className="text-xl font-bold">
+            {t("Ukupna rekapitulacija ponude")}
+          </h3>
+        </div>
+
+        <div className="p-4">
+
+          <div className="max-w-xl ml-auto space-y-2">
+
+            <div className="flex justify-between gap-4 border-b pb-2">
+              <span>
+                {t("Prodajna vrednost stolarije")}
+              </span>
+
+              <strong>
+                {formatMoney(ukupnaProdajnaProzori)}{" "}
+                {valutaNaziv}
+              </strong>
+            </div>
+
+            <div className="flex justify-between gap-4 border-b pb-2">
+              <span>
+                {t("Dodatne usluge i proizvodi")}
+              </span>
+
+              <strong>
+                {formatMoney(ukupnoDodatno)}{" "}
+                {valutaNaziv}
+              </strong>
+            </div>
+
+            <div className="flex justify-between gap-4 border-b pb-2">
+              <span>
+                {t("Ukupno")}
+              </span>
+
+              <strong>
+                {formatMoney(ukupnoPrePopusta)}{" "}
+                {valutaNaziv}
+              </strong>
+            </div>
+
+            {popustProc > 0 && (
+              <div className="flex justify-between gap-4 border-b pb-2">
+                <span>
+                  {t("Popust")} ({popustProc}%)
+                </span>
+
+                <strong>
+                  - {formatMoney(popustIznos)}{" "}
+                  {valutaNaziv}
+                </strong>
+              </div>
+            )}
+
+            <div className="flex justify-between gap-4 border-b pb-2">
+              <span>
+                {t("PDV")} ({pdvProc}%)
+              </span>
+
+              <strong>
+                {formatMoney(pdvIznos)}{" "}
+                {valutaNaziv}
+              </strong>
+            </div>
+
+            <div className="flex justify-between gap-4 text-xl pt-2">
+              <span className="font-bold">
+                {t("Za uplatu")}
+              </span>
+
+              <strong>
+                {formatMoney(zaUplatu)}{" "}
+                {valutaNaziv}
+              </strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      {/* =========================
+          ZARADA NA STOLARIJI
+         ========================= */}
+
+      <div className="mt-6 bg-gray-50 border rounded-xl p-4">
+
+        <h3 className="font-bold text-lg mb-3">
+          {t("Zarada na stolariji")}
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+          <div>
+            <div className="text-sm text-gray-500">
+              {t("Nabavna vrednost")}
+            </div>
+
+            <div className="font-bold">
+              {formatMoney(ukupnaNabavnaProzori)}{" "}
+              {valutaNaziv}
+            </div>
+          </div>
+
+          <div>
+            <div className="text-sm text-gray-500">
+              {t("Očekivana zarada")}
+            </div>
+
+            <div
+              className={`font-bold ${
+                zaradaProzori < 0
+                  ? "text-red-700"
+                  : "text-green-700"
+              }`}
+            >
+              {formatMoney(zaradaProzori)}{" "}
+              {valutaNaziv}
+            </div>
+          </div>
+
+          <div>
+            <div className="text-sm text-gray-500">
+              {t("Marža")}
+            </div>
+
+            <div className="font-bold">
+              {marzaProzori.toFixed(2)}%
+            </div>
+          </div>
+
+        </div>
 
       </div>
 
@@ -9978,6 +10165,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Logo firme",
       "Sva prava zadržana",
       "Elementi prozora",
+      "Materijal",
     ],
   },
   {
@@ -9986,6 +10174,17 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Dodatne usluge / proizvodi",
       "Dodaj stavku",
       "Maksimalan broj dodatnih usluga/proizvoda je 30",
+      "Rekapitulacija",
+      "Nabavna vrednost",
+      "Prodajna vrednost pre popusta",
+      "Prodajna vrednost nakon popusta",
+      "Očekivana zarada",
+      "Marža",
+      "Ponuda je ispod nabavne vrednosti",
+      "R.br.",
+      "Nabavna",
+      "Prodajna",
+      "Zarada",
     ],
   },
   {
