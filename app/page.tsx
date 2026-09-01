@@ -2520,14 +2520,27 @@ const openWorklistOffer = async (id: number) => {
     return;
   }
 
-  const items = Array.isArray(data.items) ? data.items : [];
+const items = Array.isArray(data.items) ? data.items : [];
 
-  setWorklistOffer(data.offer);
-  setWorklistPositions(items);
-  setWorklistExtraItems(Array.isArray(data.extraItems) ? data.extraItems : []);
+const proposalItems = items.map((item: any) => {
+  const prozor = prozori.find(
+    (x: any) => x.naziv === item.vrsta_prozora
+  );
+
+  return {
+    ...item,
+    slika: item.slika || prozor?.id || null,
+  };
+});
+
+setProposalOffer(data.offer);
+setProposalPositions(proposalItems);
+setProposalExtraItems(
+  Array.isArray(data.extraItems) ? data.extraItems : []
+);
 
 const calculatedPairs = await Promise.all(
-  items.map(async (p: any, i: number) => {
+  proposalItems.map(async (p: any, i: number) => {
     if (!p.vrsta_prozora) return null;
 
     const missing: string[] = [];
