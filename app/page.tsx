@@ -2513,6 +2513,7 @@ const openWorklistOffer = async (id: number) => {
   const res = await apiFetch(`${API_URL}/offers/${id}`, {
     headers: authHeaders(),
   });
+
   const data = await res.json();
 
   if (!data.offer) {
@@ -2520,67 +2521,51 @@ const openWorklistOffer = async (id: number) => {
     return;
   }
 
-const items = Array.isArray(data.items) ? data.items : [];
+  const items = Array.isArray(data.items) ? data.items : [];
 
-const proposalItems = items.map((item: any) => {
-  const prozor = prozori.find(
-    (x: any) => x.naziv === item.vrsta_prozora
+  setWorklistOffer(data.offer);
+  setWorklistPositions(items);
+  setWorklistExtraItems(
+    Array.isArray(data.extraItems) ? data.extraItems : []
   );
 
-  return {
-    ...item,
-    slika: item.slika || prozor?.id || null,
-  };
-});
+  const calculatedPairs = await Promise.all(
+    items.map(async (p: any, i: number) => {
+      if (!p.vrsta_prozora) return null;
 
+      const missing: string[] = [];
 
-console.log("PROPOSAL ITEMS:", proposalItems);
-console.log("PROZORI:", prozori);
+      if (!p.vrsta_stolarije) missing.push("vrsta stolarije");
+      if (!p.vrsta_prozora) missing.push("vrsta prozora");
+      if (!p.profil) missing.push("profil");
 
+      const requiredDims = dimensionRules[p.vrsta_prozora] || [];
 
-setProposalOffer(data.offer);
-setProposalPositions(proposalItems);
-setProposalExtraItems(
-  Array.isArray(data.extraItems) ? data.extraItems : []
-);
+      if (requiredDims.includes("a") && !p.a) missing.push("A");
+      if (requiredDims.includes("b") && !p.b) missing.push("B");
+      if (requiredDims.includes("c") && !p.c) missing.push("C");
+      if (requiredDims.includes("d") && !p.d) missing.push("D");
+      if (requiredDims.includes("e") && !p.e) missing.push("E");
 
-const calculatedPairs = await Promise.all(
-  proposalItems.map(async (p: any, i: number) => {
-    if (!p.vrsta_prozora) return null;
+      if (missing.length > 0) return null;
 
-    const missing: string[] = [];
+      const result = await calculateWorklistPosition(p);
 
-    if (!p.vrsta_stolarije) missing.push("vrsta stolarije");
-    if (!p.vrsta_prozora) missing.push("vrsta prozora");
-    if (!p.profil) missing.push("profil");
+      return [i, result] as const;
+    })
+  );
 
-    const requiredDims = dimensionRules[p.vrsta_prozora] || [];
+  const calculated: Record<number, any[]> = {};
 
-    if (requiredDims.includes("a") && !p.a) missing.push("A");
-    if (requiredDims.includes("b") && !p.b) missing.push("B");
-    if (requiredDims.includes("c") && !p.c) missing.push("C");
-    if (requiredDims.includes("d") && !p.d) missing.push("D");
-    if (requiredDims.includes("e") && !p.e) missing.push("E");
+  calculatedPairs.forEach((pair) => {
+    if (!pair) return;
 
-    if (missing.length > 0) return null;
+    const [i, result] = pair;
+    calculated[i] = result;
+  });
 
-    const result = await calculateWorklistPosition(p);
-
-    return [i, result] as const;
-  })
-);
-
-const calculated: Record<number, any[]> = {};
-
-calculatedPairs.forEach((pair) => {
-  if (!pair) return;
-
-  const [i, result] = pair;
-  calculated[i] = result;
-});
-
-setWorklistResults(calculated);
-setSelectedWorklistOfferId(id);
+  setWorklistResults(calculated);
+  setSelectedWorklistOfferId(id);
 };
 
 
@@ -2686,6 +2671,7 @@ const openProposalOffer = async (id: number) => {
   const res = await apiFetch(`${API_URL}/offers/${id}`, {
     headers: authHeaders(),
   });
+
   const data = await res.json();
 
   if (!data.offer) {
@@ -2695,34 +2681,57 @@ const openProposalOffer = async (id: number) => {
 
   const items = Array.isArray(data.items) ? data.items : [];
 
+  // Dopunjavamo sliku prema vrsti prozora.
+  // Ovo omogućava prikaz slike i kod starijih ponuda
+  // kod kojih slika nije sačuvana u bazi.
+  const proposalItems = items.map((item: any) => {
+    const prozor = prozori.find(
+      (x: any) => x.naziv === item.vrsta_prozora
+    );
+
+    return {
+      ...item,
+      slika: item.slika || prozor?.id || null,
+    };
+  });
+
   setProposalOffer(data.offer);
-  setProposalPositions(items);
-  setProposalExtraItems(Array.isArray(data.extraItems) ? data.extraItems : []);
+  setProposalPositions(proposalItems);
+  setProposalExtraItems(
+    Array.isArray(data.extraItems) ? data.extraItems : []
+  );
 
-const calculatedPairs = await Promise.all(
-  items.map(async (p: any, i: number) => {
-    if (!p.vrsta_prozora) return null;
-    if (!p.vrsta_stolarije) return null;
-    if (!p.profil) return null;
-    if (!p.a || !p.b) return null;
+  const calculatedPairs = await Promise.all(
+    proposalItems.map(async (p: any, i: number) => {
+      if (!p.vrsta_prozora) return null;
+      if (!p.vrsta_stolarije) return null;
+      if (!p.profil) return null;
 
-    const result = await calculateWorklistPosition(p);
+      const requiredDims = dimensionRules[p.vrsta_prozora] || [];
 
-    return [i, result] as const;
-  })
-);
+      if (requiredDims.includes("a") && !p.a) return null;
+      if (requiredDims.includes("b") && !p.b) return null;
+      if (requiredDims.includes("c") && !p.c) return null;
+      if (requiredDims.includes("d") && !p.d) return null;
+      if (requiredDims.includes("e") && !p.e) return null;
 
-const calculated: Record<number, any[]> = {};
+      const result = await calculateWorklistPosition(p);
 
-calculatedPairs.forEach((pair) => {
-  if (!pair) return;
+      return [i, result] as const;
+    })
+  );
 
-  const [i, result] = pair;
-  calculated[i] = result;
-});
+  const calculated: Record<number, any[]> = {};
 
-setProposalResults(calculated);
-setSelectedFormOfferId(id);
+  calculatedPairs.forEach((pair) => {
+    if (!pair) return;
+
+    const [i, result] = pair;
+    calculated[i] = result;
+  });
+
+  setProposalResults(calculated);
+  setSelectedFormOfferId(id);
 };
 
 
