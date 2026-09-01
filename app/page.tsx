@@ -10064,6 +10064,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "C",
       "D",
       "E - broj krila / stakala",
+      "E - broj krila / fiksa",
       "Izaberi ispunu",
       "Izaberi okov",
       "Otvaranje",
