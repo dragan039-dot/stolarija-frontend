@@ -10676,7 +10676,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
                 "Više korisnika",
                 "Rad više zaposlenih",
                 "Online","Pristup sa bilo kog uređaja",
-                "Firma i telefon su obavezni.
+                "Firma i telefon su obavezni.",
 "Greška pri slanju zahteva.",
 "Zahtev je uspešno poslat.",
 "Greška pri povezivanju sa serverom.",
