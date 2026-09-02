@@ -4079,6 +4079,10 @@ const loadSiteTranslations = async () => {
   });
 
   const data = await res.json();
+  
+  console.log("SITE TRANSLATIONS DATA:", data);
+
+
   setSiteTranslations(Array.isArray(data) ? data : []);
 };
 
