@@ -50,7 +50,7 @@ const sendRequest = async () => {
   setRequestMessage("");
 
   if (!requestForm.firma || !requestForm.telefon) {
-    setRequestMessage("Firma i telefon su obavezni.");
+    setRequestMessage(tSite("Firma i telefon su obavezni."));
     return;
   }
 
@@ -68,11 +68,11 @@ const res = await fetch("/api/site-requests", {
     const data = await res.json();
 
     if (!res.ok) {
-      setRequestMessage(data.message || "Greška pri slanju zahteva.");
+      setRequestMessage(data.message || tSite("Greška pri slanju zahteva."));
       return;
     }
 
-    setRequestMessage("Zahtev je uspešno poslat.");
+    setRequestMessage(tSite("Zahtev je uspešno poslat."));
 
     setRequestForm({
       firma: "",
@@ -85,7 +85,7 @@ const res = await fetch("/api/site-requests", {
       website: "",
     });
   } catch (err) {
-    setRequestMessage("Greška pri povezivanju sa serverom.");
+    setRequestMessage(tSite("Greška pri povezivanju sa serverom."));
   } finally {
     setRequestLoading(false);
   }
@@ -101,33 +101,33 @@ const tabs = [
 
   const videos = [
     {
-      title: "Početak rada",
-      text: "Osnovno upoznavanje sa aplikacijom.",
+      title: tSite("Početak rada"),
+      text: tSite("Osnovno upoznavanje sa aplikacijom."),
       videoId: "PN1ydahHvLo",
     },
     {
-      title: "Kreiranje ponude",
-      text: "Kako se unosi kupac, pozicije i čuva ponuda.",
+      title: tSite("Kreiranje ponude"),
+      text: tSite("Kako se unosi kupac, pozicije i čuva ponuda."),
       videoId: "g-LHD8NcuzI",
     },
     {
-      title: "Radna lista",
-      text: "Pregled elemenata i priprema za proizvodnju.",
+      title: tSite("Radna lista"),
+      text: tSite("Pregled elemenata i priprema za proizvodnju."),
       videoId: "DZ5Zw-SkH6M",
     },
     {
-      title: "Podešavanje parametara",
-      text: "Profili, cene, tehnički parametri i formule.",
+      title: tSite("Podešavanje parametara"),
+      text: tSite("Profili, cene, tehnički parametri i formule."),
       videoId: "srFLz5oGbaM",
     },
         {
-      title: "Izmena ponude",
-      text: "Kako se menja postojeća ponuda.",
+      title: tSite("Izmena ponude"),
+      text: tSite("Kako se menja postojeća ponuda."),
       videoId: "z3NttbWEZvw",
     },
         {
-      title: "Rad na telefonu",
-      text: "Kako izgleda aplikacija na telefonu.",
+      title: tSite("Rad na telefonu"),
+      text: tSite("Kako izgleda aplikacija na telefonu."),
       videoId: "RAQOSeKR64Q",
     },
   ];
@@ -212,7 +212,7 @@ const tSite = (key: string) => {
               PVC Kalkulator
             </div>
             <div className="text-sm text-slate-400">
-              Softver za ponude, radne liste i kalkulacije stolarije
+              {tSite("Softver za ponude, radne liste i kalkulacije stolarije")}
             </div>
           </div>
 
@@ -284,8 +284,8 @@ const tSite = (key: string) => {
           </p>
 
           <p className="mb-8 max-w-2xl text-slate-400">
-            Aplikacija radi online i dostupna je sa laptopa, tableta i telefona.
-            Svi podaci su sačuvani i dostupni kad god vam zatrebaju.
+            {tSite("Aplikacija radi online i dostupna je sa laptopa, tableta i telefona.")}
+            {tSite("Svi podaci su sačuvani i dostupni kad god vam zatrebaju.")}
           </p>
 
           <div className="mb-8 flex flex-col gap-3 sm:flex-row">
@@ -305,10 +305,10 @@ const tSite = (key: string) => {
           </div>
 
           <div className="grid gap-3 text-sm text-slate-300 sm:grid-cols-2">
-            <div>✓ Online pristup</div>
-            <div>✓ Sačuvani podaci</div>
-            <div>✓ Automatski obračuni</div>
-            <div>✓ PDF ponude i radne liste</div>
+            <div>✓ {tSite("Online pristup")}</div>
+            <div>✓ {tSite("Sačuvani podaci")}</div>
+            <div>✓ {tSite("Automatski obračuni")}</div>
+            <div>✓ {tSite("PDF ponude i radne liste")}</div>
           </div>
         </div>
 
@@ -329,12 +329,12 @@ const tSite = (key: string) => {
     <section className="border-y border-white/10 bg-white/5">
       <div className="mx-auto grid max-w-7xl gap-4 px-4 py-6 md:grid-cols-6">
         {[
-          ["Ponude", "Izrada ponuda u nekoliko klikova"],
-          ["Radne liste", "Detaljni elementi za proizvodnju"],
-          ["Obračuni", "Automatski obračun cena"],
-          ["PDF dokumenti", "Profesionalna štampa"],
-          ["Više korisnika", "Rad više zaposlenih"],
-          ["Online", "Pristup sa bilo kog uređaja"],
+  [tSite("Ponude"), tSite("Izrada ponuda u nekoliko klikova")],
+  [tSite("Radne liste"), tSite("Detaljni elementi za proizvodnju")],
+  [tSite("Obračuni"), tSite("Automatski obračun cena")],
+  [tSite("PDF dokumenti"), tSite("Profesionalna štampa")],
+  [tSite("Više korisnika"), tSite("Rad više zaposlenih")],
+  [tSite("Online"), tSite("Pristup sa bilo kog uređaja")],
         ].map(([title, text]) => (
           <div key={title} className="rounded-2xl bg-slate-900/60 p-4">
             <div className="mb-1 font-black text-blue-300">{title}</div>
@@ -385,7 +385,7 @@ const tSite = (key: string) => {
 
       <div className="grid gap-6 md:grid-cols-3">
         <div className="rounded-2xl border border-white/10 bg-white/10 p-6">
-          <h3 className="mb-3 text-xl font-black">Ušteda vremena</h3>
+          <h3 className="mb-3 text-xl font-black">{tSite("Ušteda vremena")}</h3>
           <p className="text-slate-300">
             Ponude i radne liste izrađuju se brzo, pregledno i bez ručnog
             računanja.
@@ -393,7 +393,7 @@ const tSite = (key: string) => {
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/10 p-6">
-          <h3 className="mb-3 text-xl font-black">Manje grešaka</h3>
+          <h3 className="mb-3 text-xl font-black">{tSite("Manje grešaka")}</h3>
           <p className="text-slate-300">
             Automatski obračuni smanjuju mogućnost grešaka u dimenzijama i
             cenama.
@@ -401,7 +401,7 @@ const tSite = (key: string) => {
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/10 p-6">
-          <h3 className="mb-3 text-xl font-black">Rad sa bilo kog mesta</h3>
+          <h3 className="mb-3 text-xl font-black">{tSite("Rad sa bilo kog mesta")}</h3>
           <p className="text-slate-300">
             Pristup aplikaciji sa računara, tableta ili telefona, gde god se
             nalazite.
@@ -433,7 +433,7 @@ const tSite = (key: string) => {
       {activeTab === "O aplikaciji" && (
         <section className="mx-auto max-w-5xl px-4 py-12">
           <div className="rounded-3xl border border-white/10 bg-white/10 p-8">
-            <h2 className="mb-6 text-4xl font-black">O aplikaciji</h2>
+            <h2 className="mb-6 text-4xl font-black">{tSite("O aplikaciji")}</h2>
 
             <div className="grid gap-6 text-slate-300 md:grid-cols-2">
               <p>
@@ -524,7 +524,7 @@ const tSite = (key: string) => {
           </div>
 
           <h2 className="mb-3 text-4xl font-black">
-            Isprobajte aplikaciju potpuno besplatno 30 dana
+            {tSite("Isprobajte aplikaciju potpuno besplatno")} 30 dana
           </h2>
 
           <p className="max-w-3xl text-slate-300">
@@ -688,7 +688,7 @@ const tSite = (key: string) => {
       {activeTab === "Zahtev za ponudu" && (
         <section className="mx-auto max-w-4xl px-4 py-12">
           <div className="rounded-3xl border border-white/10 bg-white/10 p-8">
-            <h2 className="mb-4 text-4xl font-black">Zahtev za ponudu</h2>
+            <h2 className="mb-4 text-4xl font-black">{tSite("Zahtev za ponudu")}</h2>
 
             <p className="mb-6 text-slate-300">
               Pošaljite osnovne podatke i kontaktiraćemo vas u vezi probnog
@@ -811,7 +811,7 @@ const tSite = (key: string) => {
       {activeTab === "Kontakt" && (
         <section className="mx-auto max-w-4xl px-4 py-12">
           <div className="rounded-3xl border border-white/10 bg-white/10 p-8">
-            <h2 className="mb-6 text-4xl font-black">Kontakt</h2>
+            <h2 className="mb-6 text-4xl font-black">{tSite("Kontakt")}</h2>
 
             <div className="space-y-3 text-slate-300">
               <p>
@@ -825,17 +825,17 @@ const tSite = (key: string) => {
               </p>
 
               <p>
-                <strong className="text-white">Email:</strong>{" "}
+                <strong className="text-white">{tSite("Email:")}</strong>{" "}
                 pvckalkulator1@gmail.com
               </p>
 
               <p>
-                <strong className="text-white">Web:</strong>{" "}
+                <strong className="text-white">{tSite("Web:")}</strong>{" "}
                 pvckalkulator.com
               </p>
 
               <p>
-                <strong className="text-white">Viber / WhatsApp:</strong>{" "}
+                <strong className="text-white">{tSite("Viber / WhatsApp:")}</strong>{" "}
                 +381 62 858 2 333
               </p>
             </div>
