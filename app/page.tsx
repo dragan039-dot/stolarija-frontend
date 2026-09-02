@@ -9949,7 +9949,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     </div>
 
     <div className="overflow-auto border max-h-[70vh]">
-      <table className="border-collapse text-sm min-w-[900px]">
+      <table className="border-collapse text-sm min-w-[800px]">
         <thead className="bg-gray-200">
   <tr>
     <th className="border p-2 min-w-[220px] sticky top-0 left-0 z-30 bg-gray-200">
