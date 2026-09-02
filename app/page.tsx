@@ -608,14 +608,18 @@ useEffect(() => {
 // Učitavanje podataka samo za administratora
 useEffect(() => {
   if (!loggedUser?.id) return;
+  if (loggedUser.role !== "ADMIN") return;
 
-  if (activeTab === "Administracija" && loggedUser.role === "ADMIN") {
+  if (activeTab === "Administracija") {
     loadAdminUsers();
     loadAdStats();
     loadInstruction();
+  }
+
+  if (activeTab === "Parametri" && paramTab === "Prevodi site") {
     loadSiteTranslations();
   }
-}, [loggedUser?.id, loggedUser?.role, activeTab]);
+}, [loggedUser?.id, loggedUser?.role, activeTab, paramTab]);
 
 
 
@@ -4079,7 +4083,7 @@ const loadSiteTranslations = async () => {
   });
 
   const data = await res.json();
-  
+
   console.log("SITE TRANSLATIONS DATA:", data);
 
 
