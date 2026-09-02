@@ -217,24 +217,44 @@ const tSite = (key: string) => {
           </div>
 
 <div className="flex items-center gap-3">
-  <select
-    value={selectedLanguageId}
-    onChange={(e) => {
-      setSelectedLanguageId(e.target.value);
-      localStorage.setItem("selectedLanguageId", e.target.value);
+<select
+  value={selectedLanguageId}
+  onChange={(e) => {
+    setSelectedLanguageId(e.target.value);
+    localStorage.setItem("selectedLanguageId", e.target.value);
+  }}
+  className="rounded-xl border border-white/20 bg-slate-900 px-3 py-3 text-white appearance-none"
+  style={{
+    backgroundColor: "#0f172a",
+    color: "#ffffff",
+    colorScheme: "dark",
+  }}
+>
+  <option
+    value=""
+    style={{
+      backgroundColor: "#0f172a",
+      color: "#ffffff",
     }}
-    className="rounded-xl border border-white/20 bg-slate-900 px-3 py-3 text-white"
   >
-    <option value="">SR</option>
+    SR
+  </option>
 
-    {languages
-      .filter((l: any) => l.enabled)
-      .map((l: any) => (
-        <option key={l.id} value={String(l.id)}>
-          {l.name}
-        </option>
-      ))}
-  </select>
+  {languages
+    .filter((l: any) => l.enabled)
+    .map((l: any) => (
+      <option
+        key={l.id}
+        value={String(l.id)}
+        style={{
+          backgroundColor: "#0f172a",
+          color: "#ffffff",
+        }}
+      >
+        {l.name}
+      </option>
+    ))}
+</select>
 
   <a
     href="https://app.pvckalkulator.com"
