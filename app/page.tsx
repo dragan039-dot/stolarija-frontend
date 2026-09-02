@@ -4084,7 +4084,9 @@ const loadSiteTranslations = async () => {
 
 const getSiteTranslationValue = (key: string, lang: any) => {
   const found = siteTranslations.find(
-    (x: any) => x.key === key && x.languageId === lang.id
+    (x: any) =>
+      x.key === key &&
+      String(x.languageId) === String(lang.id)
   );
 
   return found?.value || "";
@@ -4093,12 +4095,15 @@ const getSiteTranslationValue = (key: string, lang: any) => {
 const setSiteTranslationValue = (key: string, lang: any, value: string) => {
   setSiteTranslations((prev: any[]) => {
     const existing = prev.find(
-      (x: any) => x.key === key && x.languageId === lang.id
+      (x: any) =>
+        x.key === key &&
+        String(x.languageId) === String(lang.id)
     );
 
     if (existing) {
       return prev.map((x: any) =>
-        x.key === key && x.languageId === lang.id
+        x.key === key &&
+        String(x.languageId) === String(lang.id)
           ? { ...x, value }
           : x
       );
@@ -10652,7 +10657,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
                 "Profesionalni softver za izradu ponuda i radnih lista PVC i ALU stolarije",
                 "Ponuda i radna lista izrađuju se u par klikova, uz automatski obračun profila, ispuna, okova, roletni i ostalih elemenata.",
                 "Aplikacija radi online i dostupna je sa laptopa, tableta i telefona.",
-                "Besplatna proba 10 dana",
+                "Besplatna proba 30 dana",
                 "Online pristup",
                 "Sačuvani podaci",
                 "Automatski obračuni",
