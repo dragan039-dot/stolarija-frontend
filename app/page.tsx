@@ -4084,9 +4084,7 @@ const loadSiteTranslations = async () => {
 
 const getSiteTranslationValue = (key: string, lang: any) => {
   const found = siteTranslations.find(
-    (x: any) =>
-      x.key === key &&
-      String(x.languageId) === String(lang.id)
+    (x: any) => x.key === key && x.languageId === lang.id
   );
 
   return found?.value || "";
@@ -4095,15 +4093,12 @@ const getSiteTranslationValue = (key: string, lang: any) => {
 const setSiteTranslationValue = (key: string, lang: any, value: string) => {
   setSiteTranslations((prev: any[]) => {
     const existing = prev.find(
-      (x: any) =>
-        x.key === key &&
-        String(x.languageId) === String(lang.id)
+      (x: any) => x.key === key && x.languageId === lang.id
     );
 
     if (existing) {
       return prev.map((x: any) =>
-        x.key === key &&
-        String(x.languageId) === String(lang.id)
+        x.key === key && x.languageId === lang.id
           ? { ...x, value }
           : x
       );
@@ -10657,83 +10652,11 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
                 "Profesionalni softver za izradu ponuda i radnih lista PVC i ALU stolarije",
                 "Ponuda i radna lista izrađuju se u par klikova, uz automatski obračun profila, ispuna, okova, roletni i ostalih elemenata.",
                 "Aplikacija radi online i dostupna je sa laptopa, tableta i telefona.",
-                "Besplatna proba 30 dana",
+                "Besplatna proba 10 dana",
                 "Online pristup",
                 "Sačuvani podaci",
                 "Automatski obračuni",
                 "PDF ponude i radne liste",
-                "Softver za ponude, radne liste i kalkulacije stolarije",
-                "Aplikacija radi online i dostupna je sa laptopa, tableta i telefona.",
-                "Svi podaci su sačuvani i dostupni kad god vam zatrebaju.",
-                "Besplatna proba 30 dana",
-                "Online pristup",
-                "Sačuvani podaci",
-                "Automatski obračuni",
-                "PDF ponude i radne liste",
-                "Ponude",
-                "Izrada ponuda u nekoliko klikova",
-                "Radne liste",
-                "Detaljni elementi za proizvodnju",
-                "Obračuni",
-                "Automatski obračun cena",
-                "PDF dokumenti",
-                "Profesionalna štampa",
-                "Više korisnika",
-                "Rad više zaposlenih",
-                "Online","Pristup sa bilo kog uređaja",
-                "Firma i telefon su obavezni.",
-"Greška pri slanju zahteva.",
-"Zahtev je uspešno poslat.",
-"Greška pri povezivanju sa serverom.",
-"Početak rada",
-"Osnovno upoznavanje sa aplikacijom.",
-"Kreiranje ponude",
-"Kako se unosi kupac, pozicije i čuva ponuda.",
-"Radna lista",
-"Pregled elemenata i priprema za proizvodnju.",
-"Podešavanje parametara",
-"Profili, cene, tehnički parametri i formule.",
-"Izmena ponude",
-"Kako se menja postojeća ponuda.",
-"Rad na telefonu",
-"Kako izgleda aplikacija na telefonu.",
-"Softver za ponude, radne liste i kalkulacije stolarije",
-"Login",
-"Moderan · brz · pouzdan",
-"Profesionalni softver za izradu ponuda i radnih lista PVC i ALU stolarije",
-"Ponuda i radna lista izrađuju se u par klikova, uz automatski obračun profila, ispuna, okova, roletni i ostalih elemenata.",
-"Aplikacija radi online i dostupna je sa laptopa, tableta i telefona.",
-"Svi podaci su sačuvani i dostupni kad god vam zatrebaju.",
-"Besplatna proba 30 dana",
-"Prijava u aplikaciju",
-"Online pristup",
-"Sačuvani podaci",
-"Automatski obračuni",
-"PDF ponude i radne liste",
-"Ponude",
-"Izrada ponuda u nekoliko klikova",
-"Radne liste",
-"Detaljni elementi za proizvodnju",
-"Obračuni",
-"Automatski obračun cena",
-"PDF dokumenti",
-"Profesionalna štampa",
-"Više korisnika",
-"Rad više zaposlenih",
-"Online",
-"Pristup sa bilo kog uređaja",
-"Ušteda vremena",
-"Manje grešaka",
-"Rad sa bilo kog mesta",
-"O aplikaciji",
-"Isprobajte aplikaciju potpuno besplatno",
-"Zahtev za ponudu",
-"Kontakt",
-"Email:",
-"Web:",
-"Viber / WhatsApp:",
-
-
               ],
             },
             {
