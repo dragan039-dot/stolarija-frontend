@@ -10791,6 +10791,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Dobijate kompletan pristup aplikaciji tokom probnog perioda od 30 dana.",
       "Započni besplatnu probu",
       "Sva prava zadržana.",
+      "Softver za ponude, radne liste i kalkulacije stolarije",
     ],
   },
 ].map((group) => (
