@@ -10653,6 +10653,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Prijava u aplikaciju",
     ],
   },
+
   {
     title: "Početna",
     items: [
@@ -10691,6 +10692,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Pristup aplikaciji sa računara, tableta ili telefona, gde god se nalazite.",
     ],
   },
+
   {
     title: "O aplikaciji",
     items: [
@@ -10722,6 +10724,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Kako izgleda aplikacija na telefonu.",
     ],
   },
+
   {
     title: "Cene paketa",
     items: [
@@ -10729,7 +10732,6 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Isprobajte aplikaciju potpuno besplatno",
       "Tokom probnog perioda možete koristiti kompletnu aplikaciju: ponude, radne liste, parametre, formule, PDF dokumente i rad sa više uređaja.",
       "Zatraži probni period",
-      "Cene paketa",
       "Ponuda i radna lista izrađuju se u par klikova, uz automatski obračun i čuvanje podataka.",
       "START",
       "BUSINESS",
@@ -10745,11 +10747,9 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Produženje: 50% od cene godišnje",
       "Bez godišnje obnove",
       "Laptop, tablet i telefon",
-      "Online pristup",
       "Tehnička podrška",
       "Prioritetna podrška",
       "Neograničen broj ponuda",
-      "Više korisnika",
       "Dugoročna licenca",
       "Prilagođavanja po zahtevu",
       "Izaberi paket",
@@ -10759,11 +10759,11 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "ENTERPRISE - 20 uređaja - 1599 € / 10 godina",
     ],
   },
+
   {
     title: "Zahtev za ponudu",
     items: [
       "Pošaljite osnovne podatke i kontaktiraćemo vas u vezi probnog perioda i podešavanja aplikacije.",
-      "Izaberite paket",
       "Firma / Ime i prezime *",
       "PIB",
       "Kontakt osoba",
@@ -10778,6 +10778,7 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Greška pri povezivanju sa serverom.",
     ],
   },
+
   {
     title: "Kontakt",
     items: [
@@ -10787,7 +10788,6 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Email:",
       "Web:",
       "Viber / WhatsApp:",
-      "Isprobajte aplikaciju potpuno besplatno",
       "Dobijate kompletan pristup aplikaciji tokom probnog perioda od 30 dana.",
       "Započni besplatnu probu",
       "Sva prava zadržana.",
