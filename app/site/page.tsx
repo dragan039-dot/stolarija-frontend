@@ -315,7 +315,7 @@ const tSite = (key: string) => {
 <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/10 shadow-2xl">
   <Image
     src="/site/hero.png"
-    alt="PVC Kalkulator aplikacija"
+    alt={tSite("PVC Kalkulator aplikacija")}
     width={900}
     height={600}
     className="h-full w-full object-cover"
@@ -348,28 +348,26 @@ const tSite = (key: string) => {
       <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
         <div>
           <div className="mb-2 text-sm font-black uppercase tracking-wider text-blue-300">
-            Brzina i jednostavnost
+            {tSite("Brzina i jednostavnost")}
           </div>
 
           <h2 className="mb-5 text-4xl font-black">
-            Ponuda i radna lista u par klikova
+            {tSite("Ponuda i radna lista u par klikova")}
           </h2>
 
           <p className="mb-5 text-lg text-slate-300">
-            Nakon unosa dimenzija i izbora sistema, aplikacija automatski
-            obračunava profile, ispune, okove, roletne i ostale elemente.
+            {tSite("Nakon unosa dimenzija i izbora sistema, aplikacija automatski obračunava profile, ispune, okove, roletne i ostale elemente.")}
           </p>
 
           <p className="mb-8 text-lg text-slate-300">
-            Za svega nekoliko minuta možete izraditi profesionalnu ponudu i
-            kompletnu radnu listu spremnu za proizvodnju.
+            {tSite("Za svega nekoliko minuta možete izraditi profesionalnu ponudu i kompletnu radnu listu spremnu za proizvodnju.")}
           </p>
         </div>
 
 <div className="overflow-hidden rounded-3xl border border-white/10 bg-white/10 shadow-2xl">
   <Image
     src="/site/workflow.png"
-    alt="Ponuda i radna lista u par klikova"
+    alt={tSite("Ponuda i radna lista u par klikova")}
     width={900}
     height={600}
     className="h-full w-full object-cover"
@@ -380,31 +378,28 @@ const tSite = (key: string) => {
 
     <section className="mx-auto max-w-7xl px-4 pb-16">
       <h2 className="mb-8 text-center text-4xl font-black">
-        Zašto PVC Kalkulator?
+        {tSite("Zašto PVC Kalkulator?")}
       </h2>
 
       <div className="grid gap-6 md:grid-cols-3">
         <div className="rounded-2xl border border-white/10 bg-white/10 p-6">
           <h3 className="mb-3 text-xl font-black">{tSite("Ušteda vremena")}</h3>
           <p className="text-slate-300">
-            Ponude i radne liste izrađuju se brzo, pregledno i bez ručnog
-            računanja.
+            {tSite("Ponude i radne liste izrađuju se brzo, pregledno i bez ručnog računanja.")}
           </p>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/10 p-6">
           <h3 className="mb-3 text-xl font-black">{tSite("Manje grešaka")}</h3>
           <p className="text-slate-300">
-            Automatski obračuni smanjuju mogućnost grešaka u dimenzijama i
-            cenama.
+            {tSite("Automatski obračuni smanjuju mogućnost grešaka u dimenzijama i cenama.")}
           </p>
         </div>
 
         <div className="rounded-2xl border border-white/10 bg-white/10 p-6">
           <h3 className="mb-3 text-xl font-black">{tSite("Rad sa bilo kog mesta")}</h3>
           <p className="text-slate-300">
-            Pristup aplikaciji sa računara, tableta ili telefona, gde god se
-            nalazite.
+            {tSite("Pristup aplikaciji sa računara, tableta ili telefona, gde god se nalazite.")}
           </p>
         </div>
       </div>
@@ -412,7 +407,7 @@ const tSite = (key: string) => {
 <div className="mt-8 overflow-hidden rounded-3xl border border-white/10 bg-white/10 shadow-2xl">
   <Image
     src="/site/devices.png"
-    alt="Rad sa bilo kog uređaja"
+    alt={tSite("Rad sa bilo kog uređaja")}
     width={1200}
     height={700}
     className="h-full w-full object-cover"
@@ -437,15 +432,12 @@ const tSite = (key: string) => {
 
             <div className="grid gap-6 text-slate-300 md:grid-cols-2">
               <p>
-                PVC Kalkulator je poslovna web aplikacija namenjena firmama koje
-                se bave PVC i ALU stolarijom. Sistem omogućava izradu ponuda,
-                radnih lista, obračun elemenata i PDF dokumentaciju.
+                {tSite("PVC Kalkulator je poslovna web aplikacija namenjena firmama koje se bave PVC i ALU stolarijom.")}{" "}
+                {tSite("Sistem omogućava izradu ponuda, radnih lista, obračun elemenata i PDF dokumentaciju.")}
               </p>
 
               <p>
-                Administrator može da podešava profile, ispune, okove, roletne,
-                komarnike, dodatne elemente, tehničke parametre, cene, formule,
-                korisnike i jezike.
+                {tSite("Administrator može da podešava profile, ispune, okove, roletne, komarnike, dodatne elemente, tehničke parametre, cene, formule, korisnike i jezike.")}
               </p>
             </div>
 
@@ -465,7 +457,7 @@ const tSite = (key: string) => {
                   key={item}
                   className="rounded-xl bg-slate-900/70 p-4 font-semibold"
                 >
-                  ✓ {item}
+                  ✓ {tSite(item)}
                 </div>
               ))}
             </div>
@@ -473,11 +465,11 @@ const tSite = (key: string) => {
 
 <div className="mt-10">
   <h3 className="mb-3 text-2xl font-black">
-    Video uputstva
+    {tSite("Video uputstva")}
   </h3>
 
   <p className="mb-6 text-slate-300">
-    Pogledajte kratka uputstva kako se koristi aplikacija.
+    {tSite("Pogledajte kratka uputstva kako se koristi aplikacija.")}
   </p>
 
   <div className="grid gap-6 md:grid-cols-2">
@@ -487,11 +479,11 @@ const tSite = (key: string) => {
         className="rounded-2xl border border-white/10 bg-slate-900/70 p-4"
       >
         <h4 className="mb-1 text-lg font-black">
-          {video.title}
+          {tSite(video.title)}
         </h4>
 
         <p className="mb-4 text-sm text-slate-300">
-          {video.text}
+          {tSite(video.text)}
         </p>
 
         <div className="aspect-video overflow-hidden rounded-xl bg-slate-950">
@@ -520,7 +512,7 @@ const tSite = (key: string) => {
       <div className="grid gap-6 md:grid-cols-[1fr_auto] md:items-center">
         <div>
           <div className="mb-2 text-sm font-bold uppercase tracking-wide text-blue-300">
-            Besplatna proba
+            {tSite("Besplatna proba")}
           </div>
 
           <h2 className="mb-3 text-4xl font-black">
@@ -528,9 +520,7 @@ const tSite = (key: string) => {
           </h2>
 
           <p className="max-w-3xl text-slate-300">
-            Tokom probnog perioda možete koristiti kompletnu aplikaciju:
-            ponude, radne liste, parametre, formule, PDF dokumente i rad
-            sa više uređaja.
+            {tSite("Tokom probnog perioda možete koristiti kompletnu aplikaciju: ponude, radne liste, parametre, formule, PDF dokumente i rad sa više uređaja.")}
           </p>
         </div>
 
@@ -538,20 +528,19 @@ const tSite = (key: string) => {
           onClick={() => setActiveTab("Zahtev za ponudu")}
           className="rounded-xl bg-blue-500 px-8 py-4 text-lg font-black shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95"
         >
-          Zatraži probni period
+          {tSite("Zatraži probni period")}
         </button>
       </div>
     </div>
 
     <div className="mb-10 text-center">
       <h2 className="mb-3 text-4xl font-black">
-        Cene paketa
+        {tSite("Cene paketa")}
       </h2>
 
       <p className="mx-auto max-w-3xl text-slate-300">
-        Aplikacija radi online i dostupna je sa laptopa, tableta i telefona.
-        Ponuda i radna lista izrađuju se u par klikova, uz automatski obračun
-        i čuvanje podataka.
+        {tSite("Aplikacija radi online i dostupna je sa laptopa, tableta i telefona.")}{" "}
+        {tSite("Ponuda i radna lista izrađuju se u par klikova, uz automatski obračun i čuvanje podataka.")}
       </p>
     </div>
 
@@ -626,17 +615,17 @@ const tSite = (key: string) => {
         >
           {pack.popular && (
             <div className="absolute -top-4 left-1/2 -translate-x-1/2 rounded-full bg-blue-500 px-4 py-1 text-xs font-black uppercase">
-              Najpopularniji
+              {tSite("Najpopularniji")}
             </div>
           )}
 
           <div className="mb-4 text-center">
             <div className="text-sm font-black text-blue-300">
-              {pack.name}
+              {tSite(pack.name)}
             </div>
 
             <div className="mt-1 text-2xl font-black">
-              {pack.devices}
+              {tSite(pack.devices)}
             </div>
 
             <div className="mt-5">
@@ -644,19 +633,19 @@ const tSite = (key: string) => {
                 {pack.price}
               </span>
               <span className="text-slate-300">
-                {" "} / {pack.period}
+                {" "} / {tSite(pack.period)}
               </span>
             </div>
           </div>
 
           <ul className="mb-6 space-y-3 text-sm text-slate-300">
             {pack.features.map((f) => (
-              <li key={f}>✓ {f}</li>
+              <li key={f}>✓ {tSite(f)}</li>
             ))}
           </ul>
 
           <div className="mb-5 rounded-2xl bg-slate-900/70 p-4 text-center text-sm font-bold text-slate-200">
-            {pack.renew}
+            {tSite(pack.renew)}
           </div>
 
           <button
@@ -675,7 +664,7 @@ const tSite = (key: string) => {
                 : "border border-blue-400 text-blue-300 hover:bg-blue-500 hover:text-white"
             }`}
           >
-            Izaberi paket
+            {tSite("Izaberi paket")}
           </button>
         </div>
       ))}
@@ -691,8 +680,7 @@ const tSite = (key: string) => {
             <h2 className="mb-4 text-4xl font-black">{tSite("Zahtev za ponudu")}</h2>
 
             <p className="mb-6 text-slate-300">
-              Pošaljite osnovne podatke i kontaktiraćemo vas u vezi probnog
-              perioda i podešavanja aplikacije.
+              {tSite("Pošaljite osnovne podatke i kontaktiraćemo vas u vezi probnog perioda i podešavanja aplikacije.")}
             </p>
 
 
@@ -708,11 +696,11 @@ const tSite = (key: string) => {
     })
   }
 >
-  <option value="">Izaberite paket</option>
+  <option value="">{tSite("Izaberite paket")}</option>
 
   {packages.map((p) => (
     <option key={p} value={p}>
-      {p}
+      {tSite(p)}
     </option>
   ))}
 </select>
@@ -722,7 +710,7 @@ const tSite = (key: string) => {
 <div className="grid gap-4 md:grid-cols-2">
   <input
     className="rounded-xl border border-white/10 bg-slate-900 p-3"
-    placeholder="Firma / Ime i prezime *"
+    placeholder={tSite("Firma / Ime i prezime *")}
     value={requestForm.firma}
     onChange={(e) =>
       setRequestForm({ ...requestForm, firma: e.target.value })
@@ -731,7 +719,7 @@ const tSite = (key: string) => {
 
   <input
     className="rounded-xl border border-white/10 bg-slate-900 p-3"
-    placeholder="PIB"
+    placeholder={tSite("PIB")}
     value={requestForm.pib}
     onChange={(e) =>
       setRequestForm({ ...requestForm, pib: e.target.value })
@@ -740,7 +728,7 @@ const tSite = (key: string) => {
 
   <input
     className="rounded-xl border border-white/10 bg-slate-900 p-3"
-    placeholder="Kontakt osoba"
+    placeholder={tSite("Kontakt osoba")}
     value={requestForm.kontaktOsoba}
     onChange={(e) =>
       setRequestForm({
@@ -752,7 +740,7 @@ const tSite = (key: string) => {
 
   <input
     className="rounded-xl border border-white/10 bg-slate-900 p-3"
-    placeholder="Telefon *"
+    placeholder={tSite("Telefon *")}
     value={requestForm.telefon}
     onChange={(e) =>
       setRequestForm({ ...requestForm, telefon: e.target.value })
@@ -761,7 +749,7 @@ const tSite = (key: string) => {
 
   <input
     className="rounded-xl border border-white/10 bg-slate-900 p-3 md:col-span-2"
-    placeholder="Email"
+    placeholder={tSite("Email")}
     value={requestForm.email}
     onChange={(e) =>
       setRequestForm({ ...requestForm, email: e.target.value })
@@ -783,7 +771,7 @@ const tSite = (key: string) => {
 
   <textarea
     className="min-h-[140px] rounded-xl border border-white/10 bg-slate-900 p-3 md:col-span-2"
-    placeholder="Poruka"
+    placeholder={tSite("Poruka")}
     value={requestForm.poruka}
     onChange={(e) =>
       setRequestForm({ ...requestForm, poruka: e.target.value })
@@ -801,7 +789,7 @@ const tSite = (key: string) => {
     disabled={requestLoading}
     className="rounded-xl bg-blue-500 px-8 py-4 text-lg font-black shadow-lg shadow-blue-500/30 transition hover:bg-blue-400 active:scale-95 disabled:opacity-60 md:col-span-2"
   >
-    {requestLoading ? "Slanje..." : "Pošalji zahtev"}
+    {requestLoading ? tSite("Slanje...") : tSite("Pošalji zahtev")}
   </button>
 </div>
           </div>
@@ -815,13 +803,12 @@ const tSite = (key: string) => {
 
             <div className="space-y-3 text-slate-300">
               <p>
-                Za dodatne informacije, probni period ili podešavanje aplikacije
-                možete nas kontaktirati.
-                Pošaljite poruku na neki od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehnički službe.
+                {tSite("Za dodatne informacije, probni period ili podešavanje aplikacije možete nas kontaktirati.")}{" "}
+                {tSite("Pošaljite poruku na neki od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehnički službe.")}
               </p>
 
               <p>
-                Pošaljite poruku na jedan od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehnički službe.
+                {tSite("Pošaljite poruku na jedan od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehnički službe.")}
               </p>
 
               <p>
@@ -848,18 +835,18 @@ const tSite = (key: string) => {
   <div className="rounded-3xl border border-blue-400/20 bg-blue-500/10 p-10 text-center">
 
     <h2 className="mb-4 text-4xl font-black">
-      Isprobajte aplikaciju potpuno besplatno
+      {tSite("Isprobajte aplikaciju potpuno besplatno")}
     </h2>
 
     <p className="mx-auto mb-8 max-w-3xl text-slate-300">
-      Dobijate kompletan pristup aplikaciji tokom probnog perioda od 30 dana.
+      {tSite("Dobijate kompletan pristup aplikaciji tokom probnog perioda od 30 dana.")}
     </p>
 
     <button
       onClick={() => setActiveTab("Zahtev za ponudu")}
       className="rounded-xl bg-blue-500 px-8 py-4 text-lg font-black shadow-lg shadow-blue-500/30 hover:bg-blue-400"
     >
-      Započni besplatnu probu
+      {tSite("Započni besplatnu probu")}
     </button>
 
   </div>
@@ -868,7 +855,7 @@ const tSite = (key: string) => {
 
 
       <footer className="border-t border-white/10 py-6 text-center text-sm text-slate-500">
-        © {new Date().getFullYear()} PVC Kalkulator. Sva prava zadržana.
+        © {new Date().getFullYear()} PVC Kalkulator. {tSite("Sva prava zadržana.")}
       </footer>
     </main>
   );
