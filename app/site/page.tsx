@@ -99,38 +99,38 @@ const tabs = [
   "Kontakt",
 ];
 
-  const videos = [
-    {
-      title: tSite("Početak rada"),
-      text: tSite("Osnovno upoznavanje sa aplikacijom."),
-      videoId: "PN1ydahHvLo",
-    },
-    {
-      title: tSite("Kreiranje ponude"),
-      text: tSite("Kako se unosi kupac, pozicije i čuva ponuda."),
-      videoId: "g-LHD8NcuzI",
-    },
-    {
-      title: tSite("Radna lista"),
-      text: tSite("Pregled elemenata i priprema za proizvodnju."),
-      videoId: "DZ5Zw-SkH6M",
-    },
-    {
-      title: tSite("Podešavanje parametara"),
-      text: tSite("Profili, cene, tehnički parametri i formule."),
-      videoId: "srFLz5oGbaM",
-    },
-        {
-      title: tSite("Izmena ponude"),
-      text: tSite("Kako se menja postojeća ponuda."),
-      videoId: "z3NttbWEZvw",
-    },
-        {
-      title: tSite("Rad na telefonu"),
-      text: tSite("Kako izgleda aplikacija na telefonu."),
-      videoId: "RAQOSeKR64Q",
-    },
-  ];
+const videos = [
+  {
+    title: "Početak rada",
+    text: "Osnovno upoznavanje sa aplikacijom.",
+    videoId: "PN1ydahHvLo",
+  },
+  {
+    title: "Kreiranje ponude",
+    text: "Kako se unosi kupac, pozicije i čuva ponuda.",
+    videoId: "g-LHD8NcuzI",
+  },
+  {
+    title: "Radna lista",
+    text: "Pregled elemenata i priprema za proizvodnju.",
+    videoId: "DZ5Zw-SkH6M",
+  },
+  {
+    title: "Podešavanje parametara",
+    text: "Profili, cene, tehnički parametri i formule.",
+    videoId: "srFLz5oGbaM",
+  },
+  {
+    title: "Izmena ponude",
+    text: "Kako se menja postojeća ponuda.",
+    videoId: "z3NttbWEZvw",
+  },
+  {
+    title: "Rad na telefonu",
+    text: "Kako izgleda aplikacija na telefonu.",
+    videoId: "RAQOSeKR64Q",
+  },
+];
 
 
 
