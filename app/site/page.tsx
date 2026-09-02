@@ -804,11 +804,11 @@ const tSite = (key: string) => {
             <div className="space-y-3 text-slate-300">
               <p>
                 {tSite("Za dodatne informacije, probni period ili podešavanje aplikacije možete nas kontaktirati.")}{" "}
-                {tSite("Pošaljite poruku na neki od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehnički službe.")}
+                {tSite("Pošaljite poruku na neki od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehničke službe.")}
               </p>
 
               <p>
-                {tSite("Pošaljite poruku na jedan od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehnički službe.")}
+                {tSite("Pošaljite poruku na jedan od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehničke službe.")}
               </p>
 
               <p>

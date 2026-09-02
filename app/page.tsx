@@ -10783,8 +10783,8 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
     title: "Kontakt",
     items: [
       "Za dodatne informacije, probni period ili podešavanje aplikacije možete nas kontaktirati.",
-      "Pošaljite poruku na neki od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehnički službe.",
-      "Pošaljite poruku na jedan od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehnički službe.",
+      "Pošaljite poruku na neki od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehničke službe.",
+      "Pošaljite poruku na jedan od dole navedenih načina i ubrzo će vas neko kontaktirati iz tehničke službe.",
       "Email:",
       "Web:",
       "Viber / WhatsApp:",
