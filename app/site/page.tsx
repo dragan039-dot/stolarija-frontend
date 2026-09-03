@@ -217,44 +217,60 @@ const tSite = (key: string) => {
           </div>
 
 <div className="flex items-center gap-3">
-<select
-  value={selectedLanguageId}
-  onChange={(e) => {
-    setSelectedLanguageId(e.target.value);
-    localStorage.setItem("selectedLanguageId", e.target.value);
-  }}
-  className="rounded-xl border border-white/20 bg-slate-900 px-3 py-3 text-white appearance-none"
-  style={{
-    backgroundColor: "#0f172a",
-    color: "#ffffff",
-    colorScheme: "dark",
-  }}
->
-  <option
-    value=""
-    style={{
-      backgroundColor: "#0f172a",
-      color: "#ffffff",
-    }}
+<div className="relative">
+  <button
+    type="button"
+    onClick={() => setLanguageMenuOpen((prev) => !prev)}
+    className="flex min-w-[140px] items-center justify-between gap-3 rounded-xl border border-white/20 bg-slate-900 px-4 py-3 font-semibold text-white"
   >
-    SR
-  </option>
+    <span>
+      {selectedLanguageId
+        ? languages.find(
+            (l: any) => String(l.id) === String(selectedLanguageId)
+          )?.name || "SR"
+        : "SR"}
+    </span>
 
-  {languages
-    .filter((l: any) => l.enabled)
-    .map((l: any) => (
-      <option
-        key={l.id}
-        value={String(l.id)}
-        style={{
-          backgroundColor: "#0f172a",
-          color: "#ffffff",
+    <span className="text-xs text-slate-400">▼</span>
+  </button>
+
+  {languageMenuOpen && (
+    <div className="absolute right-0 top-full z-[100] mt-2 min-w-[180px] overflow-hidden rounded-xl border border-white/20 bg-slate-900 shadow-2xl">
+
+      <button
+        type="button"
+        onClick={() => {
+          setSelectedLanguageId("");
+          localStorage.setItem("selectedLanguageId", "");
+          setLanguageMenuOpen(false);
         }}
+        className="block w-full px-4 py-3 text-left text-white hover:bg-slate-800"
       >
-        {l.name}
-      </option>
-    ))}
-</select>
+        SR
+      </button>
+
+      {languages
+        .filter((l: any) => l.enabled)
+        .map((l: any) => (
+          <button
+            key={l.id}
+            type="button"
+            onClick={() => {
+              setSelectedLanguageId(String(l.id));
+              localStorage.setItem(
+                "selectedLanguageId",
+                String(l.id)
+              );
+              setLanguageMenuOpen(false);
+            }}
+            className="block w-full px-4 py-3 text-left text-white hover:bg-slate-800"
+          >
+            {l.name}
+          </button>
+        ))}
+    </div>
+  )}
+</div>
 
   <a
     href="https://app.pvckalkulator.com"
