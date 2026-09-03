@@ -33,7 +33,9 @@ export async function GET(request: NextRequest) {
     const data = await response.json();
 
     return NextResponse.json({
-      countryCode: data?.success ? data.country_code || null : null,
+      countryCode: data?.success
+        ? data.country_code || null
+        : null,
     });
   } catch (error) {
     console.error("Country detection error:", error);

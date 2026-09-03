@@ -80,7 +80,7 @@ useEffect(() => {
         return;
       }
 
-      const response = await fetch("/api/country", {
+      const response = await fetch("/country-detect", {
         cache: "no-store",
       });
 
