@@ -28,6 +28,123 @@ const [requestLoading, setRequestLoading] = useState(false);
 
 const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
 
+const [autoLanguageChecked, setAutoLanguageChecked] = useState(false);
+
+
+
+
+
+const getLanguageByCode = (code: string) => {
+  const languageNames: Record<string, string[]> = {
+    SL: ["Slovenački", "Slovenacki"],
+    HR: ["Hrvatski"],
+    MK: ["Makedonski"],
+    AL: ["Albanski"],
+    BG: ["Bugarski"],
+    RO: ["Rumunski"],
+    TR: ["Turski"],
+    DE: ["Nemački", "Nemacki"],
+    IT: ["Italijanski"],
+    EN: ["Engleski"],
+  };
+
+  const names = languageNames[code] || [];
+
+  return languages.find(
+    (language: any) =>
+      language.enabled &&
+      names.some(
+        (name) =>
+          name.toLowerCase() ===
+          String(language.name || "").trim().toLowerCase()
+      )
+  );
+};
+
+
+
+useEffect(() => {
+  if (!languages.length) return;
+  if (autoLanguageChecked) return;
+
+  const detectLanguage = async () => {
+    try {
+      // Ako je korisnik nekada ručno izabrao jezik,
+      // njegov izbor ima prednost.
+      const manuallySelected = localStorage.getItem(
+        "siteLanguageManuallySelected"
+      );
+
+      if (manuallySelected === "1") {
+        setAutoLanguageChecked(true);
+        return;
+      }
+
+      const response = await fetch("/api/country", {
+        cache: "no-store",
+      });
+
+      const data = await response.json();
+
+      const languageCode = getLanguageCodeByCountry(
+        data?.countryCode || ""
+      );
+
+      // Srpski je osnovni jezik i kod njega je ID prazan string.
+      if (languageCode === "SR") {
+        setSelectedLanguageId("");
+        localStorage.setItem("selectedLanguageId", "");
+        setAutoLanguageChecked(true);
+        return;
+      }
+
+      let language = getLanguageByCode(languageCode);
+
+      // Ako prevod za tu državu još nije unet,
+      // pokušaj Engleski.
+      if (!language) {
+        language = getLanguageByCode("EN");
+      }
+
+      if (language) {
+        const languageId = String(language.id);
+
+        setSelectedLanguageId(languageId);
+        localStorage.setItem(
+          "selectedLanguageId",
+          languageId
+        );
+      }
+
+      setAutoLanguageChecked(true);
+    } catch (error) {
+      console.error(
+        "Greška pri automatskom izboru jezika:",
+        error
+      );
+
+      // Ako određivanje države ne uspe,
+      // podrazumevano biramo Engleski.
+      const english = getLanguageByCode("EN");
+
+      if (english) {
+        const languageId = String(english.id);
+
+        setSelectedLanguageId(languageId);
+        localStorage.setItem(
+          "selectedLanguageId",
+          languageId
+        );
+      }
+
+      setAutoLanguageChecked(true);
+    }
+  };
+
+  detectLanguage();
+}, [languages, autoLanguageChecked]);
+
+
 
 
 useEffect(() => {
@@ -192,6 +309,43 @@ const tSite = (key: string) => {
 
 
 
+const getLanguageCodeByCountry = (countryCode: string) => {
+  const code = countryCode.toUpperCase();
+
+  if (["RS", "ME", "BA"].includes(code)) return "SR";
+  if (code === "SI") return "SL";
+  if (code === "HR") return "HR";
+  if (code === "MK") return "MK";
+  if (["AL", "XK"].includes(code)) return "AL";
+  if (code === "BG") return "BG";
+  if (code === "RO") return "RO";
+  if (code === "TR") return "TR";
+  if (["DE", "AT", "CH"].includes(code)) return "DE";
+  if (code === "IT") return "IT";
+
+  return "EN";
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -239,11 +393,15 @@ const tSite = (key: string) => {
 
       <button
         type="button"
-        onClick={() => {
-          setSelectedLanguageId("");
-          localStorage.setItem("selectedLanguageId", "");
-          setLanguageMenuOpen(false);
-        }}
+onClick={() => {
+  setSelectedLanguageId("");
+  localStorage.setItem("selectedLanguageId", "");
+  localStorage.setItem(
+    "siteLanguageManuallySelected",
+    "1"
+  );
+  setLanguageMenuOpen(false);
+}}
         className="block w-full px-4 py-3 text-left text-white hover:bg-slate-800"
       >
         SR
@@ -255,14 +413,21 @@ const tSite = (key: string) => {
           <button
             key={l.id}
             type="button"
-            onClick={() => {
-              setSelectedLanguageId(String(l.id));
-              localStorage.setItem(
-                "selectedLanguageId",
-                String(l.id)
-              );
-              setLanguageMenuOpen(false);
-            }}
+onClick={() => {
+  setSelectedLanguageId(String(l.id));
+
+  localStorage.setItem(
+    "selectedLanguageId",
+    String(l.id)
+  );
+
+  localStorage.setItem(
+    "siteLanguageManuallySelected",
+    "1"
+  );
+
+  setLanguageMenuOpen(false);
+}}
             className="block w-full px-4 py-3 text-left text-white hover:bg-slate-800"
           >
             {l.name}
