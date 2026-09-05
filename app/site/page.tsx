@@ -35,32 +35,40 @@ const [autoLanguageChecked, setAutoLanguageChecked] = useState(false);
 
 
 const getLanguageByCode = (code: string) => {
-  const languageNames: Record<string, string[]> = {
-    SL: ["Slovenački", "Slovenacki"],
-    HR: ["Hrvatski"],
-    MK: ["Makedonski"],
-    AL: ["Albanski"],
-    BG: ["Bugarski"],
-    RO: ["Rumunski"],
-    TR: ["Turski"],
-    DE: ["Nemački", "Nemacki"],
-    IT: ["Italijanski"],
-    EN: ["Engleski"],
+  const wantedCode = code.toUpperCase();
+
+  const aliases: Record<string, string[]> = {
+    EN: ["EN", "ENGLESKI", "ENGLISH"],
+    HR: ["HR", "HRVATSKI"],
+    SL: ["SL", "SLO", "SLOVENAČKI", "SLOVENACKI"],
+    MK: ["MK", "MAKEDONSKI"],
+    AL: ["AL", "ALBANSKI"],
+    BG: ["BG", "BUGARSKI"],
+    RO: ["RO", "RUMUNSKI"],
+    TR: ["TR", "TURSKI"],
+    DE: ["DE", "NEMAČKI", "NEMACKI", "GERMAN"],
+    IT: ["IT", "ITALIJANSKI"],
   };
 
-  const names = languageNames[code] || [];
+  const allowed = aliases[wantedCode] || [wantedCode];
 
-  return languages.find(
-    (language: any) =>
-      language.enabled &&
-      names.some(
-        (name) =>
-          name.toLowerCase() ===
-          String(language.name || "").trim().toLowerCase()
-      )
-  );
+  return languages.find((language: any) => {
+    if (!language.enabled) return false;
+
+    const languageCode = String(language.code || "")
+      .trim()
+      .toUpperCase();
+
+    const languageName = String(language.name || "")
+      .trim()
+      .toUpperCase();
+
+    return (
+      allowed.includes(languageCode) ||
+      allowed.includes(languageName)
+    );
+  });
 };
-
 
 
 useEffect(() => {
