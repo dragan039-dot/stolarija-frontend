@@ -397,7 +397,7 @@ const getLanguageCodeByCountry = (countryCode: string) => {
   </button>
 
   {languageMenuOpen && (
-    <div className="absolute right-0 top-full z-[100] mt-2 min-w-[180px] overflow-hidden rounded-xl border border-white/20 bg-slate-900 shadow-2xl">
+    <div className="absolute left-0 top-full z-[100] mt-2 w-full min-w-[140px] overflow-hidden rounded-xl border border-white/20 bg-slate-900 shadow-2xl md:left-auto md:right-0 md:w-auto md:min-w-[180px]">
 
       <button
         type="button"
@@ -455,12 +455,12 @@ onClick={() => {
 
         </div>
 
-        <nav className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 pb-4">
+        <nav className="mx-auto grid max-w-7xl grid-cols-2 gap-2 px-4 pb-4 md:flex md:flex-wrap">
           {tabs.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`whitespace-nowrap rounded-xl px-4 py-2 text-sm font-bold transition ${
+              className={`w-full rounded-xl px-3 py-2 text-sm font-bold transition md:w-auto md:whitespace-nowrap ${
                 activeTab === tab
                   ? "bg-blue-500 text-white"
                   : "bg-white/10 text-slate-300 hover:bg-white/20"
