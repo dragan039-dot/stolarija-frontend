@@ -41,6 +41,7 @@ type Offer = {
   vrsta_ponude: string;
   valuta: string;
   popust: string;
+  avans: string;
   napomena: string;
 };
 
@@ -703,20 +704,21 @@ const deleteParam = async (id: number) => {
 
 
 
-  const [form, setForm] = useState<Offer>({
-    id: 0,
-    brojPonude: "",
-    naziv: "",
-    adresa: "",
-    telefon: "",
-    pib: "",
-    maticni: "",
-    datum: "",
-    vrsta_ponude: "",
-    valuta: "",
-    popust: "",
-    napomena: "",
-  });
+const [form, setForm] = useState<Offer>({
+  id: 0,
+  brojPonude: "",
+  naziv: "",
+  adresa: "",
+  telefon: "",
+  pib: "",
+  maticni: "",
+  datum: "",
+  vrsta_ponude: "",
+  valuta: "",
+  popust: "",
+  avans: "",
+  napomena: "",
+});
 
   const emptyPosition = (): Position => ({
   vrsta_stolarije: "",
@@ -1552,6 +1554,7 @@ const getValue = (profil: string, parametar: string) => {
   vrsta_ponude: data.offer.vrsta_ponude || "",
   valuta: openedValuta,
   popust: data.offer.popust || "",
+  avans: String(data.offer.avans ?? ""),
   napomena: data.offer.napomena || "",
 });
 
@@ -2012,6 +2015,7 @@ const saveTehnicki = async () => {
       vrsta_ponude: "",
       valuta: "",
       popust: "",
+      avans: "",
       napomena: "",
     });
 
@@ -5116,31 +5120,54 @@ return (
       />
     </div>
 
-    <div className="grid grid-cols-2 gap-4">
+<div className="grid grid-cols-2 gap-4">
 
+  <input
+    placeholder={t("Popust %")}
+    type="text"
+    inputMode="decimal"
+    value={form.popust || ""}
+    onChange={(e) =>
+      setForm({
+        ...form,
+        popust: sanitizeNumber(e.target.value),
+      })
+    }
+    className="border p-2"
+  />
 
+  <input
+    placeholder={t("Avans")}
+    type="text"
+    inputMode="decimal"
+    value={form.avans || ""}
+    onChange={(e) => {
+      let value = e.target.value.replace(",", ".");
 
+      // Dozvoljava samo brojeve i najviše 2 decimale
+      if (/^\d*(\.\d{0,2})?$/.test(value)) {
+        setForm({
+          ...form,
+          avans: value,
+        });
+      }
+    }}
+    className="border p-2"
+  />
 
-<input
-  placeholder={t("Popust %")}
-  type="text"
-  inputMode="decimal"
-  value={form.popust || ""}
-  onChange={(e) =>
-    setForm({
-      ...form,
-      popust: sanitizeNumber(e.target.value),
-    })
-  }
-  className="border p-2"
-/>
+  <input
+    placeholder={t("Telefon")}
+    value={form.telefon || ""}
+    onChange={(e) =>
+      setForm({
+        ...form,
+        telefon: e.target.value,
+      })
+    }
+    className="border p-2"
+  />
 
-        <input placeholder={t("Telefon")} value={form.telefon || ""}
-          onChange={e => setForm({ ...form, telefon: e.target.value })}
-          className="border p-2"/>
-
-
-    </div>
+</div>
 
 
   </div>
@@ -5861,14 +5888,36 @@ console.log("SVE VALUTE:", valute);
         return sum + getExtraTotal(x);
       }, 0);
 
-      const ukupno = positionSubtotal + extraSubtotal;
-      const popustProc = Number(proposalOffer.popust) || 0;
-      const popustIznos = ukupno * popustProc / 100;
+// =========================
+// ZAVRŠNI OBRAČUN
+// =========================
 
-      const pdvProc = Number(firma.pdv) || 0;
-      const pdvIznos = (ukupno - popustIznos) * pdvProc / 100;
+const ukupnoPrePopusta =
+  positionSubtotal + extraSubtotal;
 
-      const zaUplatu = ukupno - popustIznos + pdvIznos;
+const popustProc =
+  Number(proposalOffer.popust) || 0;
+
+const popustIznos =
+  ukupnoPrePopusta * (popustProc / 100);
+
+const ukupnoPoslePopusta =
+  ukupnoPrePopusta - popustIznos;
+
+const pdvProc =
+  Number(firma.pdv) || 0;
+
+const pdvIznos =
+  ukupnoPoslePopusta * (pdvProc / 100);
+
+const ukupnoSaPdv =
+  ukupnoPoslePopusta + pdvIznos;
+
+const avans =
+  Number(proposalOffer.avans) || 0;
+
+const zaUplatu =
+  ukupnoSaPdv - avans;
 
       return (
         <div className="pdf-mobile-scroll overflow-x-auto">
@@ -6086,7 +6135,7 @@ console.log(
 
               <tr className="border-b border-gray-400">
   {/* NAPOMENA (spojene 3 kolone + 4 reda) */}
-  <td className="p-3 align-top" colSpan={3} rowSpan={4}>
+  <td className="p-3 align-top" colSpan={3} rowSpan={6}>
     <div className="font-semibold mb-2">{t("Napomena")}:</div>
     <div className="min-h-[100px] whitespace-pre-line">
       {proposalOffer.napomena || ""}
@@ -6099,7 +6148,7 @@ console.log(
     {t("Ukupno")}
   </td>
   <td className="p-2 text-right font-semibold">
-    {formatCena(ukupno)} 
+    {formatCena(ukupnoPrePopusta)} 
   </td>
 </tr>
 
@@ -6119,7 +6168,27 @@ console.log(
     {t("PDV")} {pdvProc}%
   </td>
   <td className="p-2 text-right">
-    {formatCena(pdvIznos)} 
+    {formatCena(pdvIznos)}
+  </td>
+</tr>
+
+<tr className="border-b border-gray-400">
+  {/* UKUPNO SA PDV-OM */}
+  <td className="p-2 font-semibold text-right">
+    {t("Ukupno sa PDV-om")}
+  </td>
+  <td className="p-2 text-right font-semibold">
+    {formatCena(ukupnoSaPdv)}
+  </td>
+</tr>
+
+<tr className="border-b border-gray-400">
+  {/* AVANS */}
+  <td className="p-2 text-right">
+    {t("Avans")}
+  </td>
+  <td className="p-2 text-right">
+    -{formatCena(avans)}
   </td>
 </tr>
 
@@ -6129,7 +6198,7 @@ console.log(
     {t("Za uplatu")}
   </td>
   <td className="p-2 text-right font-bold text-sm">
-    {formatCena(zaUplatu)} 
+    {formatCena(zaUplatu)}
   </td>
 </tr>
             </tbody>
@@ -6207,30 +6276,39 @@ console.log(
     0
   );
 
-  // =========================
-  // ZAVRŠNI OBRAČUN
-  // =========================
+// =========================
+// ZAVRŠNI OBRAČUN
+// =========================
 
-  const ukupnoPrePopusta =
-    ukupnaProdajnaProzori + ukupnoDodatno;
+const ukupnoPrePopusta =
+  ukupnaProdajnaProzori + ukupnoDodatno;
 
-  const popustProc =
-    Number(proposalOffer.popust) || 0;
+// Koristimo i naziv "ukupno" jer ga tabela Ponude već koristi
+const ukupno = ukupnoPrePopusta;
 
-  const popustIznos =
-    ukupnoPrePopusta * (popustProc / 100);
+const popustProc =
+  Number(proposalOffer.popust) || 0;
 
-  const ukupnoPoslePopusta =
-    ukupnoPrePopusta - popustIznos;
+const popustIznos =
+  ukupnoPrePopusta * (popustProc / 100);
 
-  const pdvProc =
-    Number(firma.pdv) || 0;
+const ukupnoPoslePopusta =
+  ukupnoPrePopusta - popustIznos;
 
-  const pdvIznos =
-    ukupnoPoslePopusta * (pdvProc / 100);
+const pdvProc =
+  Number(firma.pdv) || 0;
 
-  const zaUplatu =
-    ukupnoPoslePopusta + pdvIznos;
+const pdvIznos =
+  ukupnoPoslePopusta * (pdvProc / 100);
+
+const ukupnoSaPdv =
+  ukupnoPoslePopusta + pdvIznos;
+
+const avans =
+  Number(proposalOffer.avans) || 0;
+
+const zaUplatu =
+  ukupnoSaPdv - avans;
 
   // Zarada trenutno samo na stolariji
   const zaradaProzori =
