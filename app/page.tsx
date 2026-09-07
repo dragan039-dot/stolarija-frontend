@@ -10411,6 +10411,8 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       "Elementi prozora",
       "Materijal",
       "Nazad",
+      "Ukupno sa PDV-om",
+      "Avans",
     ],
   },
   {
