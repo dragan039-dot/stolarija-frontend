@@ -6915,6 +6915,30 @@ const elements = results.filter(
               </strong>
             </div>
 
+
+<div className="flex justify-between gap-4 border-b pb-2">
+  <span>
+    {t("Ukupno sa PDV-om")}
+  </span>
+
+  <strong>
+    {formatMoney(ukupnoSaPdv)}{" "}
+    {valutaNaziv}
+  </strong>
+</div>
+
+<div className="flex justify-between gap-4 border-b pb-2">
+  <span>
+    {t("Avans")}
+  </span>
+
+  <strong>
+    - {formatMoney(avans)}{" "}
+    {valutaNaziv}
+  </strong>
+</div>
+
+
             <div className="flex justify-between gap-4 text-xl pt-2">
               <span className="font-bold">
                 {t("Za uplatu")}
