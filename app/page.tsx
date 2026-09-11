@@ -1722,6 +1722,16 @@ const validatePositionsBeforeSave = () => {
   const warningFields: Record<string, "warning"> = {};
 
   positions.forEach((p, i) => {
+
+
+  // Ako nije izabrana vrsta prozora,
+  // pozicija se smatra praznom i ne validira se
+  if (!p.vrsta_prozora) {
+    return;
+  }
+
+
+
     const positionName = `${t("Pozicija")} ${i + 1}`;
 
     const positionErrors: string[] = [];
@@ -1736,10 +1746,10 @@ const validatePositionsBeforeSave = () => {
       errorFields[fieldKey(i, "vrsta_stolarije")] = "error";
     }
 
-    if (!p.vrsta_prozora) {
-      positionErrors.push(t("Vrsta prozora"));
-      errorFields[fieldKey(i, "vrsta_prozora")] = "error";
-    }
+       // = if (!p.vrsta_prozora) {
+        // =  positionErrors.push(t("Vrsta prozora"));
+        // =  errorFields[fieldKey(i, "vrsta_prozora")] = "error";
+       // = }
 
     // DIMENZIJE
     if (
