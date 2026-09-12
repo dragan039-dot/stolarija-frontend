@@ -1885,7 +1885,7 @@ if (isChangingOfferType) {
   headers: authHeaders(),
 body: JSON.stringify({
   ...form,
-  valuta: firma.valuta || "",
+  
   userId: loggedUser.id,
   username: loggedUser.username,
   positions,
@@ -1908,7 +1908,7 @@ const formForCreate = {
   ...form,
   id: 0,
   brojPonude: "",
-  valuta: firma.valuta || "",
+  
 };
 
     const res = await apiFetch(`${API_URL}/offers`, {
@@ -2924,9 +2924,9 @@ const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
 
 
 const valutaNaziv =
-  (valute || []).find((v: any) => v && String(v.id) === String(proposalOffer?.valuta))?.naziv ||
-  proposalOffer?.valuta ||
-  "";
+  (valute || []).find(
+    (v: any) => v && String(v.id) === String(firma.valuta)
+  )?.naziv || "";
 
   
 
@@ -5876,9 +5876,9 @@ console.log("SVE VALUTE:", valute);
       const rowsPositions = proposalPositions.filter((p) => p.vrsta_prozora);
       const rowsExtra = proposalExtraItems.filter((x) => x.naziv);
 
-      const valutaNaziv =
-  valuteMap[String(proposalOffer.valuta)] ||
-  String(proposalOffer.valuta || "");
+const valutaNaziv =
+  valuteMap[String(firma.valuta)] ||
+  String(firma.valuta || "");
 
       const positionSubtotal = rowsPositions.reduce((sum, p, index) => {
         const cena = getPositionPrice(proposalResults[index] || []);
@@ -6225,10 +6225,9 @@ console.log(
     (x: any) => x.naziv
   );
 
-  const valutaNaziv =
-    valuteMap[String(proposalOffer.valuta)] ||
-    proposalOffer.valuta ||
-    "";
+const valutaNaziv =
+  valuteMap[String(firma.valuta)] ||
+  String(firma.valuta || "");
 
   const formatMoney = (value: number) =>
     Number(value || 0).toLocaleString("sr-RS", {
