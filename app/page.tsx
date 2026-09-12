@@ -9057,40 +9057,6 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
 
 
 
-<div className="grid grid-cols-3 gap-4">
-
-  <div>
-    <div className="mb-1 text-xs text-gray-500">
-      {t("Valuta")}
-    </div>
-
-    <select
-      value={firma.valuta || ""}
-      onChange={(e) =>
-        setFirma({
-          ...firma,
-          valuta: e.target.value,
-        })
-      }
-      className="border p-2 w-full rounded"
-    >
-      <option value="">
-        {t("Izaberi valutu")}
-      </option>
-
-      {valute.map((v, index) => (
-        <option
-          key={v.id ?? index}
-          value={v.id ?? index + 1}
-        >
-          {v.naziv}
-        </option>
-      ))}
-    </select>
-  </div>
-
-</div>
-
 
 
 
@@ -9152,6 +9118,49 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
         </div>
 
       </div>
+
+
+
+
+
+<div className="grid grid-cols-3 gap-4">
+
+  <div>
+    <div className="mb-1 text-xs text-gray-500">
+      {t("Valuta")}
+    </div>
+
+    <select
+      value={firma.valuta || ""}
+      onChange={(e) =>
+        setFirma({
+          ...firma,
+          valuta: e.target.value,
+        })
+      }
+      className="border p-2 w-full rounded"
+    >
+      <option value="">
+        {t("Izaberi valutu")}
+      </option>
+
+      {valute.map((v, index) => (
+        <option
+          key={v.id ?? index}
+          value={v.id ?? index + 1}
+        >
+          {v.naziv}
+        </option>
+      ))}
+    </select>
+  </div>
+
+</div>
+
+
+
+
+
 
     </div>
 
