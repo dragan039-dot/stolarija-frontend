@@ -214,6 +214,9 @@ const [loginPassword, setLoginPassword] = useState("");
 const [loginError, setLoginError] = useState("");
 
 const [adminUsers, setAdminUsers] = useState<any[]>([]);
+const [activeUsers, setActiveUsers] = useState<any[]>([]);
+
+
 const [newUser, setNewUser] = useState({
   username: "",
   password: "",
@@ -613,6 +616,7 @@ useEffect(() => {
 
   if (activeTab === "Administracija") {
     loadAdminUsers();
+    loadActiveUsers();
     loadAdStats();
     loadInstruction();
   }
@@ -621,6 +625,19 @@ useEffect(() => {
     loadSiteTranslations();
   }
 }, [loggedUser?.id, loggedUser?.role, activeTab, paramTab]);
+
+
+useEffect(() => {
+  if (!loggedUser?.id) return;
+  if (loggedUser.role !== "ADMIN") return;
+  if (activeTab !== "Administracija") return;
+
+  const interval = setInterval(() => {
+    loadActiveUsers();
+  }, 30000);
+
+  return () => clearInterval(interval);
+}, [loggedUser?.id, loggedUser?.role, activeTab]);
 
 
 
@@ -3119,6 +3136,19 @@ const loadAdminUsers = async () => {
   const data = await res.json();
   setAdminUsers(Array.isArray(data) ? data : []);
 };
+
+
+const loadActiveUsers = async () => {
+  const res = await apiFetch(`${API_URL}/auth/active-users`, {
+    headers: authHeaders(),
+  });
+
+  if (!res.ok) return;
+
+  const data = await res.json();
+  setActiveUsers(Array.isArray(data) ? data : []);
+};
+
 
 const createAdminUser = async () => {
   if (!newUser.username.trim()) {
@@ -8882,6 +8912,80 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
     </table>
   </div>
 </div>
+
+
+
+
+<div className="border rounded p-4 bg-white mt-6">
+  <div className="flex justify-between items-center mb-3">
+    <h2 className="text-xl font-bold">
+      Trenutno aktivni korisnici
+    </h2>
+
+    <button
+      onClick={loadActiveUsers}
+      className="bg-green-700 text-white px-4 py-2 rounded"
+    >
+      Osveži
+    </button>
+  </div>
+
+  <div className="overflow-x-auto">
+    <table className="w-full text-sm border-collapse">
+      <thead className="bg-gray-200">
+        <tr>
+          <th className="border p-2">Korisnik</th>
+          <th className="border p-2">Uloga</th>
+          <th className="border p-2">Poslednja aktivnost</th>
+          <th className="border p-2">Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {activeUsers.map((u: any) => (
+          <tr key={u.id}>
+            <td className="border p-2">
+              {u.username}
+            </td>
+
+            <td className="border p-2">
+              {u.role}
+            </td>
+
+            <td className="border p-2">
+              {u.lastSeenAt
+                ? new Date(u.lastSeenAt).toLocaleString("sr-RS")
+                : ""}
+            </td>
+
+            <td className="border p-2 text-center">
+              <span className="inline-flex items-center gap-2 font-semibold text-green-700">
+                <span className="w-2.5 h-2.5 rounded-full bg-green-500"></span>
+                Online
+              </span>
+            </td>
+          </tr>
+        ))}
+
+        {activeUsers.length === 0 && (
+          <tr>
+            <td
+              colSpan={4}
+              className="border p-3 text-center text-gray-500"
+            >
+              Trenutno nema aktivnih korisnika.
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
+  </div>
+
+  <div className="mt-2 text-xs text-gray-500">
+    Korisnik se smatra aktivnim ako je aplikaciju koristio u poslednja 2 minuta.
+  </div>
+</div>
+
 
 
 
