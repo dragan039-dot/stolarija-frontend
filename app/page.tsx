@@ -1883,13 +1883,14 @@ if (isChangingOfferType) {
     const res = await apiFetch(`${API_URL}/offers/${form.id}`, {
   method: "PUT",
   headers: authHeaders(),
-  body: JSON.stringify({
-    ...form,
-    userId: loggedUser.id,
-    username: loggedUser.username,
-    positions,
-    extraItems,
-  }),
+body: JSON.stringify({
+  ...form,
+  valuta: firma.valuta || "",
+  userId: loggedUser.id,
+  username: loggedUser.username,
+  positions,
+  extraItems,
+}),
 });
 
 if (!res.ok) {
@@ -1907,6 +1908,7 @@ const formForCreate = {
   ...form,
   id: 0,
   brojPonude: "",
+  valuta: firma.valuta || "",
 };
 
     const res = await apiFetch(`${API_URL}/offers`, {
@@ -5099,18 +5101,7 @@ return (
         className="border p-2"
       />
 
-      <select
-        value={form.valuta || ""}
-        onChange={(e) => setForm({ ...form, valuta: e.target.value })}
-        className="border p-2"
-      >
-        <option value="">{t("Izaberi valutu")}</option>
-        {valute.map((v, index) => (
-          <option key={v.id ?? index} value={v.id ?? index + 1}>
-            {v.naziv}
-          </option>
-        ))}
-      </select>
+
 
  </div>
 
