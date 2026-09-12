@@ -633,6 +633,31 @@ useEffect(() => {
 
 
 
+useEffect(() => {
+  if (!loggedUser) return;
+
+  const sendHeartbeat = async () => {
+    try {
+      await apiFetch(`${API_URL}/auth/heartbeat`, {
+        method: "POST",
+      });
+    } catch (error) {
+      console.error("Heartbeat error:", error);
+    }
+  };
+
+  sendHeartbeat();
+
+  const interval = setInterval(() => {
+    sendHeartbeat();
+  }, 30000);
+
+  return () => clearInterval(interval);
+}, [loggedUser]);
+
+
+
+
 
 const getFirmaValue = (key: string) => {
   const val = firma[key];
