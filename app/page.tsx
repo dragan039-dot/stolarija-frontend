@@ -1534,11 +1534,7 @@ const getValue = (profil: string, parametar: string) => {
 
 
 
-    const openedValuta =
-  valute.find((v: any) => String(v.id) === String(data.offer.valuta))?.id ||
-  valute.find((v: any) => String(v.naziv) === String(data.offer.valuta))?.id ||
-  data.offer.valuta ||
-  "";
+const openedValuta = firma.valuta || "";
 
 
 
@@ -5870,7 +5866,7 @@ return (
 
     {proposalSubTab === "Ponuda" && proposalOffer && (() => {
 
-console.log("VALUTA IZ PONUDE:", proposalOffer.valuta);
+
 console.log("SVE VALUTE:", valute);
 
       const rowsPositions = proposalPositions.filter((p) => p.vrsta_prozora);
@@ -9284,7 +9280,19 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
       <thead className="bg-gray-200">
         <tr>
           <th className="border p-2 min-w-[260px]">{t("Naziv")}</th>
-          <th className="border p-2 w-[140px]">{t("Cena")}</th>
+<th className="border p-2 w-[140px]">
+  <div>{t("Cena")}</div>
+
+  {firma.valuta && (
+    <div className="text-xs font-normal text-gray-500">
+      {
+        (valute || []).find(
+          (v: any) => String(v.id) === String(firma.valuta)
+        )?.naziv || ""
+      }
+    </div>
+  )}
+</th>
         </tr>
       </thead>
 
@@ -9353,7 +9361,19 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
       <thead className="bg-gray-200">
         <tr>
           <th className="border p-2 min-w-[260px]">{t("Naziv")}</th>
-          <th className="border p-2 w-[140px]">{t("Cena")}</th>
+<th className="border p-2 w-[140px]">
+  <div>{t("Cena")}</div>
+
+  {firma.valuta && (
+    <div className="text-xs font-normal text-gray-500">
+      {
+        (valute || []).find(
+          (v: any) => String(v.id) === String(firma.valuta)
+        )?.naziv || ""
+      }
+    </div>
+  )}
+</th>
         </tr>
       </thead>
 
@@ -9422,7 +9442,19 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
       <thead className="bg-gray-200">
         <tr>
           <th className="border p-2">{t("Naziv")}</th>
-          <th className="border p-2 w-[140px]">{t("Cena")}</th>
+<th className="border p-2 w-[140px]">
+  <div>{t("Cena")}</div>
+
+  {firma.valuta && (
+    <div className="text-xs font-normal text-gray-500">
+      {
+        (valute || []).find(
+          (v: any) => String(v.id) === String(firma.valuta)
+        )?.naziv || ""
+      }
+    </div>
+  )}
+</th>
         </tr>
       </thead>
 
@@ -9484,7 +9516,19 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
       <thead className="bg-gray-200">
         <tr>
           <th className="border p-2">{t("Naziv")}</th>
-          <th className="border p-2 w-[140px]">{t("Cena")}</th>
+<th className="border p-2 w-[140px]">
+  <div>{t("Cena")}</div>
+
+  {firma.valuta && (
+    <div className="text-xs font-normal text-gray-500">
+      {
+        (valute || []).find(
+          (v: any) => String(v.id) === String(firma.valuta)
+        )?.naziv || ""
+      }
+    </div>
+  )}
+</th>
         </tr>
       </thead>
 
@@ -9553,7 +9597,19 @@ if (requiredDims.includes("e") && !p.e) missing.push("E");
       <thead className="bg-gray-200">
         <tr>
           <th className="border p-2">{t("Naziv")}</th>
-          <th className="border p-2 w-[140px]">{t("Cena")}</th>
+<th className="border p-2 w-[140px]">
+  <div>{t("Cena")}</div>
+
+  {firma.valuta && (
+    <div className="text-xs font-normal text-gray-500">
+      {
+        (valute || []).find(
+          (v: any) => String(v.id) === String(firma.valuta)
+        )?.naziv || ""
+      }
+    </div>
+  )}
+</th>
         </tr>
       </thead>
 
@@ -9816,7 +9872,20 @@ onChange={(e) => setSelectedProfilId(e.target.value)}
       <thead className="bg-gray-200">
         <tr>
           <th className="border p-2 w-[75%]">{t("Element")}</th>
-          <th className="border p-2 w-[25%]">{t("Cena")}</th>
+
+<th className="border p-2 w-[25%]">
+  <div>{t("Cena")}</div>
+
+  {firma.valuta && (
+    <div className="text-xs font-normal text-gray-500">
+      {
+        (valute || []).find(
+          (v: any) => String(v.id) === String(firma.valuta)
+        )?.naziv || ""
+      }
+    </div>
+  )}
+</th>
         </tr>
       </thead>
 
