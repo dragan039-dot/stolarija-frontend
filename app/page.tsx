@@ -209,6 +209,7 @@ const [parametri, setParametri] = useState<string[]>([]);
 
 
 const [loggedUser, setLoggedUser] = useState<any>(null);
+const [isOnline, setIsOnline] = useState(true);
 const [loginUsername, setLoginUsername] = useState("");
 const [loginPassword, setLoginPassword] = useState("");
 const [loginError, setLoginError] = useState("");
@@ -654,14 +655,34 @@ useEffect(() => {
   if (!loggedUser) return;
 
   const sendHeartbeat = async () => {
+    // Ako uređaj nema mrežu, odmah je Offline
+    if (!navigator.onLine) {
+      setIsOnline(false);
+      return;
+    }
+
     try {
-      await apiFetch(`${API_URL}/auth/heartbeat`, {
+      const res = await apiFetch(`${API_URL}/auth/heartbeat`, {
         method: "POST",
       });
+
+      setIsOnline(res.ok);
     } catch (error) {
+      setIsOnline(false);
       console.error("Heartbeat error:", error);
     }
   };
+
+  const handleOnline = () => {
+    sendHeartbeat();
+  };
+
+  const handleOffline = () => {
+    setIsOnline(false);
+  };
+
+  window.addEventListener("online", handleOnline);
+  window.addEventListener("offline", handleOffline);
 
   sendHeartbeat();
 
@@ -669,7 +690,11 @@ useEffect(() => {
     sendHeartbeat();
   }, 30000);
 
-  return () => clearInterval(interval);
+  return () => {
+    clearInterval(interval);
+    window.removeEventListener("online", handleOnline);
+    window.removeEventListener("offline", handleOffline);
+  };
 }, [loggedUser]);
 
 
