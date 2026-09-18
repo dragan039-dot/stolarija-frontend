@@ -4789,6 +4789,24 @@ return (
 
 
 
+{/* ONLINE / OFFLINE STATUS */}
+<div
+  className={`no-print fixed top-2 left-2 z-[9999] flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold shadow ${
+    isOnline
+      ? "bg-green-100 text-green-800 border border-green-300"
+      : "bg-red-100 text-red-800 border border-red-300"
+  }`}
+>
+  <span
+    className={`w-2.5 h-2.5 rounded-full ${
+      isOnline ? "bg-green-500" : "bg-red-500"
+    }`}
+  />
+
+  {isOnline ? t("Online") : t("Offline")}
+</div>
+
+
 
 <div className="no-print sticky top-0 z-950 bg-white border-b shadow-sm mb-0">
   <div className="no-print py-0 flex justify-center">
